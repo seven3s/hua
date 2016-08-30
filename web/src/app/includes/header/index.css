@@ -1,0 +1,51 @@
+#header {
+    background-color: #fff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    height: 48px;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 99997;
+}
+.wrapper {
+    width: 1200px;
+    height: 48px;
+    margin: 0 auto;
+}
+.menu-bar {
+    height: 100%;
+    text-align: center;
+}
+.menu-bar > .left-part {
+    float: left;
+    margin-top: 5px;
+}
+@keyframes logo_rotate{
+    0% {
+        transform: rotate(0deg);
+    }
+    33.333% {
+        transform: rotate(120deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+#huaxia {
+    float: left;
+    width: 31px;
+    height: 36px;
+    margin-top: 3px;
+    animation: 6.18s linear 0s normal none infinite running logo_rotate;
+}
+.menu-item {
+    color: #444;
+    margin-left: 25px;
+    line-height: 38px;
+    font-size: 16px;
+}
+.menu-bar > .right-part {
+    float: right;
+    margin-top: 5px;
+}

@@ -1,9 +1,15 @@
-.ml-0618 {
-    margin-left: .618rem;
+body {
+    font-size: 14px;
 }
-.dsy-inb {
-    display: inline-block;
+a {
+    color: #444;
+    -webkit-transition: color .25s ease-out;
+       -moz-transition: color .25s ease-out;
+        -ms-transition: color .25s ease-out;
+         -o-transition: color .25s ease-out;
+            transition: color .25s ease-out;
 }
-.label-poi {
-    cursor: pointer!important;
-}
+a:hover,
+a.active{
+    color: #db2828;
+};

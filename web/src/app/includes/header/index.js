@@ -1,5 +1,5 @@
 /**
- * @File:      首页
+ * @File:      header
  * @Author:    花夏(liubiao01@itoxs.com)
  * @Version:   V0.0.1
  * @Date:      2016-08-30 15:16:59
@@ -18,7 +18,7 @@ module.exports = Vue.extend({
         
     },
     components: {
-        'v-header': require('../../includes/header/')
+        
     },
     watch: {
         

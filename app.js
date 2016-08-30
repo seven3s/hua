@@ -18,7 +18,7 @@ app.set('views', path.join(__dirname, '/web/dist'));
 // app.set('view engine', 'html');
 // app.set('view engine', 'ejs');
 // 站点favicon
-app.use(express.favicon(path.join(__dirname, '/public/images/favicon.ico')));
+app.use(express.favicon(path.join(__dirname, '/web/src/app/public/images/favicon.ico')));
 
 app.use(favicon());
 app.use(logger('dev'));
