@@ -37,7 +37,7 @@
     width: 31px;
     height: 36px;
     margin-top: 3px;
-    animation: 6.18s linear 0s normal none infinite running logo_rotate;
+    animation: 6.18s ease-out 0s infinite running logo_rotate;
 }
 .menu-item {
     color: #444;
