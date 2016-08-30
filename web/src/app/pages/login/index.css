@@ -116,6 +116,11 @@
 }
 
 .login-btn {
-    padding: 0 30px 30px;
+    padding: 0 30px 45px;
     width: 100%;
+}
+.goback {
+    position: absolute;
+    bottom: 5px;
+    right: 30px;
 }
