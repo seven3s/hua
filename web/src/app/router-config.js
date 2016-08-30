@@ -10,5 +10,11 @@ module.exports = {
         component: function (resolve) {
             require(['./pages/index'], resolve);
         }
+    },
+    '/login': {
+        // 登录页
+        component: function (resolve) {
+            require(['./pages/login'], resolve);
+        }
     }
 };
