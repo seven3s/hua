@@ -1,0 +1,7 @@
+<div>
+    <label v-if="data.title" class="dsy-inb">{{data.title}}</label>
+    <div class="ui checkbox ml-0618" v-for="item in data.data">
+        <input id="checkbox_{{item.val}}" type="checkbox" value="{{item.val}}" checked="{{item.isChecked}}" disabled="{{item.isDisabled}}" v-model="checkedVal">
+        <label class="label-poi" for="checkbox_{{item.val}}">{{item.title}}</label>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+.ui.selection.dropdown {
+    min-width: 12.36rem;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .ui.selection.dropdown {
+        min-width: 11.58rem;
+    }
+}

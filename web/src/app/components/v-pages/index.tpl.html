@@ -1,0 +1,11 @@
+<div id="pages" class="text-right">
+    <div v-if="pagesdata.data.totalPages > 0" class="fl-l">
+        当前第
+        <span class="default-color">{{pagesdata.data.pageCurNum}}</span>
+        页/共
+        <span>{{pagesdata.data.totalPages}}</span>
+        页
+        <span v-if="pagesdata.data.totalMsg !== ''">{{pagesdata.data.totalMsg}}</span>
+        <ul id="pagination" class="pagination m0"></ul>
+    </div>
+</div>

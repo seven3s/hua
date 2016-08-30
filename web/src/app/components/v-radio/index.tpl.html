@@ -1,0 +1,11 @@
+<div class="ui form">
+    <div class="inline fields">
+        <label v-if="data.title">{{data.title}}</label>
+        <div class="field" v-for="item in data.data">
+            <div class="ui radio checkbox">
+                <input id="radio_{{item.val}}" name="{{data.name}}" value="{{item.val}}" checked="{{item.val}} === {{data.checkedVal}}" disabled="{{item.isDisabled}}" type="radio" v-model="checkedVal">
+                <label for="radio_{{item.val}}" class="label-poi">{{item.title}}</label>
+            </div>
+        </div>
+    </div>
+</div>

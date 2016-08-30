@@ -1,0 +1,10 @@
+<div class="ui selection dropdown">
+    <input name="{{selectobj.inputName}}" type="hidden" value="{{selectobj.checked}}" v-model="checkedData">
+    <i class="dropdown icon"></i>
+    <div class="default text">{{selectobj.defaultText}}</div>
+    <div class="menu">
+        <div class="item" data-value="{{item.value}}" data-text="{{item.text}}" v-for="item in selectobj.data">
+            {{item.text}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+/**
+ * @File:      分页器默认样式
+ * @Author:    花夏(liubiao@itoxs.com)
+ * @Version:   V0.0.1
+ * @Date:      2016-05-19 18:43:54
+ */
+
+.pagination {
+    border-radius: 4px;
+    display: inline-block;
+    margin: 20px 0;
+    padding-left: 0;
+}
+.pagination > li {
+    display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    float: left;
+    line-height: 1.42857;
+    margin-left: -1px;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+}
+.pagination-sm > li > a,
+.pagination-sm > li > span {
+    font-size: 12px;
+    padding: 5px 10px;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+    background-color: #ffffff;
+    border-color: #dddddd;
+    color: #999999;
+    cursor: not-allowed;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    margin-left: 0;
+}
+.pagination-sm > li:first-child > a,
+.pagination-sm > li:first-child > span {
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    background-color: #1e70bf;
+    border-color: #1e70bf;
+    color: #ffffff;
+    cursor: default;
+    z-index: 2;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    background-color: #eeeeee;
+}
+/**************以上为分页器默认样式**********************/
