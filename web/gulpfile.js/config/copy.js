@@ -10,6 +10,10 @@ module.exports = {
     root: config.sourceDirectory,
     seUISrc: config.sourceDirectory + '/common/semantic-ui/**/*',
     seUiDest: config.publicDirectory + '/lib/semantic-ui/',
+
     sweetalertSrc: config.sourceDirectory + '/common/sweetalert/**/*',
-    sweetalertDest: config.publicDirectory + '/lib/sweetalert/'
+    sweetalertDest: config.publicDirectory + '/lib/sweetalert/',
+
+    laydateSrc: config.sourceDirectory + '/common/laydate/**/*',
+    laydateDest: config.publicDirectory + '/lib/laydate/'
 };

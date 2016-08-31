@@ -16,5 +16,11 @@ module.exports = {
         component: function (resolve) {
             require(['./pages/login'], resolve);
         }
+    },
+    '/new': {
+        // 新增页
+        component: function (resolve) {
+            require(['./pages/new'], resolve);
+        }
     }
 };

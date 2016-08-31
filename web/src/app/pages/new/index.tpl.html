@@ -1,0 +1,52 @@
+<v-header></v-header>
+<div id="main">
+    <div class="ui three column grid">
+        <div class="column">
+            <span class="ui horizontal label">文题</span>
+            <div class="ui input">
+                <input type="text" placeholder="请输入文题" />
+            </div>
+        </div>
+        <div class="column">
+            <span class="ui horizontal label">创作时间</span>
+            <div class="ui input">
+                <input type="text" id="test1" placeholder="" />
+            </div>
+        </div>
+        <div class="column">
+            <span class="ui horizontal label">体裁</span>
+            <v-select :selectobj.sync="writeType"></v-select>
+        </div>
+    </div>
+    <div class="ui piled segments">
+        <div class="ui segment">
+            <span class="ui ribbon label">第一联</span>
+            <div class="ui input">
+                <input type="text" placeholder="" value="点点相思倚望楼">
+            </div>
+        </div>
+        <div class="ui segment">
+            <span class="ui ribbon label">第二联</span>
+            <div class="ui input">
+                <input type="text" placeholder="" value="枯阳掉半挂山眸">
+            </div>
+        </div>
+        <div class="ui segment">
+            <span class="ui ribbon label">第三联</span>
+            <div class="ui input">
+                <input type="text" placeholder="" value="长安遥映洛阳笔">
+            </div>
+        </div>
+        <div class="ui segment">
+            <span class="ui ribbon label">第四联</span>
+            <div class="ui input">
+                <input type="text" placeholder="" value="熟宣不画几白头">
+            </div>
+        </div>
+        <div class="ui segment">
+            <button class="ui red button compact">删一联</button>
+            <button class="ui green button compact">增一联</button>
+            <button class="ui green button compact" id="submit">发布</button>
+        </div>
+    </div>
+</div>

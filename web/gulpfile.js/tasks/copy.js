@@ -10,4 +10,5 @@ var gulp   = require('gulp');
 gulp.task('copy', function () {
     gulp.src(config.seUISrc).pipe(gulp.dest(config.seUiDest));
     gulp.src(config.sweetalertSrc).pipe(gulp.dest(config.sweetalertDest));
+    gulp.src(config.laydateSrc).pipe(gulp.dest(config.laydateDest));
 });

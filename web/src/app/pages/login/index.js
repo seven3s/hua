@@ -18,7 +18,10 @@ module.exports = Vue.extend({
     },
     template: require('./index.tpl.html'),
     data: function () {
-        return {};
+        return {
+            userName: '',
+            password: ''
+        };
     },
     events: {
         
@@ -30,6 +33,28 @@ module.exports = Vue.extend({
         
     },
     methods: {
-        
+        login: function () {
+            var me = this;
+            var data = {
+                userName: me.$data.userName,
+                password: me.$data.password
+            }
+            $.ajax({
+                url: '/login',
+                type: 'POST',
+                data: data,
+                success: function(data, status) {
+                    console.log(data);
+                    if (status == 'success') {
+                        
+                    }
+                },
+                error: function(data, status, e) {
+                    if (status == "error") {
+                        
+                    }
+                }
+            });
+        }
     }
 });

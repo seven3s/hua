@@ -1,0 +1,30 @@
+#main {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 10.5%;
+}
+#main > .header {
+    padding: 0 18px;
+}
+.segment > div.input {
+    width: 91%;
+}
+.segment > .button {
+    font-size: 12px;
+    font-weight: 400;
+}
+#submit {
+    float: right;
+    margin-right: 11px;
+}
+/*重置laydate样式*/
+#laydate_box * {
+    box-sizing: initial!important;
+}
+#laydate_YY {
+    margin-right: 0;
+}
+#laydate_MM {
+    float: right;
+}
+/*重置laydate样式end*/

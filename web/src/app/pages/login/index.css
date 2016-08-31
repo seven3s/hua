@@ -124,3 +124,7 @@
     bottom: 5px;
     right: 30px;
 }
+.form div.input {
+    width: 100%;
+    margin-bottom: 20px;
+}

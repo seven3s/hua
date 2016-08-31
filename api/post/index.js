@@ -8,5 +8,9 @@ module.exports = {
     init: function(app) {
         var test = require('./test');
         test.init(app);
+
+        // 登录接口
+        var login = require('./login');
+        login.init(app);
     }
 };
