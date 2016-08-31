@@ -43,7 +43,8 @@ module.exports = Vue.extend({
     },
     components: {
         'v-select': require('../../components/v-select/'),
-        'v-header': require('../../includes/header/')
+        'v-header': require('../../includes/header/'),
+        'v-footer': require('../../includes/footer/')
     },
     watch: {
         

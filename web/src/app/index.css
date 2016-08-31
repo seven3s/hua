@@ -1,6 +1,19 @@
+html,
+body,
+ul,
+ol,
+li,
+div,
+p,
+a {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 body {
     font-size: 14px;
-    padding-top: 70px;
+    height: 100%;
+    position: relative;
 }
 a {
     color: #444;
@@ -10,7 +23,12 @@ a {
          -o-transition: color .25s ease-out;
             transition: color .25s ease-out;
 }
-a:hover,
-a.active{
+#app {
+    position: relative;
+    padding-top: 70px;
+    padding-bottom: 330px;
+    min-height:100%;
+}
+a:hover {
     color: #db2828;
 };
