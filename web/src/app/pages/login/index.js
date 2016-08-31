@@ -8,13 +8,7 @@ var Vue = require('vue');
 require('./index.css');
 module.exports = Vue.extend({
     ready: function () {
-        $(function() {
-            $('#login #password').focus(function() {
-                $('#owl-login').addClass('password');
-            }).blur(function() {
-                $('#owl-login').removeClass('password');
-            });
-        });
+        this.init();
     },
     template: require('./index.tpl.html'),
     data: function () {
@@ -33,6 +27,15 @@ module.exports = Vue.extend({
         
     },
     methods: {
+        init: function () {
+            $(function() {
+                $('#login #password').focus(function() {
+                    $('#owl-login').addClass('password');
+                }).blur(function() {
+                    $('#owl-login').removeClass('password');
+                });
+            });
+        },
         login: function () {
             var me = this;
             var data = {

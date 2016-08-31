@@ -22,12 +22,12 @@ a {
          -o-transition: color .25s ease-out;
             transition: color .25s ease-out;
 }
+a:hover {
+    color: #db2828;
+}
 #app {
     position: relative;
     padding-top: 70px;
     padding-bottom: 330px;
     min-height:100%;
 }
-a:hover {
-    color: #db2828;
-};
