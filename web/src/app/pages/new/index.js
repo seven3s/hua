@@ -6,6 +6,7 @@
  */
 var Vue = require('vue');
 require('./index.css');
+var numToCn = require('../../common/numToCn');
 module.exports = Vue.extend({
     ready: function () {
         this.date();
@@ -35,7 +36,9 @@ module.exports = Vue.extend({
                         value: 3
                     }
                 ]
-            }
+            },
+            initLineNum: 4, // 初始行数
+            newLines: []
         };
     },
     events: {
@@ -63,6 +66,40 @@ module.exports = Vue.extend({
                     //选择日期完毕的回调
                 }
             });
+        },
+
+        /**
+         * newLine 新增一联
+         *
+         */
+        newLine: function () {
+            var initLineNum = this.$data.initLineNum;
+            var newLineNum = initLineNum - 4;
+            var cnNewLineNum = ++newLineNum + 4;
+            if (cnNewLineNum >= 69) {
+                alert('不能再添加了哦~~');
+                return;
+            }
+            this.$data.initLineNum = cnNewLineNum;
+            var cn = numToCn.get(cnNewLineNum);
+            this.$data.newLines.push(cn);
+        },
+
+        /**
+         * delLine 删除一联
+         *
+         */
+        delLine: function () {
+            var cnNewLineNum = this.$data.initLineNum;
+            var newLineNum = cnNewLineNum - 4;
+            --newLineNum;
+            this.$data.initLineNum = (newLineNum + 4);
+            var len = this.$data.newLines.length;
+            if (len === 0) {
+                alert('不能再删除了哦~~');
+                return;
+            }
+            this.$data.newLines.splice(len - 1, len);
         }
     }
 });

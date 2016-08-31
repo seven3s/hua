@@ -43,9 +43,15 @@
                 <input type="text" placeholder="请输入第四联">
             </div>
         </div>
+        <div class="ui segment" v-for="item in newLines">
+            <span class="ui ribbon label">第{{item}}联</span>
+            <div class="ui input">
+                <input type="text" placeholder="请输入{{item}}联">
+            </div>
+        </div>
         <div class="ui segment">
-            <button class="ui red button compact">删一联</button>
-            <button class="ui green button compact">增一联</button>
+            <button class="ui red button compact" @click="delLine">删一联</button>
+            <button class="ui green button compact" @click="newLine">增一联</button>
             <button class="ui green button compact" id="submit">发布</button>
         </div>
     </div>

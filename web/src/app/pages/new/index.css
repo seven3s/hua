@@ -7,7 +7,9 @@
     padding: 0 18px;
 }
 .segment > div.input {
-    width: 91%;
+    width: 85%;
+    float: right;
+    margin-top: -5px;
 }
 .segment > .button {
     font-size: 12px;
