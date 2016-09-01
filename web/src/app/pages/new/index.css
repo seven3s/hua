@@ -1,5 +1,5 @@
 #main {
-    width: 1200px;
+    width: 90%;
     margin: 0 auto;
     padding: 0 10.5%;
 }
@@ -36,4 +36,7 @@
 .poem-title > .ui.label.prompt,
 .poem-genres > .ui.label.prompt {
     margin-right: 45px;
+}
+.ui.input {
+    width: 64%;
 }
