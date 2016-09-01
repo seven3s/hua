@@ -1,28 +1,30 @@
 <div id="login">
-    <div class="login">
-        <form class="container offset1 loginform" method="post" action="javascript:;">
-            <div id="owl-login" class="">
-                <div class="hand"></div>
-                <div class="hand hand-r"></div>
-                <div class="arms">
-                    <div class="arm"></div>
-                    <div class="arm arm-r"></div>
-                </div>
+    <div class="loginform ui form segment">
+        <div id="owl-login" class="">
+            <div class="hand"></div>
+            <div class="hand hand-r"></div>
+            <div class="arms">
+                <div class="arm"></div>
+                <div class="arm arm-r"></div>
             </div>
-            <div class="pad ui form">
+        </div>
+        <div class="pad ui">
+            <div class="field">
                 <div class="ui left icon input">
                     <input type="text" autofocus="autofocus" tabindex="1" placeholder="用户名" name="user" id="user" v-model="userName">
                     <i class="user icon"></i>
                 </div>
+            </div>
+            <div class="field">
                 <div class="ui left icon input">
                     <input type="password" tabindex="2" placeholder="密码" name="password" id="password" v-model="password">
                     <i class="lock icon"></i>
                 </div>
             </div>
-            <div class="ui buttons login-btn">
-                <button class="ui green basic button" tabindex="4" type="button" @click="login">登录</button>
-            </div>
-            <a href="/" class="goback" title="返回首页">返回首页</a>
-        </form>
+        </div>
+        <div class="ui buttons login-btn">
+            <button class="ui green basic button submit" tabindex="4">登录</button>
+        </div>
+        <a href="/" class="goback" title="返回首页">返回首页</a>
     </div>
 </div>

@@ -28,11 +28,44 @@ module.exports = Vue.extend({
     },
     methods: {
         init: function () {
+            var me = this;
+            var validationRules = {
+                user: {
+                    identifier: 'user',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '用户名必填！'
+                        }
+                    ]
+                },
+                password: {
+                    identifier: 'password',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入密码！'
+                        }, {
+                            type: 'minLength[6]',
+                            prompt: '密码不得小于6位！'
+                        }
+                    ]
+                }
+            };
             $(function() {
                 $('#login #password').focus(function() {
                     $('#owl-login').addClass('password');
                 }).blur(function() {
                     $('#owl-login').removeClass('password');
+                });
+                // 登陆校验
+                $('.ui.form').form({
+                    fields: validationRules,
+                    inline: true,
+                    on: 'submit',
+                    onSuccess: function () {
+                        me.login();
+                    }
                 });
             });
         },
