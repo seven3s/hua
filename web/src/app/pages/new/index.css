@@ -30,3 +30,10 @@
     float: right;
 }
 /*重置laydate样式end*/
+.field > .prompt {
+    float: right;
+}
+.poem-title > .ui.label.prompt,
+.poem-genres > .ui.label.prompt {
+    margin-right: 45px;
+}

@@ -31,3 +31,14 @@ a:hover {
     padding-bottom: 330px;
     min-height:100%;
 }
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+*html clearfix {
+    height: 1%
+}

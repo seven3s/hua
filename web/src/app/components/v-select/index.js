@@ -14,7 +14,7 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     data: function () {
         return {
-            checkedData: -1
+            checkedData: ''
         };
     },
     watch: {
@@ -27,7 +27,7 @@ module.exports = Vue.extend({
         selectobj: {
             handler: function (val, oldVal) {
                 // 监听变化，如果是-1则做重置
-                if (val.checkedData == -1) {
+                if (val.checkedData === '') {
                     this.rest();
                 }
             },

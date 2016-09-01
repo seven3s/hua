@@ -7,21 +7,23 @@
 var Vue = require('vue');
 require('./index.css');
 var numToCn = require('../../common/numToCn');
+var rule = require('./rule-setting');
 module.exports = Vue.extend({
     ready: function () {
+        this.init();
         this.date();
     },
     template: require('./index.tpl.html'),
     data: function () {
         return {
-            writeType: {
-                inputName: 'writeType', // 选择的name字段
+            genres: {
+                inputName: 'poem_genres', // 选择的name字段
                 defaultText: '请选择', // 默认请选择
-                checkedData: -1, // 默认选中value值
+                checkedData: '', // 默认选中value值
                 data: [
                     {
                         text: '请选择',
-                        value: -1
+                        value: ''
                     },
                     {
                         text: '诗',
@@ -38,7 +40,7 @@ module.exports = Vue.extend({
                 ]
             },
             initLineNum: 4, // 初始行数
-            newLines: []
+            newLines: ['壹', '贰', '叁', '肆']
         };
     },
     events: {
@@ -53,6 +55,17 @@ module.exports = Vue.extend({
         
     },
     methods: {
+        init: function () {
+            var me = this;
+            $('[name = poem-form]').form({
+                fields: rule,
+                inline: true,
+                on: 'submit',
+                onSuccess: function () {
+                    alert('录入成功');
+                }
+            });
+        },
         /**
          * date 初始化日期组件
          *
@@ -92,13 +105,11 @@ module.exports = Vue.extend({
         delLine: function () {
             var cnNewLineNum = this.$data.initLineNum;
             var newLineNum = cnNewLineNum - 4;
-            --newLineNum;
-            this.$data.initLineNum = (newLineNum + 4);
-            var len = this.$data.newLines.length;
-            if (len === 0) {
+            if (newLineNum === 0) {
                 alert('不能再删除了哦~~');
                 return;
             }
+            var len = this.$data.newLines.length;
             this.$data.newLines.splice(len - 1, len);
         }
     }

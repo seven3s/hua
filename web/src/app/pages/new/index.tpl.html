@@ -1,58 +1,34 @@
 <v-header></v-header>
-<div id="main">
+<div id="main" name="poem-form">
     <div class="ui three column grid">
-        <div class="column">
+        <div class="column field poem-title">
             <span class="ui horizontal label">文题</span>
             <div class="ui input">
-                <input type="text" placeholder="请输入文题" />
+                <input type="text" placeholder="请输入文题" name="poem_title" />
             </div>
         </div>
-        <div class="column">
+        <div class="column field">
             <span class="ui horizontal label">创作时间</span>
             <div class="ui input">
                 <input type="text" id="test1" placeholder="选择输入创作时间" />
             </div>
         </div>
-        <div class="column">
+        <div class="column field poem-genres">
             <span class="ui horizontal label">体裁</span>
-            <v-select :selectobj.sync="writeType"></v-select>
+            <v-select :selectobj.sync="genres"></v-select>
         </div>
     </div>
-    <div class="ui piled segments">
-        <div class="ui segment">
-            <span class="ui ribbon label">第一联</span>
-            <div class="ui input">
-                <input type="text" placeholder="请输入第一联">
-            </div>
-        </div>
-        <div class="ui segment">
-            <span class="ui ribbon label">第二联</span>
-            <div class="ui input">
-                <input type="text" placeholder="请输入第二联">
-            </div>
-        </div>
-        <div class="ui segment">
-            <span class="ui ribbon label">第三联</span>
-            <div class="ui input">
-                <input type="text" placeholder="请输入第三联">
-            </div>
-        </div>
-        <div class="ui segment">
-            <span class="ui ribbon label">第四联</span>
-            <div class="ui input">
-                <input type="text" placeholder="请输入第四联">
-            </div>
-        </div>
-        <div class="ui segment" v-for="item in newLines">
+    <div class="ui segments">
+        <div class="ui segment field clearfix" v-for="item in newLines">
             <span class="ui ribbon label">第{{item}}联</span>
             <div class="ui input">
-                <input type="text" placeholder="请输入{{item}}联">
+                <input type="text" placeholder="请输入第{{item}}联" name="poem">
             </div>
         </div>
         <div class="ui segment">
             <button class="ui red button compact" @click="delLine">删一联</button>
             <button class="ui green button compact" @click="newLine">增一联</button>
-            <button class="ui green button compact" id="submit">发布</button>
+            <button class="ui green button compact submit" id="submit">发布</button>
         </div>
     </div>
 </div>
