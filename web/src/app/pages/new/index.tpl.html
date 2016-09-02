@@ -20,9 +20,9 @@
     </div>
     <div class="ui segments piled">
         <div class="ui segment field clearfix" v-for="item in newLines">
-            <span class="ui ribbon label">第{{item}}联</span>
+            <span class="ui ribbon label">第{{item.title}}联</span>
             <div class="ui input">
-                <input type="text" placeholder="请输入第{{item}}联" name="poem">
+                <input type="text" placeholder="请输入第{{item.title}}联" v-model="item.value">
             </div>
         </div>
         <div class="ui segment">

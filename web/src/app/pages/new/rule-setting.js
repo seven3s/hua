@@ -10,7 +10,7 @@ module.exports = {
         identifier: 'poem_title',
         rules: [
             {
-                type: 'empty',
+                type:   'empty',
                 prompt: '好题配好辞！'
             }
         ]
@@ -20,18 +20,17 @@ module.exports = {
         identifier: 'poem_genres',
         rules: [
             {
-                type: 'empty',
+                type:   'empty',
                 prompt: '请归下类目吧！'
             }
         ]
     },
-    // 文联校验规则
     poem: {
         identifier: 'poem',
         rules: [
             {
-                type: 'empty',
-                prompt: '再想想就是一句好词！'
+                type:   'empty',
+                prompt: '再想想又是一好辞'
             }
         ]
     }

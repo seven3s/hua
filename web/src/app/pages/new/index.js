@@ -40,11 +40,28 @@ module.exports = Vue.extend({
                 ]
             },
             initLineNum: 4, // 初始行数
-            newLines: ['壹', '贰', '叁', '肆']
+            newLines: [
+                {
+                    title: '壹',
+                    value: ''
+                },
+                {
+                    title: '贰',
+                    value: ''
+                },
+                {
+                    title: '叁',
+                    value: ''
+                },
+                {
+                    title: '肆',
+                    value: ''
+                }
+            ]
         };
     },
     events: {
-        
+
     },
     components: {
         'v-select': require('../../components/v-select/'),
@@ -58,11 +75,12 @@ module.exports = Vue.extend({
         init: function () {
             var me = this;
             $('[name = poem-form]').form({
-                fields: rule,
-                inline: true,
-                on: 'submit',
+                fields:    rule,
+                inline:    true,
+                on:        'submit',
                 onSuccess: function () {
-                    alert('录入成功');
+                    var validate = me.validation();
+                    console.log(validate);
                 }
             });
         },
@@ -72,10 +90,10 @@ module.exports = Vue.extend({
          */
         date: function () {
             laydate({
-                elem: '#test1',
-                format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+                elem:     '#test1',
+                format:   'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
                 festival: true, //显示节日
-                choose: function(datas){
+                choose:   function(datas){
                     //选择日期完毕的回调
                 }
             });
@@ -86,8 +104,8 @@ module.exports = Vue.extend({
          *
          */
         newLine: function () {
-            var initLineNum = this.$data.initLineNum;
-            var newLineNum = initLineNum - 4;
+            var initLineNum  = this.$data.initLineNum;
+            var newLineNum   = initLineNum - 4;
             var cnNewLineNum = ++newLineNum + 4;
             if (cnNewLineNum >= 69) {
                 alert('不能再添加了哦~~');
@@ -95,7 +113,11 @@ module.exports = Vue.extend({
             }
             this.$data.initLineNum = cnNewLineNum;
             var cn = numToCn.get(cnNewLineNum);
-            this.$data.newLines.push(cn);
+            var obj = {
+                title: cn,
+                value: ''
+            }
+            this.$data.newLines.push(obj);
         },
 
         /**
@@ -104,7 +126,7 @@ module.exports = Vue.extend({
          */
         delLine: function () {
             var cnNewLineNum = this.$data.initLineNum;
-            var newLineNum = cnNewLineNum - 4;
+            var newLineNum   = cnNewLineNum - 4;
             if (newLineNum === 0) {
                 alert('不能再删除了哦~~');
                 return;
@@ -112,6 +134,23 @@ module.exports = Vue.extend({
             var len = this.$data.newLines.length;
             this.$data.newLines.splice(len - 1, len);
             this.$data.initLineNum = this.$data.newLines.length;
+        },
+
+        validation: function () {
+            var data = this.$data.newLines;
+            var validateNum = 0;
+            data.forEach(function (item, index) {
+                if (!item.value && (item.value !== 0 || item.value !== '0')) {
+                    var errEl = $('.ui.segment.field').eq(index).find('.prompt.label');
+                    if (errEl.length <= 0) {
+                        $('.ui.segment.field').eq(index).append('<div class="ui basic red pointing prompt label transition visible">再想想又是一好辞！</div>');
+                    }
+                    validateNum++;
+                }else {
+                    $('.ui.segment.field').eq(index).find('.prompt.label').remove();
+                }
+            });
+            return validateNum <= 0;
         }
     }
 });
