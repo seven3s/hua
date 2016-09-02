@@ -111,6 +111,7 @@ module.exports = Vue.extend({
             }
             var len = this.$data.newLines.length;
             this.$data.newLines.splice(len - 1, len);
+            this.$data.initLineNum = this.$data.newLines.length;
         }
     }
 });
