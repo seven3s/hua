@@ -4,13 +4,13 @@
         <div class="column field poem-title">
             <span class="ui horizontal label">文题</span>
             <div class="ui input">
-                <input type="text" placeholder="请输入文题" name="poem_title" />
+                <input type="text" placeholder="请输入文题" name="poem_title" v-model="poem_title"/>
             </div>
         </div>
         <div class="column field">
             <span class="ui horizontal label">创作时间</span>
             <div class="ui input">
-                <input type="text" id="test1" placeholder="输入创作时间" />
+                <input type="text" id="test1" placeholder="输入创作时间" v-model="poem_time"/>
             </div>
         </div>
         <div class="column field poem-genres">

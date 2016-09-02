@@ -16,6 +16,7 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     data: function () {
         return {
+            poem_title: '', // 文题
             genres: {
                 inputName: 'poem_genres', // 选择的name字段
                 defaultText: '请选择', // 默认请选择
@@ -39,6 +40,7 @@ module.exports = Vue.extend({
                     }
                 ]
             },
+            poem_time: '', // 创作时间
             initLineNum: 4, // 初始行数
             newLines: [
                 {
