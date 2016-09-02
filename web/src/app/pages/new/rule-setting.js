@@ -11,7 +11,7 @@ module.exports = {
         rules: [
             {
                 type: 'empty',
-                prompt: '好题配好诗！'
+                prompt: '好题配好辞！'
             }
         ]
     },
