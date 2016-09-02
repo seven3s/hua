@@ -80,7 +80,10 @@ module.exports = Vue.extend({
                 on:        'submit',
                 onSuccess: function () {
                     var validate = me.validation();
-                    console.log(validate);
+                    // 所有验证通过则提交数据并保存
+                    if (validate) {
+                        me.post();
+                    }
                 }
             });
         },
@@ -136,6 +139,10 @@ module.exports = Vue.extend({
             this.$data.initLineNum = this.$data.newLines.length;
         },
 
+        /**
+         * validation 自定义校验每一行
+         *
+         */
         validation: function () {
             var data = this.$data.newLines;
             var validateNum = 0;
@@ -151,6 +158,10 @@ module.exports = Vue.extend({
                 }
             });
             return validateNum <= 0;
+        },
+
+        post: function () {
+            alert(1);
         }
     }
 });
