@@ -4,18 +4,21 @@
  * @Version:   V0.0.1
  * @Date:      2016-08-31 11:22:13
  */
+var mongoose = require('mongoose');
 module.exports = {
     init: function(app) {
         app.post('/login', function(req, res) {
-            var user = {
-                userName: 'admin',
-                password: 'admin'
-            }
-            if (req.body.userName == user.userName && req.body.password == user.password) {
-                res.send(200);
-            } else {
-                res.send(404);
-            }
+            var config = require('../../db/config');
+            var db = app.get('db');
+            var UsersScheMa = require('../../db/schemas/users');
+            var UsersModel = db.model('users', UsersScheMa);
+            UsersModel.findbyusername(req.body.userName, function (err, data) {
+                if (req.body.userName == data.account && req.body.password == data.passWord) {
+                    res.send(200);
+                } else {
+                    res.send(404);
+                }
+            });
         });
     }
 };
