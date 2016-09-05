@@ -79,16 +79,18 @@ module.exports = Vue.extend({
                 url: '/login',
                 type: 'POST',
                 data: data,
-                success: function(data, status) {
+                success: function(data) {
                     console.log(data);
-                    if (status == 'success') {
-                        
+                    if (data.status === -1) {
+                        alert(data.message);
+                    }else if (data.status === 0) {
+                        alert(data.message);
+                    }else if (data.status === 1) {
+                        alert(data.message);
                     }
                 },
-                error: function(data, status, e) {
-                    if (status == "error") {
-                        
-                    }
+                error: function(data, e) {
+                    
                 }
             });
         }

@@ -20,10 +20,6 @@ var UsersScheMa = new mongoose.Schema({
 });
 
 UsersScheMa.statics = {
-    fetch: function(cb){
-        return this.find({}).sort('meta.updateAt').exec(cb);
-    },
-
     // 根据用户名查询
     findbyusername: function(username, cb) {
         return this.findOne({account: username}).exec(cb);
