@@ -81,12 +81,29 @@ module.exports = Vue.extend({
                 data: data,
                 success: function(data) {
                     console.log(data);
+                    // 用户名不存在
                     if (data.status === -1) {
-                        alert(data.message);
+                        swal({
+                            title: '',
+                            text: data.message,
+                            type: 'error'
+                        });
                     }else if (data.status === 0) {
-                        alert(data.message);
+                        // 密码错误
+                        swal({
+                            title: '',
+                            text: data.message,
+                            type: 'error'
+                        });
                     }else if (data.status === 1) {
-                        alert(data.message);
+                        // 登陆成功
+                        swal({
+                            title: '',
+                            text: data.message,
+                            type: 'success'
+                        }, function () {
+                            window.location.href = '/';
+                        });
                     }
                 },
                 error: function(data, e) {
