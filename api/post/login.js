@@ -7,7 +7,7 @@
 var mongoose = require('mongoose');
 module.exports = {
     init: function(app) {
-        app.post('/login', function(req, res) {
+        app.post('/api/login', function(req, res) {
             var config = require('../../db/config');
             var db = app.get('db');
             var UsersScheMa = require('../../db/schemas/users');
@@ -20,6 +20,7 @@ module.exports = {
                         data: []
                     });
                 }else if (req.body.userName === data.account && req.body.password !== data.passWord) {
+                    req.session.user = data.account;
                     res.send({
                         status: 0,
                         message: '密码错误！',

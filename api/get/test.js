@@ -7,6 +7,7 @@
 module.exports = {
     init: function(app) {
         app.get('/test', function(req, res) {
+            console.log(req.url);
             if (req.query && req.query.callback) {
                 //console.log(params.query.callback);
                 res.jsonp({

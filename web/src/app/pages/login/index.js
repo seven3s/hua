@@ -76,7 +76,7 @@ module.exports = Vue.extend({
                 password: me.$data.password
             }
             $.ajax({
-                url: '/login',
+                url: '/api/login',
                 type: 'POST',
                 data: data,
                 success: function(data) {
