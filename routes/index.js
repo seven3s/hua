@@ -14,9 +14,8 @@ module.exports = {
     init: function(app){
         var me = this;
         /* GET index page. */
-        app.get('/', function(req, res){
-            console.log(req.url);
-            // me.checkLogin();
+        app.get('/', function(req, res, next){
+            me.checkLogin(req, res, next);
         });
     },
 
@@ -27,10 +26,12 @@ module.exports = {
      * @param  {Object} res
      *
      */
-    checkLogin: function (req, res) {
-        var url = req.originalUrl;
-        if ((url !== '/login' || url !== '/' || url !== '/index') && !req.session.user) {
-            return res.redirect("/login");
-        }
+    checkLogin: function (req, res, next) {
+        console.log(req.url);
+        // if ((url !== '/login' || url !== '/' || url !== '/index') && !req.session.user) {
+        //     return res.redirect("/login");
+        // }else {
+        //     next();
+        // }
     }
 };

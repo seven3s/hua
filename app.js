@@ -18,6 +18,10 @@ app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+
+// 登陆验证
+routes.init(app);
+
 app.use(express.static(path.join(__dirname, '/web/dist')));
 app.use(express.cookieParser('manager_花夏'));
 app.use(express.session({
@@ -34,8 +38,6 @@ app.set('db', db);
 // API接口
 var api = require('./api/init');
 api.init(app);
-// 登陆验证
-routes.init(app);
 // catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
