@@ -13,7 +13,10 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     data: function () {
         return {
-            isLogin: 0
+            login: {
+                status: 0,
+                userName: ''
+            }
         };
     },
     events: {
@@ -41,7 +44,8 @@ module.exports = Vue.extend({
                 type: 'GET',
             })
             .done(function(data) {
-                me.isLogin = data.status;
+                me.login.status = data.status;
+                me.login.userName = data.data.userName;
             })
             .fail(function(error) {
                 console.log(error);

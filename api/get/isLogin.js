@@ -7,9 +7,19 @@
 module.exports = {
     init: function(app) {
         app.get('/api/isLogin', function(req, res) {
-            if (req.session.user) {
+            var userName = req.session.user;
+            console.log(req.session.nickname);
+            if (userName) {
                 res.jsonp({
                     status: 1,
+                    message: '',
+                    data: {
+                         userName: req.session.nickname
+                    }
+                });
+            }else {
+                res.jsonp({
+                    status: 0,
                     message: '',
                     data: []
                 });

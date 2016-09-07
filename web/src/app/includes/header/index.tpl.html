@@ -19,9 +19,10 @@
             </div>
             <div class="right-part">
                 <!-- <button class="ui red basic button">注册</button> -->
-                <a class="ui red basic button" v-link="{ path: '/new' }" v-if="isLogin === 1">新增</a>
-                <a class="ui green basic button" v-link="{ path: '/logout' }" v-if="isLogin === 1">登出</a>
-                <a class="ui green basic button" v-link="{ path: '/login' }" v-if="isLogin === 0">登录</a>
+                <a class="ui green" v-if="login.status === 1">{{login.userName}}</a>
+                <a class="ui red basic button" v-link="{ path: '/new' }" v-if="login.status === 1">新增</a>
+                <a class="ui green basic button" v-link="{ path: '/logout' }" v-if="login.status === 1">登出</a>
+                <a class="ui green basic button" v-link="{ path: '/login' }" v-if="login.status === 0">登录</a>
             </div>
         </div>
     </div>
