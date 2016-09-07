@@ -4,6 +4,7 @@
  * @version V0.01
  * @date 2016-09-05 18:57:00
  */
+var url = require('url');
 module.exports = {
     /**
      * init 路由初始化
@@ -27,7 +28,9 @@ module.exports = {
      *
      */
     checkLogin: function (req, res, next) {
-        console.log(req.url);
+        var arg = url.parse(req.url);
+        console.log(req.session);
+        next();
         // if ((url !== '/login' || url !== '/' || url !== '/index') && !req.session.user) {
         //     return res.redirect("/login");
         // }else {

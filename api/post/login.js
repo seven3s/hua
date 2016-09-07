@@ -20,13 +20,14 @@ module.exports = {
                         data: []
                     });
                 }else if (req.body.userName === data.account && req.body.password !== data.passWord) {
-                    req.session.user = data.account;
                     res.send({
                         status: 0,
                         message: '密码错误！',
                         data: []
                     });
                 }else if (req.body.userName === data.account && req.body.password === data.passWord) {
+                    req.session.user = data.account;
+                    console.log(req);
                     res.send({
                         status: 1,
                         message: '登陆成功！',

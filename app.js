@@ -5,6 +5,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var SessionStore = require("session-mongoose")(express);
 var routes = require('./routes/index');
 var app = express();
 var router = express.Router();
@@ -19,25 +20,33 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
-// 登陆验证
-routes.init(app);
-
-app.use(express.static(path.join(__dirname, '/web/dist')));
 app.use(express.cookieParser('manager_花夏'));
-app.use(express.session({
-  resave: true, // don't save session if unmodified  
-  saveUninitialized: false, // don't create session until something stored  
-  secret: 'love'
-}));
+
 //引入mongoose模块
 var mongoose = require('mongoose');
 var config = require('./db/config');
 // 链接数据库
 var db = mongoose.connect(config.db.mongodb);
 app.set('db', db);
+var store = new SessionStore({
+    url: config.db.mongodb,
+    interval: 120000
+});
+app.use(express.session({
+    store: store,
+    resave: true, // don't save session if unmodified  
+    saveUninitialized: false, // don't create session until something stored  
+    secret: 'love',
+    cookie: {
+        maxAge: 1000 * 60 * 30 //过期时间设置(单位毫秒)
+    }
+}));
+// 登陆验证
+routes.init(app);
 // API接口
 var api = require('./api/init');
 api.init(app);
+app.use(express.static(path.join(__dirname, '/web/dist')));
 // catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
