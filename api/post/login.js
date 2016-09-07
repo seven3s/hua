@@ -27,7 +27,6 @@ module.exports = {
                     });
                 }else if (req.body.userName === data.account && req.body.password === data.passWord) {
                     req.session.user = data.account;
-                    console.log(req);
                     res.send({
                         status: 1,
                         message: '登陆成功！',

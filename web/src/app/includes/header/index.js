@@ -8,11 +8,13 @@ var Vue = require('vue');
 require('./index.css');
 module.exports = Vue.extend({
     ready: function () {
-        
+        this.init();
     },
     template: require('./index.tpl.html'),
     data: function () {
-        return {};
+        return {
+            isLogin: 0
+        };
     },
     events: {
         
@@ -24,6 +26,26 @@ module.exports = Vue.extend({
         
     },
     methods: {
-        
+        init: function () {
+            this.checkLogin();
+        },
+
+        /**
+         * checkLogin 检查登陆状态
+         *
+         */
+        checkLogin: function () {
+            var me = this;
+            $.ajax({
+                url: '/api/isLogin',
+                type: 'GET',
+            })
+            .done(function(data) {
+                me.isLogin = data.status;
+            })
+            .fail(function(error) {
+                console.log(error);
+            });
+        }
     }
 });

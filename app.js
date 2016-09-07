@@ -36,7 +36,8 @@ app.use(express.session({
     store: store,
     resave: true, // don't save session if unmodified  
     saveUninitialized: false, // don't create session until something stored  
-    secret: 'love',
+    secret: 'secret',
+    key: 'usid',
     cookie: {
         maxAge: 1000 * 60 * 30 //过期时间设置(单位毫秒)
     }
