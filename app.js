@@ -42,8 +42,7 @@ app.use(express.session({
         maxAge: 1000 * 60 * 30 //过期时间设置(单位毫秒)
     }
 }));
-// 登陆验证
-routes.init(app);
+
 // API接口
 var api = require('./api/init');
 api.init(app);

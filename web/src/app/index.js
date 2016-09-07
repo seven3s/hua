@@ -13,10 +13,13 @@ require('./common/semantic-ui/semantic.min.js');
 // 引用sweetalert
 require('./common/sweetalert/sweetalert.min.js');
 Vue.use(VueRouter);
-var router = new VueRouter({
+window.router = new VueRouter({
     saveScrollPosition: true
 });
 var route = require('./router-config');
 router.map(route);
+
+// 登陆控制
+
 router.start({}, '#app');
 module.exports = app;

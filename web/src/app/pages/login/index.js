@@ -80,7 +80,6 @@ module.exports = Vue.extend({
                 type: 'POST',
                 data: data,
                 success: function(data) {
-                    console.log(data);
                     // 用户名不存在
                     if (data.status === -1) {
                         swal({

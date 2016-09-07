@@ -46,10 +46,37 @@ module.exports = Vue.extend({
             .done(function(data) {
                 me.login.status = data.status;
                 me.login.userName = data.data.userName;
+                me.louterForeEach();
             })
             .fail(function(error) {
                 console.log(error);
             });
+        },
+
+        /**
+         * louterForeEach 登陆控制
+         *
+         */
+        louterForeEach: function () {
+            var status = this.loginUrl();
+            if (this.$data.login.status === 0 && status) {
+                router.go('/login');
+            }
+        },
+
+        /**
+         * loginUrl 配置需要登陆的页面
+         *
+         */
+        loginUrl: function () {
+            var status = true;
+            switch (router.app.$route.path) {
+                case '/new':
+                    status = false;
+                    break;
+                default: status = true;
+            }
+            return !status;
         },
 
         /**
