@@ -12,5 +12,8 @@ module.exports = {
         // 登录接口
         var login = require('./login');
         login.init(app);
+        // 登出接口
+        var logout = require('./logout');
+        logout.init(app);
     }
 };

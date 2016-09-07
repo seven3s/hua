@@ -50,6 +50,33 @@ module.exports = Vue.extend({
             .fail(function(error) {
                 console.log(error);
             });
+        },
+
+        /**
+         * logout 登出操作
+         *
+         */
+        logout: function () {
+            $.ajax({
+                url: '/api/logout',
+                type: 'POST',
+            })
+            .done(function(data) {
+                swal({
+                    title: '',
+                    text: data.message,
+                    type: 'success'
+                }, function () {
+                    window.location.href = '/';
+                });
+            })
+            .fail(function(error) {
+                swal({
+                    title: '',
+                    text: error,
+                    type: 'error'
+                });
+            });
         }
     }
 });
