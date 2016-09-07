@@ -15,5 +15,8 @@ module.exports = {
         // 登出接口
         var logout = require('./logout');
         logout.init(app);
+        // 诗歌保存接口
+        var poem = require('./poem');
+        poem.init(app);
     }
 };

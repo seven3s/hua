@@ -99,12 +99,14 @@ module.exports = Vue.extend({
          *
          */
         date: function () {
+            var me = this;
             laydate({
-                elem:     '#test1',
+                elem:     '#poem_time',
                 format:   'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
                 festival: true, //显示节日
                 choose:   function(datas){
                     //选择日期完毕的回调
+                    me.poem_time = datas;
                 }
             });
         },
@@ -167,8 +169,41 @@ module.exports = Vue.extend({
             return validateNum <= 0;
         },
 
+        /**
+         * post 保存数据
+         *
+         */
         post: function () {
-            alert(1);
+            var poem_title = this.$data.poem_title;
+            var poem_time = this.$data.poem_time;
+            var poem_type = this.$data.genres.checkedData;
+            var poem_lines = [];
+            this.$data.newLines.forEach(function (item) {
+                poem_lines.push(item.value);
+            });
+            var data = {
+                poem_title: poem_title,
+                poem_time:  poem_time,
+                poem_type:  poem_type,
+                poem_lines: poem_lines
+            };
+            $.ajax({
+                url: '/api/save/poem',
+                type: 'POST',
+                data: data,
+            })
+            .done(function(data) {
+                swal({
+                    title: '',
+                    text: data.message,
+                    type: 'success'
+                }, function () {
+                    window.location.href = '/';
+                });
+            })
+            .fail(function() {
+                console.log("error");
+            });
         }
     }
 });
