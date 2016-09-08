@@ -198,7 +198,8 @@ module.exports = Vue.extend({
                     text: data.message,
                     type: 'success'
                 }, function () {
-                    window.location.href = '/';
+                    var url = /detail/ + data.data.id;
+                    router.go(url);
                 });
             })
             .fail(function() {

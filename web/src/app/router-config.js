@@ -22,5 +22,11 @@ module.exports = {
         component: function (resolve) {
             require(['./pages/new'], resolve);
         }
+    },
+    '/detail/:id': {
+        // 诗歌详情页
+        component: function (resolve) {
+            require(['./pages/detail'], resolve);
+        }
     }
 };
