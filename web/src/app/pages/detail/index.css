@@ -1,0 +1,15 @@
+#main {
+    width: 80%;
+}
+.w-65 {
+    width: 65%;
+}
+.poem-body {
+    margin-top: -68px;
+}
+#app .poem-body > * {
+    padding-left: 30px;
+}
+#app .ui.label {
+    margin-bottom: 10px;
+}

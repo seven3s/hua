@@ -1,7 +1,13 @@
 <v-header></v-header>
-<div id="main" name="poem-form">
+<div id="main" name="poem-form" class="mar-auto">
     <div class="ui tall stacked segment green">
-        <h4 class="ui grey header">Grey</h4>
+        <span class="ui teal ribbon label">{{poem.poem_time}}</span>
+        <div></div>
+        <a class="ui right ribbon label">{{poem.userName}}</a>
+        <div class="w-65 mar-auto poem-body">
+            <h4 class="ui grey header">{{poem.title}}</h4>
+            <div class="ui vertical segment" v-for="item in poem.lines">{{item}}</div>
+        </div>
     </div>
 </div>
 <v-footer></v-footer>

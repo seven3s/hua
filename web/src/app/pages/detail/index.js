@@ -47,7 +47,6 @@ module.exports = Vue.extend({
                 }
             })
             .done(function(json) {
-                console.log(json);
                 var data = json.data;
                 var poem = {};
                 poem.title = data.title;
@@ -55,7 +54,7 @@ module.exports = Vue.extend({
                 poem.type = me.swicthPoemType(data.poem_type);
                 poem.poem_time = data.poem_time;
                 poem.lines = data.poem_lines;
-                me.$data.poem = data;
+                me.$data.poem = poem;
                 console.log(me.$data.poem);
             })
             .fail(function(err) {

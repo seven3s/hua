@@ -42,3 +42,6 @@ a:hover {
 *html clearfix {
     height: 1%
 }
+.mar-auto {
+    margin: 0 auto;
+}
