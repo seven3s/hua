@@ -10,6 +10,7 @@ var PoemScheMa = new mongoose.Schema({
     poem_time: String,
     poem_type: Number,
     poem_lines: Array,
+    poem_author: String,
     meta: {
         createAt: {
             type: Date,

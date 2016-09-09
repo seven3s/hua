@@ -15,6 +15,9 @@ module.exports = {
             var PoemsModel = db.model('poems', PoemsScheMa);
             var id = req.body._id;
             var poemsObj = req.body;
+            // 添加作者
+            poemsObj.poem_author = req.session.user;
+            console.log(req.session.user);
             var _poems;
             if (id !== undefined) {
                 PoemsModel.findById(id, function(err, poems) {

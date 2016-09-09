@@ -12,5 +12,8 @@ module.exports = {
         // 检查登陆状态
         var isLogin = require('./isLogin');
         isLogin.init(app);
+        // 获取诗歌详情
+        var poem = require('./poem');
+        poem.init(app);
     }
 };
