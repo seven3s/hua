@@ -1,13 +1,14 @@
 <v-header></v-header>
 <div id="main" name="poem-form" class="mar-auto">
     <div class="ui tall stacked segment green">
-        <span class="ui teal ribbon label">{{poem.poem_time}}</span>
+        <span class="ui teal ribbon label">{{poem.title}}</span>
         <div></div>
-        <a class="ui right ribbon label">{{poem.userName}}</a>
+        <a class="ui ribbon label">{{poem.userName}}</a>
         <div></div>
-        <a class="ui teal ribbon label">{{poem.type}}</a>
-        <div class="w-65 mar-auto poem-body">
-            <h4 class="ui grey header">{{poem.title}}</h4>
+        <span class="ui right ribbon label">{{poem.poem_time}}</span>
+        <div></div>
+        <a class="ui right ribbon label">{{poem.type}}</a>
+        <div class="w-65 mar-auto poem-body" id="poem-body">
             <div class="ui vertical segment" v-for="item in poem.lines">{{item}}</div>
         </div>
     </div>

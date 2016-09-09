@@ -10,6 +10,9 @@
 #app .poem-body > * {
     padding-left: 30px;
 }
+.poem-body > .segment.ui {
+    font-size: 1.8rem;
+}
 #app .ui.label {
     margin-bottom: 10px;
 }
