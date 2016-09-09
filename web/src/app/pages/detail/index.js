@@ -13,6 +13,7 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     data: function () {
         return {
+            load: 0,
             poem: {}
         };
     },
@@ -21,7 +22,8 @@ module.exports = Vue.extend({
     },
     components: {
         'v-header': require('../../includes/header/'),
-        'v-footer': require('../../includes/footer/')
+        'v-footer': require('../../includes/footer/'),
+        'v-loading': require('../../components/v-loading/')
     },
     watch: {
         
@@ -55,7 +57,7 @@ module.exports = Vue.extend({
                 poem.poem_time = data.poem_time;
                 poem.lines = data.poem_lines;
                 me.$data.poem = poem;
-                console.log(me.$data.poem);
+                me.$data.load = 1;
             })
             .fail(function(err) {
                 console.log("error");
