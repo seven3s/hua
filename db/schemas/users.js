@@ -22,7 +22,7 @@ var UsersScheMa = new mongoose.Schema({
 UsersScheMa.statics = {
     // 根据用户名查询
     findbyusername: function(username, cb) {
-        return this.findOne({account: username}, cb);
+        return this.findOne({account: username}).exec(cb);
     },
     findById: function(id, cb){
         return this.findOne({id: id}).exec(cb);

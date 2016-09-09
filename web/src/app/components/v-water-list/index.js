@@ -13,6 +13,11 @@ module.exports = Vue.extend({
     ready: function () {
         this.init();
     },
+    // props: {
+    //     waterdata: {
+    //         type: Object
+    //     }
+    // },
     template: require('./index.tpl.html'),
     data: function () {
         return {
@@ -30,6 +35,8 @@ module.exports = Vue.extend({
     },
     methods: {
         init: function () {
+            var me = this;
+            console.log(me.waterdata);
             $('#container').waterfall({
                 itemCls: 'water-item',
                 colWidth: 222,  
@@ -38,7 +45,7 @@ module.exports = Vue.extend({
                 isFadeIn: true,
                 checkImagesLoaded: false,
                 path: function() {
-                    // return data;
+                    return me.waterdata;
                 }
             });
         }

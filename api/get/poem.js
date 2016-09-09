@@ -51,11 +51,13 @@ module.exports = {
                 data.poem_type = poem.poem_type;
                 data.poem_author = poem.poem_author;
                 data.poem_lines = poem.poem_lines;
+            }).then(function (poem) {
                 UserNameModel.findbyusername(poem.poem_author, function(err, user) {
                     data.userName = user.nickname;
+                }).then(function () {
                     res.send({
                         status: 1,
-                        message: '',
+                        message: '成功',
                         data: data
                     });
                 });
@@ -68,15 +70,32 @@ module.exports = {
      */
     queryAll: function (PoemsModel, UserNameModel, req, res) {
         PoemsModel.find(function(err, poems) {
+            var datas = [];
             if (err) {
                 res.send(err);
             }
             if (poems) {
-                res.send({
-                    status: 1,
-                    message: '成功！',
-                    data: poems
-                });
+                var data = {};
+                var len = poems.length;
+                poems.forEach(function (item, index) {
+                    data.title = item.poem_title;
+                    data.poem_time = item.poem_time;
+                    data.poem_type = item.poem_type;
+                    data.poem_author = item.poem_author;
+                    data.poem_lines = item.poem_lines;
+                    UserNameModel.findbyusername(item.poem_author, function(err, user) {
+                        data.userName = user.nickname;
+                    }).then(function () {
+                        datas.push(data);
+                        if (index === (len - 1)) {
+                            res.send({
+                                status: 1,
+                                message: '',
+                                data: datas
+                            });
+                        }
+                    });
+                })
             }else {
                 res.send({
                     status: 0,

@@ -37,12 +37,13 @@ module.exports = Vue.extend({
          *
          */
         getPoems: function () {
+            var me = this;
             $.ajax({
                 url: '/api/poem',
                 type: 'GET'
             })
             .done(function(json) {
-                console.log(json);
+                me.$data.waterdata = json.data;
             })
             .fail(function() {
                 console.log("error");
