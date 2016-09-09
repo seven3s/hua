@@ -84,6 +84,7 @@ module.exports = Vue.extend({
             $('[name = poem-form]').form({
                 fields:    rule,
                 inline:    true,
+                istoday: false,
                 on:        'submit',
                 onSuccess: function () {
                     var validate = me.validation();
@@ -107,6 +108,7 @@ module.exports = Vue.extend({
                 choose:   function(datas){
                     //选择日期完毕的回调
                     me.poem_time = datas;
+                    console.log(datas);
                 }
             });
         },
@@ -187,6 +189,8 @@ module.exports = Vue.extend({
                 poem_type:  poem_type,
                 poem_lines: poem_lines
             };
+            console.log(this.$data.poem_time);
+            console.log(data);
             $.ajax({
                 url: '/api/save/poem',
                 type: 'POST',
@@ -198,7 +202,7 @@ module.exports = Vue.extend({
                     text: data.message,
                     type: 'success'
                 }, function () {
-                    var url = /detail/ + data.data.id;
+                    var url = /p/ + data.data.id;
                     router.go(url);
                 });
             })

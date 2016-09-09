@@ -17,7 +17,10 @@ module.exports = {
             var poemsObj = req.body;
             // 添加作者
             poemsObj.poem_author = req.session.user;
-            console.log(req.session.user);
+            if (!poemsObj.poem_time) {
+                var moment = require('moment');
+                poemsObj.poem_time = moment(Date.now()).format('YYYY-MM-DD');
+            }
             var _poems;
             if (id !== undefined) {
                 PoemsModel.findById(id, function(err, poems) {
@@ -44,7 +47,6 @@ module.exports = {
                 delete _poemsObj._id;
                 // 添加诗歌
                 _poems = new PoemsModel(_poemsObj);
-                console.log(_poems);
                 _poems.save(function(err, poems) {
                     if (err) {
                         res.send(err);
