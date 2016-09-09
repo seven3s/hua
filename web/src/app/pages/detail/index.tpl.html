@@ -4,6 +4,8 @@
         <span class="ui teal ribbon label">{{poem.poem_time}}</span>
         <div></div>
         <a class="ui right ribbon label">{{poem.userName}}</a>
+        <div></div>
+        <a class="ui teal ribbon label">{{poem.type}}</a>
         <div class="w-65 mar-auto poem-body">
             <h4 class="ui grey header">{{poem.title}}</h4>
             <div class="ui vertical segment" v-for="item in poem.lines">{{item}}</div>
