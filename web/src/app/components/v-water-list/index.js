@@ -6,18 +6,16 @@
  */
 var Vue = require('vue');
 require('./index.css');
-require('./waterfall.css');
+// require('./waterfall.css');
 // require('./handlebars.js');
-require('./waterfall.min.js');
+// require('./waterfall.min.js');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
     },
-    // props: {
-    //     waterdata: {
-    //         type: Object
-    //     }
-    // },
+    props: {
+        waterdata: []
+    },
     template: require('./index.tpl.html'),
     data: function () {
         return {
@@ -31,23 +29,16 @@ module.exports = Vue.extend({
         
     },
     watch: {
-        
+        waterdata: {
+            handler: function (val) {
+                this.init();
+            }
+        }
     },
     methods: {
         init: function () {
             var me = this;
             console.log(me.waterdata);
-            $('#container').waterfall({
-                itemCls: 'water-item',
-                colWidth: 222,  
-                gutterWidth: 15,
-                gutterHeight: 15,
-                isFadeIn: true,
-                checkImagesLoaded: false,
-                path: function() {
-                    return me.waterdata;
-                }
-            });
         }
     }
 });
