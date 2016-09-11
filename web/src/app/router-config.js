@@ -28,5 +28,11 @@ module.exports = {
         component: function (resolve) {
             require(['./pages/detail'], resolve);
         }
+    },
+    '/list/:type': {
+        // 诗歌详情页
+        component: function (resolve) {
+            require(['./pages/list'], resolve);
+        }
     }
 };

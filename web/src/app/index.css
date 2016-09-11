@@ -25,6 +25,10 @@ a {
 a:hover {
     color: #db2828;
 }
+a{text-decoration:none; color:#333; -webkit-transition: color .2s;-moz-transition: color .2s;-o-transition: color .2s; -ms-transition: color .2s;transition: color .2s;}
+a:hover{text-decoration:none; color: #ff7d8e;}
+a:focus{outline:none;}
+::selection {background:#ff7d8e; color:#fff;} 
 #app {
     position: relative;
     padding-top: 70px;

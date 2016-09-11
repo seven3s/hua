@@ -19,7 +19,5 @@ window.router = new VueRouter({
 var route = require('./router-config');
 router.map(route);
 
-// 登陆控制
-
 router.start({}, '#app');
 module.exports = app;

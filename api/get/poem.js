@@ -26,6 +26,14 @@ module.exports = {
             if (id) {
                 me.getPoemById(PoemsModel, UserNameModel, req, res);
             }
+            // 根据type查询
+            var type = query.typeId;
+            if (type) {
+                var data = {
+                    poem_type: type
+                };
+                me.queryType(PoemsModel, UserNameModel, data, req, res);
+            }
         });
     },
 
@@ -66,12 +74,29 @@ module.exports = {
             });
         }
     },
+
+    /**
+     * queryType 根据诗歌类型查询
+     *
+     */
+    queryType: function (PoemsModel, UserNameModel, data, req, res) {
+        this.query(PoemsModel, UserNameModel, data, req, res);
+    },
+
     /**
      * queryAll 查询全部
      *
      */
     queryAll: function (PoemsModel, UserNameModel, req, res) {
-        PoemsModel.find(function(err, poems) {
+        this.query(PoemsModel, UserNameModel, {}, req, res);
+    },
+
+    /**
+     * query 查询诗歌
+     *
+     */
+    query: function (PoemsModel, UserNameModel, data, req, res) {
+        PoemsModel.find(data, function(err, poems) {
             if (err) {
                 res.send(err);
             }
@@ -109,7 +134,6 @@ module.exports = {
             }
         });
     },
-
     /**
      * isEmpty 是否为空对象 {}
      *
@@ -118,6 +142,6 @@ module.exports = {
      * @return {Boolean}   返回布尔值
      */
     isEmpty: function (val) {
-        return Object.prototype.isPrototypeOf(val) && Object.keys(val).length === 0
+        return Object.prototype.isPrototypeOf(val) && Object.keys(val).length === 0;
     }
 };
