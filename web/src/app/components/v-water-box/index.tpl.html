@@ -6,11 +6,13 @@
         <img src="../../public/images/user.jpg" class="ui avatar image">
         <span>{{waterboxdata.userName}}</span>
     </div>
-    <div class="image" v-if="waterboxdata.imgSrc">
-        <img src="/images/wireframe/image.png" class="ui wireframe image">
+    <div class="image">
+        <img :src="waterboxdata.imgSrc" class="ui wireframe image" v-if="!!waterboxdata.imgSrc">
     </div>
     <div class="content">
-        <h4 class="ui sub header">{{waterboxdata.title}}</h4>
+        <h4 class="ui sub header">
+            <a v-link="{ path: '/p/' + waterboxdata.id }">{{waterboxdata.title}}</a>
+        </h4>
         <div class="ui small feed">
             <div class="event">
                 <div class="content">
@@ -24,13 +26,9 @@
             <i class="heart like icon" :class="waterboxdata.likes > 0 ? 'active' : '' "></i>
             {{waterboxdata.likes}}
         </span>
-        <i class="comment icon"></i>
-        3 comments
-    </div>
-    <div class="extra content">
-        <div class="ui large transparent left icon input">
-            <i class="heart outline icon"></i>
-            <input type="text" placeholder="Add Comment...">
-        </div>
+        <span>
+            <i class="book icon"></i>
+            {{waterboxdata.type}}
+        </span>
     </div>
 </div>

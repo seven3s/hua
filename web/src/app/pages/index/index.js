@@ -52,6 +52,7 @@ module.exports = Vue.extend({
                     var swicthPoemType = require('../../common/swicthPoemType');
                     poem.type = swicthPoemType(item.poem_type);
                     poem.poem_time = item.poem_time;
+                    poem.id = item.id;
                     poem.likes = item.likes;
                     poem.lines = item.poem_lines;
                     poems.push(poem);
