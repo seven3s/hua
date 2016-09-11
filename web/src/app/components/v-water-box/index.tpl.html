@@ -1,16 +1,9 @@
 <div class="ui card item">
-    <div class="content">
-        <div class="right floated meta">
-            {{waterboxdata.poem_time}}
-        </div>
-        <img src="../../public/images/user.jpg" class="ui avatar image">
-        <span>{{waterboxdata.userName}}</span>
-    </div>
     <div class="image" v-if="!!waterboxdata.imgSrc">
         <img :src="waterboxdata.imgSrc" class="ui wireframe image">
     </div>
-    <div class="content">
-        <h4 class="ui sub header">
+    <div class="content ui">
+        <h4 class="ui top left attached label">
             <a v-link="{ path: '/p/' + waterboxdata.id }">{{waterboxdata.title}}</a>
         </h4>
         <div class="ui small feed">
@@ -22,10 +15,19 @@
         </div>
     </div>
     <div class="content">
-        <span class="right floated">
-            <i class="heart like icon" :class="waterboxdata.likes > 0 ? 'active' : '' "></i>
-            {{waterboxdata.likes}}
-        </span>
+        <div class="right floated meta">
+            {{waterboxdata.poem_time}}
+        </div>
+        <img src="../../public/images/user.jpg" class="ui avatar image">
+        <span>{{waterboxdata.userName}}</span>
+        <div>
+            <span class="left floated heart-span">
+                <i class="heart like icon" :class="waterboxdata.likes > 0 ? 'active' : '' "></i>
+                <span>{{waterboxdata.likes || 0}}</span>
+            </span>
+        </div>
+    </div>
+    <div class="ui top right attached label">
         <span>
             <i class="book icon"></i>
             {{waterboxdata.type}}
