@@ -63,6 +63,8 @@ module.exports = Vue.extend({
             .fail(function(err) {
                 console.log("error");
             });
+            $youziku.load("#poem-body", "5e6cb22754a646e4802b63a653c4c414", "winman_tun33004");
+            $youziku.draw();
         }
     }
 });

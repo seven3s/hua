@@ -8,7 +8,7 @@ var Vue = require('vue');
 require('./index.css');
 module.exports = Vue.extend({
     ready: function () {
-        
+        this.init();
     },
     props: {
         waterdata: []
@@ -27,5 +27,8 @@ module.exports = Vue.extend({
 
     },
     methods: {
+        init: function () {
+            
+        }
     }
 });

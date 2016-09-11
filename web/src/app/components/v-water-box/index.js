@@ -27,7 +27,6 @@ module.exports = Vue.extend({
         
     },
     watch: {
-        
     },
     methods: {
         init: function () {
