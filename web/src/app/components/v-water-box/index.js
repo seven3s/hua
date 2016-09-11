@@ -6,9 +6,11 @@
  */
 var Vue = require('vue');
 require('./index.css');
+require('./cascade.css');
+require('./cascade');
 module.exports = Vue.extend({
     ready: function () {
-        
+        this.init();
     },
     props: {
         waterboxdata: {}
@@ -28,6 +30,11 @@ module.exports = Vue.extend({
         
     },
     methods: {
-        
+        init: function () {
+            $(function () {
+                $('.water-full').cascade();
+                $(window).trigger('resize.cascade');
+            });
+        }
     }
 });

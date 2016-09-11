@@ -1,4 +1,4 @@
-<div class="ui card">
+<div class="ui card item">
     <div class="content">
         <div class="right floated meta">
             {{waterboxdata.poem_time}}
@@ -6,8 +6,8 @@
         <img src="../../public/images/user.jpg" class="ui avatar image">
         <span>{{waterboxdata.userName}}</span>
     </div>
-    <div class="image">
-        <img :src="waterboxdata.imgSrc" class="ui wireframe image" v-if="!!waterboxdata.imgSrc">
+    <div class="image" v-if="!!waterboxdata.imgSrc">
+        <img :src="waterboxdata.imgSrc" class="ui wireframe image">
     </div>
     <div class="content">
         <h4 class="ui sub header">
