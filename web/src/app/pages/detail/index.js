@@ -53,7 +53,8 @@ module.exports = Vue.extend({
                 var poem = {};
                 poem.title = data.title;
                 poem.userName = data.userName;
-                poem.type = me.swicthPoemType(data.poem_type);
+                var swicthPoemType = require('../../common/swicthPoemType');
+                poem.type = swicthPoemType(data.poem_type);
                 poem.poem_time = data.poem_time;
                 poem.lines = data.poem_lines;
                 me.$data.poem = poem;
@@ -62,27 +63,6 @@ module.exports = Vue.extend({
             .fail(function(err) {
                 console.log("error");
             });
-        },
-
-        /**
-         * swicthPoemType 根据code返回类型
-         *
-         * @return {String} 返回类型
-         */
-        swicthPoemType: function (i) {
-            var type = '诗';
-             switch (i) {
-                case 1:
-                    type = '诗';
-                    break;
-                case 2:
-                    type = '词';
-                    break;
-                case 3:
-                    type = '赋';
-                    break;
-            }
-            return type;
         }
     }
 });

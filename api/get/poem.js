@@ -4,6 +4,7 @@
  * @version V0.01
  * @date 2016-09-09 16:03:48
  */
+var moment = require('moment');
 module.exports = {
     init: function(app) {
         var me = this;
@@ -47,7 +48,7 @@ module.exports = {
                     res.send(err);
                 }
                 data.title = poem.poem_title;
-                data.poem_time = poem.poem_time;
+                data.poem_time = moment(poem.poem_time).startOf('day').fromNow();
                 data.poem_type = poem.poem_type;
                 data.poem_author = poem.poem_author;
                 data.poem_lines = poem.poem_lines;
@@ -79,13 +80,14 @@ module.exports = {
                 var len = poems.length;
                 poems.forEach(function (item, index) {
                     data.title = item.poem_title;
-                    data.poem_time = item.poem_time;
+                    data.poem_time = moment(item.poem_time).startOf('day').fromNow();
                     data.poem_type = item.poem_type;
                     data.poem_author = item.poem_author;
                     data.poem_lines = item.poem_lines;
                     UserNameModel.findbyusername(item.poem_author, function(err, user) {
                         data.userName = user.nickname;
                     }).then(function () {
+                        console.log(data);
                         datas.push(data);
                         if (index === (len - 1)) {
                             res.send({
@@ -95,7 +97,7 @@ module.exports = {
                             });
                         }
                     });
-                })
+                });
             }else {
                 res.send({
                     status: 0,

@@ -43,7 +43,19 @@ module.exports = Vue.extend({
                 type: 'GET'
             })
             .done(function(json) {
-                me.$data.waterdata = json.data;
+                var data = json.data;
+                var poems = [];
+                data.forEach(function (item, index) {
+                    var poem = {};
+                    poem.title = item.title;
+                    poem.userName = item.userName;
+                    var swicthPoemType = require('../../common/swicthPoemType');
+                    poem.type = swicthPoemType(item.poem_type);
+                    poem.poem_time = item.poem_time;
+                    poem.lines = item.poem_lines;
+                    poems.push(poem);
+                });
+                me.$data.waterdata = poems;
             })
             .fail(function() {
                 console.log("error");
