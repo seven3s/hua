@@ -122,7 +122,11 @@ module.exports = Vue.extend({
             var newLineNum   = initLineNum - 4;
             var cnNewLineNum = ++newLineNum + 4;
             if (cnNewLineNum >= 69) {
-                alert('不能再添加了哦~~');
+                swal({
+                    title: '',
+                    text: '不能再添加了哦~~',
+                    type: 'error'
+                });
                 return;
             }
             this.$data.initLineNum = cnNewLineNum;
@@ -142,7 +146,11 @@ module.exports = Vue.extend({
             var cnNewLineNum = this.$data.initLineNum;
             var newLineNum   = cnNewLineNum - 4;
             if (newLineNum === 0) {
-                alert('不能再删除了哦~~');
+                swal({
+                    title: '',
+                    text: '不能再删除了哦~~',
+                    type: 'warning'
+                });
                 return;
             }
             var len = this.$data.newLines.length;
@@ -202,7 +210,7 @@ module.exports = Vue.extend({
                     text: data.message,
                     type: 'success'
                 }, function () {
-                    var url = /p/ + data.data.id;
+                    var url = '/p/' + data.data.id;
                     router.go(url);
                 });
             })

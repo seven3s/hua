@@ -69,6 +69,17 @@ module.exports = Vue.extend({
             })
             .done(function(json) {
                 var data = json.data;
+                if (json.status === 0 && data.length <= 0) {
+                    swal({
+                        title: '',
+                        text: json.message,
+                        type: 'warning',
+                        confirmButtonText: '跳转到首页',
+                    }, function () {
+                        var url = '/';
+                        router.go(url);
+                    });
+                }
                 var poems = [];
                 data.forEach(function (item, index) {
                     var poem = {};

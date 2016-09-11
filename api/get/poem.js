@@ -100,7 +100,7 @@ module.exports = {
             if (err) {
                 res.send(err);
             }
-            if (poems) {
+            if (poems && poems.length > 0) {
                 var datas = [];
                 var len = poems.length;
                 poems.forEach(function (item, index) {
