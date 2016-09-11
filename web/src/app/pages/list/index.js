@@ -8,7 +8,11 @@ var Vue = require('vue');
 require('./index.css');
 module.exports = Vue.extend({
     ready: function () {
-        
+        var type = this.$route.params.type;
+        // 是首页即进入
+        if (type === undefined) {
+            this.init();
+        }
     },
     template: require('./index.tpl.html'),
     data: function () {
@@ -51,13 +55,17 @@ module.exports = Vue.extend({
         getPoemsType: function () {
             var me = this;
             var type = this.$route.params.type;
-            var id = this.getTypeId(type);
+            var id;
+            var data = {};
+            // 非首页
+            if (type !== undefined) {
+                id = this.getTypeId(type);
+                data.typeId = id;
+            }
             $.ajax({
                 url: '/api/poem',
                 type: 'GET',
-                data: {
-                    typeId: id
-                }
+                data: data
             })
             .done(function(json) {
                 var data = json.data;
