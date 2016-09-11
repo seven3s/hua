@@ -71,14 +71,14 @@ module.exports = {
      */
     queryAll: function (PoemsModel, UserNameModel, req, res) {
         PoemsModel.find(function(err, poems) {
-            var datas = [];
             if (err) {
                 res.send(err);
             }
             if (poems) {
-                var data = {};
+                var datas = [];
                 var len = poems.length;
                 poems.forEach(function (item, index) {
+                    var data = {};
                     data.title = item.poem_title;
                     data.poem_time = moment(item.poem_time).startOf('day').fromNow();
                     data.poem_type = item.poem_type;
@@ -86,9 +86,9 @@ module.exports = {
                     data.poem_lines = item.poem_lines;
                     UserNameModel.findbyusername(item.poem_author, function(err, user) {
                         data.userName = user.nickname;
-                    }).then(function () {
-                        console.log(data);
                         datas.push(data);
+                        console.log(datas);
+                    }).then(function () {
                         if (index === (len - 1)) {
                             res.send({
                                 status: 1,
