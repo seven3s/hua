@@ -8,16 +8,14 @@ var Vue = require('vue');
 require('./index.css');
 module.exports = Vue.extend({
     ready: function () {
-        this.init();
+        
     },
     props: {
         waterdata: []
     },
     template: require('./index.tpl.html'),
     data: function () {
-        return {
-
-        };
+        return {};
     },
     events: {
         
@@ -26,16 +24,8 @@ module.exports = Vue.extend({
         'v-water-box': require('../../components/v-water-box/')
     },
     watch: {
-        waterdata: {
-            handler: function (val) {
-                this.init();
-            }
-        }
+
     },
     methods: {
-        init: function () {
-            var me = this;
-            // me.waterdata
-        }
     }
 });

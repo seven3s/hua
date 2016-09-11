@@ -31,10 +31,8 @@ module.exports = Vue.extend({
     },
     methods: {
         init: function () {
-            $(function () {
-                $('.water-full').cascade();
-                $(window).trigger('resize.cascade');
-            });
+            $('.water-full').cascade();
+            $(window).trigger('resize.cascade');
         }
     }
 });

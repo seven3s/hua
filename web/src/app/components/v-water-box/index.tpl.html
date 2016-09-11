@@ -22,15 +22,15 @@
         <span>{{waterboxdata.userName}}</span>
         <div>
             <span class="left floated heart-span">
-                <i class="heart like icon" :class="waterboxdata.likes > 0 ? 'active' : '' "></i>
+                <i class="heart like icon"></i>
                 <span>{{waterboxdata.likes || 0}}</span>
             </span>
         </div>
     </div>
     <div class="ui top right attached label">
-        <span>
+        <a v-link="{ path: '/list/' + waterboxdata.type }">
             <i class="book icon"></i>
-            {{waterboxdata.type}}
-        </span>
+            {{waterboxdata.typeString}}
+        </a>
     </div>
 </div>

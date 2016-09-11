@@ -40,7 +40,7 @@ module.exports = Vue.extend({
          *
          */
         data: function (transition) {
-           this.init();
+            this.init();
        }
     },
     methods: {
@@ -59,7 +59,7 @@ module.exports = Vue.extend({
             var data = {};
             // 非首页
             if (type !== undefined) {
-                id = this.getTypeId(type);
+                id = this.getId2Type(type);
                 data.typeId = id;
             }
             $.ajax({
@@ -86,7 +86,8 @@ module.exports = Vue.extend({
                     poem.title = item.title;
                     poem.userName = item.userName;
                     var swicthPoemType = require('../../common/swicthPoemType');
-                    poem.type = swicthPoemType(item.poem_type);
+                    poem.typeString = swicthPoemType(item.poem_type);
+                    poem.type = me.getType2Id(item.poem_type);
                     poem.poem_time = item.poem_time;
                     poem.id = item.id;
                     poem.likes = item.likes;
@@ -101,13 +102,13 @@ module.exports = Vue.extend({
         },
 
         /**
-         * getTypeId 根据type判断typeid
+         * getId2Type 根据type判断typeid
          *
          * @param  {String} type 是个类型
          *
          * @return {Nunber} 返回诗歌类型ID
          */
-        getTypeId: function (type) {
+        getId2Type: function (type) {
             // 默认是诗
             var id = 1;
             switch (type) {
@@ -122,6 +123,28 @@ module.exports = Vue.extend({
                     break;
             }
             return id;
+        },
+
+        /**
+         * getType2Id 根据Id返回type字段
+         *
+         * @return {String} 返回type
+         */
+        getType2Id: function (id) {
+            // 默认是诗
+            var type = 'poem';
+            switch (id) {
+                case 1:
+                    type = 'poem';
+                    break;
+                case 2:
+                    type = 'speech';
+                    break;
+                case 3:
+                    type = 'pennon';
+                    break;
+            }
+            return type;
         }
     }
 });
