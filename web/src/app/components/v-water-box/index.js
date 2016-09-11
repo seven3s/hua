@@ -8,7 +8,7 @@ var Vue = require('vue');
 require('./index.css');
 module.exports = Vue.extend({
     ready: function () {
-        console.log(this.waterboxdata);
+        
     },
     props: {
         waterboxdata: {}

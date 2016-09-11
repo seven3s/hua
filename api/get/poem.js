@@ -84,11 +84,12 @@ module.exports = {
                     data.poem_type = item.poem_type;
                     data.poem_author = item.poem_author;
                     data.poem_lines = item.poem_lines;
+                    data.likes = item.likes;
                     UserNameModel.findbyusername(item.poem_author, function(err, user) {
                         data.userName = user.nickname;
-                        datas.push(data);
-                        console.log(datas);
                     }).then(function () {
+                        datas.push(data);
+                        console.log(item.likes);
                         if (index === (len - 1)) {
                             res.send({
                                 status: 1,

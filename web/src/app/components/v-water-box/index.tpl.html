@@ -21,8 +21,8 @@
     </div>
     <div class="content">
         <span class="right floated">
-            <i class="heart outline like icon"></i>
-            17 likes
+            <i class="heart like icon" :class="waterboxdata.likes > 0 ? 'active' : '' "></i>
+            {{waterboxdata.likes}}
         </span>
         <i class="comment icon"></i>
         3 comments
