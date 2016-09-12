@@ -1,13 +1,14 @@
 #main {
     width: 90%;
     margin: 0 auto;
-    padding: 0 10.5%;
+    padding: 0 1.5%;
+    max-padding: 0 10.5%;
 }
 #main > .header {
     padding: 0 18px;
 }
 .segment > div.input {
-    width: 85%;
+    width: 71%;
     float: right;
     margin-top: -5px;
 }

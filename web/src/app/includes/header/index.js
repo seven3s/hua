@@ -6,6 +6,7 @@
  */
 var Vue = require('vue');
 require('./index.css');
+var browserRedirect = require('../../common/browserRedirect.js');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -13,6 +14,7 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     data: function () {
         return {
+            isMobiledDevice: true,
             login: {
                 status: 0,
                 userName: ''
@@ -30,7 +32,9 @@ module.exports = Vue.extend({
     },
     methods: {
         init: function () {
+            this.$data.isMobiledDevice = browserRedirect.browserRedirect();
             this.checkLogin();
+            $('.ui.dropdown').dropdown();
         },
 
         /**

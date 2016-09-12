@@ -1,6 +1,6 @@
 /**
  * @File:      数字转换为大写
- * @Author:    花夏(v_liubiao01@baidu.com)
+ * @Author:    花夏(liubiao@itoxs.com)
  * @Version:   V0.0.1
  * @Date:      2016-08-31 19:11:34
  */

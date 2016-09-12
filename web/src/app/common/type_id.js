@@ -1,6 +1,6 @@
 /**
  * @File:      type与id相互转换
- * @Author:    花夏(v_liubiao01@baidu.com)
+ * @Author:    花夏(liubiao@itoxs.com)
  * @Version:   V0.0.1
  * @Date:      2016-09-12 14:56:53
  */
