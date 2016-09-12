@@ -5,7 +5,7 @@
  * @date 2016-09-09 16:03:48
  */
 var moment = require('moment');
-moment.lang('zh-cn');
+moment.locale('zh-cn');
 module.exports = {
     init: function(app) {
         var me = this;
