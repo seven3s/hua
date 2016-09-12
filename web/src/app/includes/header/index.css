@@ -50,3 +50,11 @@
     float: right;
     margin-top: 5px;
 }
+.user img{
+    border-radius: 50%;
+    height: 2em;
+    width: 2em;
+    background: url(../../public/images/user.jpg);
+    border: 1px solid rgba(33, 186, 69, 0.58);
+    vertical-align: middle;
+}
