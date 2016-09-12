@@ -2,8 +2,8 @@
     width: 80%;
 }
 
-.w-65 {
-    width: 65%;
+.w-80 {
+    width: 80%;
 }
 
 .poem-body {
@@ -16,7 +16,7 @@
 }
 
 .poem-body > .segment.ui {
-    font-size: 1.8rem;
+    font-size: 1rem;
 }
 
 #app .ui.label {

@@ -12,7 +12,6 @@ footer {
     color: #666;
     margin: auto;
     position: relative;
-    width: 700px;
 }
 .footphoto {
     border: 5px solid #f16e50;
@@ -54,7 +53,6 @@ footer {
     margin: 40px auto 0;
     overflow: hidden;
     padding-top: 40px;
-    width: 800px;
 }
 .visitor h2 {
     color: #fff;

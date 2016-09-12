@@ -33,7 +33,7 @@ a:focus{outline:none;}
     position: relative;
     padding-top: 70px;
     padding-bottom: 330px;
-    min-height:100%;
+    min-height:100%
 }
 .clearfix:after {
     content: ".";
@@ -42,9 +42,14 @@ a:focus{outline:none;}
     clear: both;
     visibility: hidden;
 }
-
 *html clearfix {
     height: 1%
+}
+html, body {
+    height: auto;
+}
+body {
+    overflow-x: auto;
 }
 .mar-auto {
     margin: 0 auto;
