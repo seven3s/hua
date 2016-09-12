@@ -1,18 +1,24 @@
 #main {
     width: 80%;
 }
+
 .w-65 {
     width: 65%;
 }
+
 .poem-body {
     margin-top: -68px;
+    font-family: 'winman_tun33004';
 }
+
 #app .poem-body > * {
     padding-left: 30px;
 }
+
 .poem-body > .segment.ui {
     font-size: 1.8rem;
 }
+
 #app .ui.label {
     margin-bottom: 10px;
 }
