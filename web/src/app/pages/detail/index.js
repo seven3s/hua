@@ -6,6 +6,7 @@
  */
 var Vue = require('vue');
 require('./index.css');
+var type_id =require('../../common/type_id.js');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -54,7 +55,8 @@ module.exports = Vue.extend({
                 poem.title = data.title;
                 poem.userName = data.userName;
                 var swicthPoemType = require('../../common/swicthPoemType');
-                poem.type = swicthPoemType(data.poem_type);
+                poem.type = type_id.getTypeOfId(data.poem_type);
+                poem.typeString = swicthPoemType(data.poem_type);
                 poem.poem_time = data.poem_time;
                 poem.lines = data.poem_lines;
                 me.$data.poem = poem;

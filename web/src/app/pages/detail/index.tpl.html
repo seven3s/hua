@@ -8,7 +8,7 @@
         <div></div>
         <span class="ui right ribbon label">{{poem.poem_time}}</span>
         <div></div>
-        <a class="ui right ribbon label">{{poem.type}}</a>
+        <a class="ui right ribbon label" v-link="{ path: '/list/' + poem.type }">{{poem.typeString}}</a>
         <div class="w-65 mar-auto poem-body" id="poem-body">
             <div class="ui vertical segment" v-for="item in poem.lines">{{item}}</div>
         </div>

@@ -6,6 +6,7 @@
  */
 var Vue = require('vue');
 require('./index.css');
+var type_id =require('../../common/type_id.js');
 module.exports = Vue.extend({
     ready: function () {
         var type = this.$route.params.type;
@@ -59,7 +60,7 @@ module.exports = Vue.extend({
             var data = {};
             // 非首页
             if (type !== undefined) {
-                id = this.getId2Type(type);
+                id = type_id.getIdOfType(type);
                 data.typeId = id;
             }
             $.ajax({
@@ -87,7 +88,7 @@ module.exports = Vue.extend({
                     poem.userName = item.userName;
                     var swicthPoemType = require('../../common/swicthPoemType');
                     poem.typeString = swicthPoemType(item.poem_type);
-                    poem.type = me.getType2Id(item.poem_type);
+                    poem.type = type_id.getTypeOfId(item.poem_type);
                     poem.poem_time = item.poem_time;
                     poem.id = item.id;
                     poem.likes = item.likes;
@@ -99,52 +100,6 @@ module.exports = Vue.extend({
             .fail(function() {
                 console.log("error");
             });
-        },
-
-        /**
-         * getId2Type 根据type判断typeid
-         *
-         * @param  {String} type 是个类型
-         *
-         * @return {Nunber} 返回诗歌类型ID
-         */
-        getId2Type: function (type) {
-            // 默认是诗
-            var id = 1;
-            switch (type) {
-                case 'poem':
-                    id = 1;
-                    break;
-                case 'speech':
-                    id = 2;
-                    break;
-                case 'pennon':
-                    id = 3;
-                    break;
-            }
-            return id;
-        },
-
-        /**
-         * getType2Id 根据Id返回type字段
-         *
-         * @return {String} 返回type
-         */
-        getType2Id: function (id) {
-            // 默认是诗
-            var type = 'poem';
-            switch (id) {
-                case 1:
-                    type = 'poem';
-                    break;
-                case 2:
-                    type = 'speech';
-                    break;
-                case 3:
-                    type = 'pennon';
-                    break;
-            }
-            return type;
         }
     }
 });
