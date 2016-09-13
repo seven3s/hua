@@ -1,5 +1,5 @@
 #main {
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
     padding: 0 1.5%;
 }
@@ -7,7 +7,7 @@
     padding: 0 18px;
 }
 .segment > div.input {
-    width: 71%;
+    width: 90%;
     float: right;
     margin-top: -5px;
 }
@@ -39,4 +39,22 @@
 }
 .ui.input {
     width: 64%;
+}
+@media screen and (max-width: 810px) {
+    #main {
+        width: 80%;
+    }
+    #app .mobile {
+        display: block;
+    }
+    #app .mobile > div {
+        display: block;
+        width: 100%;
+    }
+    .segment > div.input {
+        width: 71%;
+    }
+}
+.ui > .column > .label {
+    width: 5rem;
 }
