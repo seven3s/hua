@@ -25,13 +25,9 @@
                 <template v-if="isMobiledDevice">
                     <div class="ui right dropdown item" tabindex="0">
                         <i class="add circle icon"></i>
-                        <div class="menu transition hidden" tabindex="-1">
-                            <div class="item">
-                                <a class="" v-link="{ path: '/new' }" v-if="login.status === 1">新增</a>
-                            </div>
-                            <div class="item">
-                                <a class="" v-if="login.status === 1" @click="logout">登出</a>
-                            </div>
+                        <div class="menu transition hidden" tabindex="-1" >
+                            <a class="item" v-link="{ path: '/new' }" v-if="login.status === 1">新增</a>
+                            <a class="item" v-if="login.status === 1" @click="logout">登出</a>
                         </div>
                     </div>
                 </template>
