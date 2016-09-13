@@ -29,6 +29,12 @@
 #laydate_MM {
     float: right;
 }
+#app {
+    position: relative;
+    padding-top: 70px;
+    padding-bottom: 350px;
+    min-height:100%
+}
 /*重置laydate样式end*/
 .field > .prompt {
     float: right;
@@ -40,12 +46,12 @@
 .ui.input {
     width: 64%;
 }
+#main .ui > .column > .label {
+    width: auto;
+}
 @media screen and (max-width: 810px) {
     #main {
         width: 80%;
-    }
-    #app .mobile {
-        display: block;
     }
     #app .mobile > div {
         display: block;

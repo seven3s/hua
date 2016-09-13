@@ -29,12 +29,6 @@ a{text-decoration:none; color:#333; -webkit-transition: color .2s;-moz-transitio
 a:hover{text-decoration:none; color: #ff7d8e;}
 a:focus{outline:none;}
 ::selection {background:#ff7d8e; color:#fff;} 
-#app {
-    position: relative;
-    padding-top: 70px;
-    padding-bottom: 330px;
-    min-height:100%
-}
 .clearfix:after {
     content: ".";
     display: block;
