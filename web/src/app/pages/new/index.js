@@ -71,12 +71,12 @@ module.exports = Vue.extend({
         'v-footer': require('../../includes/footer/')
     },
     watch: {
-        newLines: {
-            handler: function () {
-                this.validation();
-            },
-            deep: true
-        }
+        // newLines: {
+        //     handler: function () {
+        //         this.validation();
+        //     },
+        //     deep: true
+        // }
     },
     methods: {
         init: function () {
