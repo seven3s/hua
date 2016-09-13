@@ -8,6 +8,9 @@ footer {
     bottom:0;
     width:100%;
 }
+#footer .footavatar, #footer .visitor {
+    width: 80%;
+}
 .footavatar {
     color: #666;
     margin: auto;
