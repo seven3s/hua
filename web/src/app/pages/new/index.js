@@ -67,6 +67,7 @@ module.exports = Vue.extend({
     },
     components: {
         'v-select': require('../../components/v-select/'),
+        'v-upload': require('../../components/v-upload/'),
         'v-header': require('../../includes/header/'),
         'v-footer': require('../../includes/footer/')
     },

@@ -18,5 +18,8 @@ module.exports = {
         // 诗歌保存接口
         var poem = require('./poem');
         poem.init(app);
+        // upload接口
+        var upload = require('./qiniu');
+        upload.init(app);
     }
 };
