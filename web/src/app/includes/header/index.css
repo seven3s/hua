@@ -8,21 +8,25 @@
     top: 0;
     z-index: 9999;
 }
+
 .wrapper {
     max-width: 100%;
     width: 80%;
     height: 48px;
     margin: 0 auto;
 }
+
 .menu-bar {
     height: 100%;
     text-align: center;
 }
+
 .menu-bar > .left-part {
     float: left;
     margin-top: 5px;
 }
-@keyframes logo_rotate{
+
+@keyframes logo_rotate {
     0% {
         transform: rotate(0deg);
     }
@@ -33,6 +37,7 @@
         transform: rotate(360deg);
     }
 }
+
 #huaxia {
     float: left;
     width: 31px;
@@ -40,25 +45,28 @@
     margin-top: 3px;
     animation: 6.18s ease-out 0s infinite running logo_rotate;
 }
+
 .menu-item {
     color: #444;
     margin-left: 25px;
     line-height: 38px;
     font-size: 16px;
 }
+
 .menu-bar > .right-part {
     float: right;
     margin-top: 5px;
 }
-.user img{
+
+.user img {
     border-radius: 50%;
     height: 2em;
     width: 2em;
-    background: url(../../public/images/user.jpg);
     border: 1px solid rgba(33, 186, 69, 0.58);
     vertical-align: middle;
 }
+
 .add.icon {
     font-size: 1.8rem;
-    vertical-align: sub;
+    vertical-align: text-top;
 }

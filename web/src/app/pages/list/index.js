@@ -75,7 +75,7 @@ module.exports = Vue.extend({
                         title: '',
                         text: json.message,
                         type: 'warning',
-                        confirmButtonText: '跳转到首页',
+                        confirmButtonText: '跳转到首页'
                     }, function () {
                         var url = '/';
                         router.go(url);

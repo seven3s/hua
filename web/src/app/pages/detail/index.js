@@ -50,6 +50,18 @@ module.exports = Vue.extend({
                 }
             })
             .done(function(json) {
+                if (json.status === 0) {
+                    swal({
+                        title: '',
+                        text: json.message,
+                        type: 'warning',
+                        confirmButtonText: '跳转到首页'
+                    }, function () {
+                        var url = '/';
+                        router.go(url);
+                    });
+                    return;
+                }
                 var data = json.data;
                 var poem = {};
                 poem.title = data.title;

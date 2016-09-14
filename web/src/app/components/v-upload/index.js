@@ -17,7 +17,8 @@ module.exports = Vue.extend({
         srcobj = JSON.parse(srcobj);
         return {
             srcobj: srcobj,
-            loading: 0
+            loading: 0,
+            imgDisabled: 0
         };
     },
     props: {
@@ -101,7 +102,6 @@ module.exports = Vue.extend({
                             // loading
                             me.$data.loading = 1;
                             // 文件添加进队列后，处理相关的事情
-                            return;
                         });
                     },
                     'BeforeUpload': function(up, file) {
@@ -127,6 +127,7 @@ module.exports = Vue.extend({
                         me.$data.srcobj.src = sourceLink;
                         // loading
                         me.$data.loading = 0;
+                        me.$data.imgDisabled = 1;
                     },
                     'Error': function(up, err, errTip) {
                         //上传出错时，处理相关的事情
@@ -137,6 +138,7 @@ module.exports = Vue.extend({
                         });
                         // loading
                         me.$data.loading = 0;
+                        me.$data.imgDisabled = 0;
                     },
                     'UploadComplete': function() {
                         //队列文件处理完毕后，处理相关的事情
@@ -159,6 +161,15 @@ module.exports = Vue.extend({
          */
         remove: function () {
             var qiniuSrc = this.$data.srcobj.src;
+            if (qiniuSrc === config.srcobj.src) {
+                swal({
+                    title: '',
+                    text: '没有可被移除的文件',
+                    type: 'error'
+                });
+                return;
+            }
+            this.$data.imgDisabled = 0;
             var data = {
                 src: qiniuSrc
             }
@@ -167,8 +178,15 @@ module.exports = Vue.extend({
                 type: 'POST',
                 data: data,
             })
-            .done(function(josn) {
-                console.log(josn);
+            .done(function(json) {
+                if (json.status === -1) {
+                    swal({
+                        title: '',
+                        text: json.message,
+                        type: 'error'
+                    });
+                }
+                console.log(json.message);
             })
             .fail(function(err) {
                 console.log(err);

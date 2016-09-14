@@ -1,5 +1,6 @@
 <div id="container">
     <i class="remove icon" @click="remove"></i>
+    <div class="img-disabled" v-if="imgDisabled === 1">请先移除图片再上传吧~</div>
     <button id="pickfiles">
         <input type="hidden" name="pic" v-model="srcobj.src" v-if="srcobj.state === 1"/>
         <img :src="srcobj.src" class="ui medium image">

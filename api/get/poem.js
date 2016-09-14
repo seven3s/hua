@@ -53,6 +53,13 @@ module.exports = {
         }else {
             var data = {};
             PoemsModel.findById(id, function(err, poem) {
+                if (poem === null) {
+                    res.send({
+                        status: 0,
+                        message: '没有找到该作品,请刷新后再试!',
+                        data: []
+                    });
+                }
                 if (err) {
                     res.send(err);
                 }

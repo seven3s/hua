@@ -22,16 +22,28 @@ module.exports = {
         //你要测试的空间， 并且这个key在你空间中存在
         bucket = conf.QINIUBUCKETNAME;
         app.post('/qiniu/delete', function(req, res, next) {
-            console.log(req.body);
             key = req.body.src;
+            if (key === (conf.domamin + conf.uploadImg)) {
+                res.send({
+                    status: -1,
+                    message: '没有可移除的文件！'
+                });
+                return;
+            }
             key = key.split('-glistening')[0];
             key = key.split('http://odflit039.bkt.clouddn.com/')[1];
             // 删除资源
             client.remove(bucket, key, function(err, ret) {
                 if (!err) {
-                    res.send('移除成功');
+                    res.send({
+                        status: 1,
+                        message: '移除成功'
+                    });
                 } else {
-                    res.send(err);
+                    res.send({
+                        status: 0,
+                        message: err
+                    });
                 }
             });
         });
