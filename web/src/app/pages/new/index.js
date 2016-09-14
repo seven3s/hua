@@ -59,7 +59,8 @@ module.exports = Vue.extend({
                     title: '肆',
                     value: ''
                 }
-            ]
+            ],
+            picobj: {}
         };
     },
     events: {
@@ -78,6 +79,16 @@ module.exports = Vue.extend({
         //     },
         //     deep: true
         // }
+        picobj: {
+            handler: function (val) {
+                // 获取上传组件传回的图片src
+                if (val.state === 0) {
+                    this.$data.picobj.src = '';
+                }
+                this.$data.picobj.src = val.sarc;
+            },
+            deep: true
+        }
     },
     methods: {
         init: function () {

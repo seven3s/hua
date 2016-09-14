@@ -10,6 +10,12 @@ module.exports = {
         this.upload(app);
     },
 
+    /**
+     * upload 文件上传接口
+     *
+     * @param  {Object} app nodejs启动
+     *
+     */
     upload: function (app) {
         app.post('/api/upload', function(req, res) {
             var src = req.body.src;
@@ -21,7 +27,7 @@ module.exports = {
             qiniu.conf.SECRET_KEY = conf.SECRET_KEY;
 
             //要上传的空间
-            bucket = 'poem';
+            bucket = conf.QINIUBUCKETNAME;
 
             //上传到七牛后保存的文件名
             var time =new Date().getTime();

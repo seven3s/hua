@@ -15,5 +15,8 @@ module.exports = {
         // 获取诗歌详情
         var poem = require('./poem');
         poem.init(app);
+        // 获取七牛云uptoken接口
+        var uptoken = require('./qiniuUptoken');
+        uptoken.init(app);
     }
 };

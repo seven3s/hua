@@ -1,0 +1,27 @@
+#container {
+    padding-top: 30px;
+    position: relative;
+}
+@media screen and (max-width: 810px) {
+   #container {
+        text-align: center;
+    }
+}
+#pickfiles {
+    border: none;
+    padding: 0;
+}
+.remove.icon {
+    position: absolute;
+    left: 0;
+    top: 34px;
+    z-index: 999;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}

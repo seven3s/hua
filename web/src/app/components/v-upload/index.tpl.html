@@ -1,1 +1,8 @@
-<input type="file" class="upload">
+<div id="container">
+    <i class="remove icon" @click="remove"></i>
+    <button id="pickfiles">
+        <input type="hidden" name="pic" v-model="srcobj.src" v-if="srcobj.state === 1"/>
+        <img :src="srcobj.src" class="ui medium image">
+    </button>
+    <v-loading class="loading"></v-loading>
+</div>

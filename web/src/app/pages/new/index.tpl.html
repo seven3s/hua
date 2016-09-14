@@ -1,6 +1,5 @@
 <v-header></v-header>
 <div id="main" name="poem-form">
-    <v-upload></v-upload>
     <div class="ui three column grid mobile">
         <div class="column field poem-title">
             <span class="ui horizontal label">文题</span>
@@ -19,6 +18,7 @@
             <v-select :selectobj.sync="genres"></v-select>
         </div>
     </div>
+    <v-upload :picobj.sync="picobj"></v-upload>
     <div class="ui segments piled">
         <div class="ui segment field clearfix" v-for="item in newLines">
             <span class="ui ribbon label">第{{item.title}}联</span>

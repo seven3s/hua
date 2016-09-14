@@ -15,5 +15,8 @@ module.exports = {
     sweetalertDest: config.publicDirectory + '/lib/sweetalert/',
 
     laydateSrc: config.sourceDirectory + '/common/laydate/**/*',
-    laydateDest: config.publicDirectory + '/lib/laydate/'
+    laydateDest: config.publicDirectory + '/lib/laydate/',
+
+    qiniujsSrc: config.sourceDirectory + '/common/qiniu-js/**/*',
+    qiniujsDest: config.publicDirectory + '/lib/qiniu-js/'
 };

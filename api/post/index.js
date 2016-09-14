@@ -19,7 +19,7 @@ module.exports = {
         var poem = require('./poem');
         poem.init(app);
         // upload接口
-        var upload = require('./qiniu');
+        var upload = require('./upload');
         upload.init(app);
     }
 };
