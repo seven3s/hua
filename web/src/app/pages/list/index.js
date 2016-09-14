@@ -92,6 +92,7 @@ module.exports = Vue.extend({
                     poem.poem_time = item.poem_time;
                     poem.id = item.id;
                     poem.likes = item.likes;
+                    poem.imgSrc = item.poem_imgSrc;
                     poem.lines = item.poem_lines;
                     poems.push(poem);
                 });

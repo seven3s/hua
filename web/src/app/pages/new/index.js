@@ -120,7 +120,6 @@ module.exports = Vue.extend({
                 choose:   function(datas){
                     //选择日期完毕的回调
                     me.poem_time = datas;
-                    console.log(datas);
                 }
             });
         },
@@ -200,6 +199,11 @@ module.exports = Vue.extend({
             var poem_time = this.$data.poem_time;
             var poem_type = this.$data.genres.checkedData;
             var poem_lines = [];
+            var poem_imgSrc = '';
+            var picobj = this.$data.picobj;
+            if (picobj.state === 1) {
+                poem_imgSrc = picobj.src;
+            }
             this.$data.newLines.forEach(function (item) {
                 poem_lines.push(item.value);
             });
@@ -207,9 +211,9 @@ module.exports = Vue.extend({
                 poem_title: poem_title,
                 poem_time:  poem_time,
                 poem_type:  poem_type,
-                poem_lines: poem_lines
+                poem_lines: poem_lines,
+                poem_imgSrc: poem_imgSrc
             };
-            console.log(this.$data.poem_time);
             console.log(data);
             $.ajax({
                 url: '/api/save/poem',

@@ -22,3 +22,9 @@
 #app .ui.label {
     margin-bottom: 10px;
 }
+#poem-body .image {
+    text-align: center;
+}
+#poem-body img.ui.image {
+    display: inline-block;
+}

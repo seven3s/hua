@@ -1,6 +1,10 @@
 #main {
     position: relative;
 }
+#main a.image {
+    margin-top: 40px;
+    border-radius: 0!important;
+}
 img.image {
     border: 1px solid #d4d4d4;
 }
@@ -9,4 +13,7 @@ img.image {
 }
 .heart-span {
     margin: 5px 0 0 5px;
+}
+.content.ui > .ui.feed {
+    padding: 18px;
 }

@@ -61,6 +61,8 @@ module.exports = {
                 data.poem_type = poem.poem_type;
                 data.poem_author = poem.poem_author;
                 data.poem_lines = poem.poem_lines;
+                data.likes = poem.likes;
+                data.poem_imgSrc = poem.poem_imgSrc;
                 data.id = poem._id;
             }).then(function (poem) {
                 UserNameModel.findbyusername(poem.poem_author, function(err, user) {
@@ -112,6 +114,7 @@ module.exports = {
                     data.poem_author = item.poem_author;
                     data.poem_lines = item.poem_lines;
                     data.likes = item.likes;
+                    data.poem_imgSrc = item.poem_imgSrc;
                     data.id = item._id;
                     UserNameModel.findbyusername(item.poem_author, function(err, user) {
                         data.userName = user.nickname;

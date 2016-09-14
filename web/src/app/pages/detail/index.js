@@ -58,6 +58,7 @@ module.exports = Vue.extend({
                 poem.type = type_id.getTypeOfId(data.poem_type);
                 poem.typeString = swicthPoemType(data.poem_type);
                 poem.poem_time = data.poem_time;
+                poem.imgSrc = data.poem_imgSrc;
                 poem.lines = data.poem_lines;
                 me.$data.poem = poem;
                 me.$data.load = 1;

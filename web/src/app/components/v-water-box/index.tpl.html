@@ -1,7 +1,7 @@
 <div class="ui card item">
-    <div class="image" v-if="!!waterboxdata.imgSrc">
+    <a class="image" v-if="!!waterboxdata.imgSrc" v-link="{ path: '/p/' + waterboxdata.id }">
         <img :src="waterboxdata.imgSrc" class="ui wireframe image">
-    </div>
+    </a>
     <div class="content ui">
         <h4 class="ui top left attached label">
             <a v-link="{ path: '/p/' + waterboxdata.id }">{{waterboxdata.title}}</a>
@@ -18,7 +18,7 @@
         <div class="right floated meta">
             {{waterboxdata.poem_time}}
         </div>
-        <img src="../../public/images/user.jpg" class="ui avatar image">
+        <img src="http://odflit039.bkt.clouddn.com/14737614892742.pic.jpg?imageView2/2/w/110/h/110/interlace/1/q/100" class="ui avatar image">
         <span>{{waterboxdata.userName}}</span>
         <div>
             <span class="left floated heart-span">

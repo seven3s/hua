@@ -99,6 +99,7 @@ module.exports = Vue.extend({
                         swal({
                             title: '',
                             text: data.message,
+                            timer: 1000,
                             type: 'success'
                         }, function () {
                             window.location.href = '/';
