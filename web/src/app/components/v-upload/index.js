@@ -71,10 +71,17 @@ module.exports = Vue.extend({
                 max_file_size: '100mb', // 最大文件体积限制
                 flash_swf_url: 'http://odflit039.bkt.clouddn.com/Moxie.swf', //引入flash，相对路径
                 max_retries: 1, // 上传失败最大重试次数
-                dragdrop: false, // 开启可拖曳上传
+                dragdrop: true, // 开启可拖曳上传
                 drop_element: 'container', // 拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
                 chunk_size: '4mb', // 分块上传时，每块的体积
                 auto_start: true, // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
+                filters : {
+                    max_file_size: '10mb',
+                        mime_types: [{
+                            title: "图片",
+                            extensions: "jpeg,jpg,png,gif"
+                        }]
+                },
                 //x_vars : {
                 //    查看自定义变量
                 //    'time' : function(up,file) {
@@ -94,6 +101,7 @@ module.exports = Vue.extend({
                             // loading
                             me.$data.loading = 1;
                             // 文件添加进队列后，处理相关的事情
+                            return;
                         });
                     },
                     'BeforeUpload': function(up, file) {
@@ -122,7 +130,11 @@ module.exports = Vue.extend({
                     },
                     'Error': function(up, err, errTip) {
                         //上传出错时，处理相关的事情
-                        console.log('上传出错');
+                        swal({
+                            title: '',
+                            text: '上传文件出错，请重新上传！',
+                            type: 'error'
+                        });
                         // loading
                         me.$data.loading = 0;
                     },
