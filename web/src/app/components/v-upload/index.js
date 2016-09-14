@@ -26,7 +26,7 @@ module.exports = Vue.extend({
         
     },
     components: {
-        'v-loading': require('../../components/v-loading/')
+        
     },
     watch: {
         srcobj: {

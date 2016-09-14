@@ -1,6 +1,8 @@
 #container {
-    padding-top: 30px;
+    width: 300px;
+    height: 248px;
     position: relative;
+    margin-top: 30px;
 }
 @media screen and (max-width: 810px) {
    #container {
@@ -14,14 +16,21 @@
 .remove.icon {
     position: absolute;
     left: 0;
-    top: 34px;
+    top: 9px;
     z-index: 999;
     font-size: 2rem;
     cursor: pointer;
 }
-.loading {
+.dimmer.ui {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 999;
+}
+.dimmer.ui > .loading {
+    left: 50%;
+    margin-left: -12px;
+    margin-top: -55px;
+    position: absolute;
+    top: 50%;
 }

@@ -45,6 +45,12 @@ html, body {
 body {
     overflow-x: auto;
 }
+#app {
+    min-height: 100%;
+    padding-bottom: 350px;
+    padding-top: 70px;
+    position: relative;
+}
 .mar-auto {
     margin: 0 auto;
 }

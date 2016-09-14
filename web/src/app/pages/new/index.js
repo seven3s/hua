@@ -60,7 +60,10 @@ module.exports = Vue.extend({
                     value: ''
                 }
             ],
-            picobj: {}
+            picobj: {
+                state: 0,
+                src: ''
+            }
         };
     },
     events: {
@@ -85,7 +88,7 @@ module.exports = Vue.extend({
                 if (val.state === 0) {
                     this.$data.picobj.src = '';
                 }
-                this.$data.picobj.src = val.sarc;
+                this.$data.picobj.src = val.src;
             },
             deep: true
         }
