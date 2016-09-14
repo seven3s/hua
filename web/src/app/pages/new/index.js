@@ -62,7 +62,7 @@ module.exports = Vue.extend({
             ],
             picobj: {
                 state: 0,
-                src: ''
+                src: 'http://odflit039.bkt.clouddn.com/o_1asjud1su1nft13js1prps14hrl9image.png'
             }
         };
     },
@@ -85,9 +85,6 @@ module.exports = Vue.extend({
         picobj: {
             handler: function (val) {
                 // 获取上传组件传回的图片src
-                if (val.state === 0) {
-                    this.$data.picobj.src = '';
-                }
                 this.$data.picobj.src = val.src;
             },
             deep: true

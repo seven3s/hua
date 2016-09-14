@@ -16,7 +16,8 @@ module.exports = Vue.extend({
         var srcobj = JSON.stringify(config.srcobj);
         srcobj = JSON.parse(srcobj);
         return {
-            srcobj: srcobj
+            srcobj: srcobj,
+            loading: 0
         };
     },
     props: {
@@ -26,7 +27,7 @@ module.exports = Vue.extend({
         
     },
     components: {
-        
+        'v-loading': require('../../components/v-loading')
     },
     watch: {
         srcobj: {
@@ -90,6 +91,8 @@ module.exports = Vue.extend({
                 init: {
                     'FilesAdded': function(up, files) {
                         plupload.each(files, function(file) {
+                            // loading
+                            me.$data.loading = 1;
                             // 文件添加进队列后，处理相关的事情
                         });
                     },
@@ -114,10 +117,14 @@ module.exports = Vue.extend({
                         var sourceLink = domain + '/' + res.key + config.glistening;
                         me.$data.srcobj.state = 1;
                         me.$data.srcobj.src = sourceLink;
+                        // loading
+                        me.$data.loading = 0;
                     },
                     'Error': function(up, err, errTip) {
                         //上传出错时，处理相关的事情
                         console.log('上传出错');
+                        // loading
+                        me.$data.loading = 0;
                     },
                     'UploadComplete': function() {
                         //队列文件处理完毕后，处理相关的事情
