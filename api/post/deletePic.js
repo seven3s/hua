@@ -30,7 +30,7 @@ module.exports = {
                 });
                 return;
             }
-            key = key.split('-glistening')[0];
+            key = key.split('-scal')[0];
             key = key.split('http://odflit039.bkt.clouddn.com/')[1];
             // 删除资源
             client.remove(bucket, key, function(err, ret) {

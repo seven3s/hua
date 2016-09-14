@@ -1,10 +1,10 @@
 <div class="ui card item">
-    <a class="image" v-if="!!waterboxdata.imgSrc" v-link="{ path: '/p/' + waterboxdata.id }">
+    <a class="image" v-if="!!waterboxdata.imgSrc" v-link="{ path: '/p/' + waterboxdata.id }" target="_blank">
         <img :src="waterboxdata.imgSrc" class="ui wireframe image">
     </a>
     <div class="content ui">
         <h4 class="ui top left attached label">
-            <a v-link="{ path: '/p/' + waterboxdata.id }">{{waterboxdata.title}}</a>
+            <a v-link="{ path: '/p/' + waterboxdata.id }" target="_blank">{{waterboxdata.title}}</a>
         </h4>
         <div class="ui small feed">
             <div class="event">
