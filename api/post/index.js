@@ -21,5 +21,8 @@ module.exports = {
         // upload接口
         var upload = require('./upload');
         upload.init(app);
+        // deletePic接口
+        var deletePic = require('./deletePic');
+        deletePic.init(app);
     }
 };
