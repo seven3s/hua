@@ -6,8 +6,8 @@
  */
 module.exports = {
     init: function(app) {
-        var test = require('./test');
-        test.init(app);
+        // var test = require('./test');
+        // test.init(app);
 
         // 检查登陆状态
         var isLogin = require('./isLogin');

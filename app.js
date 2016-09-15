@@ -10,7 +10,7 @@ var routes = require('./routes/index');
 var app = express();
 var router = express.Router();
 // view engine setup
-app.set('views', path.join(__dirname, '/web/dist'));
+// app.set('views', path.join(__dirname, '/web/dist'));
 app.set('port', process.env.PORT || 3000);
 // 站点favicon
 app.use(express.favicon(path.join(__dirname, '/web/src/app/public/images/favicon.ico')));
