@@ -1,14 +1,12 @@
 #main {
     width: 80%;
 }
-
 .w-80 {
     width: 80%;
 }
 
 .poem-body {
     margin-top: -68px;
-    font-family: 'winman_tun33004';
 }
 
 #app .poem-body > * {
@@ -27,8 +25,13 @@
 }
 #poem-body img.ui.image {
     display: inline-block;
-    max-width: 60%;
+    max-width: 90%;
 }
 .ui.label {
     z-index: 9;
+}
+@media screen and (max-width: 810px) {
+    #main {
+        width: 90%;
+    }
 }

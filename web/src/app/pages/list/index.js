@@ -20,6 +20,7 @@ module.exports = Vue.extend({
         return {
             waterdata: {},
             poemType: '',
+            loading: 1
         };
     },
     events: {
@@ -28,7 +29,8 @@ module.exports = Vue.extend({
     components: {
         'v-header': require('../../includes/header/'),
         'v-footer': require('../../includes/footer/'),
-        'v-water-list': require('../../components/v-water-list/')
+        'v-water-list': require('../../components/v-water-list/'),
+        'v-loading': require('../../components/v-loading')
     },
     watch: {
         
@@ -69,6 +71,7 @@ module.exports = Vue.extend({
                 data: data
             })
             .done(function(json) {
+                me.$data.loading = 0;
                 var data = json.data;
                 if (json.status === 0 && data.length <= 0) {
                     swal({

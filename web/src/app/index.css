@@ -40,7 +40,7 @@ a:focus{outline:none;}
     height: 1%
 }
 html, body {
-    height: auto;
+    min-height: 100%;
 }
 body {
     overflow-x: auto;

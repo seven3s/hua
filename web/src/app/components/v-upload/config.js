@@ -5,7 +5,7 @@
  * @Date:      2016-09-14 17:11:03
  */
 module.exports = {
-    glistening: '-glistening',
+    glistening: '-scal',
     srcobj: {
         state: 0,
         src: 'http://odflit039.bkt.clouddn.com/o_1asjud1su1nft13js1prps14hrl9image.png'

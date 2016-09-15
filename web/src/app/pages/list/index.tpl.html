@@ -1,5 +1,6 @@
 <v-header></v-header>
 <div id="main" class="ui grid water-full">
-    <v-water-list :waterdata="waterdata"></v-water-list>
+    <v-loading class="loading" v-if="loading === 1"></v-loading>
+    <v-water-list :waterdata="waterdata" v-else></v-water-list>
 </div>
 <v-footer></v-footer>

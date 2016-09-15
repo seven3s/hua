@@ -6,7 +6,7 @@
 /*品牌列表*/
 .brand-list{ margin-left: -10px;}
 .brand-list .brand-bd{position: relative; margin-left: 10px;}
-.brand-list .item,.brand-list .additem{position: absolute; width: 275px; background-color: #f8f8f8; border: 1px solid #f8f8f8; top:0; left: 40%; -webkit-transition: all 0.3s;-moz-transition: all 0.3s;-o-transition: all 0.3s;-ms-transition: all 0.3s;transition: all 0.3s;}
+.brand-list .item,.brand-list .additem{position: absolute; background-color: #f8f8f8; border: 1px solid #f8f8f8; top:0; left: 40%; -webkit-transition: all 0.3s;-moz-transition: all 0.3s;-o-transition: all 0.3s;-ms-transition: all 0.3s;transition: all 0.3s;}
 .brand-list .hover{box-shadow: 0px 1px 8px rgba(200,200,200,.6); background-color: #fff; border-color: #c8c8c8;}
 .brand-list .additem{padding: 0; width: 240px; border: none; }
 
