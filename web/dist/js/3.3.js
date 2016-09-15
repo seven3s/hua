@@ -510,7 +510,6 @@ webpackJsonp([3],Array(21).concat([
 	                poem_lines: poem_lines,
 	                poem_imgSrc: poem_imgSrc
 	            };
-	            console.log(data);
 	            $.ajax({
 	                url: '/api/save/poem',
 	                type: 'POST',
