@@ -24,7 +24,9 @@ app.use(express.cookieParser('manager_花夏'));
 
 //引入mongoose模块
 var mongoose = require('mongoose');
-var config = require('./db/config');
+// 线上数据库
+var config = require('./db/_config');
+// var config = require('./db/config');
 // 链接数据库
 var db = mongoose.connect(config.db.mongodb);
 app.set('db', db);

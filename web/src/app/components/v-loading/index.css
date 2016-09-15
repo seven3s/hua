@@ -1,0 +1,11 @@
+.loading {
+    margin: 0 auto;
+}
+.loading-text {
+    color: #21ba45;
+    left: -13px;
+    position: absolute;
+    top: 25px;
+    width: 60px;
+    font-weight: 200;
+}
