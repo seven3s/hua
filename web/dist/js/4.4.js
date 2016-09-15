@@ -621,7 +621,7 @@ webpackJsonp([4],{
 
 
 	// module
-	exports.push([module.id, "#main {\n    width: 80%;\n}\n.w-80 {\n    width: 80%;\n}\n\n.poem-body {\n    margin-top: -68px;\n}\n\n#app .poem-body > * {\n    padding-left: 30px;\n}\n\n.poem-body > .segment.ui {\n    font-size: 1rem;\n}\n\n#app .ui.label {\n    margin-bottom: 10px;\n}\n#poem-body .image {\n    text-align: center;\n}\n#poem-body img.ui.image {\n    display: inline-block;\n    max-width: 60%;\n}\n.ui.label {\n    z-index: 9;\n}\n@media screen and (max-width: 810px) {\n    #main {\n        width: 90%;\n    }\n}", ""]);
+	exports.push([module.id, "#main {\n    width: 80%;\n}\n.w-80 {\n    width: 80%;\n}\n\n.poem-body {\n    margin-top: -68px;\n}\n\n#app .poem-body > * {\n    padding-left: 30px;\n}\n\n.poem-body > .segment.ui {\n    font-size: 1rem;\n}\n\n#app .ui.label {\n    margin-bottom: 10px;\n}\n#poem-body .image {\n    text-align: center;\n}\n#poem-body img.ui.image {\n    display: inline-block;\n    max-width: 60%;\n    min-width: 500px;\n}\n.ui.label {\n    z-index: 9;\n}\n@media screen and (max-width: 810px) {\n    #main {\n        width: 90%;\n    }\n}", ""]);
 
 	// exports
 
