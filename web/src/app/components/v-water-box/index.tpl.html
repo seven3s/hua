@@ -1,36 +1,34 @@
 <div class="ui card item">
+    <div class="ui top left attached label">
+        <a v-link="{ path: '/list/' + waterboxdata.type }" target="_blank">
+            <i class="book icon"></i>
+            {{{waterboxdata.typeString}}}
+        </a>
+    </div>
+    <div class="ui top right attached label">
+        {{waterboxdata.poem_time}}
+    </div>
     <a class="image" v-if="!!waterboxdata.imgSrc" v-link="{ path: '/p/' + waterboxdata.id }" target="_blank">
         <img :src="waterboxdata.imgSrc" class="ui wireframe image">
     </a>
     <div class="content ui">
-        <h4 class="ui top left attached label">
-            <a v-link="{ path: '/p/' + waterboxdata.id }" target="_blank">{{waterboxdata.title}}</a>
-        </h4>
         <div class="ui small feed">
             <div class="event">
                 <div class="content">
+                    <h4 class="">
+                        <a v-link="{ path: '/p/' + waterboxdata.id }" target="_blank">{{waterboxdata.title}}</a>
+                    </h4>
                     <p class="description" v-for="item in waterboxdata.lines">{{item}}</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="content">
-        <div class="right floated meta">
-            {{waterboxdata.poem_time}}
-        </div>
         <img src="http://odflit039.bkt.clouddn.com/14737614892742.pic.jpg?imageView2/2/w/110/h/110/interlace/1/q/100" class="ui avatar image">
         <span>{{waterboxdata.userName}}</span>
-        <div>
-            <span class="left floated heart-span">
-                <i class="heart like icon"></i>
-                <span>{{waterboxdata.likes || 0}}</span>
-            </span>
-        </div>
-    </div>
-    <div class="ui top right attached label">
-        <a v-link="{ path: '/list/' + waterboxdata.type }" target="_blank">
-            <i class="book icon"></i>
-            {{{waterboxdata.typeString}}}
-        </a>
+        <span class="right floated heart-span">
+            <i class="heart like icon"></i>
+            <span>{{waterboxdata.likes || 0}}</span>
+        </span>
     </div>
 </div>

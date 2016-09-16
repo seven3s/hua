@@ -11,9 +11,15 @@ img.image {
 .ui.card {
     margin: 0;
 }
+.ui.card > .content.ui {
+    border-top: none;
+}
 .heart-span {
     margin: 5px 0 0 5px;
 }
 .content.ui > .ui.feed {
     padding: 18px;
+}
+.content.ui > .content {
+    margin-top: 16px;
 }
