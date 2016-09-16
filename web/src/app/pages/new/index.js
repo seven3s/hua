@@ -8,7 +8,7 @@ var Vue = require('vue');
 require('./index.css');
 var numToCn = require('../../common/numToCn');
 var rule = require('./rule-setting');
-var genresData = require('./default-config').genresData;
+var defaultConfig = require('./default-config');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -18,31 +18,15 @@ module.exports = Vue.extend({
     data: function () {
         return {
             poem_title: '', // 文题
-            genres: genresData,
+            genres: defaultConfig.genresData,
             poem_time: '', // 创作时间
             initLineNum: 4, // 初始行数
-            newLines: [
-                {
-                    title: '壹',
-                    value: ''
-                },
-                {
-                    title: '贰',
-                    value: ''
-                },
-                {
-                    title: '叁',
-                    value: ''
-                },
-                {
-                    title: '肆',
-                    value: ''
-                }
-            ],
+            newLines: [],
             picobj: {
                 state: 0,
                 src: 'http://odflit039.bkt.clouddn.com/o_1asjud1su1nft13js1prps14hrl9image.png'
-            }
+            },
+            update: 0
         };
     },
     events: {
@@ -72,6 +56,7 @@ module.exports = Vue.extend({
     methods: {
         init: function () {
             var me = this;
+            this.isUpdate();
             $('[name = poem-form]').form({
                 fields:    rule,
                 inline:    true,
@@ -85,14 +70,25 @@ module.exports = Vue.extend({
                     }
                 }
             });
+        },
+
+        /**
+         * isUpdate 是否是更新
+         *
+         */
+        isUpdate: function () {
             // 编辑
             var path = this.$route.path;
             var update = path.split('/')[1];
             if (update === 'update') {
+                this.$data.update = 1;
                 var id = this.$route.params.id;
                 this.getPoem(id);
+            }else {
+                this.$data.newLines = defaultConfig.newLines;
             }
         },
+
         /**
          * date 初始化日期组件
          *
@@ -200,6 +196,11 @@ module.exports = Vue.extend({
                 poem_lines: poem_lines,
                 poem_imgSrc: poem_imgSrc
             };
+            // 更新
+            var _id = this.$route.params.id;
+            if (_id) {
+                data['_id'] = _id;
+            }
             $.ajax({
                 url: '/api/save/poem',
                 type: 'POST',
@@ -221,14 +222,6 @@ module.exports = Vue.extend({
         },
 
         /**
-         * update 编辑更新
-         *
-         */
-        update: function () {
-
-        },
-
-        /**
          * getPoem 根据id获取poemupdate
          *
          */
@@ -243,7 +236,6 @@ module.exports = Vue.extend({
                 }
             })
             .done(function(json) {
-                console.log(json);
                 if (json.status === 0) {
                     swal({
                         title: '',
@@ -259,7 +251,6 @@ module.exports = Vue.extend({
                 var data = json.data;
                 // 诗歌类型
                 me.$data.genres.checkedData = data.poem_type;
-                // var poem = {};
                 // 文题
                 me.$data.poem_title = data.title;
                 // 创作时间
@@ -272,15 +263,17 @@ module.exports = Vue.extend({
                     };
                     me.$data.picobj = picobj;
                 }
-                // poem.userName = data.userName;
-                // var swicthPoemType = require('../../common/swicthPoemType');
-                // poem.type = type_id.getTypeOfId(data.poem_type);
-                // poem.typeString = swicthPoemType(data.poem_type);
-                // poem.poem_time = data.poem_time;
-                // poem.imgSrc = data.poem_imgSrc;
-                // poem.lines = data.poem_lines;
-                // me.$data.poem = poem;
-                // me.$data.load = 1;
+                // 联句
+                var poems = data.poem_lines;
+                me.$data.initLineNum = poems.length;
+                poems.forEach(function (item, index) {
+                    var cn = numToCn.get(index + 1);
+                    var obj = {
+                        title: cn,
+                        value: item
+                    }
+                    me.$data.newLines.push(obj);
+                });
             })
             .fail(function(err) {
                 console.log("error");

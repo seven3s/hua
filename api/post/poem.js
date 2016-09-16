@@ -26,6 +26,18 @@ module.exports = {
                 PoemsModel.findById(id, function(err, poems) {
                     if (err) {
                         console.log(err);
+                        res.send({
+                            status: -1,
+                            message: err,
+                            data: []
+                        });
+                    }
+                    if (id === undefined) {
+                        res.send({
+                            status: 0,
+                            message: 'ID错误',
+                            data: []
+                        });
                     }
                     _poems = _.extend(poems, poemsObj);
                     _poems.save(function(err, poems) {
