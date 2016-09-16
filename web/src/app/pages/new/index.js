@@ -238,10 +238,12 @@ module.exports = Vue.extend({
                 url: '/api/poem',
                 type: 'get',
                 data: {
-                    id: id
+                    id: id,
+                    update: true
                 }
             })
             .done(function(json) {
+                console.log(json);
                 if (json.status === 0) {
                     swal({
                         title: '',
@@ -258,7 +260,18 @@ module.exports = Vue.extend({
                 // 诗歌类型
                 me.$data.genres.checkedData = data.poem_type;
                 // var poem = {};
-                // poem.title = data.title;
+                // 文题
+                me.$data.poem_title = data.title;
+                // 创作时间
+                me.$data.poem_time = data.poem_time;
+                // 图集
+                if (data.poem_imgSrc) {
+                    var picobj = {
+                        state: 1,
+                        src: data.poem_imgSrc
+                    };
+                    me.$data.picobj = picobj;
+                }
                 // poem.userName = data.userName;
                 // var swicthPoemType = require('../../common/swicthPoemType');
                 // poem.type = type_id.getTypeOfId(data.poem_type);

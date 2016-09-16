@@ -64,7 +64,9 @@ module.exports = {
                     res.send(err);
                 }
                 data.title = poem.poem_title;
-                data.poem_time = moment(poem.poem_time).startOf('day').fromNow();
+                // 是否是update
+                var update = req.query.update;
+                data.poem_time = update ? poem.poem_time : moment(poem.poem_time).startOf('day').fromNow();
                 data.poem_type = poem.poem_type;
                 data.poem_author = poem.poem_author;
                 data.poem_lines = poem.poem_lines;

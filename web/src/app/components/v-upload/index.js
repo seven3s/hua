@@ -36,6 +36,14 @@ module.exports = Vue.extend({
                 this.picobj = val;
             },
             deep: true
+        },
+        // 做数据回写
+        picobj: {
+            handler: function (val) {
+                this.$data.srcobj = val;
+                // this.$data.imgDisabled = val.state;
+            },
+            deep: true
         }
     },
     methods: {
@@ -127,7 +135,7 @@ module.exports = Vue.extend({
                         me.$data.srcobj.src = sourceLink;
                         // loading
                         me.$data.loading = 0;
-                        me.$data.imgDisabled = 1;
+                        // me.$data.imgDisabled = 1;
                     },
                     'Error': function(up, err, errTip) {
                         //上传出错时，处理相关的事情
@@ -194,6 +202,21 @@ module.exports = Vue.extend({
             var srcobj = JSON.stringify(config.srcobj);
             srcobj = JSON.parse(srcobj);
             this.$data.srcobj = srcobj;
+        },
+
+        /**
+         * showShade 显示遮罩层
+         */
+        showShade: function () {
+            this.$data.imgDisabled = this.$data.srcobj.state;
+        },
+
+        /**
+         * hideShade 隐藏遮罩层
+         *
+         */
+        hideShade: function () {
+            this.$data.imgDisabled = 0;
         }
     }
 });

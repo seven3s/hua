@@ -19,6 +19,7 @@
     z-index: 999;
     font-size: 2rem;
     cursor: pointer;
+    color: #fff;
 }
 .dimmer.ui {
     position: absolute;
@@ -41,6 +42,13 @@
     top: 0;
     background: rgba(0, 0, 0, .3);
     z-index: 998;
-    text-align: right;
+    text-align: center;
     color: #fff;
+}
+.img-disabled:after {
+    display:inline-block;
+    width:0;
+    height:100%;
+    vertical-align:middle;
+    content:"";
 }
