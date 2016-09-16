@@ -20,6 +20,6 @@ img.image {
 .content.ui > .ui.feed {
     padding: 18px;
 }
-.content.ui > .content {
+.ui.feed > .event {
     margin-top: 16px;
 }
