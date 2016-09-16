@@ -18,7 +18,7 @@
                     <h4 class="">
                         <a v-link="{ path: '/p/' + waterboxdata.id }" target="_blank">{{waterboxdata.title}}</a>
                     </h4>
-                    <p class="description" v-for="item in waterboxdata.lines">{{item}}</p>
+                    <p class="description" v-for="item in waterboxdata.lines" track-by="$index">{{item}}</p>
                 </div>
             </div>
         </div>

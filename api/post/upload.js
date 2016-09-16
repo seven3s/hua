@@ -21,8 +21,8 @@ module.exports = {
             var src = req.body.src;
             //需要填写你的 Access Key 和 Secret Key
             // 测试
-            // var conf = require('../qiniu/_config');
-            var conf = require('../qiniu/config');
+            var conf = require('../qiniu/_config');
+            // var conf = require('../qiniu/config');
             qiniu.conf.ACCESS_KEY = conf.ACCESS_KEY;
             qiniu.conf.SECRET_KEY = conf.SECRET_KEY;
 

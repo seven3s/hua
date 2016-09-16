@@ -11,8 +11,8 @@ module.exports = {
     },
 
     deletePic: function (app) {
-        // var conf = require('../qiniu/_config');
-        var conf = require('../qiniu/config');
+        var conf = require('../qiniu/_config');
+        // var conf = require('../qiniu/config');
         qiniu.conf.ACCESS_KEY = conf.ACCESS_KEY;
         qiniu.conf.SECRET_KEY = conf.SECRET_KEY;
 
