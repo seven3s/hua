@@ -70,3 +70,9 @@
     font-size: 1.8rem;
     vertical-align: text-top;
 }
+/*移动端*/
+@media screen and (max-width: 810px) {
+    .wrapper {
+        width: 90%;
+    }
+}
