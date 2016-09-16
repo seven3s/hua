@@ -14,7 +14,7 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     data: function () {
         return {
-            checkedData: ''
+            checkedData: -1
         };
     },
     watch: {
@@ -27,8 +27,10 @@ module.exports = Vue.extend({
         selectobj: {
             handler: function (val, oldVal) {
                 // 监听变化，如果是-1则做重置
-                if (val.checkedData === '') {
+                if (val.checkedData == -1) {
                     this.rest();
+                }else {
+                    this.checking(val.checkedData);
                 }
             },
             deep: true
@@ -55,6 +57,23 @@ module.exports = Vue.extend({
         rest: function () {
             var defaultText = this.selectobj.defaultText;
             $('.selection.dropdown > .text').text(defaultText).addClass('default');
+        },
+
+        /**
+         * checking 修复semantic UI ajax获取数据无法显示选中的文字
+         *
+         * @return {type} description
+         */
+        checking: function (val) {
+            var data = this.selectobj.data;
+            var $el = $('.ui.dropdown > .text');
+            var text = $el.text();
+            data.forEach(function (item, index) {
+                if (item.value == val) {
+                    text = item.text;
+                    $el.text(text).removeClass('default');
+                }
+            });
         }
     }
 });

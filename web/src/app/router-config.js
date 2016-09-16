@@ -29,6 +29,12 @@ module.exports = {
             require(['./pages/detail'], resolve);
         }
     },
+    '/update/:id': {
+        // 诗歌详情页
+        component: function (resolve) {
+            require(['./pages/new'], resolve);
+        }
+    },
     '/list/:type': {
         // 诗歌详情页
         component: function (resolve) {

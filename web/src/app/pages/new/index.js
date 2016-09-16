@@ -8,6 +8,7 @@ var Vue = require('vue');
 require('./index.css');
 var numToCn = require('../../common/numToCn');
 var rule = require('./rule-setting');
+var genresData = require('./default-config').genresData;
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -17,29 +18,7 @@ module.exports = Vue.extend({
     data: function () {
         return {
             poem_title: '', // 文题
-            genres: {
-                inputName: 'poem_genres', // 选择的name字段
-                defaultText: '请选择', // 默认请选择
-                checkedData: '', // 默认选中value值
-                data: [
-                    {
-                        text: '请选择',
-                        value: ''
-                    },
-                    {
-                        text: '诗',
-                        value: 1
-                    },
-                    {
-                        text: '词',
-                        value: 2
-                    },
-                    {
-                        text: '赋',
-                        value: 3
-                    }
-                ]
-            },
+            genres: genresData,
             poem_time: '', // 创作时间
             initLineNum: 4, // 初始行数
             newLines: [
@@ -106,6 +85,13 @@ module.exports = Vue.extend({
                     }
                 }
             });
+            // 编辑
+            var path = this.$route.path;
+            var update = path.split('/')[1];
+            if (update === 'update') {
+                var id = this.$route.params.id;
+                this.getPoem(id);
+            }
         },
         /**
          * date 初始化日期组件
@@ -230,6 +216,60 @@ module.exports = Vue.extend({
                 });
             })
             .fail(function() {
+                console.log("error");
+            });
+        },
+
+        /**
+         * update 编辑更新
+         *
+         */
+        update: function () {
+
+        },
+
+        /**
+         * getPoem 根据id获取poemupdate
+         *
+         */
+        getPoem: function (id) {
+            var me = this;
+            $.ajax({
+                url: '/api/poem',
+                type: 'get',
+                data: {
+                    id: id
+                }
+            })
+            .done(function(json) {
+                if (json.status === 0) {
+                    swal({
+                        title: '',
+                        text: json.message,
+                        type: 'warning',
+                        confirmButtonText: '跳转到首页'
+                    }, function () {
+                        var url = '/';
+                        router.go(url);
+                    });
+                    return;
+                }
+                var data = json.data;
+                // 诗歌类型
+                me.$data.genres.checkedData = data.poem_type;
+                // var poem = {};
+                // poem.title = data.title;
+                // poem.userName = data.userName;
+                // var swicthPoemType = require('../../common/swicthPoemType');
+                // poem.type = type_id.getTypeOfId(data.poem_type);
+                // poem.typeString = swicthPoemType(data.poem_type);
+                // poem.poem_time = data.poem_time;
+                // poem.imgSrc = data.poem_imgSrc;
+                // poem.lines = data.poem_lines;
+                // me.$data.poem = poem;
+                // me.$data.load = 1;
+            })
+            .fail(function(err) {
                 console.log("error");
             });
         }

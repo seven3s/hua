@@ -26,9 +26,12 @@
     <div class="content">
         <img src="http://odflit039.bkt.clouddn.com/14737614892742.pic.jpg?imageView2/2/w/110/h/110/interlace/1/q/100" class="ui avatar image">
         <span>{{waterboxdata.userName}}</span>
-        <span class="right floated heart-span">
+        <!-- <span class="right floated heart-span">
             <i class="heart like icon"></i>
             <span>{{waterboxdata.likes || 0}}</span>
+        </span> -->
+        <span class="right floated heart-span">
+            <a v-link="{ path: '/update/' + waterboxdata.id}"><i class="edit icon"></i>编辑</a>
         </span>
     </div>
 </div>
