@@ -29,7 +29,6 @@ module.exports = {
      */
     checkLogin: function (req, res, next) {
         var arg = url.parse(req.url);
-        console.log(arg);
         next();
         // if ((url !== '/login' || url !== '/' || url !== '/index') && !req.session.user) {
         //     return res.redirect('/#!/login');

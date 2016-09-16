@@ -6,9 +6,9 @@
  */
 module.exports = {
     //需要填写你的 Access Key 和 Secret Key
-    conf: {
-        ACCESS_KEY: '123',
-        SECRET_KEY: '456',
-        QINIUBUCKETNAME: 'poem'
-    }
+    ACCESS_KEY: 'aaa',
+    SECRET_KEY: 'bbb',
+    QINIUBUCKETNAME: 'ccc',
+    domamin: 'http://sss.ss.com',
+    uploadImg: 'o_1asjud1su1nft13js1prps14hrl9image.png'
 }

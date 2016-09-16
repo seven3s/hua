@@ -11,7 +11,7 @@ var app = express();
 var router = express.Router();
 // view engine setup
 // app.set('views', path.join(__dirname, '/web/dist'));
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8989);
 // 站点favicon
 app.use(express.favicon(path.join(__dirname, '/web/src/app/public/images/favicon.ico')));
 
@@ -24,9 +24,9 @@ app.use(express.cookieParser('manager_花夏'));
 
 //引入mongoose模块
 var mongoose = require('mongoose');
-// 线上数据库
-var config = require('./db/_config');
-// var config = require('./db/config');
+// 测试数据库
+//var config = require('./db/_config');
+var config = require('./db/config');
 // 链接数据库
 var db = mongoose.connect(config.db.mongodb);
 app.set('db', db);
