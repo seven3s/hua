@@ -6,6 +6,7 @@
  */
 var Vue = require('vue');
 require('./index.css');
+var title = require('../../common/setTitle');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -29,6 +30,7 @@ module.exports = Vue.extend({
     methods: {
         init: function () {
             var me = this;
+            title.setTitle('客官您来啦');
             var validationRules = {
                 user: {
                     identifier: 'user',

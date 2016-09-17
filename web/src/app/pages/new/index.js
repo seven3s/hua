@@ -9,6 +9,7 @@ require('./index.css');
 var numToCn = require('../../common/numToCn');
 var rule = require('./rule-setting');
 var defaultConfig = require('./default-config');
+var title = require('../../common/setTitle');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -57,6 +58,7 @@ module.exports = Vue.extend({
     methods: {
         init: function () {
             var me = this;
+            title.setTitle('忽来文思涌');
             this.isUpdate();
             // 刷新关闭提示
             this.fresh();
@@ -317,6 +319,7 @@ module.exports = Vue.extend({
                 me.$data.genres.checkedData = data.poem_type;
                 // 文题
                 me.$data.poem_title = data.title;
+                title.setTitle(data.title);
                 // 创作时间
                 me.$data.poem_time = data.poem_time;
                 // 图集

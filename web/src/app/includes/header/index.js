@@ -34,6 +34,7 @@ module.exports = Vue.extend({
         init: function () {
             this.$data.isMobiledDevice = browserRedirect.browserRedirect();
             this.checkLogin();
+            require('../../common/onVisibilityChange').init();
             $('.ui.dropdown').dropdown();
         },
 

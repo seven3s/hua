@@ -7,6 +7,7 @@
 var Vue = require('vue');
 require('./index.css');
 var type_id =require('../../common/type_id.js');
+var title = require('../../common/setTitle');
 module.exports = Vue.extend({
     ready: function () {
         var type = this.$route.params.type;
@@ -64,6 +65,8 @@ module.exports = Vue.extend({
             if (type !== undefined) {
                 id = type_id.getIdOfType(type);
                 data.typeId = id;
+                var cn = type_id.getIdOfCn(id);
+                title.setTitle(cn);
             }
             $.ajax({
                 url: '/api/poem',
