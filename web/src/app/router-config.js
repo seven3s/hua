@@ -19,6 +19,7 @@ module.exports = {
     },
     '/new': {
         // 新增页
+        auth: true, // 需要做登陆校验
         component: function (resolve) {
             require(['./pages/new'], resolve);
         }
@@ -31,6 +32,7 @@ module.exports = {
     },
     '/update/:id': {
         // 诗歌详情页
+        auth: true, // 需要做登陆校验
         component: function (resolve) {
             require(['./pages/new'], resolve);
         }

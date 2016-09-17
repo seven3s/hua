@@ -13,9 +13,9 @@ var router = express.Router();
 // app.set('views', path.join(__dirname, '/web/dist'));
 app.set('port', process.env.PORT || 8989);
 // 站点favicon
-app.use(express.favicon(path.join(__dirname, '/web/src/app/public/images/favicon.ico')));
+app.use(express.favicon('http://odflit039.bkt.clouddn.com/favicon.ico'));
 
-app.use(favicon());
+// app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());

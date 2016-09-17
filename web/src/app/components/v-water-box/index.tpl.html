@@ -30,7 +30,7 @@
             <i class="heart like icon"></i>
             <span>{{waterboxdata.likes || 0}}</span>
         </span> -->
-        <span class="right floated heart-span">
+        <span class="right floated heart-span" v-if="isLoginState">
             <a v-link="{ path: '/update/' + waterboxdata.id}"><i class="edit icon"></i>编辑</a>
         </span>
     </div>

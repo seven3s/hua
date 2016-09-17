@@ -17,6 +17,7 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     data: function () {
         return {
+            isLoginstate: 0,
             poem_title: '', // 文题
             genres: defaultConfig.genresData,
             poem_time: '', // 创作时间
@@ -201,6 +202,17 @@ module.exports = Vue.extend({
             if (_id) {
                 data['_id'] = _id;
             }
+            if (this.isLoginstate === 0) {
+                swal({
+                    title: '',
+                    text: '未登录请登陆',
+                    type: 'error'
+                }, function () {
+                    var url = '/#!/login';
+                    self.open(url);
+                });
+                return;
+            }
             $.ajax({
                 url: '/api/save/poem',
                 type: 'POST',
@@ -212,12 +224,35 @@ module.exports = Vue.extend({
                     text: data.message,
                     type: 'success'
                 }, function () {
-                    var url = '/p/' + data.data.id;
-                    router.go(url);
+                    var url = '/#!/p/' + data.data.id;
+                    self.location.href = url;
                 });
             })
             .fail(function() {
                 console.log("error");
+            });
+        },
+
+        /**
+         * isLogin 检查是否登陆
+         *
+         */
+        isLogin: function () {
+            var me = this;
+            $.ajax({
+                url: '/api/isLogin',
+                type: 'GET',
+            })
+            .done(function(data) {
+                if (data.status === 1) {
+                    me.isLoginstate = 1;
+                }else {
+                    me.isLoginstate = 0;
+                }
+            })
+            .fail(function(error) {
+                me.isLoginstate = 0;
+                console.log(error);
             });
         },
 

@@ -145,7 +145,7 @@ module.exports = {
                     data: []
                 });
             }
-        });
+        }).sort({ 'poem_time' : -1 });
     },
     /**
      * isEmpty 是否为空对象 {}

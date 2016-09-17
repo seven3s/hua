@@ -19,7 +19,7 @@
 
 #login #owl-login,
 #register #owl-login {
-    background-image: url(../../public/images/owl-login@2x.png);
+    background-image: url(http://odflit039.bkt.clouddn.com/owl-login@2x.png);
     background-size: 211px 108px;
     height: 108px;
     left: 50%;
@@ -58,7 +58,7 @@
 
 #login #owl-login .arms .arm,
 #register #owl-login .arms .arm {
-    background-image: url(../../public/images/owl-login-arm@2x.png);
+    background-image: url(http://odflit039.bkt.clouddn.com/owl-login-arm@2x.png);
     background-size: 40px 65px;
     height: 65px;
     left: 20px;

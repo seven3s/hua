@@ -48,11 +48,18 @@ module.exports = Vue.extend({
                 type: 'GET',
             })
             .done(function(data) {
-                me.login.status = data.status;
-                me.login.userName = data.data.userName;
+                if (data.status === 1) {
+                    me.login.status = data.status;
+                    me.login.userName = data.data.userName;
+                    // 全局登陆控制
+                    Vue.auth = true;
+                }else {
+                    Vue.auth = false;
+                }
                 me.louterForeEach();
             })
             .fail(function(error) {
+                Vue.auth = false;
                 console.log(error);
             });
         },
@@ -64,7 +71,8 @@ module.exports = Vue.extend({
         louterForeEach: function () {
             var status = this.loginUrl();
             if (this.$data.login.status === 0 && status) {
-                router.go('/login');
+                var url = '/#!/login';
+                self.open(url);
             }
         },
 
@@ -73,14 +81,7 @@ module.exports = Vue.extend({
          *
          */
         loginUrl: function () {
-            var status = true;
-            switch (router.app.$route.path) {
-                case '/new':
-                    status = false;
-                    break;
-                default: status = true;
-            }
-            return !status;
+            return !!this.$route.auth;
         },
 
         /**

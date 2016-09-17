@@ -18,6 +18,7 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     data: function () {
         return {
+            isLoginState: false
         };
     },
     events: {
@@ -30,6 +31,7 @@ module.exports = Vue.extend({
     },
     methods: {
         init: function () {
+            this.$data.isLoginState = Vue.auth;
             $('.water-full').cascade();
             $(window).trigger('resize.cascade');
         }
