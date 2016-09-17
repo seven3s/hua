@@ -58,6 +58,8 @@ module.exports = Vue.extend({
         init: function () {
             var me = this;
             this.isUpdate();
+            // 刷新关闭提示
+            this.fresh();
             $('[name = poem-form]').form({
                 fields:    rule,
                 inline:    true,
@@ -71,6 +73,22 @@ module.exports = Vue.extend({
                     }
                 }
             });
+        },
+
+        /**
+         * fresh 刷新提示
+         *
+         */
+        fresh: function () {
+            // 刷新提示
+            document.body.onbeforeunload = function (e) {
+                e = e || window.event;
+                if (/webkit/.test(navigator.userAgent.toLowerCase())) {
+                    return"离开页面将导致数据丢失！";
+                }else {
+                    e.returnValue ="离开页面将导致数据丢失！";
+                }
+            }
         },
 
         /**
@@ -137,6 +155,7 @@ module.exports = Vue.extend({
          *
          */
         delLine: function () {
+            var me = this;
             var cnNewLineNum = this.$data.initLineNum;
             var newLineNum   = cnNewLineNum - 4;
             if (newLineNum === 0) {
@@ -147,9 +166,19 @@ module.exports = Vue.extend({
                 });
                 return;
             }
-            var len = this.$data.newLines.length;
-            this.$data.newLines.splice(len - 1, len);
-            this.$data.initLineNum = this.$data.newLines.length;
+            swal({
+                title: "您确定要删除最后一行吗？",
+                // text: "您确定要删除这条数据？", 
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "是的，我要删除",
+                confirmButtonColor: "#ec6c62"
+            }, function() {
+                var len = me.$data.newLines.length;
+                me.$data.newLines.splice(len - 1, len);
+                me.$data.initLineNum = me.$data.newLines.length;
+            });
         },
 
         /**
