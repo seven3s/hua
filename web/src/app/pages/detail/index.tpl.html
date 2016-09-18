@@ -10,8 +10,14 @@
         <div></div>
         <a class="ui right ribbon label" v-link="{ path: '/list/' + poem.type }" target="_blank">{{poem.typeString}}</a>
         <div class="w-80 mar-auto poem-body" id="poem-body">
-            <div class="image" v-if="!!poem.imgSrc">
-                <img :src="poem.imgSrc" class="ui wireframe image">
+            <div class="image baguette-img" v-if="!!poem.imgSrc">
+                <a href="{{poem.imgSrc}}" 
+                data-at-450="{{poem.imgSrc}}"
+                data-at-800="{{poem.imgSrc}}"
+                data-at-1366="{{poem.imgSrc}}"
+                data-at-1920="{{poem.imgSrc}}" data-caption="Image caption">
+                    <img :src="poem.imgSrc" class="ui wireframe image" alt="{{poem.imgSrc}}">
+                </a>
             </div>
             <div class="ui vertical segment" v-for="item in poem.lines">{{item}}</div>
         </div>

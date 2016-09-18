@@ -8,6 +8,7 @@ var Vue = require('vue');
 require('./index.css');
 var type_id =require('../../common/type_id.js');
 var title = require('../../common/setTitle');
+require('../../common/baguetteBox/css/baguetteBox.css');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -80,6 +81,16 @@ module.exports = Vue.extend({
             .fail(function(err) {
                 console.log("error");
             });
+            // 图片预览
+            window.onload = function () {
+                baguetteBox.run('.baguette-img', {
+                    animation: 'fadeIn',
+                    noScrollbars: true,
+                    captions: function(element) {
+                        return element.getElementsByTagName('img')[0].alt;
+                    }
+                });
+            }
         }
     }
 });

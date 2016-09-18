@@ -18,5 +18,8 @@ module.exports = {
     laydateDest: config.publicDirectory + '/lib/laydate/',
 
     qiniujsSrc: config.sourceDirectory + '/common/qiniu-js/**/*',
-    qiniujsDest: config.publicDirectory + '/lib/qiniu-js/'
+    qiniujsDest: config.publicDirectory + '/lib/qiniu-js/',
+
+    baguetteBoxSrc: config.sourceDirectory + '/common/baguetteBox/**/*',
+    baguetteBoxDest: config.publicDirectory + '/lib/baguetteBox/'
 };

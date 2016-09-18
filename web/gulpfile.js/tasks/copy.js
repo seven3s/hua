@@ -12,4 +12,5 @@ gulp.task('copy', function () {
     gulp.src(config.sweetalertSrc).pipe(gulp.dest(config.sweetalertDest));
     gulp.src(config.laydateSrc).pipe(gulp.dest(config.laydateDest));
     gulp.src(config.qiniujsSrc).pipe(gulp.dest(config.qiniujsDest));
+    gulp.src(config.baguetteBoxSrc).pipe(gulp.dest(config.baguetteBoxDest));
 });
