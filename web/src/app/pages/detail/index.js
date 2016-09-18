@@ -77,20 +77,20 @@ module.exports = Vue.extend({
                 poem.lines = data.poem_lines;
                 me.$data.poem = poem;
                 me.$data.load = 1;
+                // 图片预览
+                setTimeout(function () {
+                    baguetteBox.run('.baguette-img', {
+                        animation: 'fadeIn',
+                        noScrollbars: true,
+                        captions: function(element) {
+                            return element.getElementsByTagName('img')[0].alt;
+                        }
+                    });
+                });
             })
             .fail(function(err) {
                 console.log("error");
             });
-            // 图片预览
-            window.onload = function () {
-                baguetteBox.run('.baguette-img', {
-                    animation: 'fadeIn',
-                    noScrollbars: true,
-                    captions: function(element) {
-                        return element.getElementsByTagName('img')[0].alt;
-                    }
-                });
-            }
         }
     }
 });

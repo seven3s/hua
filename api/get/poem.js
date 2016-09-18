@@ -10,7 +10,7 @@ module.exports = {
     init: function(app) {
         var me = this;
         app.get('/api/poem', function(req, res) {
-            var config = require('../../db/_config');
+            // var config = require('../../db/_config');
             var db = app.get('db');
             var UserNameScheMa = require('../../db/schemas/users');
             var UserNameModel = db.model('users', UserNameScheMa);
