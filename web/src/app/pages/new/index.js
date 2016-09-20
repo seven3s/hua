@@ -233,10 +233,12 @@ module.exports = Vue.extend({
             if (_id) {
                 data['_id'] = _id;
             }
+            // 检查登陆状态
+            this.isLogin();
             if (this.isLoginstate === 0) {
                 swal({
                     title: '',
-                    text: '未登录请登陆',
+                    text: '未登陆请登陆',
                     type: 'error'
                 }, function () {
                     var url = '/#!/login';
@@ -273,6 +275,7 @@ module.exports = Vue.extend({
             $.ajax({
                 url: '/api/isLogin',
                 type: 'GET',
+                async: false
             })
             .done(function(data) {
                 if (data.status === 1) {
