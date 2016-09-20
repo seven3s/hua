@@ -45,7 +45,7 @@ module.exports = Vue.extend({
          */
         data: function (transition) {
             this.init();
-       }
+        }
     },
     methods: {
         init: function () {
@@ -74,7 +74,6 @@ module.exports = Vue.extend({
                 data: data
             })
             .done(function(json) {
-                me.$data.loading = 0;
                 var data = json.data;
                 if (json.status === 0 && data.length <= 0) {
                     swal({
@@ -102,6 +101,7 @@ module.exports = Vue.extend({
                     poem.lines = item.poem_lines;
                     poems.push(poem);
                 });
+                me.$data.loading = 0;
                 me.$data.waterdata = poems;
             })
             .fail(function() {

@@ -26,12 +26,14 @@ module.exports = {
     },
     '/p/:id': {
         // 诗歌详情页
+        canReuse: false,
         component: function (resolve) {
             require(['./pages/detail'], resolve);
         }
     },
     '/update/:id': {
         // 诗歌详情页
+        canReuse: false,
         auth: true, // 需要做登陆校验
         component: function (resolve) {
             require(['./pages/new'], resolve);
@@ -39,6 +41,7 @@ module.exports = {
     },
     '/list/:type': {
         // 诗歌详情页
+        canReuse: false,
         component: function (resolve) {
             require(['./pages/list'], resolve);
         }

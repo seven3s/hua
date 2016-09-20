@@ -32,7 +32,12 @@ module.exports = Vue.extend({
     methods: {
         init: function () {
             this.$data.isLoginState = Vue.auth;
-            $('.water-full').cascade();
+            // setTimeout(function () {
+            //     $('.water-full').cascade();
+            // });
+            this.$nextTick(function () {
+                $('.water-full').cascade();
+            });
             $(window).trigger('resize.cascade');
         }
     }

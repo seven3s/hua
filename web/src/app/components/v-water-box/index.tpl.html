@@ -1,6 +1,6 @@
 <div class="ui card item">
     <div class="ui top left attached label">
-        <a v-link="{ path: '/list/' + waterboxdata.type }" target="_blank">
+        <a v-link="{ path: '/list/' + waterboxdata.type }">
             <i class="book icon"></i>
             {{{waterboxdata.typeString}}}
         </a>
@@ -8,7 +8,7 @@
     <div class="ui top right attached label">
         {{waterboxdata.poem_time}}
     </div>
-    <a class="image" v-if="!!waterboxdata.imgSrc" v-link="{ path: '/p/' + waterboxdata.id }" target="_blank">
+    <a class="image" v-if="!!waterboxdata.imgSrc" v-link="{ path: '/p/' + waterboxdata.id }">
         <img :src="waterboxdata.imgSrc" class="ui wireframe image">
     </a>
     <div class="content ui">
@@ -16,7 +16,7 @@
             <div class="event">
                 <div class="content">
                     <h4 class="">
-                        <a v-link="{ path: '/p/' + waterboxdata.id }" target="_blank">{{waterboxdata.title}}</a>
+                        <a v-link="{ path: '/p/' + waterboxdata.id }">{{waterboxdata.title}}</a>
                     </h4>
                     <p class="description" v-for="item in waterboxdata.lines" track-by="$index">{{item}}</p>
                 </div>
