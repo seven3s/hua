@@ -44,6 +44,7 @@ module.exports = Vue.extend({
          *
          */
         data: function (transition) {
+            this.$data.loading = 1;
             this.init();
         }
     },
