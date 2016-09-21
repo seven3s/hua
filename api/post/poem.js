@@ -67,8 +67,8 @@ module.exports = {
                             status: 1,
                             message: '新增成功！',
                             data: {
-                                    id: poems._id
-                                }
+                                id: poems._id
+                            }
                         });
                     }
                 });

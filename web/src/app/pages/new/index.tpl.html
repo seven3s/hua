@@ -29,7 +29,11 @@
         <div class="ui segment">
             <button class="ui red button compact" @click="delLine">删一联</button>
             <button class="ui green button compact" @click="newLine">增一联</button>
-            <button class="ui green button compact submit" id="submit">
+            <button class="ui green button compact submit loading" id="submit" v-if="postState === 1" disabled>
+                <span v-if="update === 0">发布</span>
+                <span v-if="update === 1">更新</span>
+            </button>
+            <button class="ui green button compact submit" id="submit" v-else>
                 <span v-if="update === 0">发布</span>
                 <span v-if="update === 1">更新</span>
             </button>

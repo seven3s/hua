@@ -28,7 +28,8 @@ module.exports = Vue.extend({
                 state: 0,
                 src: 'http://odflit039.bkt.clouddn.com/o_1asjud1su1nft13js1prps14hrl9image.png'
             },
-            update: 0
+            update: 0,
+            postState: 0 // 点击提交状态
         };
     },
     events: {
@@ -118,7 +119,8 @@ module.exports = Vue.extend({
             var me = this;
             laydate({
                 elem:     '#poem_time',
-                format:   'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+                format:   'YYYY-MM-DD hh:mm:ss', // 分隔符可以任意定义，该例子表示只显示年月
+                istime: true,
                 festival: true, //显示节日
                 choose:   function(datas){
                     //选择日期完毕的回调
@@ -209,6 +211,7 @@ module.exports = Vue.extend({
          *
          */
         post: function () {
+            this.$data.postState = 1;
             var poem_title = this.$data.poem_title;
             var poem_time = this.$data.poem_time;
             var poem_type = this.$data.genres.checkedData;
@@ -236,6 +239,7 @@ module.exports = Vue.extend({
             // 检查登陆状态
             this.isLogin();
             if (this.isLoginstate === 0) {
+                this.$data.postState = 0;
                 swal({
                     title: '',
                     text: '未登陆请登陆',
@@ -262,6 +266,7 @@ module.exports = Vue.extend({
                 });
             })
             .fail(function() {
+                me.$data.postState = 0;
                 console.log("error");
             });
         },
