@@ -23,7 +23,8 @@
             </div>
         </div>
         <div class="ui buttons login-btn">
-            <button class="ui green basic button submit" tabindex="4">登录</button>
+            <button class="ui green basic button submit loading" tabindex="4" v-if="postState === 1" disabled>登录</button>
+            <button class="ui green basic button submit" tabindex="4" v-else>登录</button>
         </div>
         <a href="/" class="goback" title="返回首页">返回首页</a>
     </div>

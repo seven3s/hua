@@ -15,7 +15,8 @@ module.exports = Vue.extend({
     data: function () {
         return {
             userName: '',
-            password: ''
+            password: '',
+            postState: 0
         };
     },
     events: {
@@ -77,6 +78,7 @@ module.exports = Vue.extend({
                 userName: me.$data.userName,
                 password: me.$data.password
             }
+            this.$data.postState = 1;
             $.ajax({
                 url: '/api/login',
                 type: 'POST',
@@ -84,12 +86,14 @@ module.exports = Vue.extend({
                 success: function(data) {
                     // 用户名不存在
                     if (data.status === -1) {
+                        me.$data.postState = 0;
                         swal({
                             title: '',
                             text: data.message,
                             type: 'error'
                         });
                     }else if (data.status === 0) {
+                        me.$data.postState = 0;
                         // 密码错误
                         swal({
                             title: '',
@@ -109,7 +113,7 @@ module.exports = Vue.extend({
                     }
                 },
                 error: function(data, e) {
-                    
+                    me.$data.postState = 0;
                 }
             });
         }

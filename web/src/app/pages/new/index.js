@@ -18,7 +18,7 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     data: function () {
         return {
-            isLoginstate: 0,
+            isLoginstate: 0, // 登陆状态
             poem_title: '', // 文题
             genres: defaultConfig.genresData,
             poem_time: '', // 创作时间

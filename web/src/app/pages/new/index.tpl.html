@@ -1,43 +1,46 @@
 <v-header></v-header>
 <div id="main" name="poem-form">
-    <div class="ui three column grid mobile">
-        <div class="column field poem-title">
-            <span class="ui horizontal label">文题</span>
-            <div class="ui input">
-                <input type="text" placeholder="请输入文题" name="poem_title" v-model="poem_title"/>
+    <v-loading v-if="load === 0"></v-loading>
+    <template v-else>
+        <div class="ui three column grid mobile">
+            <div class="column field poem-title">
+                <span class="ui horizontal label">文题</span>
+                <div class="ui input">
+                    <input type="text" placeholder="请输入文题" name="poem_title" v-model="poem_title"/>
+                </div>
+            </div>
+            <div class="column field">
+                <span class="ui horizontal label">创作时间</span>
+                <div class="ui input">
+                    <input type="text" id="poem_time" placeholder="输入创作时间" v-model="poem_time"/>
+                </div>
+            </div>
+            <div class="column field poem-genres">
+                <span class="ui horizontal label">体裁</span>
+                <v-select :selectobj.sync="genres"></v-select>
             </div>
         </div>
-        <div class="column field">
-            <span class="ui horizontal label">创作时间</span>
-            <div class="ui input">
-                <input type="text" id="poem_time" placeholder="输入创作时间" v-model="poem_time"/>
+        <v-upload :picobj.sync="picobj"></v-upload>
+        <div class="ui segments piled">
+            <div class="ui segment field clearfix" v-for="item in newLines">
+                <span class="ui ribbon label">第{{item.title}}联</span>
+                <div class="ui input">
+                    <input type="text" placeholder="请输入第{{item.title}}联" v-model="item.value">
+                </div>
+            </div>
+            <div class="ui segment">
+                <button class="ui red button compact" @click="delLine">删一联</button>
+                <button class="ui green button compact" @click="newLine">增一联</button>
+                <button class="ui green button compact submit loading" id="submit" v-if="postState === 1" disabled>
+                    <span v-if="update === 0">发布</span>
+                    <span v-if="update === 1">更新</span>
+                </button>
+                <button class="ui green button compact submit" id="submit" v-else>
+                    <span v-if="update === 0">发布</span>
+                    <span v-if="update === 1">更新</span>
+                </button>
             </div>
         </div>
-        <div class="column field poem-genres">
-            <span class="ui horizontal label">体裁</span>
-            <v-select :selectobj.sync="genres"></v-select>
-        </div>
-    </div>
-    <v-upload :picobj.sync="picobj"></v-upload>
-    <div class="ui segments piled">
-        <div class="ui segment field clearfix" v-for="item in newLines">
-            <span class="ui ribbon label">第{{item.title}}联</span>
-            <div class="ui input">
-                <input type="text" placeholder="请输入第{{item.title}}联" v-model="item.value">
-            </div>
-        </div>
-        <div class="ui segment">
-            <button class="ui red button compact" @click="delLine">删一联</button>
-            <button class="ui green button compact" @click="newLine">增一联</button>
-            <button class="ui green button compact submit loading" id="submit" v-if="postState === 1" disabled>
-                <span v-if="update === 0">发布</span>
-                <span v-if="update === 1">更新</span>
-            </button>
-            <button class="ui green button compact submit" id="submit" v-else>
-                <span v-if="update === 0">发布</span>
-                <span v-if="update === 1">更新</span>
-            </button>
-        </div>
-    </div>
+    </template>
 </div>
 <v-footer></v-footer>

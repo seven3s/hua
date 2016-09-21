@@ -60,7 +60,7 @@ module.exports = Vue.extend({
                         confirmButtonText: '跳转到首页'
                     }, function () {
                         var url = '/';
-                        router.go(url);
+                        self.location.href = url;
                     });
                     return;
                 }
