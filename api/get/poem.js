@@ -118,7 +118,7 @@ module.exports = {
                 poems.forEach(function (item, index) {
                     var data = {};
                     data.title = item.poem_title;
-                    data.poem_time = moment(item.poem_time).startOf('day').fromNow();
+                    data.poem_time = moment(item.poem_time).startOf('hour').fromNow();
                     data.poem_type = item.poem_type;
                     data.poem_author = item.poem_author;
                     data.poem_lines = item.poem_lines;
