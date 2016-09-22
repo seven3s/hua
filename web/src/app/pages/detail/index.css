@@ -24,7 +24,6 @@
     text-align: center;
 }
 #main img.ui.image {
-    display: inline-block;
     margin: 0 auto;
 }
 .ui.label {
