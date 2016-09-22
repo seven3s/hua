@@ -23,7 +23,7 @@
 #poem-body .image {
     text-align: center;
 }
-#poem-body img.ui.image {
+#main img.ui.image {
     display: inline-block;
     margin: 0 auto;
 }
