@@ -10,7 +10,6 @@ module.exports = {
     init: function(app) {
         var me = this;
         app.get('/api/poem', function(req, res) {
-            // var config = require('../../db/_config');
             var db = app.get('db');
             var UserNameScheMa = require('../../db/schemas/users');
             var UserNameModel = db.model('users', UserNameScheMa);
@@ -66,7 +65,9 @@ module.exports = {
                 data.title = poem.poem_title;
                 // 是否是update
                 var update = req.query.update;
-                data.poem_time = update ? poem.poem_time : moment(poem.poem_time).startOf('day').fromNow();
+                // 格式化时间
+                item.poem_time = moment(item.poem_time).format('YYYY-MM-DD HH:mm:ss');
+                data.poem_time = update ? poem.poem_time : data.poem_time = moment(item.poem_time).fromNow();
                 data.poem_type = poem.poem_type;
                 data.poem_author = poem.poem_author;
                 data.poem_lines = poem.poem_lines;
@@ -118,7 +119,9 @@ module.exports = {
                 poems.forEach(function (item, index) {
                     var data = {};
                     data.title = item.poem_title;
-                    data.poem_time = moment(item.poem_time).startOf('hour').fromNow();
+                    // 格式化时间
+                    item.poem_time = moment(item.poem_time).format('YYYY-MM-DD HH:mm:ss');
+                    data.poem_time = moment(item.poem_time).fromNow();
                     data.poem_type = item.poem_type;
                     data.poem_author = item.poem_author;
                     data.poem_lines = item.poem_lines;
