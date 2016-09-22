@@ -9,16 +9,16 @@
         <span class="ui right ribbon label">{{poem.poem_time}}</span>
         <div></div>
         <a class="ui right ribbon label" v-link="{ path: '/list/' + poem.type }">{{poem.typeString}}</a>
+        <div class="image baguette-img" v-if="!!poem.imgSrc">
+            <a href="javascript:;"
+            data-at-450="{{poem.imgSrc}}"
+            data-at-800="{{poem.imgSrc}}"
+            data-at-1366="{{poem.imgSrc}}"
+            data-at-1920="{{poem.imgSrc}}" data-caption="Image caption">
+                <img :src="poem.imgSrc" class="ui wireframe image" alt="{{poem.imgSrc}}">
+            </a>
+        </div>
         <div class="w-80 mar-auto poem-body" id="poem-body">
-            <div class="image baguette-img" v-if="!!poem.imgSrc">
-                <a href="javascript:;"
-                data-at-450="{{poem.imgSrc}}"
-                data-at-800="{{poem.imgSrc}}"
-                data-at-1366="{{poem.imgSrc}}"
-                data-at-1920="{{poem.imgSrc}}" data-caption="Image caption">
-                    <img :src="poem.imgSrc" class="ui wireframe image" alt="{{poem.imgSrc}}">
-                </a>
-            </div>
             <div class="ui vertical segment" v-for="item in poem.lines">{{item}}</div>
         </div>
     </div>

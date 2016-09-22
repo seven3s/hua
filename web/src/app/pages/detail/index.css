@@ -25,7 +25,6 @@
 }
 #poem-body img.ui.image {
     display: inline-block;
-    max-width: 90%;
 }
 .ui.label {
     z-index: 9;
