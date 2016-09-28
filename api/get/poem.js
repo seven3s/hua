@@ -109,6 +109,18 @@ module.exports = {
      *
      */
     query: function (PoemsModel, UserNameModel, data, req, res) {
+        // 增加分页
+        // 如果没有传入pageSize那么则不分页，设置0
+        var pageSize = req.pageSize || 0;
+        // 根据时间来做分页
+        if (req.gtTime) {
+            var gtTime = {
+                'poem_time': {
+                    "$gt": String(req.gtTime)
+                }
+            };
+            data = gtTime;
+        }
         PoemsModel.find(data, function(err, poems) {
             if (err) {
                 res.send(err);
@@ -148,7 +160,7 @@ module.exports = {
                     data: []
                 });
             }
-        }).sort({ 'poem_time' : -1 });
+        }).limit(pageSize).sort({ 'poem_time' : -1 });
     },
     /**
      * isEmpty 是否为空对象 {}
