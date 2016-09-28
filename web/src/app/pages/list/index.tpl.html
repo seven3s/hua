@@ -1,6 +1,14 @@
 <v-header></v-header>
-<div id="main" class="ui grid water-full" v-drapload drapload-key="ascroll" drapload-initialize="true" drapload-down="down()" drapload-up="up()">
+<div id="main" class="ui grid water-full">
     <v-loading class="loading" v-if="loading === 1"></v-loading>
     <v-water-list :waterdata="waterdata" v-else></v-water-list>
 </div>
+<template v-if="loadMore === 1">
+    <div class="bottom-loading">
+        <div class="ui active inverted dimmer">
+            <div class="ui small text loader">加载中</div>
+        </div>
+    </div>
+</template>
+<div class="info" v-if="endPoemsTimeObj.endPoemsTimeState === 1">没有更多数据了~~~</div>
 <v-footer></v-footer>

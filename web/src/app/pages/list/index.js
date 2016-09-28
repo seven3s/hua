@@ -6,11 +6,9 @@
  */
 var Vue = require('vue');
 require('./index.css');
-var vueDrapload =  require('vue-drapload');
-var config = require('./config');
-Vue.use(vueDrapload, config);
 var type_id =require('../../common/type_id.js');
 var title = require('../../common/setTitle');
+var util = require('../../common/util');
 var moment = require('moment');
 module.exports = Vue.extend({
     ready: function () {
@@ -23,9 +21,17 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     data: function () {
         return {
-            waterdata: {},
+            waterdata: [],
             poemType: '',
-            loading: 1
+            loading: 1,
+            loadMore: 0,
+            // 查询最后一个的时间
+            endTime: '',
+            // 诗歌中最后一条数据
+            endPoemsTimeObj: {
+                endPoemsTime: '1900-01-01',
+                endPoemsTimeState: 0
+            }
         };
     },
     events: {
@@ -56,8 +62,21 @@ module.exports = Vue.extend({
         init: function () {
             // this.getPoemsType();
             var me = this;
-            me.$data.loading = 0;
-            me.$options.vue = me;
+            // 第一次进入加载
+            var curTime = moment().format('YYYY-MM-DD HH:mm:ss');
+            this.$data.endTime = curTime;
+            var param = {
+                ltTime: curTime,
+                pageSize: 4
+            }
+            me.loadListData(param,function(json) {
+                var data = json.data;
+                // 记录最后一条的时间
+                me.$data.endTime = data[data.length - 1]['time'];
+                me.getPoemsData(json);
+                me.$data.loading = 0;
+            });
+            this.scroll();
         },
 
         /**
@@ -122,7 +141,6 @@ module.exports = Vue.extend({
          * @param fn
          */
         loadListData: function(param, fn) {
-            var me = this.vue;
             var type = this.$route.params.type;
             var id;
             var data = {};
@@ -143,25 +161,39 @@ module.exports = Vue.extend({
                 }
             });
         },
-        down: function() {
+
+        /**
+         * scroll 滑动加载更多
+         *
+         */
+        scroll: function() {
             var me = this;
-            var curTime = moment().format('YYYY-MM-DD HH:mm:ss');
-            var param = {
-                lteTime: curTime,
-                pageSize: 4
+            window.onscroll = function () { 
+                var param = {
+                    ltTime: me.$data.endTime,
+                    pageSize: 4
+                }
+                var loadMore = me.$data.loadMore;
+                var endTime = me.$data.endTime;
+                var endPoemsTime = me.$data.endPoemsTimeObj.endPoemsTime;
+                if (
+                    util.getScrollTop() + util.getClientHeight()
+                    === util.getScrollHeight()
+                    && loadMore === 0
+                    && endTime > endPoemsTime) {
+                    me.$data.loadMore = 1;
+                    me.loadListData(param, function(json) {
+                        var data = json.data;
+                        // 记录最后一条的时间
+                        me.$data.endTime = data[data.length - 1]['time'];
+                        me.$data.endPoemsTimeObj.endPoemsTime = json.endPoemsTime;
+                        if (me.$data.endTime === me.$data.endPoemsTimeObj.endPoemsTime) {
+                            me.$data.endPoemsTimeObj.endPoemsTimeState = 1;
+                        }
+                        me.getPoemsData(json);
+                    });
+                }
             }
-            this.loadListData(param,function(data) {
-                me.getPoemsData(data);
-                me.ascroll.resetload(true);
-            });
-        },
-        up: function() {
-            var me = this;
-            this.loadListData(function(json) {
-                console.log(1);
-                
-                me.ascroll.resetload();
-            });
         },
 
         /**
@@ -199,8 +231,9 @@ module.exports = Vue.extend({
                 poem.lines = item.poem_lines;
                 poems.push(poem);
             });
-            // me.$data.loading = 0;
-            me.$data.waterdata = poems;
+            me.$data.loadMore = 0;
+            var arr = me.$data.waterdata;
+            me.$data.waterdata = arr.concat(poems);
         },
 
         /**

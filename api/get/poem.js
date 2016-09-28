@@ -102,55 +102,72 @@ module.exports = {
         // 如果没有传入pageSize那么则不分页，设置0
         var pageSize = req.query.pageSize || 0;
         // 根据时间来做分页
-        if (req.query.lteTime) {
-            var lteTime = {
+        if (req.query.ltTime) {
+            var ltTime = {
                 poem_time: {
-                    '$lte': req.query.lteTime
+                    '$lt': req.query.ltTime
                 }
             };
-            data = lteTime;
+            data = ltTime;
         }
-        PoemsModel.find(data, function(err, poems) {
-            if (err) {
-                res.send(err);
-            }
-            if (poems && poems.length > 0) {
-                var datas = [];
-                var len = poems.length;
-                poems.forEach(function (item, index) {
-                    var data = {};
-                    data.title = item.poem_title;
-                    // 格式化时间
-                    item.poem_time = moment(item.poem_time).format('YYYY-MM-DD HH:mm:ss');
-                    data.poem_time = moment(item.poem_time).fromNow();
-                    data.poem_type = item.poem_type;
-                    data.poem_author = item.poem_author;
-                    data.poem_lines = item.poem_lines;
-                    data.likes = item.likes;
-                    data.poem_imgSrc = item.poem_imgSrc;
-                    data.id = item._id;
-                    UserNameModel.findbyusername(item.poem_author, function(err, user) {
-                        data.userName = user.nickname;
-                    }).then(function () {
-                        datas.push(data);
-                        if (index === (len - 1)) {
-                            res.send({
-                                status: 1,
-                                message: '',
-                                data: datas
-                            });
-                        }
+        // 先查询最后一条数据
+        this.queryEnd(PoemsModel, req, res, function (endPoems) {
+            var endPoemsTime = endPoems[0].poem_time;
+            PoemsModel.find(data, function(err, poems) {
+                if (err) {
+                    res.send(err);
+                }
+                if (poems && poems.length > 0) {
+                    var datas = [];
+                    var len = poems.length;
+                    poems.forEach(function (item, index) {
+                        var data = {};
+                        data.title = item.poem_title;
+                        data.time = item.poem_time;
+                        // 格式化时间
+                        item.poem_time = moment(item.poem_time).format('YYYY-MM-DD HH:mm:ss');
+                        data.poem_time = moment(item.poem_time).fromNow();
+                        data.poem_type = item.poem_type;
+                        data.poem_author = item.poem_author;
+                        data.poem_lines = item.poem_lines;
+                        data.likes = item.likes;
+                        data.poem_imgSrc = item.poem_imgSrc;
+                        data.id = item._id;
+                        UserNameModel.findbyusername(item.poem_author, function(err, user) {
+                            data.userName = user.nickname;
+                        }).then(function () {
+                            datas.push(data);
+                            if (index === (len - 1)) {
+                                res.send({
+                                    status: 1,
+                                    message: '',
+                                    endPoemsTime: endPoemsTime,
+                                    data: datas
+                                });
+                            }
+                        });
                     });
-                });
-            }else {
-                res.send({
-                    status: 0,
-                    message: '没有数据！',
-                    data: []
-                });
-            }
-        }).limit(pageSize).sort({ 'poem_time' : -1 });
+                }else {
+                    res.send({
+                        status: 0,
+                        message: '没有数据！',
+                        data: []
+                    });
+                }
+            }).limit(pageSize).sort({ 'poem_time' : -1 });
+        });
     },
+
+    /**
+     * queryEnd 查询最后一条数据
+     *
+     */
+    queryEnd: function (PoemsModel, req, res, cab) {
+        PoemsModel.find(function(err, poems) {
+            cab && cab(poems);
+        }).sort({ 'poem_time' : 1 }).limit(1);
+    },
+
     /**
      * isEmpty 是否为空对象 {}
      *
