@@ -10,6 +10,7 @@ var type_id =require('../../common/type_id.js');
 var title = require('../../common/setTitle');
 var util = require('../../common/util');
 var moment = require('moment');
+var browserRedirect = require('../../common/browserRedirect.js');
 module.exports = Vue.extend({
     ready: function () {
         var type = this.$route.params.type;
@@ -65,9 +66,10 @@ module.exports = Vue.extend({
             // 第一次进入加载
             var curTime = moment().format('YYYY-MM-DD HH:mm:ss');
             this.$data.endTime = curTime;
+            var pageSize = browserRedirect.browserRedirect() ? 1 : 4;
             var param = {
                 ltTime: curTime,
-                pageSize: 4
+                pageSize: pageSize
             }
             me.loadListData(param,function(json) {
                 var data = json.data;
@@ -169,9 +171,10 @@ module.exports = Vue.extend({
         scroll: function() {
             var me = this;
             window.onscroll = function () { 
+                var pageSize = browserRedirect.browserRedirect() ? 1 : 4;
                 var param = {
                     ltTime: me.$data.endTime,
-                    pageSize: 4
+                    pageSize: pageSize
                 }
                 var loadMore = me.$data.loadMore;
                 var endTime = me.$data.endTime;
