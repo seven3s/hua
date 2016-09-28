@@ -25,14 +25,11 @@ module.exports = {
             var id = query.id;
             if (id) {
                 me.getPoemById(PoemsModel, UserNameModel, req, res);
+                return;
             }
-            // 根据type查询
-            var type = query.typeId;
-            if (type) {
-                var data = {
-                    poem_type: type
-                };
-                me.queryType(PoemsModel, UserNameModel, data, req, res);
+            // 根据参数查询
+            if (!me.isEmpty(query)) {
+                me.query(PoemsModel, UserNameModel, query, req, res);
             }
         });
     },
@@ -89,14 +86,6 @@ module.exports = {
     },
 
     /**
-     * queryType 根据诗歌类型查询
-     *
-     */
-    queryType: function (PoemsModel, UserNameModel, data, req, res) {
-        this.query(PoemsModel, UserNameModel, data, req, res);
-    },
-
-    /**
      * queryAll 查询全部
      *
      */
@@ -111,15 +100,15 @@ module.exports = {
     query: function (PoemsModel, UserNameModel, data, req, res) {
         // 增加分页
         // 如果没有传入pageSize那么则不分页，设置0
-        var pageSize = req.pageSize || 0;
+        var pageSize = req.query.pageSize || 0;
         // 根据时间来做分页
-        if (req.gtTime) {
-            var gtTime = {
-                'poem_time': {
-                    "$gt": String(req.gtTime)
+        if (req.query.lteTime) {
+            var lteTime = {
+                poem_time: {
+                    '$lte': req.query.lteTime
                 }
             };
-            data = gtTime;
+            data = lteTime;
         }
         PoemsModel.find(data, function(err, poems) {
             if (err) {

@@ -1,5 +1,5 @@
 <v-header></v-header>
-<div id="main" class="ui grid water-full">
+<div id="main" class="ui grid water-full" v-drapload drapload-key="ascroll" drapload-initialize="true" drapload-down="down()" drapload-up="up()">
     <v-loading class="loading" v-if="loading === 1"></v-loading>
     <v-water-list :waterdata="waterdata" v-else></v-water-list>
 </div>
