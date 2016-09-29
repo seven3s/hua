@@ -100,7 +100,7 @@ module.exports = {
     query: function (PoemsModel, UserNameModel, data, req, res) {
         // 增加分页
         // 如果没有传入pageSize那么则不分页，设置0
-        var pageSize = req.query.pageSize || 0;
+        var pageSize = Number(req.query.pageSize) || 0;
         // 根据时间来做分页
         if (req.query.ltTime) {
             var ltTime = {
@@ -114,6 +114,7 @@ module.exports = {
         this.queryEnd(PoemsModel, req, res, function (endPoems) {
             var endPoemsTime = endPoems[0].poem_time;
             PoemsModel.find(data, function(err, poems) {
+                console.log(err);
                 if (err) {
                     res.send(err);
                 }
@@ -154,7 +155,7 @@ module.exports = {
                         data: []
                     });
                 }
-            }).limit(pageSize).sort({ 'poem_time' : -1 });
+            }).sort({ 'poem_time' : -1 }).limit(pageSize);
         });
     },
 
