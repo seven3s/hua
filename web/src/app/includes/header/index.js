@@ -18,7 +18,11 @@ module.exports = Vue.extend({
             login: {
                 status: 0,
                 userName: ''
-            }
+            },
+            // 搜索关键字
+            searchQ: '',
+            // 未搜索状态
+            searchState: false
         };
     },
     events: {
@@ -111,6 +115,16 @@ module.exports = Vue.extend({
                     type: 'error'
                 });
             });
+        },
+
+        /**
+         * search 搜索功能
+         *
+         */
+        search: function () {
+            this.$data.searchState = true;
+            console.log(this.$data.searchState);
+            console.log(this.$data.searchQ);
         }
     }
 });

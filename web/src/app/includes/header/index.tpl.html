@@ -38,9 +38,9 @@
                 </template>
             </div>
             <div class="search">
-                <div class="ui icon input">
-                    <input placeholder="试试搜索吧~~" type="text">
-                    <i class="circular search link icon"></i>
+                <div class="ui icon input" :class="searchState ? 'loading' : ''">
+                    <input placeholder="试试搜索吧~~" type="text" v-model="searchQ" @keyup.enter="search">
+                    <i class="circular search link icon" @click="search"></i>
                 </div>
             </div>
         </div>
