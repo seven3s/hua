@@ -19,11 +19,11 @@
 .menu-bar {
     height: 100%;
     text-align: center;
+    padding-top: 5px;
 }
 
 .menu-bar > .left-part {
     float: left;
-    margin-top: 5px;
 }
 
 @keyframes logo_rotate {
@@ -55,7 +55,6 @@
 
 .menu-bar > .right-part {
     float: right;
-    margin-top: 5px;
 }
 
 .user img {
@@ -69,6 +68,13 @@
 .add.icon {
     font-size: 1.8rem;
     vertical-align: text-top;
+}
+.search {
+    overflow: hidden;
+    padding: 0 50px;
+}
+.search > .ui.input {
+    width: 100%;
 }
 /*移动端*/
 @media screen and (max-width: 810px) {
