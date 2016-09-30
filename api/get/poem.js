@@ -114,7 +114,6 @@ module.exports = {
         this.queryEnd(PoemsModel, req, res, function (endPoems) {
             var endPoemsTime = endPoems[0].poem_time;
             PoemsModel.find(data, function(err, poems) {
-                console.log(err);
                 if (err) {
                     res.send(err);
                 }

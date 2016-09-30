@@ -22,17 +22,24 @@ module.exports = Vue.extend({
             // 搜索关键字
             searchQ: '',
             // 未搜索状态
-            searchState: false
+            searchState: false,
+            infoData: {
+                state: false
+            }
         };
     },
     events: {
         
     },
     components: {
-        
+        'v-info': require('../../components/v-info')
     },
     watch: {
-        
+        'infoData.state': {
+            handler: function (val) {
+                this.$data.searchState = val;
+            }
+        }
     },
     methods: {
         init: function () {
@@ -123,8 +130,26 @@ module.exports = Vue.extend({
          */
         search: function () {
             this.$data.searchState = true;
-            console.log(this.$data.searchState);
-            console.log(this.$data.searchQ);
+            var checked = this.checkSearch();
+            if (checked) {
+
+            }else {
+                this.$data.infoData = {
+                    state: true,
+                    class: 'negative',
+                    autoClose: true, // 自动关闭
+                    info: '不能为空啊!!!'
+                }
+            }
+        },
+
+        /**
+         * checkSearch 搜索前校验
+         *
+         */
+        checkSearch: function () {
+            var q = this.$data.searchQ;
+            return q === '' ? false : true;
         }
     }
 });
