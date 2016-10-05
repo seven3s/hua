@@ -14,8 +14,8 @@ module.exports = {
     getUptoken: function(app) {
         //七牛获取uptoken
         //七牛key
-        var conf = require('../qiniu/_config');
-        // var conf = require('../qiniu/config');
+        // var conf = require('../qiniu/_config');
+        var conf = require('../qiniu/config');
         qiniu.conf.ACCESS_KEY = conf.ACCESS_KEY;
         qiniu.conf.SECRET_KEY = conf.SECRET_KEY;
         app.get('/qiniu/upToken', function(req, res, next) {
