@@ -66,7 +66,7 @@ module.exports = Vue.extend({
             // 第一次进入加载
             var curTime = moment().format('YYYY-MM-DD HH:mm:ss');
             this.$data.endTime = curTime;
-            var pageSize = browserRedirect.browserRedirect() ? 1 : 4;
+            var pageSize = me.getNum();
             var param = {
                 ltTime: curTime,
                 pageSize: pageSize
@@ -171,7 +171,7 @@ module.exports = Vue.extend({
         scroll: function() {
             var me = this;
             window.onscroll = function () { 
-                var pageSize = browserRedirect.browserRedirect() ? 1 : 4;
+                var pageSize = me.getNum();
                 var param = {
                     ltTime: me.$data.endTime,
                     pageSize: pageSize
@@ -237,6 +237,13 @@ module.exports = Vue.extend({
             me.$data.loadMore = 0;
             var arr = me.$data.waterdata;
             me.$data.waterdata = arr.concat(poems);
+        },
+
+        getNum: function () {
+            var screenWidth = $(window).width();
+            fallsWidth = 290 + 15; // width + margin
+            var num = Math.floor(screenWidth / fallsWidth) || 4;
+            return num
         },
 
         /**
