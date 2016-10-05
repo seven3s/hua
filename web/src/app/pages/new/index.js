@@ -123,7 +123,6 @@ module.exports = Vue.extend({
                 istime: true,
                 festival: true, //显示节日
                 choose:   function(datas){
-                    console.log(datas);
                     //选择日期完毕的回调
                     me.poem_time = datas;
                 }
@@ -232,7 +231,6 @@ module.exports = Vue.extend({
                 poem_lines: poem_lines,
                 poem_imgSrc: poem_imgSrc
             };
-            console.log(data);return;
             // 更新
             var _id = this.$route.params.id;
             if (_id) {
