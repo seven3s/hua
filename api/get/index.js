@@ -18,5 +18,8 @@ module.exports = {
         // 获取七牛云uptoken接口
         var uptoken = require('./qiniuUptoken');
         uptoken.init(app);
+        // 搜索诗歌
+        // var search = require('./search');
+        // search.init(app);
     }
 };

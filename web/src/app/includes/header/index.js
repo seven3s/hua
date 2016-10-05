@@ -132,7 +132,7 @@ module.exports = Vue.extend({
             this.$data.searchState = true;
             var checked = this.checkSearch();
             if (checked) {
-
+                this.goSearch();
             }else {
                 this.$data.infoData = {
                     state: true,
@@ -141,6 +141,35 @@ module.exports = Vue.extend({
                     info: '不能为空啊!!!'
                 };
             }
+        },
+
+        /**
+         * goSearch 实际搜索逻辑
+         *
+         */
+        goSearch: function () {
+            var me = this;
+            var q = this.$data.searchQ;
+            $.ajax({
+                url: '/api/search',
+                type: 'GET',
+                data: {
+                    q: q
+                },
+            })
+            .done(function(json) {
+                if (json.status === 1) {
+                    console.log(json);
+                    me.$route.router.go('/search/' + q);
+                }
+            })
+            .fail(function(err) {
+                swal({
+                    title: '',
+                    text: '查询错误,请稍后再试！！！',
+                    type: 'error'
+                });
+            });
         },
 
         /**

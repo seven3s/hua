@@ -170,10 +170,11 @@ module.exports = Vue.extend({
          */
         scroll: function() {
             var me = this;
-            window.addEventListener('scroll', mouseScroll);
+            window.addEventListener('scroll', me.mouseScroll);
         },
 
        mouseScroll: function() {
+        var me = this;
            var pageSize = me.getNum();
            var param = {
                ltTime: me.$data.endTime,

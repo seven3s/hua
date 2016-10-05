@@ -37,12 +37,12 @@
                     <a class="ui green basic button" v-if="login.status === 1" @click="logout">登出</a>
                 </template>
             </div>
-            <div class="search">
+            <!-- <div class="search">
                 <div class="ui icon input" :class="searchState ? 'loading' : ''">
                     <input placeholder="试试搜索吧~~" type="text" v-model="searchQ" @keyup.enter="search">
                     <i class="circular search link icon" @click="search"></i>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <v-info :info-data.sync="infoData" v-if="infoData.state"></v-info>
