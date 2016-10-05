@@ -71,7 +71,7 @@ module.exports = Vue.extend({
                 ltTime: curTime,
                 pageSize: pageSize
             }
-            me.loadListData(param,function(json) {
+            me.loadListData(param, function(json) {
                 var data = json.data;
                 // 记录最后一条的时间
                 me.$data.endTime = data[data.length - 1]['time'];
@@ -170,35 +170,36 @@ module.exports = Vue.extend({
          */
         scroll: function() {
             var me = this;
-            window.onscroll = function () { 
-                var pageSize = me.getNum();
-                var param = {
-                    ltTime: me.$data.endTime,
-                    pageSize: pageSize
-                }
-                var loadMore = me.$data.loadMore;
-                var endTime = me.$data.endTime;
-                var endPoemsTime = me.$data.endPoemsTimeObj.endPoemsTime;
-                if (
-                    util.getScrollTop() + util.getClientHeight()
-                    === util.getScrollHeight()
-                    && loadMore === 0
-                    && endTime > endPoemsTime) {
-                    me.$data.loadMore = 1;
-                    me.loadListData(param, function(json) {
-                        var data = json.data;
-                        // 记录最后一条的时间
-                        me.$data.endTime = data[data.length - 1]['time'];
-                        me.$data.endPoemsTimeObj.endPoemsTime = json.endPoemsTime;
-                        if (me.$data.endTime === me.$data.endPoemsTimeObj.endPoemsTime) {
-                            me.$data.endPoemsTimeObj.endPoemsTimeState = 1;
-                        }
-                        me.getPoemsData(json);
-                    });
-                }
-            }
+            window.addEventListener('scroll', mouseScroll);
         },
 
+       mouseScroll: function() {
+           var pageSize = me.getNum();
+           var param = {
+               ltTime: me.$data.endTime,
+               pageSize: pageSize
+           }
+           var loadMore = me.$data.loadMore;
+           var endTime = me.$data.endTime;
+           var endPoemsTime = me.$data.endPoemsTimeObj.endPoemsTime;
+           if (
+               util.getScrollTop() + util.getClientHeight()
+               === util.getScrollHeight()
+               && loadMore === 0
+               && endTime > endPoemsTime) {
+               me.$data.loadMore = 1;
+               me.loadListData(param, function(json) {
+                   var data = json.data;
+                   // 记录最后一条的时间
+                   me.$data.endTime = data[data.length - 1]['time'];
+                   me.$data.endPoemsTimeObj.endPoemsTime = json.endPoemsTime;
+                   if (me.$data.endTime === me.$data.endPoemsTimeObj.endPoemsTime) {
+                       me.$data.endPoemsTimeObj.endPoemsTimeState = 1;
+                   }
+                   me.getPoemsData(json);
+               });
+           }
+       },
         /**
          * getPoemsData 获取诗歌data
          *
@@ -243,7 +244,7 @@ module.exports = Vue.extend({
             var screenWidth = $(window).width();
             fallsWidth = 290 + 15; // width + margin
             var num = Math.floor(screenWidth / fallsWidth) || 4;
-            return num
+            return num;
         },
 
         /**
@@ -267,5 +268,8 @@ module.exports = Vue.extend({
             }
             return a;
         }
+    },
+    destroed: function () {
+        window.removeEventListener('scroll');
     }
 });

@@ -13,7 +13,8 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     props: {
         infoData: {
-            type: Object
+            // 默认自动关闭
+            autoClose: true
         }
     },
     data: function () {

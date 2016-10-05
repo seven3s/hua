@@ -137,9 +137,9 @@ module.exports = Vue.extend({
                 this.$data.infoData = {
                     state: true,
                     class: 'negative',
-                    autoClose: true, // 自动关闭
+                    // autoClose: true, // 自动关闭
                     info: '不能为空啊!!!'
-                }
+                };
             }
         },
 
