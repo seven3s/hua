@@ -18,5 +18,12 @@ var router = new VueRouter({
 });
 var route = require('./router-config');
 router.map(route);
+router.beforeEach(function (transition) {
+    var regNew = /new/;
+    if (regNew.test(transition.to.path)) {
+        document.onscroll = null;
+    }
+    transition.next();
+});
 router.start({}, '#app');
 module.exports = app;
