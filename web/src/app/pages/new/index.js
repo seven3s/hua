@@ -59,6 +59,7 @@ module.exports = Vue.extend({
     methods: {
         init: function () {
             var me = this;
+            document.onscroll = null;
             title.setTitle('忽来文思涌');
             this.isUpdate();
             // 刷新关闭提示
