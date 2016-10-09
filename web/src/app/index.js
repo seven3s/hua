@@ -22,6 +22,9 @@ router.beforeEach(function (transition) {
     var regNew = /new/;
     if (regNew.test(transition.to.path)) {
         document.onscroll = null;
+    }else {
+        // 非新增页
+        document.body.onbeforeunload = null;
     }
     transition.next();
 });
