@@ -70,7 +70,7 @@ module.exports = Vue.extend({
             var param = {
                 ltTime: curTime,
                 pageSize: pageSize
-            }
+            };
             me.loadListData(param, function(json) {
                 var data = json.data;
                 // 记录最后一条的时间
@@ -143,6 +143,7 @@ module.exports = Vue.extend({
          * @param fn
          */
         loadListData: function(param, fn) {
+            this.$data.loadMore = 1;
             var type = this.$route.params.type;
             var id;
             var data = {};
@@ -170,6 +171,7 @@ module.exports = Vue.extend({
          */
         scroll: function() {
             var me = this;
+            this.starTime = new Date().getTime();
             document.onscroll = me.mouseScroll;
         },
 
@@ -179,11 +181,16 @@ module.exports = Vue.extend({
          */
        mouseScroll: function() {
             var me = this;
+            this.scrollTime = new Date().getTime();
+            // 防止初始进入页面滚动条在底部加载2次相同内容
+            if (this.scrollTime - this.starTime < 20) {
+                return;
+            }
             var pageSize = me.getNum();
             var param = {
                 ltTime: me.$data.endTime,
                 pageSize: pageSize
-            }
+            };
             var loadMore = me.$data.loadMore;
             var endTime = me.$data.endTime;
             var endPoemsTime = me.$data.endPoemsTimeObj.endPoemsTime;
