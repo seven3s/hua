@@ -16,7 +16,8 @@ module.exports = Vue.extend({
         return {
             userName: '',
             password: '',
-            postState: 0
+            postState: 0,
+            passwording: 0
         };
     },
     events: {
@@ -56,11 +57,11 @@ module.exports = Vue.extend({
                 }
             };
             $(function() {
-                $('#login #password').focus(function() {
-                    $('#owl-login').addClass('password');
-                }).blur(function() {
-                    $('#owl-login').removeClass('password');
-                });
+                // $('#login #password').focus(function() {
+                //     $('#owl-login').addClass('password');
+                // }).blur(function() {
+                //     $('#owl-login').removeClass('password');
+                // });
                 // 登陆校验
                 $('.ui.form').form({
                     fields: validationRules,
@@ -72,6 +73,27 @@ module.exports = Vue.extend({
                 });
             });
         },
+
+        /**
+         * passwordFocus 正在输入密码
+         *
+         */
+        passwordFocus: function () {
+            this.$data.passwording = 1;
+        },
+
+        /**
+         * passwordBlur 未输入密码
+         *
+         */
+        passwordBlur: function () {
+            this.$data.passwording = 0;
+        },
+
+        /**
+         * login 登陆
+         *
+         */
         login: function () {
             var me = this;
             var data = {
@@ -108,7 +130,7 @@ module.exports = Vue.extend({
                             type: 'success'
                         }, function () {
                             var url = '/';
-                            window.location.href = url;
+                            me.$route.router.go('/');
                         });
                     }
                 },
