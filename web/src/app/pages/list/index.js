@@ -197,6 +197,7 @@ module.exports = Vue.extend({
             if (
                 util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime) {
                 me.$data.loadMore = 1;
+            return;
                 me.loadListData(param, function(json) {
                     var data = json.data;
                     // 记录最后一条的时间
