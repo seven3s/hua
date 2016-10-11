@@ -19,7 +19,7 @@ var router = new VueRouter({
 var route = require('./router-config');
 router.map(route);
 router.beforeEach(function (transition) {
-    var regNew = /new/;
+    var regNew = /new|login/;
     if (regNew.test(transition.to.path)) {
         document.onscroll = null;
     }else {

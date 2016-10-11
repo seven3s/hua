@@ -47,9 +47,12 @@ body {
 }
 #app {
     min-height: 100%;
-    padding-bottom: 350px;
-    padding-top: 70px;
+    /*padding-bottom: 350px;
+    padding-top: 70px;*/
     position: relative;
+}
+#main {
+    margin: 70px;
 }
 .mar-auto {
     margin: 0 auto;
