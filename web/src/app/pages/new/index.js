@@ -211,6 +211,7 @@ module.exports = Vue.extend({
          *
          */
         post: function () {
+            var me = this;
             this.$data.postState = 1;
             var poem_title = this.$data.poem_title;
             var poem_time = this.$data.poem_time;
@@ -261,13 +262,37 @@ module.exports = Vue.extend({
                     text: data.message,
                     type: 'success'
                 }, function () {
-                    var url = '/#!/p/' + data.data.id;
-                    self.location.href = url;
+                    me.backUpPoem(data.data.id, function () {
+                        var url = '/#!/p/' + data.data.id;
+                        self.location.href = url;
+                    });
                 });
             })
             .fail(function() {
                 me.$data.postState = 0;
                 console.log("error");
+            });
+        },
+
+        /**
+         * backUpPoem 备份诗歌
+         *
+         * @param  {string} id 诗歌id
+         *
+         */
+        backUpPoem: function (id, cb) {
+            $.ajax({
+                url: '/api/backup',
+                type: 'POST',
+                data: {
+                    id: id
+                }
+            })
+            .done(function(json) {
+                cb && cb();
+            })
+            .fail(function() {
+                cb && cb();
             });
         },
 

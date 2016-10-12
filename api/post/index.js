@@ -24,5 +24,8 @@ module.exports = {
         // deletePic接口
         var deletePic = require('./deletePic');
         deletePic.init(app);
+        // 备份诗歌接口
+        var backup = require('./backup');
+        backup.init(app);
     }
 };

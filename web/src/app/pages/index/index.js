@@ -26,6 +26,21 @@ module.exports = Vue.extend({
         
     },
     methods: {
-        
+        /**
+         * post 备份全部诗歌
+         *
+         */
+        post: function () {
+            $.ajax({
+                url: '/api/backup',
+                type: 'POST'
+            })
+            .done(function(json) {
+                console.log(json);
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        }
     }
 });

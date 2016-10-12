@@ -52,7 +52,7 @@ body {
     position: relative;
 }
 #main {
-    margin: 70px;
+    margin-top: 70px;
 }
 .mar-auto {
     margin: 0 auto;

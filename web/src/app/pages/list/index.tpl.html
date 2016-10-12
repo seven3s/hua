@@ -1,7 +1,7 @@
 <v-header></v-header>
 <div id="main" class="ui grid water-full">
     <!-- <v-loading class="loading" v-if="loading === 1"></v-loading> -->
-    <v-water-list :waterdata="waterdata" v-else></v-water-list>
+    <v-water-list :waterdata="waterdata"></v-water-list>
 </div>
 <template v-if="loadMore === 1">
     <div class="bottom-loading">
