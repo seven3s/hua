@@ -66,6 +66,8 @@ module.exports = Vue.extend({
             // 第一次进入加载
             var curTime = moment().format('YYYY-MM-DD HH:mm:ss');
             this.$data.endTime = curTime;
+            // 第一次加载需要清空
+            me.$data.waterdata = [];
             var pageSize = me.getNum();
             var param = {
                 ltTime: curTime,
@@ -73,10 +75,17 @@ module.exports = Vue.extend({
             };
             me.loadListData(param, function(json) {
                 var data = json.data;
-                // 记录最后一条的时间
-                me.$data.endTime = data[data.length - 1]['time'];
-                me.getPoemsData(json);
-                me.$data.loading = 0;
+                if (json.status === 1) {
+                    // 记录最后一条的时间
+                    me.$data.endTime = data[data.length - 1]['time'];
+                    me.getPoemsData(json);
+                    me.$data.loadMore = 0;
+                }else if (json.status === 0) {
+                    // 记录最后一条的时间
+                    me.$data.endPoemsTimeObj.endPoemsTime = me.$data.endTime;
+                    me.$data.loadMore = 0;
+                    me.$data.endPoemsTimeObj.endPoemsTimeState = 1;
+                }
             });
             this.scroll();
         },
@@ -93,7 +102,7 @@ module.exports = Vue.extend({
             // 非首页
             if (type !== undefined) {
                 id = type_id.getIdOfType(type);
-                data.typeId = id;
+                data.poem_type = id;
                 var cn = type_id.getIdOfCn(id);
                 title.setTitle(cn);
             }
@@ -112,7 +121,7 @@ module.exports = Vue.extend({
                         confirmButtonText: '跳转到首页'
                     }, function () {
                         var url = '/';
-                        router.go(url);
+                        me.$route.router.go(url)
                     });
                 }
                 var poems = [];
@@ -151,7 +160,7 @@ module.exports = Vue.extend({
             // 非首页
             if (type !== undefined) {
                 id = type_id.getIdOfType(type);
-                data.typeId = id;
+                data.poem_type = id;
                 var cn = type_id.getIdOfCn(id);
                 title.setTitle(cn);
             }
@@ -199,13 +208,20 @@ module.exports = Vue.extend({
                 me.$data.loadMore = 1;
                 me.loadListData(param, function(json) {
                     var data = json.data;
-                    // 记录最后一条的时间
-                    me.$data.endTime = data[data.length - 1]['time'];
-                    me.$data.endPoemsTimeObj.endPoemsTime = json.endPoemsTime;
-                    if (me.$data.endTime === me.$data.endPoemsTimeObj.endPoemsTime) {
+                    if (json.status === 1) {
+                        // 记录最后一条的时间
+                        me.$data.endTime = data[data.length - 1]['time'];
+                        me.$data.endPoemsTimeObj.endPoemsTime = json.endPoemsTime;
+                        if (me.$data.endTime === me.$data.endPoemsTimeObj.endPoemsTime) {
+                            me.$data.endPoemsTimeObj.endPoemsTimeState = 1;
+                        }
+                        me.getPoemsData(json);
+                    }else if (json.status === 0) {
+                        // 记录最后一条的时间
+                        me.$data.endPoemsTimeObj.endPoemsTime = me.$data.endTime;
+                        me.$data.loadMore = 0;
                         me.$data.endPoemsTimeObj.endPoemsTimeState = 1;
                     }
-                    me.getPoemsData(json);
                 });
             }
        },

@@ -29,6 +29,7 @@ module.exports = {
             }
             // 根据参数查询
             if (!me.isEmpty(query)) {
+                console.log(query);
                 me.query(PoemsModel, UserNameModel, query, req, res);
             }
         });
@@ -97,23 +98,30 @@ module.exports = {
      * query 查询诗歌
      *
      */
-    query: function (PoemsModel, UserNameModel, data, req, res) {
+    query: function (PoemsModel, UserNameModel, query, req, res) {
         // 增加分页
         // 如果没有传入pageSize那么则不分页，设置0
         var pageSize = Number(req.query.pageSize) || 0;
         // 根据时间来做分页
         if (req.query.ltTime) {
-            var ltTime = {
-                poem_time: {
-                    '$lt': req.query.ltTime
-                }
+            var poem_time = {
+                '$lt': req.query.ltTime
             };
-            data = ltTime;
+            // 诗歌类型
+            var poem_type = req.query.poem_type;
+            query = {
+                // 最后时间
+                poem_time: poem_time
+            };
+            if (!!poem_type) {
+                query.poem_type = poem_type;
+            }
         }
+        console.log(query);
         // 先查询最后一条数据
         this.queryEnd(PoemsModel, req, res, function (endPoems) {
             var endPoemsTime = endPoems[0].poem_time;
-            PoemsModel.find(data, function(err, poems) {
+            PoemsModel.find(query, function(err, poems) {
                 if (err) {
                     res.send(err);
                 }
