@@ -29,7 +29,6 @@ module.exports = {
             }
             // 根据参数查询
             if (!me.isEmpty(query)) {
-                console.log(query);
                 me.query(PoemsModel, UserNameModel, query, req, res);
             }
         });
@@ -117,7 +116,6 @@ module.exports = {
                 query.poem_type = poem_type;
             }
         }
-        console.log(query);
         // 先查询最后一条数据
         this.queryEnd(PoemsModel, req, res, function (endPoems) {
             var endPoemsTime = endPoems[0].poem_time;

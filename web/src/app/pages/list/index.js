@@ -68,6 +68,7 @@ module.exports = Vue.extend({
             this.$data.endTime = curTime;
             // 第一次加载需要清空
             me.$data.waterdata = [];
+            me.$data.endPoemsTimeObj.endPoemsTimeState = 0;
             var pageSize = me.getNum();
             var param = {
                 ltTime: curTime,
@@ -121,7 +122,7 @@ module.exports = Vue.extend({
                         confirmButtonText: '跳转到首页'
                     }, function () {
                         var url = '/';
-                        me.$route.router.go(url)
+                        me.$route.router.go(url);
                     });
                 }
                 var poems = [];
