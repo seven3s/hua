@@ -39,6 +39,7 @@ module.exports = {
      *
      */
     getPoemById: function (PoemsModel, UserNameModel, req, res) {
+        var me = this;
         var id = req.query.id;
         if (id === undefined) {
             res.send({
@@ -65,7 +66,7 @@ module.exports = {
                 // 格式化时间
                 poem.poem_time = moment(poem.poem_time).format('YYYY-MM-DD HH:mm:ss');
                 // 修复时间与服务器时间的差别
-                data.poem_time = update ? poem.poem_time : moment(me.misstatCurTimezoneTime(item.poem_time)).fromNow();
+                data.poem_time = update ? poem.poem_time : moment(me.misstatCurTimezoneTime(poem.poem_time)).fromNow();
                 data.poem_type = poem.poem_type;
                 data.poem_author = poem.poem_author;
                 data.poem_lines = poem.poem_lines;
@@ -196,7 +197,7 @@ module.exports = {
      * @return {String} 返回转换后的时间
      */
     bj2NewyorkTime: function (time) {
-        var sq = -7; //设置时区，东为正数，西为负数
+        var sq = -8; //设置时区，东为正数，西为负数
         var utc = time + (time.getTimezoneOffset() * 60000);
         var nd = new Date(utc + (3600000 * sq));
         return nd.toLocaleString();
@@ -208,7 +209,9 @@ module.exports = {
      * @return {String} 返回当前时区时间
      */
     misstatCurTimezoneTime: function (time) {
-        var offset = new Date().getTimezoneOffset() / 60;
-        return moment(time).utc().utcOffset(offset);
+        // var offset = new Date().getTimezoneOffset() / 60;
+        // 北京时间与格林时间差
+        var offset = -8;
+        return (moment(time).utc().utcOffset(offset).format('YYYY-MM-DD HH:mm:ss'));
     }
 };
