@@ -64,7 +64,9 @@ module.exports = {
                 var update = req.query.update;
                 // 格式化时间
                 poem.poem_time = moment(poem.poem_time).format('YYYY-MM-DD HH:mm:ss');
-                data.poem_time = update ? poem.poem_time : data.poem_time = moment(poem.poem_time).fromNow();
+                // data.poem_time = update ? poem.poem_time : data.poem_time = moment(poem.poem_time).fromNow();
+                // 将北京时间转换为西八区纽约时间
+                data.poem_time = update ? poem.poem_time : data.poem_time = moment(me.bj2NewyorkTime(poem.poem_time)).fromNow();
                 data.poem_type = poem.poem_type;
                 data.poem_author = poem.poem_author;
                 data.poem_lines = poem.poem_lines;
@@ -133,6 +135,7 @@ module.exports = {
                         // 格式化时间
                         item.poem_time = moment(item.poem_time).format('YYYY-MM-DD HH:mm:ss');
                         data.poem_time = moment(item.poem_time).fromNow();
+                        console.log(data.poem_time);
                         data.poem_type = item.poem_type;
                         data.poem_author = item.poem_author;
                         data.poem_lines = item.poem_lines;
@@ -183,5 +186,19 @@ module.exports = {
      */
     isEmpty: function (val) {
         return Object.prototype.isPrototypeOf(val) && Object.keys(val).length === 0;
+    },
+
+    /**
+     * bj2NewyorkTime 北京时间转换为纽约时间
+     *
+     * @param  {String} time 
+     *
+     * @return {String} 返回转换后的时间
+     */
+    bj2NewyorkTime: function (time) {
+        var sq = -7; //设置时区，东为正数，西为负数
+        var utc = time + (time.getTimezoneOffset() * 60000);
+        var nd = new Date(utc + (3600000 * sq));
+        return nd.toLocaleString();
     }
 };
