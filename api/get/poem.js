@@ -64,9 +64,8 @@ module.exports = {
                 var update = req.query.update;
                 // 格式化时间
                 poem.poem_time = moment(poem.poem_time).format('YYYY-MM-DD HH:mm:ss');
-                // data.poem_time = update ? poem.poem_time : data.poem_time = moment(poem.poem_time).fromNow();
-                // 将北京时间转换为西八区纽约时间
-                data.poem_time = update ? poem.poem_time : data.poem_time = moment(me.bj2NewyorkTime(poem.poem_time)).fromNow();
+                // 修复时间与服务器时间的差别
+                data.poem_time = update ? poem.poem_time : moment(me.misstatCurTimezoneTime(item.poem_time)).fromNow();
                 data.poem_type = poem.poem_type;
                 data.poem_author = poem.poem_author;
                 data.poem_lines = poem.poem_lines;
@@ -100,6 +99,7 @@ module.exports = {
      *
      */
     query: function (PoemsModel, UserNameModel, query, req, res) {
+        var me = this;
         // 增加分页
         // 如果没有传入pageSize那么则不分页，设置0
         var pageSize = Number(req.query.pageSize) || 0;
@@ -134,8 +134,8 @@ module.exports = {
                         data.time = item.poem_time;
                         // 格式化时间
                         item.poem_time = moment(item.poem_time).format('YYYY-MM-DD HH:mm:ss');
-                        data.poem_time = moment(item.poem_time).fromNow();
-                        console.log(data.poem_time);
+                        // 修复时间与服务器时间的差别
+                        data.poem_time  = moment(me.misstatCurTimezoneTime(item.poem_time)).fromNow();
                         data.poem_type = item.poem_type;
                         data.poem_author = item.poem_author;
                         data.poem_lines = item.poem_lines;
@@ -200,5 +200,15 @@ module.exports = {
         var utc = time + (time.getTimezoneOffset() * 60000);
         var nd = new Date(utc + (3600000 * sq));
         return nd.toLocaleString();
+    },
+
+    /**
+     * misstatCurTimezoneTime 将获取到的时间校准为当前时区的时间
+     *
+     * @return {String} 返回当前时区时间
+     */
+    misstatCurTimezoneTime: function (time) {
+        var offset = new Date().getTimezoneOffset() / 60;
+        return moment(time).utc().utcOffset(offset);
     }
 };
