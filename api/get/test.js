@@ -4,6 +4,7 @@
  * @version V0.01
  * @date 2016-09-30
  */
+
 module.exports = {
     init: function(app) {
         app.get('/test', function(req, res) {
