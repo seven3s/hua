@@ -30,8 +30,8 @@ module.exports = {
             bucket = conf.QINIUBUCKETNAME;
 
             //上传到七牛后保存的文件名
-            var time =new Date().getTime();
-            key = src;
+            var time = new Date().getTime();
+            key = 'poem_img/' + src;
 
             //构建上传策略函数
             function uptoken(bucket, key) {

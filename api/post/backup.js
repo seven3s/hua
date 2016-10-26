@@ -66,7 +66,7 @@ module.exports = {
                             + '-' + moment().hour()
                             + ':' + moment().minute()
                             + ':' + (moment().second() + Math.ceil(Math.random()*10));
-                key = 'poem_' + time + '_' + poems.poem_title + '.json';
+                key = 'poem/' + time + '_' + poems.poem_title + '.json';
                 //生成上传 Token
                 token = uptoken(bucket, key);
                 var body = JSON.stringify(poems);
