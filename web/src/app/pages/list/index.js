@@ -11,6 +11,7 @@ var title = require('../../common/setTitle');
 var util = require('../../common/util');
 var moment = require('moment');
 var browserRedirect = require('../../common/browserRedirect.js');
+var request = require('superagent');
 module.exports = Vue.extend({
     ready: function () {
         var type = this.$route.params.type;
@@ -166,7 +167,7 @@ module.exports = Vue.extend({
                 title.setTitle(cn);
             }
             $.ajax({
-                url: '/api/poem',
+                url: 'http://localhost:2368/api/poem',
                 data: data,
                 type: 'GET',
                 success: function(data) {

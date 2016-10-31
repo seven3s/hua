@@ -7,7 +7,7 @@
 var fs         = require('fs');
 var chalk      = require('chalk');
 var _          = require('lodash');
-var config     = require('../config/');
+var mock     = require('../config/server.js');
 module.exports = {
 
     /**
@@ -42,12 +42,12 @@ module.exports = {
      */
     mockRemote: function(req, res) {
         httpProxy = require('http-proxy');
-        var base  = config.remote.path;
+        var base  = mock.remote.path;
         var proxy = httpProxy.createProxyServer({
             target: base
         });
         console.log(chalk.yellow('proxy- URL:') + chalk.green(base + req.url));
-        req.headers = _.assign(req.headers, config.remote.headers);
+        req.headers = _.assign(req.headers, mock.remote.headers);
         proxy.web(req, res);
     }
 };
