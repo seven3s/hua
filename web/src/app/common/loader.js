@@ -12,9 +12,11 @@ module.exports = {
      * 请求拦截函数
      *
      * @param  {Object} params 请求参数
+     * @param  {Object} success 成功回調函數
+     * @param  {Object} fail 失敗回調函數
      * @return {Object} 返回请求的promise对象
      */
-    doRequest: function (params) {
+    doRequest: function (params, success, fail) {
         var deferred = new $.Deferred();
         if (!(/^\//).test(params.url)) {
             params.url = document.location.protocol + '//' + params.url;
@@ -37,8 +39,10 @@ module.exports = {
             } else {
                 deferred.reject(response);
             }
+            success && success(response);
         }).fail(function (response) {
             deferred.reject(response);
+            fail && fail(response);
         });
         return deferred.promise();
     },
@@ -48,9 +52,11 @@ module.exports = {
      *
      * @param  {string} path 请求路径
      * @param  {Object} params 请求参数
+     * @param  {Object} success 成功回調函數
+     * @param  {Object} fail 失敗回調函數
      * @return {Object} 返回请求的promise对象
      */
-    request: function (path, params) {
+    request: function (path, params, success, fail) {
         var requestParams = $.extend(true, {
             cache: false,
             url: path,
@@ -59,7 +65,7 @@ module.exports = {
             dataType: 'json'
         }, params);
 
-        return this.doRequest(requestParams);
+        return this.doRequest(requestParams, success, fail);
     },
 
     /**
@@ -67,15 +73,17 @@ module.exports = {
      *
      * @param  {string} path 请求路径
      * @param  {Object} opts 请求的数据
+     * @param  {Object} success 成功回調函數
+     * @param  {Object} fail 失敗回調函數
      * @return {Object} 返回请求的promise对象
      */
-    requestGET: function (path, opts) {
+    requestGET: function (path, opts, success, fail) {
         var args = {};
         args._ = +new Date();
         $.extend(opts || {}, args);
         return this.request(path, {
             data: opts
-        });
+        }, success, fail);
     },
 
     /**
@@ -83,21 +91,23 @@ module.exports = {
      *
      * @param  {string} path 请求路径
      * @param  {Object} opts 请求的数据
+     * @param  {Object} success 成功回調函數
+     * @param  {Object} fail 失敗回調函數
      * @return {Object} 返回请求的promise对象
      */
-    requestPOST: function (path, opts) {
+    requestPOST: function (path, opts, success, fail) {
         return this.request(path, {
             data: JSON.stringify(opts),
             type: 'POST',
             contentType: 'application/json'
-        });
+        }, success, fail);
     },
-    requestPOSTAsFormData: function (path, opts) {
+    requestPOSTAsFormData: function (path, opts, success, fail) {
         return this.request(path, {
             data: opts,
             type: 'POST',
             contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
-        });
+        }, success, fail);
     },
 
     /**
@@ -105,14 +115,16 @@ module.exports = {
      *
      * @param  {string} path 请求路径
      * @param  {Object} opts 请求的数据
+     * @param  {Object} success 成功回調函數
+     * @param  {Object} fail 失敗回調函數
      * @return {Object} 返回请求的promise对象
      */
-    requestDELETE: function (path, opts) {
+    requestDELETE: function (path, opts, success, fail) {
         return this.request(path, {
             data: JSON.stringify(opts),
             type: 'DELETE',
             contentType: 'application/json'
-        });
+        }, success, fail);
     },
 
     /**
@@ -120,13 +132,15 @@ module.exports = {
      *
      * @param  {string} path 请求路径
      * @param  {Object} opts 请求的数据
+     * @param  {Object} success 成功回調函數
+     * @param  {Object} fail 失敗回調函數
      * @return {Object} 返回请求的promise对象
      */
-    requestPUT: function (path, opts) {
+    requestPUT: function (path, opts, success, fail) {
         return this.request(path, {
             data: JSON.stringify(opts),
             type: 'PUT',
             contentType: 'application/json'
-        });
+        }, success, fail);
     }
 };

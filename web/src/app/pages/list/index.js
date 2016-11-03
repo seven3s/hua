@@ -108,45 +108,6 @@ module.exports = Vue.extend({
                 var cn = type_id.getIdOfCn(id);
                 title.setTitle(cn);
             }
-            // $.ajax({
-            //     url: '/api/poem',
-            //     type: 'GET',
-            //     data: data
-            // })
-            // .done(function(json) {
-            //     var data = json.data;
-            //     if (json.status === 0 && data.length <= 0) {
-            //         swal({
-            //             title: '',
-            //             text: json.message,
-            //             type: 'warning',
-            //             confirmButtonText: '跳转到首页'
-            //         }, function () {
-            //             var url = '/';
-            //             me.$route.router.go(url);
-            //         });
-            //     }
-            //     var poems = [];
-            //     data.forEach(function (item, index) {
-            //         var poem = {};
-            //         poem.title = item.title;
-            //         poem.userName = item.userName;
-            //         var swicthPoemType = require('../../common/swicthPoemType');
-            //         poem.typeString = swicthPoemType(item.poem_type);
-            //         poem.type = type_id.getTypeOfId(item.poem_type);
-            //         poem.poem_time = item.poem_time;
-            //         poem.id = item.id;
-            //         poem.likes = item.likes;
-            //         poem.imgSrc = item.poem_imgSrc;
-            //         poem.lines = item.poem_lines;
-            //         poems.push(poem);
-            //     });
-            //     me.$data.loading = 0;
-            //     me.$data.waterdata = poems;
-            // })
-            // .fail(function() {
-            //     console.log("error");
-            // });
             restFullLoader.requestGET('/api/poem', data, function (json) {
                 var data = json.data;
                 if (json.status === 0 && data.length <= 0) {
@@ -197,14 +158,6 @@ module.exports = Vue.extend({
                 var cn = type_id.getIdOfCn(id);
                 title.setTitle(cn);
             }
-            // $.ajax({
-            //     url: '/api/poem',
-            //     data: data,
-            //     type: 'GET',
-            //     success: function(data) {
-            //         fn(data);
-            //     }
-            // });
             restFullLoader.requestGET('/api/poem', data, function (json) {
                 if (json.status === 1) {
                     fn && fn(json);
