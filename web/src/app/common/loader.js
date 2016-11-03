@@ -22,7 +22,7 @@ module.exports = {
             params.url = params.url;
         } else {
             // 为url拼接前缀
-            params.url = params.url;
+            params.url = host + params.url;
         }
         // ajax请求
         $.ajax(params).done(function (response) {

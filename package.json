@@ -20,5 +20,11 @@
     "static-favicon": "~1.0.0",
     "underscore": "^1.8.3",
     "url": "^0.11.0"
+  },
+  "deploy": {
+    "type": "git",
+    "repo": "https://github.com/liubiao0810/hua.git",
+    "branch": "gh-pages",
+    "dir": "web/dist"
   }
 }
