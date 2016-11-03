@@ -6,9 +6,10 @@
  */
 var Vue = require('vue');
 require('./index.css');
-var type_id =require('../../common/type_id.js');
+var type_id =require('../../common/type_id');
 var title = require('../../common/setTitle');
 require('../../common/baguetteBox/css/baguetteBox.css');
+var restFullLoader = require('../../common/loader');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -44,14 +45,56 @@ module.exports = Vue.extend({
                     window.location.href = '/';
                 });
             }
-            $.ajax({
-                url: '/api/poem',
-                type: 'get',
-                data: {
-                    id: id
-                }
-            })
-            .done(function(json) {
+            var url = '/api/poem';
+            var data = {
+                id: id
+            };
+            // $.ajax({
+            //     url: '/api/poem',
+            //     type: 'get',
+            //     data: data
+            // })
+            // .done(function(json) {
+            //     if (json.status === 0) {
+            //         swal({
+            //             title: '',
+            //             text: json.message,
+            //             type: 'warning',
+            //             confirmButtonText: '跳转到首页'
+            //         }, function () {
+            //             var url = '/';
+            //             self.location.href = url;
+            //         });
+            //         return;
+            //     }
+            //     var data = json.data;
+            //     var poem = {};
+            //     poem.title = data.title;
+            //     title.setTitle(data.title);
+            //     poem.userName = data.userName;
+            //     var swicthPoemType = require('../../common/swicthPoemType');
+            //     poem.type = type_id.getTypeOfId(data.poem_type);
+            //     poem.typeString = swicthPoemType(data.poem_type);
+            //     poem.poem_time = data.poem_time;
+            //     poem.imgSrc = data.poem_imgSrc;
+            //     poem.lines = data.poem_lines;
+            //     me.$data.poem = poem;
+            //     me.$data.load = 1;
+            //     // 图片预览
+            //     setTimeout(function () {
+            //         baguetteBox.run('.baguette-img', {
+            //             animation: 'fadeIn',
+            //             noScrollbars: true,
+            //             captions: function(element) {
+            //                 return element.getElementsByTagName('img')[0].alt;
+            //             }
+            //         });
+            //     });
+            // })
+            // .fail(function(err) {
+            //     console.log("error");
+            // });
+            restFullLoader.requestGET(url, data, function (json) {
                 if (json.status === 0) {
                     swal({
                         title: '',
@@ -87,9 +130,6 @@ module.exports = Vue.extend({
                         }
                     });
                 });
-            })
-            .fail(function(err) {
-                console.log("error");
             });
         }
     }

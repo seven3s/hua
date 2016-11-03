@@ -6,7 +6,8 @@
  */
 var Vue = require('vue');
 require('./index.css');
-var browserRedirect = require('../../common/browserRedirect.js');
+var browserRedirect = require('../../common/browserRedirect');
+var restFullLoader = require('../../common/loader');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -55,12 +56,28 @@ module.exports = Vue.extend({
          */
         checkLogin: function () {
             var me = this;
-            $.ajax({
-                url: '/api/isLogin',
-                type: 'GET',
-            })
-            .done(function(data) {
-                if (data.status === 1) {
+            var url = '/api/isLogin';
+            // $.ajax({
+            //     url: '/api/isLogin',
+            //     type: 'GET',
+            // })
+            // .done(function(data) {
+            //     if (data.status === 1) {
+            //         me.login.status = data.status;
+            //         me.login.userName = data.data.userName;
+            //         // 全局登陆控制
+            //         Vue.auth = true;
+            //     }else {
+            //         Vue.auth = false;
+            //     }
+            //     me.louterForeEach();
+            // })
+            // .fail(function(error) {
+            //     Vue.auth = false;
+            //     console.log(error);
+            // });
+            restFullLoader.requestGET(url, function (res) {
+                if (res.status === 1) {
                     me.login.status = data.status;
                     me.login.userName = data.data.userName;
                     // 全局登陆控制
@@ -69,8 +86,7 @@ module.exports = Vue.extend({
                     Vue.auth = false;
                 }
                 me.louterForeEach();
-            })
-            .fail(function(error) {
+            }, function (err) {
                 Vue.auth = false;
                 console.log(error);
             });

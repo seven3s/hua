@@ -7,6 +7,7 @@
 var Vue = require('vue');
 require('./index.css');
 var title = require('../../common/setTitle');
+var restFullLoader = require('../../common/loader');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -96,47 +97,79 @@ module.exports = Vue.extend({
          */
         login: function () {
             var me = this;
+            var url = '/api/login';
             var data = {
                 userName: me.$data.userName,
                 password: me.$data.password
             }
             this.$data.postState = 1;
-            $.ajax({
-                url: '/api/login',
-                type: 'POST',
-                data: data,
-                success: function(data) {
-                    // 用户名不存在
-                    if (data.status === -1) {
-                        me.$data.postState = 0;
-                        swal({
-                            title: '',
-                            text: data.message,
-                            type: 'error'
-                        });
-                    }else if (data.status === 0) {
-                        me.$data.postState = 0;
-                        // 密码错误
-                        swal({
-                            title: '',
-                            text: data.message,
-                            type: 'error'
-                        });
-                    }else if (data.status === 1) {
-                        // 登陆成功
-                        swal({
-                            title: '',
-                            text: data.message,
-                            type: 'success'
-                        }, function () {
-                            var url = '/';
-                            me.$route.router.go('/');
-                        });
-                    }
-                },
-                error: function(data, e) {
+            // $.ajax({
+            //     url: '/api/login',
+            //     type: 'POST',
+            //     data: data,
+            //     success: function(data) {
+            //         // 用户名不存在
+            //         if (data.status === -1) {
+            //             me.$data.postState = 0;
+            //             swal({
+            //                 title: '',
+            //                 text: data.message,
+            //                 type: 'error'
+            //             });
+            //         }else if (data.status === 0) {
+            //             me.$data.postState = 0;
+            //             // 密码错误
+            //             swal({
+            //                 title: '',
+            //                 text: data.message,
+            //                 type: 'error'
+            //             });
+            //         }else if (data.status === 1) {
+            //             // 登陆成功
+            //             swal({
+            //                 title: '',
+            //                 text: data.message,
+            //                 type: 'success'
+            //             }, function () {
+            //                 var url = '/';
+            //                 me.$route.router.go('/');
+            //             });
+            //         }
+            //     },
+            //     error: function(data, e) {
+            //         me.$data.postState = 0;
+            //     }
+            // });
+            restFullLoader.requestPOST(url, data, function (res) {
+                // 用户名不存在
+                if (res.status === -1) {
                     me.$data.postState = 0;
+                    swal({
+                        title: '',
+                        text: res.message,
+                        type: 'error'
+                    });
+                }else if (res.status === 0) {
+                    me.$data.postState = 0;
+                    // 密码错误
+                    swal({
+                        title: '',
+                        text: res.message,
+                        type: 'error'
+                    });
+                }else if (res.status === 1) {
+                    // 登陆成功
+                    swal({
+                        title: '',
+                        text: res.message,
+                        type: 'success'
+                    }, function () {
+                        var url = '/';
+                        me.$route.router.go('/');
+                    });
                 }
+            }, function (err) {
+                me.$data.postState = 0;
             });
         }
     }

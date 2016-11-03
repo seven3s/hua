@@ -9,7 +9,7 @@ module.exports = {
     //入口文件输出配置
     output: {
         path: './dist/js/',
-        publicPath: '/js/',
+        publicPath: './js/',
         filename: '[name].js'
     },
     module: {

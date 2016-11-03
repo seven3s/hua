@@ -10,6 +10,8 @@ var numToCn = require('../../common/numToCn');
 var rule = require('./rule-setting');
 var defaultConfig = require('./default-config');
 var title = require('../../common/setTitle');
+var restFullLoader = require('../../common/loader');
+var webConfig =  require('../../web-config');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -251,24 +253,43 @@ module.exports = Vue.extend({
                 });
                 return;
             }
-            $.ajax({
-                url: '/api/save/poem',
-                type: 'POST',
-                data: data,
-            })
-            .done(function(data) {
-                swal({
-                    title: '',
-                    text: data.message,
-                    type: 'success'
-                }, function () {
-                    me.backUpPoem(data.data.id, function () {
-                        var url = '/#!/p/' + data.data.id;
-                        self.location.href = url;
+            var url = '/api/save/poem';
+            // $.ajax({
+            //     url: '/api/save/poem',
+            //     type: 'POST',
+            //     data: data,
+            // })
+            // .done(function(data) {
+            //     swal({
+            //         title: '',
+            //         text: data.message,
+            //         type: 'success'
+            //     }, function () {
+            //         me.backUpPoem(data.data.id, function () {
+            //             var url = '/#!/p/' + data.data.id;
+            //             self.location.href = url;
+            //         });
+            //     });
+            // })
+            // .fail(function() {
+            //     me.$data.postState = 0;
+            //     console.log("error");
+            // });
+            restFullLoader.requestPOST(url, data, function (res) {
+                if (res.status === 1) {
+                    swal({
+                        title: '',
+                        text: data.message,
+                        type: 'success'
+                    }, function () {
+                        me.backUpPoem(data.data.id, function () {
+                            var url = '/#!/p/' + data.data.id;
+                            url = webConfig.host + webConfig.root + url;
+                            self.location.href = url;
+                        });
                     });
-                });
-            })
-            .fail(function() {
+                }
+            }, function (err) {
                 me.$data.postState = 0;
                 console.log("error");
             });
@@ -281,17 +302,26 @@ module.exports = Vue.extend({
          *
          */
         backUpPoem: function (id, cb) {
-            $.ajax({
-                url: '/api/backup',
-                type: 'POST',
-                data: {
-                    id: id
+            var url = '/api/backup';
+            var data = {
+                id: id
+            };
+            // $.ajax({
+            //     url: '/api/backup',
+            //     type: 'POST',
+            //     data: data
+            // })
+            // .done(function(json) {
+            //     cb && cb();
+            // })
+            // .fail(function() {
+            //     cb && cb();
+            // });
+            restFullLoader.requestPOST('/api/poem', data, function (res) {
+                if (res.status === 1) {
+                    cb && cb();
                 }
-            })
-            .done(function(json) {
-                cb && cb();
-            })
-            .fail(function() {
+            }, function (err) {
                 cb && cb();
             });
         },
@@ -302,19 +332,30 @@ module.exports = Vue.extend({
          */
         isLogin: function () {
             var me = this;
-            $.ajax({
-                url: '/api/isLogin',
-                type: 'GET',
-                async: false
-            })
-            .done(function(data) {
-                if (data.status === 1) {
+            var url = '/api/isLogin';
+            // $.ajax({
+            //     url: '/api/isLogin',
+            //     type: 'GET',
+            //     async: false
+            // })
+            // .done(function(data) {
+            //     if (data.status === 1) {
+            //         me.isLoginstate = 1;
+            //     }else {
+            //         me.isLoginstate = 0;
+            //     }
+            // })
+            // .fail(function(error) {
+            //     me.isLoginstate = 0;
+            //     console.log(error);
+            // });
+            restFullLoader.requestGET(url, function (res) {
+                if (res.status === 1) {
                     me.isLoginstate = 1;
                 }else {
                     me.isLoginstate = 0;
                 }
-            })
-            .fail(function(error) {
+            }, function (err) {
                 me.isLoginstate = 0;
                 console.log(error);
             });
@@ -326,15 +367,61 @@ module.exports = Vue.extend({
          */
         getPoem: function (id) {
             var me = this;
-            $.ajax({
-                url: '/api/poem',
-                type: 'get',
-                data: {
-                    id: id,
-                    update: true
-                }
-            })
-            .done(function(json) {
+            var url = '/api/poem';
+            var data = {
+                id: id,
+                update: true
+            };
+            // $.ajax({
+            //     url: '/api/poem',
+            //     type: 'get',
+            //     data: data
+            // })
+            // .done(function(json) {
+            //     if (json.status === 0) {
+            //         swal({
+            //             title: '',
+            //             text: json.message,
+            //             type: 'warning',
+            //             confirmButtonText: '跳转到首页'
+            //         }, function () {
+            //             var url = '/';
+            //             router.go(url);
+            //         });
+            //         return;
+            //     }
+            //     var data = json.data;
+            //     // 诗歌类型
+            //     me.$data.genres.checkedData = data.poem_type;
+            //     // 文题
+            //     me.$data.poem_title = data.title;
+            //     title.setTitle(data.title);
+            //     // 创作时间
+            //     me.$data.poem_time = data.poem_time;
+            //     // 图集
+            //     if (data.poem_imgSrc) {
+            //         var picobj = {
+            //             state: 1,
+            //             src: data.poem_imgSrc
+            //         };
+            //         me.$data.picobj = picobj;
+            //     }
+            //     // 联句
+            //     var poems = data.poem_lines;
+            //     me.$data.initLineNum = poems.length;
+            //     poems.forEach(function (item, index) {
+            //         var cn = numToCn.get(index + 1);
+            //         var obj = {
+            //             title: cn,
+            //             value: item
+            //         }
+            //         me.$data.newLines.push(obj);
+            //     });
+            // })
+            // .fail(function(err) {
+            //     console.log("error");
+            // });
+            restFullLoader.requestGET('/api/poem', data, function (json) {
                 if (json.status === 0) {
                     swal({
                         title: '',
@@ -343,7 +430,7 @@ module.exports = Vue.extend({
                         confirmButtonText: '跳转到首页'
                     }, function () {
                         var url = '/';
-                        router.go(url);
+                        me.$route.router.go('/');
                     });
                     return;
                 }
@@ -374,9 +461,6 @@ module.exports = Vue.extend({
                     }
                     me.$data.newLines.push(obj);
                 });
-            })
-            .fail(function(err) {
-                console.log("error");
             });
         }
     }
