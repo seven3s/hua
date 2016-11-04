@@ -6,5 +6,6 @@
  */
 module.exports = {
     host: 'http://hua.huar.love',
+    // host: 'http://localhost:2368',
     root: '/hua'
 };

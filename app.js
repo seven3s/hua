@@ -45,7 +45,9 @@ app.use(express.session({
 }));
 // 設置請求響應頭，支持跨域訪問
 var url = 'http://www.huar.love';
+// var url = 'http://172.24.30.187:8888';
 app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With');
     res.setHeader('Access-Control-Allow-Origin', url);
     next();
 });
