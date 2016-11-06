@@ -50,6 +50,11 @@ module.exports = Vue.extend({
             $('.ui.dropdown').dropdown();
         },
 
+        gologin: function () {
+            var backUrl = location.href;
+            var url = 'http://hua.huar.love/#!/login?backUrl=' + backUrl;
+            self.location.location = url;
+        },
         /**
          * checkLogin 检查登陆状态
          *
@@ -59,8 +64,8 @@ module.exports = Vue.extend({
             var url = '/api/isLogin';
             restFullLoader.requestGET(url, {}, function (res) {
                 if (res.status === 1) {
-                    me.login.status = data.status;
-                    me.login.userName = data.data.userName;
+                    me.login.status = res.status;
+                    me.login.userName = res.data.userName;
                     // 全局登陆控制
                     Vue.auth = true;
                 }else {

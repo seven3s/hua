@@ -164,8 +164,8 @@ module.exports = Vue.extend({
                         text: res.message,
                         type: 'success'
                     }, function () {
-                        var url = '/';
-                        me.$route.router.go('/');
+                        var url = me.$route.query.backUrl;
+                        self.location.href = url;
                     });
                 }
             }, function (err) {

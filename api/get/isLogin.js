@@ -13,7 +13,7 @@ module.exports = {
                     status: 1,
                     message: '',
                     data: {
-                         userName: req.session.nickname
+                        userName: req.session.nickname
                     }
                 });
             }else {
