@@ -18,6 +18,7 @@ module.exports = {
      */
     doRequest: function (params, success, fail) {
         var deferred = new $.Deferred();
+        params.withCredentials = true;
         if (!(/^\//).test(params.url)) {
             params.url = document.location.protocol + '//' + params.url;
         } else if ((/^http:/).test(params.url)) {
