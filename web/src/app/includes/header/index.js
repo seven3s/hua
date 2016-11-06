@@ -50,6 +50,11 @@ module.exports = Vue.extend({
             $('.ui.dropdown').dropdown();
         },
 
+        gologin: function () {
+            var backHref = location.href;
+            var url = 'http://hua.huar.love/#!/login/?backHref=' + backHref;
+            location.href = url;
+        },
         /**
          * checkLogin 检查登陆状态
          *
