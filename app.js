@@ -37,7 +37,7 @@ app.use(express.session({
     store: store,
     resave: true, // don't save session if unmodified  
     saveUninitialized: false, // don't create session until something stored
-    cookie: { domain:'.huar.love'},
+    cookie: { domain:'huar.love'},
     secret: 'secret',
     key: 'usid',
     cookie: {
@@ -50,7 +50,7 @@ var url = 'http://www.huar.love';
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With');
     res.setHeader('Access-Control-Allow-Origin', url);
-    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
 // API接口

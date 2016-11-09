@@ -81,4 +81,8 @@
     .wrapper {
         width: 90%;
     }
+    .ui.dropdown .menu {
+        right: 0;
+        left: initial;
+    }
 }

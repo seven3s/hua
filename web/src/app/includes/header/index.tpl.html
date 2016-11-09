@@ -16,6 +16,7 @@
                 <a v-link="{ path: '/list/poem' }" class="menu-item">诗</a>
                 <a v-link="{ path: '/list/speech' }" class="menu-item">词</a>
                 <a v-link="{ path: '/list/pennon' }" class="menu-item">赋</a>
+                <a v-if="!isMobiledDevice" href="http://www.huar.love" class="menu-item">煙雨滿</a>
             </div>
             <div class="right-part">
                 <!-- <button class="ui red basic button">注册</button> -->
@@ -27,6 +28,7 @@
                     <div class="ui right dropdown item" tabindex="0">
                         <i class="add icon"></i>
                         <div class="menu transition hidden" tabindex="-1" >
+                            <a class="item" href="http://www.huar.love">煙雨滿</a>
                             <a class="item" v-link="{ path: '/new' }" v-if="login.status === 1">新增</a>
                             <a class="item" v-if="login.status === 1" @click="logout">登出</a>
                         </div>

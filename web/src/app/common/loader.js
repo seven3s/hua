@@ -18,7 +18,6 @@ module.exports = {
      */
     doRequest: function (params, success, fail) {
         var deferred = new $.Deferred();
-        params.withCredentials = true;
         if (!(/^\//).test(params.url)) {
             params.url = document.location.protocol + '//' + params.url;
         } else if ((/^http:/).test(params.url)) {
@@ -63,7 +62,10 @@ module.exports = {
             url: path,
             data: {},
             type: 'GET',
-            dataType: 'json'
+            dataType: 'json',
+            headers: {
+                'With-Credentials': true
+            }
         }, params);
 
         return this.doRequest(requestParams, success, fail);
@@ -100,7 +102,10 @@ module.exports = {
         return this.request(path, {
             data: JSON.stringify(opts),
             type: 'POST',
-            contentType: 'application/json'
+            contentType: 'application/json',
+            headers: {
+                'With-Credentials': true
+            }
         }, success, fail);
     },
     requestPOSTAsFormData: function (path, opts, success, fail) {
@@ -108,6 +113,9 @@ module.exports = {
             data: opts,
             type: 'POST',
             contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
+            headers: {
+                'With-Credentials': true
+            }
         }, success, fail);
     },
 
@@ -124,7 +132,10 @@ module.exports = {
         return this.request(path, {
             data: JSON.stringify(opts),
             type: 'DELETE',
-            contentType: 'application/json'
+            contentType: 'application/json',
+            headers: {
+                'With-Credentials': true
+            }
         }, success, fail);
     },
 
@@ -141,7 +152,10 @@ module.exports = {
         return this.request(path, {
             data: JSON.stringify(opts),
             type: 'PUT',
-            contentType: 'application/json'
+            contentType: 'application/json',
+            headers: {
+                'With-Credentials': true
+            }
         }, success, fail);
     }
 };
