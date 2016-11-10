@@ -65,8 +65,9 @@ module.exports = {
                 var update = req.query.update;
                 // 格式化时间
                 poem.poem_time = moment(poem.poem_time).format('YYYY-MM-DD HH:mm:ss');
+                data.poem_time = poem.poem_time;
                 // 修复时间与服务器时间的差别
-                data.poem_time = update ? poem.poem_time : moment(me.misstatCurTimezoneTime(poem.poem_time)).fromNow();
+                // data.poem_time = update ? poem.poem_time : moment(me.misstatCurTimezoneTime(poem.poem_time)).fromNow();
                 data.poem_type = poem.poem_type;
                 data.poem_author = poem.poem_author;
                 data.poem_lines = poem.poem_lines;
