@@ -12,6 +12,7 @@ footer {
 #footer .footavatar, #footer .visitor {
     width: 80%;
 }
+
 .footavatar {
     color: #666;
     margin: auto;
@@ -22,7 +23,7 @@ footer {
     display: block;
     left: 20px;
     position: absolute;
-    top: -46px;
+    top: 15px;
 }
 .footavatar img {
     height: 110px;
@@ -74,4 +75,9 @@ footer {
 }
 .visitor p a:not(:nth-of-type(1)) {
     border-left: 1px solid #999;
+}
+@media screen and (max-width: 810px) {
+    #footer .footavatar, #footer .visitor {
+        width: 100%;
+    }
 }
