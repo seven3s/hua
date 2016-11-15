@@ -421,7 +421,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 	// module
-	exports.push([module.id, "#main {\n    margin-left: auto;\n    margin-right: auto;\n}\n.ui.grid {\n    margin: 0;\n}\n.bottom-loading {\n    position: relative;\n    width: 100%;\n    height: 55px;\n    bottom: 355px;\n    left: 0;\n    z-index: -1;\n}\n.info {\n    text-align: center;\n}", ""]);
+	exports.push([module.id, "#main {\n    margin-left: auto;\n    margin-right: auto;\n}\n.ui.grid {\n    margin: 0;\n}\n.bottom-loading {\n    position: relative;\n    width: 100%;\n    height: 55px;\n    bottom: 355px;\n    left: 0;\n    z-index: -1;\n}\n.info {\n    text-align: center;\n    position: relative;\n    bottom: 355px;\n}", ""]);
 
 	// exports
 
