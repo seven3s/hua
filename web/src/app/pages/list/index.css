@@ -6,10 +6,10 @@
     margin: 0;
 }
 .bottom-loading {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 55px;
-    bottom: -45px;
+    bottom: 355px;
     left: 0;
     z-index: -1;
 }
