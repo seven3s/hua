@@ -25,8 +25,6 @@ module.exports = Vue.extend({
         
     },
     components: {
-        'v-header': require('../../includes/header/'),
-        'v-footer': require('../../includes/footer/'),
         'v-loading': require('../../components/v-loading/')
     },
     watch: {

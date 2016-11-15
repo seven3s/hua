@@ -12,6 +12,10 @@ require('./index.css');
 require('./common/semantic-ui/semantic.min.js');
 // 引用sweetalert
 require('./common/sweetalert/sweetalert.min.js');
+var header = require('./includes/header/index.js');
+var footer = require('./includes/footer/index.js');
+Vue.component('v-header', header);
+Vue.component('v-footer', footer);
 Vue.use(VueRouter);
 var router = new VueRouter({
     saveScrollPosition: true
@@ -28,5 +32,5 @@ router.beforeEach(function (transition) {
     }
     transition.next();
 });
-router.start({}, '#app');
+router.start({}, 'body');
 module.exports = app;
