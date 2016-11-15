@@ -15,4 +15,6 @@
 }
 .info {
     text-align: center;
+    position: relative;
+    bottom: 355px;
 }
