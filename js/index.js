@@ -23834,7 +23834,10 @@
 	            url: path,
 	            data: {},
 	            type: 'GET',
-	            dataType: 'json'
+	            dataType: 'json',
+	            header: {
+	                withCredentials: true //设置允许凭证
+	            }
 	        }, params);
 
 	        return this.doRequest(requestParams, success, fail);
