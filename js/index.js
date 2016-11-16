@@ -23644,8 +23644,7 @@
 	                        text: res.message,
 	                        type: 'success'
 	                    }, function () {
-	                        var url = '/';
-	                        window.location.href = url;
+	                        location.reload();
 	                    });
 	                }
 	            }, function (err) {
