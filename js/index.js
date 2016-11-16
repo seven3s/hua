@@ -23641,7 +23641,7 @@
 	                if (res.status === 1) {
 	                    swal({
 	                        title: '',
-	                        text: data.message,
+	                        text: res.message,
 	                        type: 'success'
 	                    }, function () {
 	                        var url = '/';
