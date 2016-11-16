@@ -23834,10 +23834,7 @@
 	            url: path,
 	            data: {},
 	            type: 'GET',
-	            dataType: 'json',
-	            headers: {
-	                'With-Credentials': true
-	            }
+	            dataType: 'json'
 	        }, params);
 
 	        return this.doRequest(requestParams, success, fail);
