@@ -23871,10 +23871,7 @@
 	        return this.request(path, {
 	            data: JSON.stringify(opts),
 	            type: 'POST',
-	            contentType: 'application/json',
-	            headers: {
-	                'With-Credentials': true
-	            }
+	            contentType: 'application/json'
 	        }, success, fail);
 	    },
 	    requestPOSTAsFormData: function (path, opts, success, fail) {
