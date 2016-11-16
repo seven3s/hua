@@ -23835,8 +23835,8 @@
 	            data: {},
 	            type: 'GET',
 	            dataType: 'json',
-	            header: {
-	                withCredentials: true //设置允许凭证
+	            xhrFields: {
+	                withCredentials: true
 	            }
 	        }, params);
 
