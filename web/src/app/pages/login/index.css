@@ -1,10 +1,10 @@
 #login {
     background: rgba(0, 0, 0, 0) linear-gradient(135deg, #ea5c54 0%, #bb6dec 100%) repeat scroll 0 0;
     font-family: "Gudea", sans-serif;
-    height: 100vh;
     margin: 0;
     overflow: hidden;
     perspective: 800px;
+    padding-bottom: 385px;
 }
 
 #login .loginform,
