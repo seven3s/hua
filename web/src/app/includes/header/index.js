@@ -103,21 +103,39 @@ module.exports = Vue.extend({
          *
          */
         logout: function () {
-            $.ajax({
-                url: '/api/logout',
-                type: 'POST',
-            })
-            .done(function(data) {
-                swal({
-                    title: '',
-                    text: data.message,
-                    type: 'success'
-                }, function () {
-                    var url = '/';
-                    window.location.href = url;
-                });
-            })
-            .fail(function(error) {
+            // $.ajax({
+            //     url: '/api/logout',
+            //     type: 'POST',
+            // })
+            // .done(function(data) {
+            //     swal({
+            //         title: '',
+            //         text: data.message,
+            //         type: 'success'
+            //     }, function () {
+            //         var url = '/';
+            //         window.location.href = url;
+            //     });
+            // })
+            // .fail(function(error) {
+            //     swal({
+            //         title: '',
+            //         text: error,
+            //         type: 'error'
+            //     });
+            // });
+            var url = '/api/logout';
+            restFullLoader.requestPOST(url, {}, function (res) {
+                if (res.status === 1) {
+                    swal({
+                        title: '',
+                        text: res.message,
+                        type: 'success'
+                    }, function () {
+                        location.reload();
+                    });
+                }
+            }, function (err) {
                 swal({
                     title: '',
                     text: error,
