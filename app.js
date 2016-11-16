@@ -37,7 +37,7 @@ app.use(express.session({
     store: store,
     resave: true, // don't save session if unmodified  
     saveUninitialized: false, // don't create session until something stored
-    cookie: { domain:'huar.love'},
+    cookie: { domain:'.huar.love'},
     secret: 'secret',
     key: 'usid',
     cookie: {

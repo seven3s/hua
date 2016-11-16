@@ -63,8 +63,8 @@ module.exports = {
             data: {},
             type: 'GET',
             dataType: 'json',
-            headers: {
-                'With-Credentials': true
+            xhrFields: {
+                withCredentials: true
             }
         }, params);
 
@@ -102,10 +102,7 @@ module.exports = {
         return this.request(path, {
             data: JSON.stringify(opts),
             type: 'POST',
-            contentType: 'application/json',
-            headers: {
-                'With-Credentials': true
-            }
+            contentType: 'application/json'
         }, success, fail);
     },
     requestPOSTAsFormData: function (path, opts, success, fail) {

@@ -8,8 +8,6 @@ module.exports = {
     init: function(app) {
         app.get('/api/isLogin', function(req, res) {
             var userName = req.session.user;
-            console.log(req.session);
-            console.log(req.session.user);
             if (userName) {
                 res.jsonp({
                     status: 1,
