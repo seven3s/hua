@@ -4,14 +4,15 @@
     margin: 0;
     overflow: hidden;
     perspective: 800px;
-    padding-bottom: 385px;
+    padding-top: 150px;
+    height: 100vh;
 }
 
 #login .loginform,
 #register .loginform {
     background-color: #ffffff;
     border: 1px solid #dddddd;
-    margin: 200px auto 0;
+    margin: 0 auto;
     max-width: 400px;
     padding: 0;
     position: relative;
