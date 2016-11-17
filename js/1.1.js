@@ -15281,7 +15281,9 @@ webpackJsonp([1,5],Array(28).concat([
 	            this.autoWidth = _autoWidth;
 	        },
 	        box: function() {
-	            this.$element.height(this.getFallsMaxHeight());
+	            setTimeout(function () {
+	                this.$element.height(this.getFallsMaxHeight());
+	            });
 	        },
 	        endDecorate: function() {
 	            var _coord = this.coord,
