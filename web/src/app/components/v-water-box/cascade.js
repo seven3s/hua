@@ -71,7 +71,10 @@
             this.autoWidth = _autoWidth;
         },
         box: function() {
-            this.$element.height(this.getFallsMaxHeight());
+            var me = this;
+            setTimeout(function () {
+                me.$element.height(me.getFallsMaxHeight());
+            });
         },
         endDecorate: function() {
             var _coord = this.coord,
