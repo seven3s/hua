@@ -71,8 +71,9 @@
             this.autoWidth = _autoWidth;
         },
         box: function() {
+            var me = this;
             setTimeout(function () {
-                this.$element.height(this.getFallsMaxHeight());
+                me.$element.height(me.getFallsMaxHeight());
             });
         },
         endDecorate: function() {
@@ -99,6 +100,11 @@
                 }
             }
         },
+        /**
+         * getFallsMaxHeight 獲取box中的最大高度
+         *
+         * @return {Number} 返回高度
+         */
         getFallsMaxHeight: function() {
             var maxHeight = 0,
                 i = 0,
