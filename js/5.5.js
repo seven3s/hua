@@ -15062,7 +15062,7 @@ webpackJsonp([5],Array(32).concat([
 
 
 	// module
-	exports.push([module.id, "#main {\n    position: relative;\n    height: -moz-calc(100vh + 350px);\n    height: -webkit-calc(100vh + 350px);\n    height: calc(100vh + 350px);\n}\n\n#main a.image {\n    margin-top: 40px;\n    border-radius: 0!important;\n}\n\nimg.image {\n    border: 1px solid #d4d4d4;\n}\n\n.ui.card {\n    margin: 0;\n}\n\n.ui.card > .content.ui {\n    border-top: none;\n}\n\n.heart-span {\n    margin: 5px 0 0 5px;\n}\n\n.content.ui > .ui.feed {\n    padding: 18px;\n}\n\n.ui.feed > .event {\n    margin-top: 16px;\n}", ""]);
+	exports.push([module.id, "#main {\n    position: relative;\n}\n\n#main a.image {\n    margin-top: 40px;\n    border-radius: 0!important;\n}\n\nimg.image {\n    border: 1px solid #d4d4d4;\n}\n\n.ui.card {\n    margin: 0;\n}\n\n.ui.card > .content.ui {\n    border-top: none;\n}\n\n.heart-span {\n    margin: 5px 0 0 5px;\n}\n\n.content.ui > .ui.feed {\n    padding: 18px;\n}\n\n.ui.feed > .event {\n    margin-top: 16px;\n}", ""]);
 
 	// exports
 
@@ -15102,7 +15102,7 @@ webpackJsonp([5],Array(32).concat([
 
 
 	// module
-	exports.push([module.id, ".clear {\n    clear: both;\n    height: 0;\n    font-size: 0;\n    line-height: 0;\n    overflow: hidden;\n}\n\n.cle:after,\n.clearfix:after,\n.clear_f:after,\n.cle_float:after {\n    content: \".\";\n    display: block;\n    height: 0;\n    clear: both;\n    visibility: hidden\n}\n\n.cle,\n.clearfix,\n.clear_f,\n.cle_float {\n    zoom: 1\n}\n\n.fl {\n    float: left;\n}\n\n.fr {\n    float: right;\n}\n\n\n/*品牌列表*/\n\n#main .brand-list {\n    margin-left: -10px;\n    padding: 0;\n    height: calc(100vh);\n}\n\n.brand-list .brand-bd {\n    position: relative;\n}\n\n.brand-list .item,\n.brand-list .additem {\n    position: absolute;\n    background-color: #f8f8f8;\n    border: 1px solid #f8f8f8;\n    top: 0;\n    left: 40%;\n    -webkit-transition: all 0.3s;\n    -moz-transition: all 0.3s;\n    -o-transition: all 0.3s;\n    -ms-transition: all 0.3s;\n    transition: all 0.3s;\n}\n\n.brand-list .hover {\n    box-shadow: 0px 1px 8px rgba(200, 200, 200, .6);\n    background-color: #fff;\n    border-color: #c8c8c8;\n}\n\n.brand-list .additem {\n    padding: 0;\n    width: 240px;\n    border: none;\n}\n\n.brand-list .item h3 {\n    font-size: 42px;\n    color: #666;\n    font-family: arial;\n    font-weight: bold;\n    line-height: .8;\n    margin-bottom: 20px;\n}\n\n.brand-list .item p {\n    margin-bottom: 15px;\n}", ""]);
+	exports.push([module.id, ".clear {\n    clear: both;\n    height: 0;\n    font-size: 0;\n    line-height: 0;\n    overflow: hidden;\n}\n\n.cle:after,\n.clearfix:after,\n.clear_f:after,\n.cle_float:after {\n    content: \".\";\n    display: block;\n    height: 0;\n    clear: both;\n    visibility: hidden\n}\n\n.cle,\n.clearfix,\n.clear_f,\n.cle_float {\n    zoom: 1\n}\n\n.fl {\n    float: left;\n}\n\n.fr {\n    float: right;\n}\n\n\n/*品牌列表*/\n\n#main .brand-list {\n    margin-left: -10px;\n    padding: 0;\n}\n\n.brand-list .brand-bd {\n    position: relative;\n}\n\n.brand-list .item,\n.brand-list .additem {\n    position: absolute;\n    background-color: #f8f8f8;\n    border: 1px solid #f8f8f8;\n    top: 0;\n    left: 40%;\n    -webkit-transition: all 0.3s;\n    -moz-transition: all 0.3s;\n    -o-transition: all 0.3s;\n    -ms-transition: all 0.3s;\n    transition: all 0.3s;\n}\n\n.brand-list .hover {\n    box-shadow: 0px 1px 8px rgba(200, 200, 200, .6);\n    background-color: #fff;\n    border-color: #c8c8c8;\n}\n\n.brand-list .additem {\n    padding: 0;\n    width: 240px;\n    border: none;\n}\n\n.brand-list .item h3 {\n    font-size: 42px;\n    color: #666;\n    font-family: arial;\n    font-weight: bold;\n    line-height: .8;\n    margin-bottom: 20px;\n}\n\n.brand-list .item p {\n    margin-bottom: 15px;\n}", ""]);
 
 	// exports
 
@@ -15132,7 +15132,7 @@ webpackJsonp([5],Array(32).concat([
 	            $('.additem').remove();
 	            this.item();
 	            this.endDecorate();
-	            // this.box();
+	            this.box();
 	        },
 	        item: function() {
 	            var $box = this.$element,
