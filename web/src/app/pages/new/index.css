@@ -1,7 +1,7 @@
 #main[name=poem-form] {
     width: 80%;
     margin: 0 auto;
-    padding: 0 1.5%;
+    padding: 0 1.5% 350px;
 }
 #main > .header {
     padding: 0 18px;
