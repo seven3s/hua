@@ -23,7 +23,7 @@
                 <a class="ui green user" v-if="login.status === 1">
                     <img src="http://odflit039.bkt.clouddn.com/14737614892742.pic.jpg?imageView2/2/w/110/h/110/interlace/1/q/100">
                 </a>
-                <a class="ui green basic button" herf="javascript:;" @click="gologin" v-if="login.status === 0">登录</a>
+                <a class="ui green basic button" v-link="{ path: '/login' }" v-if="login.status === 0">登陸</a>
                 <template v-if="isMobiledDevice">
                     <div class="ui right dropdown item" tabindex="0">
                         <i class="add icon"></i>
