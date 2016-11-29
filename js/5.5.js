@@ -15037,6 +15037,7 @@ webpackJsonp([5],Array(32).concat([
 	         *
 	         */
 	        like: function (id, likes) {
+	            var me = this;
 	            if (!this.likesState) {
 	                if (this.waterboxdata.likes === undefined) {
 	                    this.waterboxdata['likes'] = 0;
@@ -15052,7 +15053,7 @@ webpackJsonp([5],Array(32).concat([
 	                restFullLoader.requestPOST(url, data, function (res) {
 	                    
 	                }, function (err) {
-	                    
+	                    this.likesState = true;
 	                });
 	            }else {
 	                var infoData = this.$root.$children[0].infoData;

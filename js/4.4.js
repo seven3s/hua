@@ -327,6 +327,7 @@ webpackJsonp([4],{
 	                poem.poem_time = data.poem_time;
 	                poem.imgSrc = data.poem_imgSrc;
 	                poem.lines = data.poem_lines;
+	                poem.id = data.id;
 	                me.$data.poem = poem;
 	                me.$data.load = 1;
 	                // 图片预览
@@ -343,6 +344,7 @@ webpackJsonp([4],{
 	        },
 
 	        likePoem: function (id, likes) {
+	            var me = this;
 	            if (!this.likesState) {
 	                if (this.poem.likes === undefined) {
 	                    this.poem['likes'] = 0;
@@ -358,7 +360,7 @@ webpackJsonp([4],{
 	                restFullLoader.requestPOST(url, data, function (res) {
 	                    
 	                }, function (err) {
-	                    
+	                    me.likesState = false;
 	                });
 	            }else {
 	                var infoData = this.$root.$children[0].infoData;
