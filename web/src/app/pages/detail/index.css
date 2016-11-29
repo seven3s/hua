@@ -27,8 +27,24 @@
 .ui.label {
     z-index: 9;
 }
+.like.icon {
+    cursor: pointer;
+}
+#main .extra.content {
+    padding:14px 0 0 30px;
+    font-size: 1.3rem;
+}
+.ui.vertical.segment:last-child {
+    border-bottom: 1px solid rgba(34, 36, 38, 0.15);
+}
+.content .active.like.icon {
+    color: #ff2733;
+}
 @media screen and (max-width: 810px) {
     #main {
         width: 90%;
+    }
+    .poem-body > .segment.ui {
+        font-size: 1.2rem;
     }
 }

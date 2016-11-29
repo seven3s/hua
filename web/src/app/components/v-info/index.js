@@ -28,7 +28,13 @@ module.exports = Vue.extend({
         
     },
     watch: {
-        
+        'infoData.state': {
+            handler: function (val) {
+                if (!!val) {
+                    this.isAutoClose();
+                }
+            }
+        }
     },
     methods: {
         init: function () {
@@ -36,7 +42,14 @@ module.exports = Vue.extend({
                 this.infoData.autoClose = true;
             }
             this.close();
-            if (this.infoData.autoClose && this.infoData.state) {
+        },
+
+        /**
+         * isAutoClose 只有自動關閉設置時才自動關係
+         *
+         */
+        isAutoClose: function () {
+            if (this.infoData.autoClose) {
                 this.autoClose();
             }
         },
@@ -48,7 +61,7 @@ module.exports = Vue.extend({
         autoClose: function () {
             var me = this;
             setTimeout(function () {
-                $('.message .close').trigger('click');
+                me.infoData.state = false;
             }, 1854);
         },
 

@@ -20,20 +20,14 @@ module.exports = Vue.extend({
     data: function () {
         return {
             isLoginState: false,
-            likesState: false,
-            infoData: {
-                class: 'negative',
-                header: '',
-                info: '',
-                state: false
-            }
+            likesState: false
         };
     },
     events: {
         
     },
     components: {
-        'v-info': require('../../components/v-info/')
+        
     },
     watch: {
     },
@@ -55,7 +49,8 @@ module.exports = Vue.extend({
          * @param  {String} id 點讚的詩歌id
          *
          */
-        like: function  (id, likes) {
+        like: function (id, likes) {
+            var me = this;
             if (!this.likesState) {
                 if (this.waterboxdata.likes === undefined) {
                     this.waterboxdata['likes'] = 0;
@@ -71,10 +66,11 @@ module.exports = Vue.extend({
                 restFullLoader.requestPOST(url, data, function (res) {
                     
                 }, function (err) {
-                    
+                    me.likesState = true;
                 });
             }else {
-                var infoData = this.infoData;
+                var infoData = this.$root.$children[0].infoData;
+                infoData.class = 'negative';
                 infoData.info = '大才子,你已經點過贊拉!!!';
                 infoData.state = true;
             }

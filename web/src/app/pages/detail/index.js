@@ -18,7 +18,8 @@ module.exports = Vue.extend({
     data: function () {
         return {
             load: 0,
-            poem: {}
+            poem: {},
+            likesState: false
         };
     },
     events: {
@@ -47,51 +48,6 @@ module.exports = Vue.extend({
             var data = {
                 id: id
             };
-            // $.ajax({
-            //     url: '/api/poem',
-            //     type: 'get',
-            //     data: data
-            // })
-            // .done(function(json) {
-            //     if (json.status === 0) {
-            //         swal({
-            //             title: '',
-            //             text: json.message,
-            //             type: 'warning',
-            //             confirmButtonText: '跳转到首页'
-            //         }, function () {
-            //             var url = '/';
-            //             self.location.href = url;
-            //         });
-            //         return;
-            //     }
-            //     var data = json.data;
-            //     var poem = {};
-            //     poem.title = data.title;
-            //     title.setTitle(data.title);
-            //     poem.userName = data.userName;
-            //     var swicthPoemType = require('../../common/swicthPoemType');
-            //     poem.type = type_id.getTypeOfId(data.poem_type);
-            //     poem.typeString = swicthPoemType(data.poem_type);
-            //     poem.poem_time = data.poem_time;
-            //     poem.imgSrc = data.poem_imgSrc;
-            //     poem.lines = data.poem_lines;
-            //     me.$data.poem = poem;
-            //     me.$data.load = 1;
-            //     // 图片预览
-            //     setTimeout(function () {
-            //         baguetteBox.run('.baguette-img', {
-            //             animation: 'fadeIn',
-            //             noScrollbars: true,
-            //             captions: function(element) {
-            //                 return element.getElementsByTagName('img')[0].alt;
-            //             }
-            //         });
-            //     });
-            // })
-            // .fail(function(err) {
-            //     console.log("error");
-            // });
             restFullLoader.requestGET(url, data, function (json) {
                 if (json.status === 0) {
                     swal({
@@ -116,6 +72,8 @@ module.exports = Vue.extend({
                 poem.poem_time = data.poem_time;
                 poem.imgSrc = data.poem_imgSrc;
                 poem.lines = data.poem_lines;
+                poem.likes = data.likes;
+                poem.id = data.id;
                 me.$data.poem = poem;
                 me.$data.load = 1;
                 // 图片预览
@@ -129,6 +87,33 @@ module.exports = Vue.extend({
                     });
                 });
             });
+        },
+
+        likePoem: function (id, likes) {
+            var me = this;
+            if (!this.likesState) {
+                if (this.poem.likes === undefined) {
+                    this.poem['likes'] = 0;
+                }
+                this.poem.likes++;
+                this.likesState = true;
+                var num = 0;
+                var url = '/api/likes';
+                var data = {
+                    _id: id,
+                    likes: ++num
+                }
+                restFullLoader.requestPOST(url, data, function (res) {
+                    
+                }, function (err) {
+                    me.likesState = false;
+                });
+            }else {
+                var infoData = this.$root.$children[0].infoData;
+                infoData.class = 'negative';
+                infoData.info = '大才子,你已經點過贊拉!!!';
+                infoData.state = true;
+            }
         }
     }
 });
