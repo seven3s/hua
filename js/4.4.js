@@ -409,7 +409,7 @@ webpackJsonp([4],{
 
 
 	// module
-	exports.push([module.id, "#main.w-90 {\n    width: 90%;\n}\n\n.poem-body {\n    \n}\n\n#app .poem-body > * {\n    padding-left: 30px;\n}\n\n.poem-body > .segment.ui {\n    font-size: 1.8rem;\n    font-family: STkaiti,Lato,\"Helvetica Neue\",Arial,Helvetica,sans-serif\n}\n\n#app .ui.label {\n    margin-bottom: 10px;\n}\n#poem-body .image {\n    text-align: center;\n}\n#main img.ui.image {\n    margin: 0 auto;\n}\n.ui.label {\n    z-index: 9;\n}\n.like.icon {\n    cursor: pointer;\n}\n#main .extra.content {\n    padding-left: 30px;\n    font-size: 1.3rem;\n}\n.ui.vertical.segment:last-child {\n    border-bottom: 1px solid rgba(34, 36, 38, 0.15);\n}\n@media screen and (max-width: 810px) {\n    #main {\n        width: 90%;\n    }\n    .poem-body > .segment.ui {\n        font-size: 1.2rem;\n    }\n}", ""]);
+	exports.push([module.id, "#main.w-90 {\n    width: 90%;\n}\n\n.poem-body {\n    \n}\n\n#app .poem-body > * {\n    padding-left: 30px;\n}\n\n.poem-body > .segment.ui {\n    font-size: 1.8rem;\n    font-family: STkaiti,Lato,\"Helvetica Neue\",Arial,Helvetica,sans-serif\n}\n\n#app .ui.label {\n    margin-bottom: 10px;\n}\n#poem-body .image {\n    text-align: center;\n}\n#main img.ui.image {\n    margin: 0 auto;\n}\n.ui.label {\n    z-index: 9;\n}\n.like.icon {\n    cursor: pointer;\n}\n#main .extra.content {\n    padding:14px 0 0 30px;\n    font-size: 1.3rem;\n}\n.ui.vertical.segment:last-child {\n    border-bottom: 1px solid rgba(34, 36, 38, 0.15);\n}\n.content .active.like.icon {\n    color: #ff2733;\n}\n@media screen and (max-width: 810px) {\n    #main {\n        width: 90%;\n    }\n    .poem-body > .segment.ui {\n        font-size: 1.2rem;\n    }\n}", ""]);
 
 	// exports
 
