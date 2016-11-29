@@ -142,7 +142,7 @@ webpackJsonp([1,5],Array(28).concat([
 	    },
 	    components: {
 	        'v-water-list': __webpack_require__(146),
-	        'v-loading': __webpack_require__(151)
+	        'v-loading': __webpack_require__(157)
 	    },
 	    watch: {
 	        
@@ -225,7 +225,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                    var poem = {};
 	                    poem.title = item.title;
 	                    poem.userName = item.userName;
-	                    var swicthPoemType = __webpack_require__(157);
+	                    var swicthPoemType = __webpack_require__(163);
 	                    poem.typeString = swicthPoemType(item.poem_type);
 	                    poem.type = type_id.getTypeOfId(item.poem_type);
 	                    poem.poem_time = item.poem_time;
@@ -344,7 +344,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                var poem = {};
 	                poem.title = item.title;
 	                poem.userName = item.userName;
-	                var swicthPoemType = __webpack_require__(157);
+	                var swicthPoemType = __webpack_require__(163);
 	                poem.typeString = swicthPoemType(item.poem_type);
 	                poem.type = type_id.getTypeOfId(item.poem_type);
 	                poem.poem_time = item.poem_time;
@@ -15020,7 +15020,7 @@ webpackJsonp([1,5],Array(28).concat([
 	        
 	    },
 	    components: {
-	        'v-water-box': __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../components/v-water-box/\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))
+	        'v-water-box': __webpack_require__(150)
 	    },
 	    watch: {
 
@@ -15079,26 +15079,31 @@ webpackJsonp([1,5],Array(28).concat([
 	module.exports = "<div class=\"brand-list clearfix\">\n    <v-water-box :waterboxdata=\"item\" v-for=\"item in waterdata\" class=\"brand-bd cle\"></v-water-box>\n</div>";
 
 /***/ },
-/* 150 */,
-/* 151 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * @File:      loading
+	 * @File:      water box组件
 	 * @Author:    花夏(liubiao01@itoxs.com)
 	 * @Version:   V0.0.1
-	 * @Date:      2016-09-09 21:14:21
+	 * @Date:      2016-09-10 19:09:50
 	 */
 	var Vue = __webpack_require__(1);
-	__webpack_require__(152);
-	__webpack_require__(154);
+	__webpack_require__(151);
+	__webpack_require__(153);
+	__webpack_require__(155);
+	var restFullLoader = __webpack_require__(15);
 	module.exports = Vue.extend({
 	    ready: function () {
-	        
+	        this.init();
+	    },
+	    props: {
+	        waterboxdata: {}
 	    },
 	    template: __webpack_require__(156),
 	    data: function () {
 	        return {
+	            isLoginState: false
 	        };
 	    },
 	    events: {
@@ -15108,21 +15113,54 @@ webpackJsonp([1,5],Array(28).concat([
 	        
 	    },
 	    watch: {
-	        
 	    },
 	    methods: {
-	        
+	        init: function () {
+	            this.$data.isLoginState = Vue.auth;
+	            // setTimeout(function () {
+	            //     $('.water-full').cascade();
+	            // });
+	            this.$nextTick(function () {
+	                $('.water-full').cascade();
+	            });
+	            $(window).trigger('resize.cascade');
+	        },
+
+	        /**
+	         * like 點讚的詩歌
+	         *
+	         * @param  {String} id 點讚的詩歌id
+	         *
+	         */
+	        like: function  (id, likes) {
+	            if (this.waterboxdata.likes === undefined) {
+	                this.waterboxdata.likes = 0;
+	            }
+	            this.waterboxdata.likes++;
+	            var num = 0;
+	            var url = '/api/likes';
+	            var data = {
+	                _id: id,
+	                likes: ++num
+	            }
+	            restFullLoader.requestPOST(url, data, function (res) {
+	                
+	            }, function (err) {
+	                
+	            });
+	        }
 	    }
 	});
 
+
 /***/ },
-/* 152 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(153);
+	var content = __webpack_require__(152);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -15142,7 +15180,288 @@ webpackJsonp([1,5],Array(28).concat([
 	}
 
 /***/ },
+/* 152 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#main {\n    position: relative;\n}\n\n#main a.image {\n    margin-top: 40px;\n    border-radius: 0!important;\n}\n\nimg.image {\n    border: 1px solid #d4d4d4;\n}\n\n.ui.card {\n    margin: 0;\n}\n\n.ui.card > .content.ui {\n    border-top: none;\n}\n\n.heart-span {\n    margin: 5px 0 0 5px;\n}\n\n.content.ui > .ui.feed {\n    padding: 18px;\n}\n\n.ui.feed > .event {\n    margin-top: 16px;\n}", ""]);
+
+	// exports
+
+
+/***/ },
 /* 153 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(154);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./cascade.css", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./cascade.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 154 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".clear {\n    clear: both;\n    height: 0;\n    font-size: 0;\n    line-height: 0;\n    overflow: hidden;\n}\n\n.cle:after,\n.clearfix:after,\n.clear_f:after,\n.cle_float:after {\n    content: \".\";\n    display: block;\n    height: 0;\n    clear: both;\n    visibility: hidden\n}\n\n.cle,\n.clearfix,\n.clear_f,\n.cle_float {\n    zoom: 1\n}\n\n.fl {\n    float: left;\n}\n\n.fr {\n    float: right;\n}\n\n\n/*品牌列表*/\n\n#main .brand-list {\n    margin-left: -10px;\n    padding: 0;\n}\n\n.brand-list .brand-bd {\n    position: relative;\n}\n\n.brand-list .item,\n.brand-list .additem {\n    position: absolute;\n    background-color: #f8f8f8;\n    border: 1px solid #f8f8f8;\n    top: 0;\n    left: 40%;\n    -webkit-transition: all 0.3s;\n    -moz-transition: all 0.3s;\n    -o-transition: all 0.3s;\n    -ms-transition: all 0.3s;\n    transition: all 0.3s;\n}\n\n.brand-list .hover {\n    box-shadow: 0px 1px 8px rgba(200, 200, 200, .6);\n    background-color: #fff;\n    border-color: #c8c8c8;\n}\n\n.brand-list .additem {\n    padding: 0;\n    width: 240px;\n    border: none;\n}\n\n.brand-list .item h3 {\n    font-size: 42px;\n    color: #666;\n    font-family: arial;\n    font-weight: bold;\n    line-height: .8;\n    margin-bottom: 20px;\n}\n\n.brand-list .item p {\n    margin-bottom: 15px;\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 155 */
+/***/ function(module, exports) {
+
+	! function($) {
+	    var Cascade = function(element, options) {
+	        this.init('cascade', element, options);
+	    }
+
+	    Cascade.prototype = {
+	        constructor: Cascade,
+	        init: function(type, element, options) {
+	            this.type = type;
+	            this.$element = $(element);
+	            this.options = this.getOptions(options);
+	            this.layout();
+	        },
+	        getOptions: function(options) {
+	            options = $.extend({}, $.fn[this.type].defaults, this.$element.data(), options);
+	            return options;
+	        },
+	        layout: function() {
+	            $('.additem').remove();
+	            this.item();
+	            this.endDecorate();
+	            this.box();
+	        },
+	        item: function() {
+	            var $box = this.$element,
+	                _coord = [],
+	                _num = 0,
+	                _options = this.options,
+	                i = 0,
+	                $items = $box.find(this.options.fallsCss),
+	                fallsWidth = $items.eq(0).outerWidth() + this.options.margin,
+	                boxWidth = $box.outerWidth() + this.options.margin,
+	                _autoWidth = 0;
+	                // 2016-09-20 18:47:42 解决vue 加载后找不到this.$element从而导致windth有错
+	                if (boxWidth < fallsWidth) {
+	                  boxWidth = $(window).width();
+	                }
+	            _num = Math.floor(boxWidth / fallsWidth);
+	            _autoWidth = (boxWidth - _num * fallsWidth) / 2;
+	            for (; i < _num; i++) {
+	                _coord.push([i * fallsWidth, 0]);
+	            }
+	            $items.each(function() {
+	                var $item = $(this),
+	                    fallsHeight = $item.outerHeight() + _options.margin,
+	                    temp = 0;
+
+	                for (i = 0; i < _num; i++) {
+	                    if (_coord[i][1] < _coord[temp][1]) {
+	                        temp = i;
+	                    }
+	                }
+	                $item.stop().animate({
+	                    left: _coord[temp][0] + _autoWidth + 'px',
+	                    top: _coord[temp][1] + 'px'
+	                })
+
+	                _coord[temp][1] += fallsHeight;
+
+
+	                $item.on('mouseenter' + '.' + _options.type, function() {
+	                    $(this).addClass('hover');
+	                })
+	                $item.on('mouseleave' + '.' + _options.type, function() {
+	                    $(this).removeClass('hover');
+	                })
+	            });
+
+	            this.coord = _coord;
+	            this.num = _num;
+	            this.autoWidth = _autoWidth;
+	        },
+	        box: function() {
+	            var me = this;
+	            setTimeout(function () {
+	                me.$element.height(me.getFallsMaxHeight());
+	            });
+	        },
+	        endDecorate: function() {
+	            var _coord = this.coord,
+	                i = 0,
+	                _num = this.num,
+	                fallsMaxHeight = this.getFallsMaxHeight(),
+	                falls = document.createElement('div'),
+	                fallsClone, fallsHeight = 0;
+
+	            falls.className = 'additem';
+	            for (; i < _num; i++) {
+	                if (fallsMaxHeight != _coord[i][1]) {
+	                    fallsClone = falls.cloneNode();
+	                    fallsHeight = fallsMaxHeight - this.options.margin - _coord[i][1];
+	                    // fallsClone.style.cssText = 'left: ' + _coord[i][0] + 'px; ' + 'top: ' + _coord[i][1] + 'px; height: ' + fallsHeight + 'px;';
+
+	                    this.$element.append($(fallsClone).stop().animate({
+	                        left: _coord[i][0] + this.autoWidth + 'px',
+	                        top: _coord[i][1] + 'px',
+	                        height: fallsHeight + 'px'
+	                    }));
+
+	                }
+	            }
+	        },
+	        getFallsMaxHeight: function() {
+	            var maxHeight = 0,
+	                i = 0,
+	                heightArry = [],
+	                _coord = this.coord,
+	                _num = this.num;
+
+	            for (; i < _num; i++) {
+	                heightArry.push(_coord[i][1]);
+	            }
+
+	            heightArry.sort(function(a, b) {
+	                return a - b;
+	            });
+	            return heightArry[_num - 1];
+	        }
+	    }
+
+	    var old = $.fn.cascade;
+
+	    $.fn.cascade = function(option) {
+	        return this.each(function() {
+	            var $this = $(this),
+	                data = $this.data('cascade'),
+	                options = typeof option == 'object' && option;
+	            if (!data) {
+	                $this.data('cascade', data = new Cascade(this, options));
+	                $(window).on('resize.cascade', function() {
+	                    data['layout']();
+	                });
+	            }
+	            if (typeof option == 'string') {
+	                data[option]();
+	            }
+	        });
+	    }
+
+	    $.fn.cascade.Constructor = Cascade;
+
+	    $.fn.cascade.defaults = {
+	        fallsCss: '.item',
+	        margin: 15
+
+	    }
+
+	    $.fn.cascade.noConflict = function() {
+	        $.fn.cascade = old;
+	        return this;
+	    }
+
+
+	}(window.jQuery);
+
+/***/ },
+/* 156 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"ui card item\">\n    <div class=\"ui top left attached label\">\n        <a v-link=\"{ path: '/list/' + waterboxdata.type }\">\n            <i class=\"book icon\"></i>\n            {{{waterboxdata.typeString}}}\n        </a>\n    </div>\n    <div class=\"ui top right attached label\">\n        {{waterboxdata.poem_time}}\n    </div>\n    <a class=\"image\" v-if=\"!!waterboxdata.imgSrc\" v-link=\"{ path: '/p/' + waterboxdata.id }\">\n        <img :src=\"waterboxdata.imgSrc\" class=\"ui wireframe image\">\n    </a>\n    <div class=\"content ui\">\n        <div class=\"ui small feed\">\n            <div class=\"event\">\n                <div class=\"content\">\n                    <h4 class=\"\">\n                        <a v-link=\"{ path: '/p/' + waterboxdata.id }\">{{waterboxdata.title}}</a>\n                    </h4>\n                    <p class=\"description\" v-for=\"item in waterboxdata.lines\" track-by=\"$index\">{{item}}</p>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"content\">\n        <img src=\"http://odflit039.bkt.clouddn.com/14737614892742.pic.jpg?imageView2/2/w/110/h/110/interlace/1/q/100\" class=\"ui avatar image\">\n        <span>{{waterboxdata.userName}}</span>\n        <span class=\"right floated heart-span\">\n            <i class=\"heart like icon\" @click=\"like(waterboxdata.id, waterboxdata.likes)\"></i>\n            <span>{{waterboxdata.likes || 0}}</span>\n        </span>\n        <span class=\"right floated heart-span\" v-if=\"isLoginState\">\n            <a v-link=\"{ path: '/update/' + waterboxdata.id}\"><i class=\"edit icon\"></i>编辑</a>\n        </span>\n    </div>\n</div>";
+
+/***/ },
+/* 157 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @File:      loading
+	 * @Author:    花夏(liubiao01@itoxs.com)
+	 * @Version:   V0.0.1
+	 * @Date:      2016-09-09 21:14:21
+	 */
+	var Vue = __webpack_require__(1);
+	__webpack_require__(158);
+	__webpack_require__(160);
+	module.exports = Vue.extend({
+	    ready: function () {
+	        
+	    },
+	    template: __webpack_require__(162),
+	    data: function () {
+	        return {
+	        };
+	    },
+	    events: {
+	        
+	    },
+	    components: {
+	        
+	    },
+	    watch: {
+	        
+	    },
+	    methods: {
+	        
+	    }
+	});
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(159);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./index.css", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./index.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -15156,13 +15475,13 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 154 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(155);
+	var content = __webpack_require__(161);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -15182,7 +15501,7 @@ webpackJsonp([1,5],Array(28).concat([
 	}
 
 /***/ },
-/* 155 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -15196,13 +15515,13 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 156 */
+/* 162 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"loading\">\n    <div class=\"coffee_cup\">\n        <span class=\"loading-text\">加载中...</span>\n    </div>\n</div>";
 
 /***/ },
-/* 157 */
+/* 163 */
 /***/ function(module, exports) {
 
 	/**
