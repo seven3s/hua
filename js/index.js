@@ -24081,7 +24081,7 @@
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"ui message\" :class=\"infoData.class\" v-if=\"infoData.state\">\n    <i class=\"close icon\" @click=\"close\"></i>\n    <div class=\"header\" v-if=\"infoData.header\">\n        {{infoData.header}}\n    </div>\n    <p>\n        {{infoData.info}}\n    </p>\n</div>";
+	module.exports = "<div :class=\"[ui, message, infoData.class\" v-if=\"infoData.state\">\n    <i class=\"close icon\" @click=\"close\"></i>\n    <div class=\"header\" v-if=\"infoData.header\">\n        {{infoData.header}}\n    </div>\n    <p>\n        {{infoData.info}}\n    </p>\n</div>";
 
 /***/ },
 /* 22 */
