@@ -344,10 +344,10 @@ webpackJsonp([4],{
 
 	        likePoem: function (id, likes) {
 	            if (!this.likesState) {
-	                if (this.waterboxdata.likes === undefined) {
-	                    this.waterboxdata['likes'] = 0;
+	                if (this.poem.likes === undefined) {
+	                    this.poem['likes'] = 0;
 	                }
-	                this.waterboxdata.likes++;
+	                this.poem.likes++;
 	                this.likesState = true;
 	                var num = 0;
 	                var url = '/api/likes';
@@ -407,7 +407,7 @@ webpackJsonp([4],{
 
 
 	// module
-	exports.push([module.id, "#main.w-90 {\n    width: 90%;\n}\n\n.poem-body {\n    \n}\n\n#app .poem-body > * {\n    padding-left: 30px;\n}\n\n.poem-body > .segment.ui {\n    font-size: 1.8rem;\n    font-family: STkaiti,Lato,\"Helvetica Neue\",Arial,Helvetica,sans-serif\n}\n\n#app .ui.label {\n    margin-bottom: 10px;\n}\n#poem-body .image {\n    text-align: center;\n}\n#main img.ui.image {\n    margin: 0 auto;\n}\n.ui.label {\n    z-index: 9;\n}\n#main .footer {\n    padding-left: 30px;\n}\n@media screen and (max-width: 810px) {\n    #main {\n        width: 90%;\n    }\n    .poem-body > .segment.ui {\n        font-size: 1.2rem;\n    }\n}", ""]);
+	exports.push([module.id, "#main.w-90 {\n    width: 90%;\n}\n\n.poem-body {\n    \n}\n\n#app .poem-body > * {\n    padding-left: 30px;\n}\n\n.poem-body > .segment.ui {\n    font-size: 1.8rem;\n    font-family: STkaiti,Lato,\"Helvetica Neue\",Arial,Helvetica,sans-serif\n}\n\n#app .ui.label {\n    margin-bottom: 10px;\n}\n#poem-body .image {\n    text-align: center;\n}\n#main img.ui.image {\n    margin: 0 auto;\n}\n.ui.label {\n    z-index: 9;\n}\n.like.icon {\n    cursor: pointer;\n}\n#main .extra.content {\n    padding-left: 30px;\n    font-size: 1.3rem;\n}\n.ui.vertical.segment:last-child {\n    border: 1px solid rgba(34, 36, 38, 0.15);\n}\n@media screen and (max-width: 810px) {\n    #main {\n        width: 90%;\n    }\n    .poem-body > .segment.ui {\n        font-size: 1.2rem;\n    }\n}", ""]);
 
 	// exports
 
@@ -459,7 +459,7 @@ webpackJsonp([4],{
 /***/ 189:
 /***/ function(module, exports) {
 
-	module.exports = "<div id=\"main\" name=\"poem-form\" class=\"mar-auto w-90\">\n    <v-loading v-if=\"load === 0\"></v-loading>\n    <div class=\"ui tall stacked segment green\" v-else>\n        <span class=\"ui teal ribbon label\">{{poem.title}}</span>\n        <div></div>\n        <a class=\"ui ribbon label\">{{poem.userName}}</a>\n        <div></div>\n        <span class=\"ui right ribbon label\">{{poem.poem_time}}</span>\n        <div></div>\n        <a class=\"ui right ribbon label\" v-link=\"{ path: '/list/' + poem.type }\">{{poem.typeString}}</a>\n        <div class=\"image baguette-img\" v-if=\"!!poem.imgSrc\">\n            <a href=\"javascript:;\" data-at-450=\"{{poem.imgSrc}}\" data-at-800=\"{{poem.imgSrc}}\" data-at-1366=\"{{poem.imgSrc}}\" data-at-1920=\"{{poem.imgSrc}}\" data-caption=\"{{poem.title}}\">\n                <img :src=\"poem.imgSrc\" class=\"ui wireframe image\" alt=\"{{poem.imgSrc}}\">\n            </a>\n        </div>\n        <div class=\"w-80 mar-auto poem-body\" id=\"poem-body\">\n            <p class=\"ui vertical segment\" v-for=\"item in poem.lines\">{{item}}</p>\n        </div>\n        <div class=\"footer\">\n            <span>\n                <span class=\"right floated heart-span\">\n                    <i class=\"heart like icon\" :class=\"{active:likesState}\" @click=\"likePoem(poem.id, poem.likes)\"></i>\n                    <span>{{poem.likes || 0}}</span>\n                </span>\n                <em>·</em>\n            </span>\n        </div>\n    </div>\n</div>";
+	module.exports = "<div id=\"main\" name=\"poem-form\" class=\"mar-auto w-90\">\n    <v-loading v-if=\"load === 0\"></v-loading>\n    <div class=\"ui tall stacked segment green\" v-else>\n        <span class=\"ui teal ribbon label\">{{poem.title}}</span>\n        <div></div>\n        <a class=\"ui ribbon label\">{{poem.userName}}</a>\n        <div></div>\n        <span class=\"ui right ribbon label\">{{poem.poem_time}}</span>\n        <div></div>\n        <a class=\"ui right ribbon label\" v-link=\"{ path: '/list/' + poem.type }\">{{poem.typeString}}</a>\n        <div class=\"image baguette-img\" v-if=\"!!poem.imgSrc\">\n            <a href=\"javascript:;\" data-at-450=\"{{poem.imgSrc}}\" data-at-800=\"{{poem.imgSrc}}\" data-at-1366=\"{{poem.imgSrc}}\" data-at-1920=\"{{poem.imgSrc}}\" data-caption=\"{{poem.title}}\">\n                <img :src=\"poem.imgSrc\" class=\"ui wireframe image\" alt=\"{{poem.imgSrc}}\">\n            </a>\n        </div>\n        <div class=\"w-80 mar-auto poem-body\" id=\"poem-body\">\n            <p class=\"ui vertical segment\" v-for=\"item in poem.lines\">{{item}}</p>\n        </div>\n        <div class=\"extra content\">\n            <span>\n                <i class=\"heart like icon\" :class=\"{active:likesState}\" @click=\"likePoem(poem.id, poem.likes)\"></i>\n                <span>{{poem.likes || 0}}</span>\n            </span>\n        </div>\n    </div>\n</div>";
 
 /***/ }
 
