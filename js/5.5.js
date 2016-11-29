@@ -15056,6 +15056,7 @@ webpackJsonp([5],Array(32).concat([
 	                });
 	            }else {
 	                var infoData = this.$root.$children[0].infoData;
+	                infoData.class = 'negative';
 	                infoData.info = '大才子,你已經點過贊拉!!!';
 	                infoData.state = true;
 	            }
