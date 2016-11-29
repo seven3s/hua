@@ -1,4 +1,4 @@
-<div class="ui message" :class="!!infoData.class ? infoData.class : 'info'">
+<div class="ui message" :class="infoData.class" v-if="infoData.state">
     <i class="close icon" @click="close"></i>
     <div class="header" v-if="infoData.header">
         {{infoData.header}}

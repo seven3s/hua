@@ -8,6 +8,7 @@ var Vue = require('vue');
 require('./index.css');
 require('./cascade.css');
 require('./cascade');
+var restFullLoader = require('../../common/loader');
 module.exports = Vue.extend({
     ready: function () {
         this.init();
@@ -18,14 +19,21 @@ module.exports = Vue.extend({
     template: require('./index.tpl.html'),
     data: function () {
         return {
-            isLoginState: false
+            isLoginState: false,
+            likesState: false,
+            infoData: {
+                class: 'negative',
+                header: '',
+                info: '',
+                state: false
+            }
         };
     },
     events: {
         
     },
     components: {
-        
+        'v-info': require('../../components/v-info/')
     },
     watch: {
     },
@@ -39,6 +47,37 @@ module.exports = Vue.extend({
                 $('.water-full').cascade();
             });
             $(window).trigger('resize.cascade');
+        },
+
+        /**
+         * like 點讚的詩歌
+         *
+         * @param  {String} id 點讚的詩歌id
+         *
+         */
+        like: function  (id, likes) {
+            if (!this.likesState) {
+                if (this.waterboxdata.likes === undefined) {
+                    this.waterboxdata['likes'] = 0;
+                }
+                this.waterboxdata.likes++;
+                this.likesState = true;
+                var num = 0;
+                var url = '/api/likes';
+                var data = {
+                    _id: id,
+                    likes: ++num
+                }
+                restFullLoader.requestPOST(url, data, function (res) {
+                    
+                }, function (err) {
+                    
+                });
+            }else {
+                var infoData = this.infoData;
+                infoData.info = '大才子,你已經點過贊拉!!!';
+                infoData.state = true;
+            }
         }
     }
 });

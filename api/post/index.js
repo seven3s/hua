@@ -27,5 +27,8 @@ module.exports = {
         // 备份诗歌接口
         var backup = require('./backup');
         backup.init(app);
+        // 點讚接口
+        var likes = require('./likes');
+        likes.init(app);
     }
 };
