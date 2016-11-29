@@ -24011,7 +24011,7 @@
 	                this.infoData.autoClose = true;
 	            }
 	            this.close();
-	            if (this.infoData.autoClose && this.infoData.state) {
+	            if (this.infoData.autoClose) {
 	                this.autoClose();
 	            }
 	        },
