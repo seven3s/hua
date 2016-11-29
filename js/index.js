@@ -24070,7 +24070,7 @@
 
 
 	// module
-	exports.push([module.id, ".ui.message{\n    position: absolute;\n    right: 1rem;\n    top: 0;\n }", ""]);
+	exports.push([module.id, ".ui.message{\n    position: fixed;\n    right: 1rem;\n    top: 0;\n    z-index: 9999;\n }", ""]);
 
 	// exports
 
