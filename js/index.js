@@ -24003,7 +24003,13 @@
 	        
 	    },
 	    watch: {
-	        
+	        'infoData.state': {
+	            handler: function (val) {
+	                if (!!val) {
+	                    this.isAutoClose();
+	                }
+	            }
+	        }
 	    },
 	    methods: {
 	        init: function () {
@@ -24011,6 +24017,13 @@
 	                this.infoData.autoClose = true;
 	            }
 	            this.close();
+	        },
+
+	        /**
+	         * isAutoClose 只有自動關閉設置時才自動關係
+	         *
+	         */
+	        isAutoClose: function () {
 	            if (this.infoData.autoClose) {
 	                this.autoClose();
 	            }
