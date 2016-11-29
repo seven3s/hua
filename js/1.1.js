@@ -15133,11 +15133,10 @@ webpackJsonp([1,5],Array(28).concat([
 	         *
 	         */
 	        like: function  (id, likes) {
-	            console.log(this.waterboxdata);
-	            // if (this.waterboxdata.likes === undefined) {
-	            //     this.waterboxdata.likes = 0;
-	            // }
-	            // this.waterboxdata.likes++;
+	            if (this.waterboxdata.likes === undefined) {
+	                this.waterboxdata['likes'] = 0;
+	            }
+	            this.waterboxdata.likes++;
 	            var num = 0;
 	            var url = '/api/likes';
 	            var data = {
