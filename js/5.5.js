@@ -15007,14 +15007,20 @@ webpackJsonp([5],Array(32).concat([
 	    data: function () {
 	        return {
 	            isLoginState: false,
-	            likesState: false
+	            likesState: false,
+	            infoData: {
+	                class: 'negative',
+	                header: '',
+	                info: '',
+	                state: false
+	            }
 	        };
 	    },
 	    events: {
 	        
 	    },
 	    components: {
-	        
+	        'v-info': __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./v-info\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))
 	    },
 	    watch: {
 	    },
@@ -15054,6 +15060,10 @@ webpackJsonp([5],Array(32).concat([
 	                }, function (err) {
 	                    
 	                });
+	            }else {
+	                var infoData = this.infoData;
+	                infoData.info = '大才子,你已經點過贊拉!!!';
+	                infoData.state = true;
 	            }
 	        }
 	    }
@@ -15303,7 +15313,7 @@ webpackJsonp([5],Array(32).concat([
 /* 156 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"ui card item\">\n    <div class=\"ui top left attached label\">\n        <a v-link=\"{ path: '/list/' + waterboxdata.type }\">\n            <i class=\"book icon\"></i>\n            {{{waterboxdata.typeString}}}\n        </a>\n    </div>\n    <div class=\"ui top right attached label\">\n        {{waterboxdata.poem_time}}\n    </div>\n    <a class=\"image\" v-if=\"!!waterboxdata.imgSrc\" v-link=\"{ path: '/p/' + waterboxdata.id }\">\n        <img :src=\"waterboxdata.imgSrc\" class=\"ui wireframe image\">\n    </a>\n    <div class=\"content ui\">\n        <div class=\"ui small feed\">\n            <div class=\"event\">\n                <div class=\"content\">\n                    <h4 class=\"\">\n                        <a v-link=\"{ path: '/p/' + waterboxdata.id }\">{{waterboxdata.title}}</a>\n                    </h4>\n                    <p class=\"description\" v-for=\"item in waterboxdata.lines\" track-by=\"$index\">{{item}}</p>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"content\">\n        <img src=\"http://odflit039.bkt.clouddn.com/14737614892742.pic.jpg?imageView2/2/w/110/h/110/interlace/1/q/100\" class=\"ui avatar image\">\n        <span>{{waterboxdata.userName}}</span>\n        <span class=\"right floated heart-span\">\n            <i class=\"heart like icon\" :class=\"{active:likesState}\" @click=\"like(waterboxdata.id, waterboxdata.likes)\"></i>\n            <span>{{waterboxdata.likes || 0}}</span>\n        </span>\n        <span class=\"right floated heart-span\" v-if=\"isLoginState\">\n            <a v-link=\"{ path: '/update/' + waterboxdata.id}\"><i class=\"edit icon\"></i>编辑</a>\n        </span>\n    </div>\n</div>";
+	module.exports = "<div class=\"ui card item\">\n    <div class=\"ui top left attached label\">\n        <a v-link=\"{ path: '/list/' + waterboxdata.type }\">\n            <i class=\"book icon\"></i>\n            {{{waterboxdata.typeString}}}\n        </a>\n    </div>\n    <div class=\"ui top right attached label\">\n        {{waterboxdata.poem_time}}\n    </div>\n    <a class=\"image\" v-if=\"!!waterboxdata.imgSrc\" v-link=\"{ path: '/p/' + waterboxdata.id }\">\n        <img :src=\"waterboxdata.imgSrc\" class=\"ui wireframe image\">\n    </a>\n    <div class=\"content ui\">\n        <div class=\"ui small feed\">\n            <div class=\"event\">\n                <div class=\"content\">\n                    <h4 class=\"\">\n                        <a v-link=\"{ path: '/p/' + waterboxdata.id }\">{{waterboxdata.title}}</a>\n                    </h4>\n                    <p class=\"description\" v-for=\"item in waterboxdata.lines\" track-by=\"$index\">{{item}}</p>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"content\">\n        <img src=\"http://odflit039.bkt.clouddn.com/14737614892742.pic.jpg?imageView2/2/w/110/h/110/interlace/1/q/100\" class=\"ui avatar image\">\n        <span>{{waterboxdata.userName}}</span>\n        <span class=\"right floated heart-span\">\n            <i class=\"heart like icon\" :class=\"{active:likesState}\" @click=\"like(waterboxdata.id, waterboxdata.likes)\"></i>\n            <span>{{waterboxdata.likes || 0}}</span>\n        </span>\n        <span class=\"right floated heart-span\" v-if=\"isLoginState\">\n            <a v-link=\"{ path: '/update/' + waterboxdata.id}\"><i class=\"edit icon\"></i>编辑</a>\n        </span>\n    </div>\n</div>\n<v-info></v-info>";
 
 /***/ },
 /* 157 */
