@@ -15020,7 +15020,7 @@ webpackJsonp([5],Array(32).concat([
 	        
 	    },
 	    components: {
-	        'v-info': __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./v-info\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))
+	        'v-info': __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./v-info/\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))
 	    },
 	    watch: {
 	    },
