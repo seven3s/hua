@@ -196,8 +196,12 @@ webpackJsonp([5],Array(32).concat([
 	            var loadMore = me.$data.loadMore;
 	            var endTime = me.$data.endTime;
 	            var endPoemsTime = me.$data.endPoemsTimeObj.endPoemsTime;
+	            // 是list頁面
+	            var url = me.$route.path;
+	            var reg = /\/list\//;
+	            var isList = reg.test(url);
 	            if (
-	                util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime) {
+	                util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList) {
 	                me.$data.loadMore = 1;
 	                me.loadListData(param, function(json) {
 	                    var data = json.data;
