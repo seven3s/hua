@@ -15053,7 +15053,7 @@ webpackJsonp([5],Array(32).concat([
 	                restFullLoader.requestPOST(url, data, function (res) {
 	                    
 	                }, function (err) {
-	                    this.likesState = true;
+	                    me.likesState = true;
 	                });
 	            }else {
 	                var infoData = this.$root.$children[0].infoData;
