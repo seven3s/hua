@@ -24070,7 +24070,7 @@
 
 
 	// module
-	exports.push([module.id, ".ui.message{\n    position: fixed;\n    right: 1rem;\n    top: 0;\n    z-index: 9999;\n }", ""]);
+	exports.push([module.id, ".ui.message{\n    position: fixed;\n    right: 1rem;\n    top: 0;\n    z-index: 99999;\n }", ""]);
 
 	// exports
 
@@ -24079,7 +24079,7 @@
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"ui message\" :class=\"['info', infoData.class]\">\n    <i class=\"close icon\" @click=\"close\"></i>\n    <div class=\"header\" v-if=\"infoData.header\">\n        {{infoData.header}}\n    </div>\n    <p>\n        {{infoData.info}}\n    </p>\n</div>";
+	module.exports = "<div class=\"ui message\" :class=\"infoData.class\">\n    <i class=\"close icon\" @click=\"close\"></i>\n    <div class=\"header\" v-if=\"infoData.header\">\n        {{infoData.header}}\n    </div>\n    <p>\n        {{infoData.info}}\n    </p>\n</div>";
 
 /***/ },
 /* 22 */
