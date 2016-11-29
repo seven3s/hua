@@ -95,7 +95,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 157:
+/***/ 151:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -105,13 +105,13 @@ webpackJsonp([4],{
 	 * @Date:      2016-09-09 21:14:21
 	 */
 	var Vue = __webpack_require__(1);
-	__webpack_require__(158);
-	__webpack_require__(160);
+	__webpack_require__(152);
+	__webpack_require__(154);
 	module.exports = Vue.extend({
 	    ready: function () {
 	        
 	    },
-	    template: __webpack_require__(162),
+	    template: __webpack_require__(156),
 	    data: function () {
 	        return {
 	        };
@@ -132,13 +132,13 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 158:
+/***/ 152:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(159);
+	var content = __webpack_require__(153);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -159,7 +159,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 159:
+/***/ 153:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -174,13 +174,13 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 160:
+/***/ 154:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(161);
+	var content = __webpack_require__(155);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -201,7 +201,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 161:
+/***/ 155:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -216,14 +216,14 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 162:
+/***/ 156:
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"loading\">\n    <div class=\"coffee_cup\">\n        <span class=\"loading-text\">加载中...</span>\n    </div>\n</div>";
 
 /***/ },
 
-/***/ 163:
+/***/ 157:
 /***/ function(module, exports) {
 
 	/**
@@ -250,7 +250,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 184:
+/***/ 178:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -260,16 +260,16 @@ webpackJsonp([4],{
 	 * @Date:      2016-09-08 18:14:59
 	 */
 	var Vue = __webpack_require__(1);
-	__webpack_require__(185);
+	__webpack_require__(179);
 	var type_id =__webpack_require__(35);
 	var title = __webpack_require__(36);
-	__webpack_require__(187);
+	__webpack_require__(181);
 	var restFullLoader = __webpack_require__(15);
 	module.exports = Vue.extend({
 	    ready: function () {
 	        this.init();
 	    },
-	    template: __webpack_require__(189),
+	    template: __webpack_require__(183),
 	    data: function () {
 	        return {
 	            load: 0,
@@ -280,7 +280,7 @@ webpackJsonp([4],{
 	        
 	    },
 	    components: {
-	        'v-loading': __webpack_require__(157)
+	        'v-loading': __webpack_require__(151)
 	    },
 	    watch: {
 	        
@@ -365,7 +365,7 @@ webpackJsonp([4],{
 	                poem.title = data.title;
 	                title.setTitle(data.title);
 	                poem.userName = data.userName;
-	                var swicthPoemType = __webpack_require__(163);
+	                var swicthPoemType = __webpack_require__(157);
 	                poem.type = type_id.getTypeOfId(data.poem_type);
 	                poem.typeString = swicthPoemType(data.poem_type);
 	                poem.poem_time = data.poem_time;
@@ -390,13 +390,13 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 185:
+/***/ 179:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(186);
+	var content = __webpack_require__(180);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -417,7 +417,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 186:
+/***/ 180:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -432,13 +432,13 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 187:
+/***/ 181:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(188);
+	var content = __webpack_require__(182);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -459,7 +459,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 188:
+/***/ 182:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -474,7 +474,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 189:
+/***/ 183:
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"main\" name=\"poem-form\" class=\"mar-auto w-90\">\n    <v-loading v-if=\"load === 0\"></v-loading>\n    <div class=\"ui tall stacked segment green\" v-else>\n        <span class=\"ui teal ribbon label\">{{poem.title}}</span>\n        <div></div>\n        <a class=\"ui ribbon label\">{{poem.userName}}</a>\n        <div></div>\n        <span class=\"ui right ribbon label\">{{poem.poem_time}}</span>\n        <div></div>\n        <a class=\"ui right ribbon label\" v-link=\"{ path: '/list/' + poem.type }\">{{poem.typeString}}</a>\n        <div class=\"image baguette-img\" v-if=\"!!poem.imgSrc\">\n            <a href=\"javascript:;\"\n            data-at-450=\"{{poem.imgSrc}}\"\n            data-at-800=\"{{poem.imgSrc}}\"\n            data-at-1366=\"{{poem.imgSrc}}\"\n            data-at-1920=\"{{poem.imgSrc}}\" data-caption=\"{{poem.title}}\">\n                <img :src=\"poem.imgSrc\" class=\"ui wireframe image\" alt=\"{{poem.imgSrc}}\">\n            </a>\n        </div>\n        <div class=\"w-80 mar-auto poem-body\" id=\"poem-body\">\n            <p class=\"ui vertical segment\" v-for=\"item in poem.lines\">{{item}}</p>\n        </div>\n    </div>\n</div>\n";
