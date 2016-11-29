@@ -15036,7 +15036,7 @@ webpackJsonp([5],Array(32).concat([
 	         * @param  {String} id 點讚的詩歌id
 	         *
 	         */
-	        like: function  (id, likes) {
+	        like: function (id, likes) {
 	            if (!this.likesState) {
 	                if (this.waterboxdata.likes === undefined) {
 	                    this.waterboxdata['likes'] = 0;
