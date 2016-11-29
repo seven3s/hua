@@ -24036,7 +24036,7 @@
 	        autoClose: function () {
 	            var me = this;
 	            setTimeout(function () {
-	                $('.message .close').trigger('click');
+	                me.infoData.state = false;
 	            }, 1854);
 	        },
 
