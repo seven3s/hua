@@ -15152,7 +15152,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                    
 	                });
 	            }else {
-	                var infoData = this.infoData;
+	                var infoData = this.$root.$children[0].infoData;
 	                infoData.info = '大才子,你已經點過贊拉!!!';
 	                infoData.state = true;
 	            }
