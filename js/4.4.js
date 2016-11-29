@@ -327,6 +327,7 @@ webpackJsonp([4],{
 	                poem.poem_time = data.poem_time;
 	                poem.imgSrc = data.poem_imgSrc;
 	                poem.lines = data.poem_lines;
+	                poem.likes = data.likes;
 	                poem.id = data.id;
 	                me.$data.poem = poem;
 	                me.$data.load = 1;
