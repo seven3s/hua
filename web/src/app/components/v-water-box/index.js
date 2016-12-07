@@ -6,8 +6,9 @@
  */
 var Vue = require('vue');
 require('./index.css');
-require('./cascade.css');
-require('./cascade');
+// require('./cascade.css');
+// require('./cascade');
+var Masonry = require('masonry-layout');
 var restFullLoader = require('../../common/loader');
 module.exports = Vue.extend({
     ready: function () {
@@ -37,10 +38,17 @@ module.exports = Vue.extend({
             // setTimeout(function () {
             //     $('.water-full').cascade();
             // });
-            this.$nextTick(function () {
-                $('.water-full').cascade();
+            // this.$nextTick(function () {
+            //     $('.water-full').cascade();
+            // });
+            // $(window).trigger('resize.cascade');
+            var elem = document.querySelector('.water-full');
+            var msnry = new Masonry(elem, {
+                // options
+                itemSelector: '.item',
+                layoutMode: 'fitRows',
+                columnWidth: 290
             });
-            $(window).trigger('resize.cascade');
         },
 
         /**
