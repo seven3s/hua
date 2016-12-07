@@ -15033,6 +15033,7 @@ webpackJsonp([5],Array(32).concat([
 	            var msnry = new Masonry(elem, {
 	                // options
 	                itemSelector: '.item',
+	                layoutMode: 'fitRows',
 	                columnWidth: 290
 	            });
 	        },
