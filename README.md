@@ -21,7 +21,6 @@
 > 5.部署空间：使用的是[heroku](https://www.heroku.com/),这个也是免费的，唯一的缺点就是每隔一个小时它会休眠，再次访问时会重新唤起它，所以会显得慢点，当然对于访问量的站点没事，对于自己使用的关系并不大吧，关键是好用，免费，国内再也找不出了，难道为了部署各nodejs买阿里云那么贵得服务器？
 
 ### 注意事项：
-
 > 1.对于前端VUE框架开发时，使用 www.xx.xxx/#!/aedasdad 跳转到www.xx.xxx/#!/daffsdss 这样的链接时，他不会触发数据渲染模板，此时需要 ,具体看查看[vue-router](http://router.vuejs.org/zh-cn/pipeline/data.html)文档
 
 ```javascript
