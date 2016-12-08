@@ -142,7 +142,7 @@ webpackJsonp([1,5],Array(28).concat([
 	    },
 	    components: {
 	        'v-water-list': __webpack_require__(146),
-	        'v-loading': __webpack_require__(162)
+	        'v-loading': __webpack_require__(163)
 	    },
 	    watch: {
 	        
@@ -225,7 +225,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                    var poem = {};
 	                    poem.title = item.title;
 	                    poem.userName = item.userName;
-	                    var swicthPoemType = __webpack_require__(168);
+	                    var swicthPoemType = __webpack_require__(169);
 	                    poem.typeString = swicthPoemType(item.poem_type);
 	                    poem.type = type_id.getTypeOfId(item.poem_type);
 	                    poem.poem_time = item.poem_time;
@@ -344,7 +344,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                var poem = {};
 	                poem.title = item.title;
 	                poem.userName = item.userName;
-	                var swicthPoemType = __webpack_require__(168);
+	                var swicthPoemType = __webpack_require__(169);
 	                poem.typeString = swicthPoemType(item.poem_type);
 	                poem.type = type_id.getTypeOfId(item.poem_type);
 	                poem.poem_time = item.poem_time;
@@ -15092,8 +15092,9 @@ webpackJsonp([1,5],Array(28).concat([
 	__webpack_require__(151);
 	// require('./cascade.css');
 	// require('./cascade');
-	var Masonry = __webpack_require__(153);
-	var AnimOnScroll = __webpack_require__(160);
+	__webpack_require__(153);
+	var Masonry = __webpack_require__(154);
+	var AnimOnScroll = __webpack_require__(161);
 	var restFullLoader = __webpack_require__(15);
 	module.exports = Vue.extend({
 	    ready: function () {
@@ -15102,7 +15103,7 @@ webpackJsonp([1,5],Array(28).concat([
 	    props: {
 	        waterboxdata: {}
 	    },
-	    template: __webpack_require__(161),
+	    template: __webpack_require__(162),
 	    data: function () {
 	        return {
 	            isLoginState: false,
@@ -15236,6 +15237,293 @@ webpackJsonp([1,5],Array(28).concat([
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	 * imagesLoaded v3.0.2
+	 * JavaScript is all like "You images are done yet or what?"
+	 */
+
+	( function( window ) {
+
+	'use strict';
+
+	var $ = window.jQuery;
+	var console = window.console;
+	var hasConsole = typeof console !== 'undefined';
+
+	// -------------------------- helpers -------------------------- //
+
+	// extend objects
+	function extend( a, b ) {
+	  for ( var prop in b ) {
+	    a[ prop ] = b[ prop ];
+	  }
+	  return a;
+	}
+
+	var objToString = Object.prototype.toString;
+	function isArray( obj ) {
+	  return objToString.call( obj ) === '[object Array]';
+	}
+
+	// turn element or nodeList into an array
+	function makeArray( obj ) {
+	  var ary = [];
+	  if ( isArray( obj ) ) {
+	    // use object if already an array
+	    ary = obj;
+	  } else if ( typeof obj.length === 'number' ) {
+	    // convert nodeList to array
+	    for ( var i=0, len = obj.length; i < len; i++ ) {
+	      ary.push( obj[i] );
+	    }
+	  } else {
+	    // array of single index
+	    ary.push( obj );
+	  }
+	  return ary;
+	}
+
+	// --------------------------  -------------------------- //
+
+	function defineImagesLoaded( EventEmitter, eventie ) {
+
+	  /**
+	   * @param {Array, Element, NodeList, String} elem
+	   * @param {Object or Function} options - if function, use as callback
+	   * @param {Function} onAlways - callback function
+	   */
+	  function ImagesLoaded( elem, options, onAlways ) {
+	    // coerce ImagesLoaded() without new, to be new ImagesLoaded()
+	    if ( !( this instanceof ImagesLoaded ) ) {
+	      return new ImagesLoaded( elem, options );
+	    }
+	    // use elem as selector string
+	    if ( typeof elem === 'string' ) {
+	      elem = document.querySelectorAll( elem );
+	    }
+
+	    this.elements = makeArray( elem );
+	    this.options = extend( {}, this.options );
+
+	    if ( typeof options === 'function' ) {
+	      onAlways = options;
+	    } else {
+	      extend( this.options, options );
+	    }
+
+	    if ( onAlways ) {
+	      this.on( 'always', onAlways );
+	    }
+
+	    this.getImages();
+
+	    if ( $ ) {
+	      // add jQuery Deferred object
+	      this.jqDeferred = new $.Deferred();
+	    }
+
+	    // HACK check async to allow time to bind listeners
+	    var _this = this;
+	    setTimeout( function() {
+	      _this.check();
+	    });
+	  }
+
+	  ImagesLoaded.prototype = new EventEmitter();
+
+	  ImagesLoaded.prototype.options = {};
+
+	  ImagesLoaded.prototype.getImages = function() {
+	    this.images = [];
+
+	    // filter & find items if we have an item selector
+	    for ( var i=0, len = this.elements.length; i < len; i++ ) {
+	      var elem = this.elements[i];
+	      // filter siblings
+	      if ( elem.nodeName === 'IMG' ) {
+	        this.addImage( elem );
+	      }
+	      // find children
+	      var childElems = elem.querySelectorAll('img');
+	      // concat childElems to filterFound array
+	      for ( var j=0, jLen = childElems.length; j < jLen; j++ ) {
+	        var img = childElems[j];
+	        this.addImage( img );
+	      }
+	    }
+	  };
+
+	  /**
+	   * @param {Image} img
+	   */
+	  ImagesLoaded.prototype.addImage = function( img ) {
+	    var loadingImage = new LoadingImage( img );
+	    this.images.push( loadingImage );
+	  };
+
+	  ImagesLoaded.prototype.check = function() {
+	    var _this = this;
+	    var checkedCount = 0;
+	    var length = this.images.length;
+	    this.hasAnyBroken = false;
+	    // complete if no images
+	    if ( !length ) {
+	      this.complete();
+	      return;
+	    }
+
+	    function onConfirm( image, message ) {
+	      if ( _this.options.debug && hasConsole ) {
+	        console.log( 'confirm', image, message );
+	      }
+
+	      _this.progress( image );
+	      checkedCount++;
+	      if ( checkedCount === length ) {
+	        _this.complete();
+	      }
+	      return true; // bind once
+	    }
+
+	    for ( var i=0; i < length; i++ ) {
+	      var loadingImage = this.images[i];
+	      loadingImage.on( 'confirm', onConfirm );
+	      loadingImage.check();
+	    }
+	  };
+
+	  ImagesLoaded.prototype.progress = function( image ) {
+	    this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
+	    this.emit( 'progress', this, image );
+	    if ( this.jqDeferred ) {
+	      this.jqDeferred.notify( this, image );
+	    }
+	  };
+
+	  ImagesLoaded.prototype.complete = function() {
+	    var eventName = this.hasAnyBroken ? 'fail' : 'done';
+	    this.isComplete = true;
+	    this.emit( eventName, this );
+	    this.emit( 'always', this );
+	    if ( this.jqDeferred ) {
+	      var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
+	      this.jqDeferred[ jqMethod ]( this );
+	    }
+	  };
+
+	  // -------------------------- jquery -------------------------- //
+
+	  if ( $ ) {
+	    $.fn.imagesLoaded = function( options, callback ) {
+	      var instance = new ImagesLoaded( this, options, callback );
+	      return instance.jqDeferred.promise( $(this) );
+	    };
+	  }
+
+
+	  // --------------------------  -------------------------- //
+
+	  var cache = {};
+
+	  function LoadingImage( img ) {
+	    this.img = img;
+	  }
+
+	  LoadingImage.prototype = new EventEmitter();
+
+	  LoadingImage.prototype.check = function() {
+	    // first check cached any previous images that have same src
+	    var cached = cache[ this.img.src ];
+	    if ( cached ) {
+	      this.useCached( cached );
+	      return;
+	    }
+	    // add this to cache
+	    cache[ this.img.src ] = this;
+
+	    // If complete is true and browser supports natural sizes,
+	    // try to check for image status manually.
+	    if ( this.img.complete && this.img.naturalWidth !== undefined ) {
+	      // report based on naturalWidth
+	      this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+	      return;
+	    }
+
+	    // If none of the checks above matched, simulate loading on detached element.
+	    var proxyImage = this.proxyImage = new Image();
+	    eventie.bind( proxyImage, 'load', this );
+	    eventie.bind( proxyImage, 'error', this );
+	    proxyImage.src = this.img.src;
+	  };
+
+	  LoadingImage.prototype.useCached = function( cached ) {
+	    if ( cached.isConfirmed ) {
+	      this.confirm( cached.isLoaded, 'cached was confirmed' );
+	    } else {
+	      var _this = this;
+	      cached.on( 'confirm', function( image ) {
+	        _this.confirm( image.isLoaded, 'cache emitted confirmed' );
+	        return true; // bind once
+	      });
+	    }
+	  };
+
+	  LoadingImage.prototype.confirm = function( isLoaded, message ) {
+	    this.isConfirmed = true;
+	    this.isLoaded = isLoaded;
+	    this.emit( 'confirm', this, message );
+	  };
+
+	  // trigger specified handler for event type
+	  LoadingImage.prototype.handleEvent = function( event ) {
+	    var method = 'on' + event.type;
+	    if ( this[ method ] ) {
+	      this[ method ]( event );
+	    }
+	  };
+
+	  LoadingImage.prototype.onload = function() {
+	    this.confirm( true, 'onload' );
+	    this.unbindProxyEvents();
+	  };
+
+	  LoadingImage.prototype.onerror = function() {
+	    this.confirm( false, 'onerror' );
+	    this.unbindProxyEvents();
+	  };
+
+	  LoadingImage.prototype.unbindProxyEvents = function() {
+	    eventie.unbind( this.proxyImage, 'load', this );
+	    eventie.unbind( this.proxyImage, 'error', this );
+	  };
+
+	  // -----  ----- //
+
+	  return ImagesLoaded;
+	}
+
+	// -------------------------- transport -------------------------- //
+
+	if ( true ) {
+	  // AMD
+	  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+	      !(function webpackMissingModule() { var e = new Error("Cannot find module \"eventEmitter\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
+	      !(function webpackMissingModule() { var e = new Error("Cannot find module \"eventie\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+	    ], __WEBPACK_AMD_DEFINE_FACTORY__ = (defineImagesLoaded), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+	  // browser global
+	  window.imagesLoaded = defineImagesLoaded(
+	    window.EventEmitter,
+	    window.eventie
+	  );
+	}
+
+	})( window );
+
+/***/ },
+/* 154 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	 * Masonry v4.1.1
 	 * Cascading grid layout library
 	 * http://masonry.desandro.com
@@ -15249,8 +15537,8 @@ webpackJsonp([1,5],Array(28).concat([
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(154),
-	        __webpack_require__(156)
+	        __webpack_require__(155),
+	        __webpack_require__(157)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
@@ -15442,7 +15730,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15458,10 +15746,10 @@ webpackJsonp([1,5],Array(28).concat([
 	  if ( true ) {
 	    // AMD - RequireJS
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(155),
 	        __webpack_require__(156),
 	        __webpack_require__(157),
-	        __webpack_require__(159)
+	        __webpack_require__(158),
+	        __webpack_require__(160)
 	      ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EvEmitter, getSize, utils, Item ) {
 	        return factory( window, EvEmitter, getSize, utils, Item);
 	      }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -16385,7 +16673,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -16500,7 +16788,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -16715,7 +17003,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 157 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -16732,7 +17020,7 @@ webpackJsonp([1,5],Array(28).concat([
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(158)
+	      __webpack_require__(159)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( matchesSelector ) {
 	      return factory( window, matchesSelector );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -16958,7 +17246,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 158 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17017,7 +17305,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17030,8 +17318,8 @@ webpackJsonp([1,5],Array(28).concat([
 	  if ( true ) {
 	    // AMD - RequireJS
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(155),
-	        __webpack_require__(156)
+	        __webpack_require__(156),
+	        __webpack_require__(157)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS - Browserify, Webpack
@@ -17574,7 +17862,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports) {
 
 	/**
@@ -17757,13 +18045,13 @@ webpackJsonp([1,5],Array(28).concat([
 	} )( window );
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"ui card item\">\n    <div class=\"ui top left attached label\">\n        <a v-link=\"{ path: '/list/' + waterboxdata.type }\">\n            <i class=\"book icon\"></i> {{{waterboxdata.typeString}}}\n        </a>\n    </div>\n    <div class=\"ui top right attached label\">\n        {{waterboxdata.poem_time}}\n    </div>\n    <a class=\"image\" v-if=\"!!waterboxdata.imgSrc\" v-link=\"{ path: '/p/' + waterboxdata.id }\">\n        <img :src=\"waterboxdata.imgSrc\" class=\"ui wireframe image\">\n    </a>\n    <div class=\"content ui\">\n        <div class=\"ui small feed\">\n            <div class=\"event\">\n                <div class=\"content\">\n                    <h4 class=\"\">\n                        <a v-link=\"{ path: '/p/' + waterboxdata.id }\">{{waterboxdata.title}}</a>\n                    </h4>\n                    <p class=\"description\" v-for=\"item in waterboxdata.lines\" track-by=\"$index\">{{item}}</p>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"content\">\n        <img src=\"http://odflit039.bkt.clouddn.com/14737614892742.pic.jpg?imageView2/2/w/110/h/110/interlace/1/q/100\" class=\"ui avatar image\">\n        <span>{{waterboxdata.userName}}</span>\n        <span class=\"right floated heart-span\">\n            <i class=\"heart like icon\" :class=\"{active:likesState}\" @click=\"like(waterboxdata.id, waterboxdata.likes)\"></i>\n            <span>{{waterboxdata.likes || 0}}</span>\n        </span>\n        <span class=\"right floated heart-span\" v-if=\"isLoginState\">\n            <a v-link=\"{ path: '/update/' + waterboxdata.id}\"><i class=\"edit icon\"></i>编辑</a>\n        </span>\n    </div>\n</div>";
 
 /***/ },
-/* 162 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17773,13 +18061,13 @@ webpackJsonp([1,5],Array(28).concat([
 	 * @Date:      2016-09-09 21:14:21
 	 */
 	var Vue = __webpack_require__(1);
-	__webpack_require__(163);
-	__webpack_require__(165);
+	__webpack_require__(164);
+	__webpack_require__(166);
 	module.exports = Vue.extend({
 	    ready: function () {
 	        
 	    },
-	    template: __webpack_require__(167),
+	    template: __webpack_require__(168),
 	    data: function () {
 	        return {
 	        };
@@ -17799,13 +18087,13 @@ webpackJsonp([1,5],Array(28).concat([
 	});
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(164);
+	var content = __webpack_require__(165);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -17825,7 +18113,7 @@ webpackJsonp([1,5],Array(28).concat([
 	}
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -17839,13 +18127,13 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(166);
+	var content = __webpack_require__(167);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -17865,7 +18153,7 @@ webpackJsonp([1,5],Array(28).concat([
 	}
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -17879,13 +18167,13 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"loading\">\n    <div class=\"coffee_cup\">\n        <span class=\"loading-text\">加载中...</span>\n    </div>\n</div>";
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports) {
 
 	/**
