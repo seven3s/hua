@@ -15131,7 +15131,9 @@ webpackJsonp([1,5],Array(28).concat([
 	                // options
 	                itemSelector: '.item',
 	                layoutMode: 'fitRows',
-	                columnWidth: 290
+	                gutter: 20, // 內容塊之間的間距
+	                columnWidth: 290,
+	                isAnimated: true
 	            });
 	        },
 
