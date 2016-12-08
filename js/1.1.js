@@ -15119,13 +15119,21 @@ webpackJsonp([1,5],Array(28).concat([
 	    methods: {
 	        init: function () {
 	            this.$data.isLoginState = Vue.auth;
-	            var $container = $('.water-full');
-	            var msnry = new Masonry($container, {
+	            // setTimeout(function () {
+	            //     $('.water-full').cascade();
+	            // });
+	            // this.$nextTick(function () {
+	            //     $('.water-full').cascade();
+	            // });
+	            // $(window).trigger('resize.cascade');
+	            var elem = document.querySelector('.water-full');
+	            var msnry = new Masonry(elem, {
 	                // options
 	                itemSelector: '.item',
 	                layoutMode: 'fitRows',
 	                gutter: 20, // 內容塊之間的間距
-	                columnWidth: 290
+	                columnWidth: 290,
+	                isAnimated: true
 	            });
 	        },
 
