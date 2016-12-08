@@ -15076,7 +15076,7 @@ webpackJsonp([1,5],Array(28).concat([
 /* 149 */
 /***/ function(module, exports) {
 
-	module.exports = "<v-water-box :waterboxdata=\"item\" v-for=\"item in waterdata\" class=\"brand-bd cle\"></v-water-box>";
+	module.exports = "<div class=\"brand-list clearfix\">\n    <v-water-box :waterboxdata=\"item\" v-for=\"item in waterdata\" class=\"brand-bd cle\"></v-water-box>\n</div>";
 
 /***/ },
 /* 150 */
