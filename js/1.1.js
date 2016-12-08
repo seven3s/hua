@@ -15136,7 +15136,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                isAnimated: true,
 	                fitWidth: true, // 设置网格容器宽度等于网格宽度，这样配合css的auto margin实现居中显示
 	                transitionDuration: '0.8s', // 改变位置或变为显示后，重布局变换的持续时间，时间格式为css的时间格式
-	                resize: true // 改变窗口大小将不会影响布局
+	                resize: false // 改变窗口大小将不会影响布局
 	            });
 	        },
 
@@ -15211,7 +15211,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 	// module
-	exports.push([module.id, "#main {\n    position: relative;\n}\n\n#main a.image {\n    margin-top: 40px;\n    border-radius: 0!important;\n}\n\nimg.image {\n    border: 1px solid #d4d4d4;\n}\n\n.ui.card {\n    margin: 0 0 20px 1%;\n}\n\n.ui.card > .content.ui {\n    border-top: none;\n}\n\n.heart-span {\n    margin: 5px 0 0 5px;\n}\n\n.content.ui > .ui.feed {\n    padding: 18px;\n}\n\n.ui.feed > .event {\n    margin-top: 16px;\n}", ""]);
+	exports.push([module.id, "#main {\n    position: relative;\n}\n\n#main a.image {\n    margin-top: 40px;\n    border-radius: 0!important;\n}\n\nimg.image {\n    border: 1px solid #d4d4d4;\n}\n\n.ui.card {\n    margin: 0 0 20px 0.5%;\n}\n\n.ui.card > .content.ui {\n    border-top: none;\n}\n\n.heart-span {\n    margin: 5px 0 0 5px;\n}\n\n.content.ui > .ui.feed {\n    padding: 18px;\n}\n\n.ui.feed > .event {\n    margin-top: 16px;\n}", ""]);
 
 	// exports
 
