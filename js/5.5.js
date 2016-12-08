@@ -14995,7 +14995,7 @@ webpackJsonp([5],Array(32).concat([
 	__webpack_require__(151);
 	// require('./cascade.css');
 	// require('./cascade');
-	__webpack_require__(153);
+	var Masonry = __webpack_require__(153);
 	var restFullLoader = __webpack_require__(15);
 	module.exports = Vue.extend({
 	    ready: function () {
@@ -15022,8 +15022,8 @@ webpackJsonp([5],Array(32).concat([
 	    methods: {
 	        init: function () {
 	            this.$data.isLoginState = Vue.auth;
-	            var elem = $('.water-full');
-	            elem.masonry({
+	            var elem = document.querySelector('.water-full');
+	            var msnry = new Masonry(elem, {
 	                // options
 	                itemSelector: '.item',
 	                layoutMode: 'fitRows',
