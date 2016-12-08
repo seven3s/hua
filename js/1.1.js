@@ -142,7 +142,7 @@ webpackJsonp([1,5],Array(28).concat([
 	    },
 	    components: {
 	        'v-water-list': __webpack_require__(146),
-	        'v-loading': __webpack_require__(163)
+	        'v-loading': __webpack_require__(162)
 	    },
 	    watch: {
 	        
@@ -225,7 +225,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                    var poem = {};
 	                    poem.title = item.title;
 	                    poem.userName = item.userName;
-	                    var swicthPoemType = __webpack_require__(169);
+	                    var swicthPoemType = __webpack_require__(168);
 	                    poem.typeString = swicthPoemType(item.poem_type);
 	                    poem.type = type_id.getTypeOfId(item.poem_type);
 	                    poem.poem_time = item.poem_time;
@@ -344,7 +344,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                var poem = {};
 	                poem.title = item.title;
 	                poem.userName = item.userName;
-	                var swicthPoemType = __webpack_require__(169);
+	                var swicthPoemType = __webpack_require__(168);
 	                poem.typeString = swicthPoemType(item.poem_type);
 	                poem.type = type_id.getTypeOfId(item.poem_type);
 	                poem.poem_time = item.poem_time;
@@ -15094,7 +15094,7 @@ webpackJsonp([1,5],Array(28).concat([
 	// require('./cascade');
 	__webpack_require__(153);
 	var Masonry = __webpack_require__(154);
-	var AnimOnScroll = __webpack_require__(161);
+	// var AnimOnScroll = require('./animonscroll.js');
 	var restFullLoader = __webpack_require__(15);
 	module.exports = Vue.extend({
 	    ready: function () {
@@ -15103,7 +15103,7 @@ webpackJsonp([1,5],Array(28).concat([
 	    props: {
 	        waterboxdata: {}
 	    },
-	    template: __webpack_require__(162),
+	    template: __webpack_require__(161),
 	    data: function () {
 	        return {
 	            isLoginState: false,
@@ -17865,193 +17865,10 @@ webpackJsonp([1,5],Array(28).concat([
 /* 161 */
 /***/ function(module, exports) {
 
-	/**
-	 * animOnScroll.js v1.0.0
-	 * http://www.codrops.com
-	 *
-	 * Licensed under the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.php
-	 * 
-	 * Copyright 2013, Codrops
-	 * http://www.codrops.com
-	 */
-	;( function( window ) {
-		
-		'use strict';
-		
-		var docElem = window.document.documentElement;
-
-		function getViewportH() {
-			var client = docElem['clientHeight'],
-				inner = window['innerHeight'];
-			
-			if( client < inner )
-				return inner;
-			else
-				return client;
-		}
-
-		function scrollY() {
-			return window.pageYOffset || docElem.scrollTop;
-		}
-
-		// http://stackoverflow.com/a/5598797/989439
-		function getOffset( el ) {
-			var offsetTop = 0, offsetLeft = 0;
-			do {
-				if ( !isNaN( el.offsetTop ) ) {
-					offsetTop += el.offsetTop;
-				}
-				if ( !isNaN( el.offsetLeft ) ) {
-					offsetLeft += el.offsetLeft;
-				}
-			} while( el = el.offsetParent )
-
-			return {
-				top : offsetTop,
-				left : offsetLeft
-			}
-		}
-
-		function inViewport( el, h ) {
-			var elH = el.offsetHeight,
-				scrolled = scrollY(),
-				viewed = scrolled + getViewportH(),
-				elTop = getOffset(el).top,
-				elBottom = elTop + elH,
-				// if 0, the element is considered in the viewport as soon as it enters.
-				// if 1, the element is considered in the viewport only when it's fully inside
-				// value in percentage (1 >= h >= 0)
-				h = h || 0;
-
-			return (elTop + elH * h) <= viewed && (elBottom - elH * h) >= scrolled;
-		}
-
-		function extend( a, b ) {
-			for( var key in b ) { 
-				if( b.hasOwnProperty( key ) ) {
-					a[key] = b[key];
-				}
-			}
-			return a;
-		}
-
-		function AnimOnScroll( el, options ) {	
-			this.el = el;
-			this.options = extend( this.defaults, options );
-			this._init();
-		}
-
-		AnimOnScroll.prototype = {
-			defaults : {
-				// Minimum and a maximum duration of the animation (random value is chosen)
-				minDuration : 0,
-				maxDuration : 0,
-				// The viewportFactor defines how much of the appearing item has to be visible in order to trigger the animation
-				// if we'd use a value of 0, this would mean that it would add the animation class as soon as the item is in the viewport. 
-				// If we were to use the value of 1, the animation would only be triggered when we see all of the item in the viewport (100% of it)
-				viewportFactor : 0
-			},
-			_init : function() {
-				this.items = Array.prototype.slice.call( document.querySelectorAll( '#' + this.el.id + ' > li' ) );
-				this.itemsCount = this.items.length;
-				this.itemsRenderedCount = 0;
-				this.didScroll = false;
-
-				var self = this;
-
-				imagesLoaded( this.el, function() {
-					
-					// initialize masonry
-					new Masonry( self.el, {
-						itemSelector: 'li',
-						transitionDuration : 0
-					} );
-					
-					if( Modernizr.cssanimations ) {
-						// the items already shown...
-						self.items.forEach( function( el, i ) {
-							if( inViewport( el ) ) {
-								self._checkTotalRendered();
-								classie.add( el, 'shown' );
-							}
-						} );
-
-						// animate on scroll the items inside the viewport
-						window.addEventListener( 'scroll', function() {
-							self._onScrollFn();
-						}, false );
-						window.addEventListener( 'resize', function() {
-							self._resizeHandler();
-						}, false );
-					}
-
-				});
-			},
-			_onScrollFn : function() {
-				var self = this;
-				if( !this.didScroll ) {
-					this.didScroll = true;
-					setTimeout( function() { self._scrollPage(); }, 60 );
-				}
-			},
-			_scrollPage : function() {
-				var self = this;
-				this.items.forEach( function( el, i ) {
-					if( !classie.has( el, 'shown' ) && !classie.has( el, 'animate' ) && inViewport( el, self.options.viewportFactor ) ) {
-						setTimeout( function() {
-							var perspY = scrollY() + getViewportH() / 2;
-							self.el.style.WebkitPerspectiveOrigin = '50% ' + perspY + 'px';
-							self.el.style.MozPerspectiveOrigin = '50% ' + perspY + 'px';
-							self.el.style.perspectiveOrigin = '50% ' + perspY + 'px';
-
-							self._checkTotalRendered();
-
-							if( self.options.minDuration && self.options.maxDuration ) {
-								var randDuration = ( Math.random() * ( self.options.maxDuration - self.options.minDuration ) + self.options.minDuration ) + 's';
-								el.style.WebkitAnimationDuration = randDuration;
-								el.style.MozAnimationDuration = randDuration;
-								el.style.animationDuration = randDuration;
-							}
-							
-							classie.add( el, 'animate' );
-						}, 25 );
-					}
-				});
-				this.didScroll = false;
-			},
-			_resizeHandler : function() {
-				var self = this;
-				function delayed() {
-					self._scrollPage();
-					self.resizeTimeout = null;
-				}
-				if ( this.resizeTimeout ) {
-					clearTimeout( this.resizeTimeout );
-				}
-				this.resizeTimeout = setTimeout( delayed, 1000 );
-			},
-			_checkTotalRendered : function() {
-				++this.itemsRenderedCount;
-				if( this.itemsRenderedCount === this.itemsCount ) {
-					window.removeEventListener( 'scroll', this._onScrollFn );
-				}
-			}
-		}
-
-		// add to global namespace
-		window.AnimOnScroll = AnimOnScroll;
-
-	} )( window );
-
-/***/ },
-/* 162 */
-/***/ function(module, exports) {
-
 	module.exports = "<div class=\"ui card item\">\n    <div class=\"ui top left attached label\">\n        <a v-link=\"{ path: '/list/' + waterboxdata.type }\">\n            <i class=\"book icon\"></i> {{{waterboxdata.typeString}}}\n        </a>\n    </div>\n    <div class=\"ui top right attached label\">\n        {{waterboxdata.poem_time}}\n    </div>\n    <a class=\"image\" v-if=\"!!waterboxdata.imgSrc\" v-link=\"{ path: '/p/' + waterboxdata.id }\">\n        <img :src=\"waterboxdata.imgSrc\" class=\"ui wireframe image\">\n    </a>\n    <div class=\"content ui\">\n        <div class=\"ui small feed\">\n            <div class=\"event\">\n                <div class=\"content\">\n                    <h4 class=\"\">\n                        <a v-link=\"{ path: '/p/' + waterboxdata.id }\">{{waterboxdata.title}}</a>\n                    </h4>\n                    <p class=\"description\" v-for=\"item in waterboxdata.lines\" track-by=\"$index\">{{item}}</p>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"content\">\n        <img src=\"http://odflit039.bkt.clouddn.com/14737614892742.pic.jpg?imageView2/2/w/110/h/110/interlace/1/q/100\" class=\"ui avatar image\">\n        <span>{{waterboxdata.userName}}</span>\n        <span class=\"right floated heart-span\">\n            <i class=\"heart like icon\" :class=\"{active:likesState}\" @click=\"like(waterboxdata.id, waterboxdata.likes)\"></i>\n            <span>{{waterboxdata.likes || 0}}</span>\n        </span>\n        <span class=\"right floated heart-span\" v-if=\"isLoginState\">\n            <a v-link=\"{ path: '/update/' + waterboxdata.id}\"><i class=\"edit icon\"></i>编辑</a>\n        </span>\n    </div>\n</div>";
 
 /***/ },
-/* 163 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18061,13 +17878,13 @@ webpackJsonp([1,5],Array(28).concat([
 	 * @Date:      2016-09-09 21:14:21
 	 */
 	var Vue = __webpack_require__(1);
-	__webpack_require__(164);
-	__webpack_require__(166);
+	__webpack_require__(163);
+	__webpack_require__(165);
 	module.exports = Vue.extend({
 	    ready: function () {
 	        
 	    },
-	    template: __webpack_require__(168),
+	    template: __webpack_require__(167),
 	    data: function () {
 	        return {
 	        };
@@ -18087,13 +17904,13 @@ webpackJsonp([1,5],Array(28).concat([
 	});
 
 /***/ },
-/* 164 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(165);
+	var content = __webpack_require__(164);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -18113,7 +17930,7 @@ webpackJsonp([1,5],Array(28).concat([
 	}
 
 /***/ },
-/* 165 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -18127,13 +17944,13 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 166 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(167);
+	var content = __webpack_require__(166);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -18153,7 +17970,7 @@ webpackJsonp([1,5],Array(28).concat([
 	}
 
 /***/ },
-/* 167 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -18167,13 +17984,13 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 168 */
+/* 167 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"loading\">\n    <div class=\"coffee_cup\">\n        <span class=\"loading-text\">加载中...</span>\n    </div>\n</div>";
 
 /***/ },
-/* 169 */
+/* 168 */
 /***/ function(module, exports) {
 
 	/**
