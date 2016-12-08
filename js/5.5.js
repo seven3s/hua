@@ -15022,15 +15022,8 @@ webpackJsonp([5],Array(32).concat([
 	    methods: {
 	        init: function () {
 	            this.$data.isLoginState = Vue.auth;
-	            // setTimeout(function () {
-	            //     $('.water-full').cascade();
-	            // });
-	            // this.$nextTick(function () {
-	            //     $('.water-full').cascade();
-	            // });
-	            // $(window).trigger('resize.cascade');
-	            var elem = document.querySelector('.water-full');
-	            var msnry = new Masonry(elem, {
+	            var elem = $('.water-full');
+	           elem.masonry({
 	                // options
 	                itemSelector: '.item',
 	                layoutMode: 'fitRows',

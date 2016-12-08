@@ -84,7 +84,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 	// module
-	exports.push([module.id, "#main {\n    width: 98%;\n}", ""]);
+	exports.push([module.id, "#main {\n    width: 96.3%;\n}", ""]);
 
 	// exports
 
@@ -15119,15 +15119,8 @@ webpackJsonp([1,5],Array(28).concat([
 	    methods: {
 	        init: function () {
 	            this.$data.isLoginState = Vue.auth;
-	            // setTimeout(function () {
-	            //     $('.water-full').cascade();
-	            // });
-	            // this.$nextTick(function () {
-	            //     $('.water-full').cascade();
-	            // });
-	            // $(window).trigger('resize.cascade');
-	            var elem = document.querySelector('.water-full');
-	            var msnry = new Masonry(elem, {
+	            var elem = $('.water-full');
+	           elem.masonry({
 	                // options
 	                itemSelector: '.item',
 	                layoutMode: 'fitRows',
