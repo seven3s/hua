@@ -15051,11 +15051,11 @@ webpackJsonp([5],Array(32).concat([
 	                    // 一对动画选项，具体参数可以参考jquery .animate()中的options选项
 	                });
 	            });
-	            new AnimOnScroll(document.getElementById('main'), {
-	                minDuration : 0.4,
-	                maxDuration : 0.7,
-	                viewportFactor : 0.2
-	            });
+	            // new AnimOnScroll(document.getElementById('main'), {
+	            //     minDuration : 0.4,
+	            //     maxDuration : 0.7,
+	            //     viewportFactor : 0.2
+	            // });
 	        },
 
 	        /**
