@@ -142,7 +142,7 @@ webpackJsonp([1,5],Array(28).concat([
 	    },
 	    components: {
 	        'v-water-list': __webpack_require__(146),
-	        'v-loading': __webpack_require__(162)
+	        'v-loading': __webpack_require__(161)
 	    },
 	    watch: {
 	        
@@ -225,7 +225,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                    var poem = {};
 	                    poem.title = item.title;
 	                    poem.userName = item.userName;
-	                    var swicthPoemType = __webpack_require__(168);
+	                    var swicthPoemType = __webpack_require__(167);
 	                    poem.typeString = swicthPoemType(item.poem_type);
 	                    poem.type = type_id.getTypeOfId(item.poem_type);
 	                    poem.poem_time = item.poem_time;
@@ -344,7 +344,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                var poem = {};
 	                poem.title = item.title;
 	                poem.userName = item.userName;
-	                var swicthPoemType = __webpack_require__(168);
+	                var swicthPoemType = __webpack_require__(167);
 	                poem.typeString = swicthPoemType(item.poem_type);
 	                poem.type = type_id.getTypeOfId(item.poem_type);
 	                poem.poem_time = item.poem_time;
@@ -15092,8 +15092,8 @@ webpackJsonp([1,5],Array(28).concat([
 	__webpack_require__(151);
 	// require('./cascade.css');
 	// require('./cascade');
-	__webpack_require__(153);
-	var Masonry = __webpack_require__(154);
+	// require('./imagesloaded.pkgd.min.js');
+	var Masonry = __webpack_require__(153);
 	var restFullLoader = __webpack_require__(15);
 	module.exports = Vue.extend({
 	    ready: function () {
@@ -15102,7 +15102,7 @@ webpackJsonp([1,5],Array(28).concat([
 	    props: {
 	        waterboxdata: {}
 	    },
-	    template: __webpack_require__(161),
+	    template: __webpack_require__(160),
 	    data: function () {
 	        return {
 	            isLoginState: false,
@@ -15121,16 +15121,13 @@ webpackJsonp([1,5],Array(28).concat([
 	        init: function () {
 	            this.$data.isLoginState = Vue.auth;
 	            var $elem = document.querySelector('.water-full');
-	            //當圖片讀取完畢才執行
-	            $elem.imagesLoaded(function (){
-	                var msnry = new Masonry($elem, {
-	                    // options
-	                    itemSelector: '.item',
-	                    layoutMode: 'fitRows',
-	                    gutter: 20, // 內容塊之間的間距
-	                    columnWidth: 290,
-	                    isAnimated: true
-	                });
+	            var msnry = new Masonry($elem, {
+	                // options
+	                itemSelector: '.item',
+	                layoutMode: 'fitRows',
+	                gutter: 20, // 內容塊之間的間距
+	                columnWidth: 290,
+	                isAnimated: true
 	            });
 	        },
 
@@ -15214,18 +15211,6 @@ webpackJsonp([1,5],Array(28).concat([
 /* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_LOCAL_MODULE_0__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * imagesLoaded PACKAGED v4.1.1
-	 * JavaScript is all like "You images are done yet or what?"
-	 * MIT License
-	 */
-
-	!function(t,e){ true?!(__WEBPACK_AMD_DEFINE_FACTORY__ = (e), __WEBPACK_LOCAL_MODULE_0__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__)):"object"==typeof module&&module.exports?module.exports=e():t.EvEmitter=e()}("undefined"!=typeof window?window:this,function(){function t(){}var e=t.prototype;return e.on=function(t,e){if(t&&e){var i=this._events=this._events||{},n=i[t]=i[t]||[];return-1==n.indexOf(e)&&n.push(e),this}},e.once=function(t,e){if(t&&e){this.on(t,e);var i=this._onceEvents=this._onceEvents||{},n=i[t]=i[t]||{};return n[e]=!0,this}},e.off=function(t,e){var i=this._events&&this._events[t];if(i&&i.length){var n=i.indexOf(e);return-1!=n&&i.splice(n,1),this}},e.emitEvent=function(t,e){var i=this._events&&this._events[t];if(i&&i.length){var n=0,o=i[n];e=e||[];for(var r=this._onceEvents&&this._onceEvents[t];o;){var s=r&&r[o];s&&(this.off(t,o),delete r[o]),o.apply(this,e),n+=s?0:1,o=i[n]}return this}},t}),function(t,e){"use strict"; true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__WEBPACK_LOCAL_MODULE_0__], __WEBPACK_AMD_DEFINE_RESULT__ = function(i){return e(t,i)}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):"object"==typeof module&&module.exports?module.exports=e(t,require("ev-emitter")):t.imagesLoaded=e(t,t.EvEmitter)}(window,function(t,e){function i(t,e){for(var i in e)t[i]=e[i];return t}function n(t){var e=[];if(Array.isArray(t))e=t;else if("number"==typeof t.length)for(var i=0;i<t.length;i++)e.push(t[i]);else e.push(t);return e}function o(t,e,r){return this instanceof o?("string"==typeof t&&(t=document.querySelectorAll(t)),this.elements=n(t),this.options=i({},this.options),"function"==typeof e?r=e:i(this.options,e),r&&this.on("always",r),this.getImages(),h&&(this.jqDeferred=new h.Deferred),void setTimeout(function(){this.check()}.bind(this))):new o(t,e,r)}function r(t){this.img=t}function s(t,e){this.url=t,this.element=e,this.img=new Image}var h=t.jQuery,a=t.console;o.prototype=Object.create(e.prototype),o.prototype.options={},o.prototype.getImages=function(){this.images=[],this.elements.forEach(this.addElementImages,this)},o.prototype.addElementImages=function(t){"IMG"==t.nodeName&&this.addImage(t),this.options.background===!0&&this.addElementBackgroundImages(t);var e=t.nodeType;if(e&&d[e]){for(var i=t.querySelectorAll("img"),n=0;n<i.length;n++){var o=i[n];this.addImage(o)}if("string"==typeof this.options.background){var r=t.querySelectorAll(this.options.background);for(n=0;n<r.length;n++){var s=r[n];this.addElementBackgroundImages(s)}}}};var d={1:!0,9:!0,11:!0};return o.prototype.addElementBackgroundImages=function(t){var e=getComputedStyle(t);if(e)for(var i=/url\((['"])?(.*?)\1\)/gi,n=i.exec(e.backgroundImage);null!==n;){var o=n&&n[2];o&&this.addBackground(o,t),n=i.exec(e.backgroundImage)}},o.prototype.addImage=function(t){var e=new r(t);this.images.push(e)},o.prototype.addBackground=function(t,e){var i=new s(t,e);this.images.push(i)},o.prototype.check=function(){function t(t,i,n){setTimeout(function(){e.progress(t,i,n)})}var e=this;return this.progressedCount=0,this.hasAnyBroken=!1,this.images.length?void this.images.forEach(function(e){e.once("progress",t),e.check()}):void this.complete()},o.prototype.progress=function(t,e,i){this.progressedCount++,this.hasAnyBroken=this.hasAnyBroken||!t.isLoaded,this.emitEvent("progress",[this,t,e]),this.jqDeferred&&this.jqDeferred.notify&&this.jqDeferred.notify(this,t),this.progressedCount==this.images.length&&this.complete(),this.options.debug&&a&&a.log("progress: "+i,t,e)},o.prototype.complete=function(){var t=this.hasAnyBroken?"fail":"done";if(this.isComplete=!0,this.emitEvent(t,[this]),this.emitEvent("always",[this]),this.jqDeferred){var e=this.hasAnyBroken?"reject":"resolve";this.jqDeferred[e](this)}},r.prototype=Object.create(e.prototype),r.prototype.check=function(){var t=this.getIsImageComplete();return t?void this.confirm(0!==this.img.naturalWidth,"naturalWidth"):(this.proxyImage=new Image,this.proxyImage.addEventListener("load",this),this.proxyImage.addEventListener("error",this),this.img.addEventListener("load",this),this.img.addEventListener("error",this),void(this.proxyImage.src=this.img.src))},r.prototype.getIsImageComplete=function(){return this.img.complete&&void 0!==this.img.naturalWidth},r.prototype.confirm=function(t,e){this.isLoaded=t,this.emitEvent("progress",[this,this.img,e])},r.prototype.handleEvent=function(t){var e="on"+t.type;this[e]&&this[e](t)},r.prototype.onload=function(){this.confirm(!0,"onload"),this.unbindEvents()},r.prototype.onerror=function(){this.confirm(!1,"onerror"),this.unbindEvents()},r.prototype.unbindEvents=function(){this.proxyImage.removeEventListener("load",this),this.proxyImage.removeEventListener("error",this),this.img.removeEventListener("load",this),this.img.removeEventListener("error",this)},s.prototype=Object.create(r.prototype),s.prototype.check=function(){this.img.addEventListener("load",this),this.img.addEventListener("error",this),this.img.src=this.url;var t=this.getIsImageComplete();t&&(this.confirm(0!==this.img.naturalWidth,"naturalWidth"),this.unbindEvents())},s.prototype.unbindEvents=function(){this.img.removeEventListener("load",this),this.img.removeEventListener("error",this)},s.prototype.confirm=function(t,e){this.isLoaded=t,this.emitEvent("progress",[this,this.element,e])},o.makeJQueryPlugin=function(e){e=e||t.jQuery,e&&(h=e,h.fn.imagesLoaded=function(t,e){var i=new o(this,t,e);return i.jqDeferred.promise(h(this))})},o.makeJQueryPlugin(),o});
-
-/***/ },
-/* 154 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	 * Masonry v4.1.1
 	 * Cascading grid layout library
@@ -15240,8 +15225,8 @@ webpackJsonp([1,5],Array(28).concat([
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(155),
-	        __webpack_require__(157)
+	        __webpack_require__(154),
+	        __webpack_require__(156)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
@@ -15433,7 +15418,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 155 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15449,10 +15434,10 @@ webpackJsonp([1,5],Array(28).concat([
 	  if ( true ) {
 	    // AMD - RequireJS
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+	        __webpack_require__(155),
 	        __webpack_require__(156),
 	        __webpack_require__(157),
-	        __webpack_require__(158),
-	        __webpack_require__(160)
+	        __webpack_require__(159)
 	      ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EvEmitter, getSize, utils, Item ) {
 	        return factory( window, EvEmitter, getSize, utils, Item);
 	      }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -16376,7 +16361,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 156 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -16491,7 +16476,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 157 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -16706,7 +16691,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 158 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -16723,7 +16708,7 @@ webpackJsonp([1,5],Array(28).concat([
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(159)
+	      __webpack_require__(158)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( matchesSelector ) {
 	      return factory( window, matchesSelector );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -16949,7 +16934,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 159 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17008,7 +16993,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 160 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17021,8 +17006,8 @@ webpackJsonp([1,5],Array(28).concat([
 	  if ( true ) {
 	    // AMD - RequireJS
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(156),
-	        __webpack_require__(157)
+	        __webpack_require__(155),
+	        __webpack_require__(156)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS - Browserify, Webpack
@@ -17565,13 +17550,13 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 161 */
+/* 160 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"ui card item\">\n    <div class=\"ui top left attached label\">\n        <a v-link=\"{ path: '/list/' + waterboxdata.type }\">\n            <i class=\"book icon\"></i> {{{waterboxdata.typeString}}}\n        </a>\n    </div>\n    <div class=\"ui top right attached label\">\n        {{waterboxdata.poem_time}}\n    </div>\n    <a class=\"image\" v-if=\"!!waterboxdata.imgSrc\" v-link=\"{ path: '/p/' + waterboxdata.id }\">\n        <img :src=\"waterboxdata.imgSrc\" class=\"ui wireframe image\">\n    </a>\n    <div class=\"content ui\">\n        <div class=\"ui small feed\">\n            <div class=\"event\">\n                <div class=\"content\">\n                    <h4 class=\"\">\n                        <a v-link=\"{ path: '/p/' + waterboxdata.id }\">{{waterboxdata.title}}</a>\n                    </h4>\n                    <p class=\"description\" v-for=\"item in waterboxdata.lines\" track-by=\"$index\">{{item}}</p>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"content\">\n        <img src=\"http://odflit039.bkt.clouddn.com/14737614892742.pic.jpg?imageView2/2/w/110/h/110/interlace/1/q/100\" class=\"ui avatar image\">\n        <span>{{waterboxdata.userName}}</span>\n        <span class=\"right floated heart-span\">\n            <i class=\"heart like icon\" :class=\"{active:likesState}\" @click=\"like(waterboxdata.id, waterboxdata.likes)\"></i>\n            <span>{{waterboxdata.likes || 0}}</span>\n        </span>\n        <span class=\"right floated heart-span\" v-if=\"isLoginState\">\n            <a v-link=\"{ path: '/update/' + waterboxdata.id}\"><i class=\"edit icon\"></i>编辑</a>\n        </span>\n    </div>\n</div>";
 
 /***/ },
-/* 162 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17581,13 +17566,13 @@ webpackJsonp([1,5],Array(28).concat([
 	 * @Date:      2016-09-09 21:14:21
 	 */
 	var Vue = __webpack_require__(1);
-	__webpack_require__(163);
-	__webpack_require__(165);
+	__webpack_require__(162);
+	__webpack_require__(164);
 	module.exports = Vue.extend({
 	    ready: function () {
 	        
 	    },
-	    template: __webpack_require__(167),
+	    template: __webpack_require__(166),
 	    data: function () {
 	        return {
 	        };
@@ -17607,13 +17592,13 @@ webpackJsonp([1,5],Array(28).concat([
 	});
 
 /***/ },
-/* 163 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(164);
+	var content = __webpack_require__(163);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -17633,7 +17618,7 @@ webpackJsonp([1,5],Array(28).concat([
 	}
 
 /***/ },
-/* 164 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -17647,13 +17632,13 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 165 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(166);
+	var content = __webpack_require__(165);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -17673,7 +17658,7 @@ webpackJsonp([1,5],Array(28).concat([
 	}
 
 /***/ },
-/* 166 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -17687,13 +17672,13 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 /***/ },
-/* 167 */
+/* 166 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"loading\">\n    <div class=\"coffee_cup\">\n        <span class=\"loading-text\">加载中...</span>\n    </div>\n</div>";
 
 /***/ },
-/* 168 */
+/* 167 */
 /***/ function(module, exports) {
 
 	/**
