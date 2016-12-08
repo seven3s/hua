@@ -15133,6 +15133,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                layoutMode: 'fitRows',
 	                gutter: 20, // 內容塊之間的間距
 	                columnWidth: 290,
+	                isAnimated: true,
 	                isAnimated: true
 	            });
 	        },
@@ -15208,7 +15209,7 @@ webpackJsonp([1,5],Array(28).concat([
 
 
 	// module
-	exports.push([module.id, "#main {\n    position: relative;\n}\n\n#main a.image {\n    margin-top: 40px;\n    border-radius: 0!important;\n}\n\nimg.image {\n    border: 1px solid #d4d4d4;\n}\n\n.ui.card {\n    margin: 0;\n}\n\n.ui.card > .content.ui {\n    border-top: none;\n}\n\n.heart-span {\n    margin: 5px 0 0 5px;\n}\n\n.content.ui > .ui.feed {\n    padding: 18px;\n}\n\n.ui.feed > .event {\n    margin-top: 16px;\n}", ""]);
+	exports.push([module.id, "#main {\n    position: relative;\n}\n\n#main a.image {\n    margin-top: 40px;\n    border-radius: 0!important;\n}\n\nimg.image {\n    border: 1px solid #d4d4d4;\n}\n\n.ui.card {\n    margin: 0 0 20px 0;\n}\n\n.ui.card > .content.ui {\n    border-top: none;\n}\n\n.heart-span {\n    margin: 5px 0 0 5px;\n}\n\n.content.ui > .ui.feed {\n    padding: 18px;\n}\n\n.ui.feed > .event {\n    margin-top: 16px;\n}", ""]);
 
 	// exports
 
