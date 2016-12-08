@@ -15023,13 +15023,6 @@ webpackJsonp([5],Array(32).concat([
 	    methods: {
 	        init: function () {
 	            this.$data.isLoginState = Vue.auth;
-	            // setTimeout(function () {
-	            //     $('.water-full').cascade();
-	            // });
-	            // this.$nextTick(function () {
-	            //     $('.water-full').cascade();
-	            // });
-	            // $(window).trigger('resize.cascade');
 	            var $container = $('.water-full');
 	            //當圖片讀取完畢才執行
 	            $container.imagesLoaded(function() {
