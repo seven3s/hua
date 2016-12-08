@@ -6,9 +6,10 @@
  */
 var Vue = require('vue');
 require('./index.css');
-// require('./cascade.css');
-// require('./cascade');
-var Masonry = require('masonry-layout');
+require('./cascade.css');
+require('./cascade');
+require('./imagesloaded.pkgd.min.js');
+// var Masonry = require('masonry-layout');
 var restFullLoader = require('../../common/loader');
 module.exports = Vue.extend({
     ready: function () {
@@ -34,21 +35,26 @@ module.exports = Vue.extend({
     },
     methods: {
         init: function () {
+            var me = this;
             this.$data.isLoginState = Vue.auth;
-            // setTimeout(function () {
-            //     $('.water-full').cascade();
-            // });
-            // this.$nextTick(function () {
-            //     $('.water-full').cascade();
-            // });
-            // $(window).trigger('resize.cascade');
-            var elem = document.querySelector('.water-full');
-            var msnry = new Masonry(elem, {
-                // options
-                itemSelector: '.item',
-                layoutMode: 'fitRows',
-                columnWidth: 290
+            var $elem = $('.water-full');
+            $elem.imagesLoaded(function (){
+                me.$nextTick(function () {
+                    $('.water-full').cascade();
+                });
+                $(window).trigger('resize.cascade');
             });
+            //當圖片讀取完畢才執行
+            // $elem.imagesLoaded(function (){
+            //     var msnry = new Masonry($elem, {
+            //         // options
+            //         itemSelector: '.item',
+            //         layoutMode: 'fitRows',
+            //         gutter: 20, // 內容塊之間的間距
+            //         columnWidth: 290,
+            //         isAnimated: true
+            //     });
+            // });
         },
 
         /**
