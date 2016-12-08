@@ -15121,13 +15121,13 @@ webpackJsonp([1,5],Array(28).concat([
 	        init: function () {
 	            var me = this;
 	            this.$data.isLoginState = Vue.auth;
+	            var $elem = document.querySelector('.water-full');
 	            $elem.imagesLoaded(function (){
 	                me.$nextTick(function () {
 	                    $('.water-full').cascade();
 	                });
 	                $(window).trigger('resize.cascade');
 	            });
-	            var $elem = document.querySelector('.water-full');
 	            //當圖片讀取完畢才執行
 	            // $elem.imagesLoaded(function (){
 	            //     var msnry = new Masonry($elem, {
