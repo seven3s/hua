@@ -296,10 +296,11 @@ webpackJsonp([1,5],Array(28).concat([
 	            // 是list頁面
 	            var url = me.$route.path;
 	            var reg = /\/list\//;
-	            confirm(url);
 	            var isList = reg.test(url) || (url === '/');
 	            if (
 	                util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList) {
+	                confirm(util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList);
+	                confirm(url);
 	                me.$data.loadMore = 1;
 	                me.loadListData(param, function(json) {
 	                    var data = json.data;
