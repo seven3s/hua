@@ -9,7 +9,6 @@ require('./index.css');
 require('./cascade.css');
 require('./cascade');
 require('./imagesloaded.pkgd.min.js');
-// var Masonry = require('masonry-layout');
 var restFullLoader = require('../../common/loader');
 module.exports = Vue.extend({
     ready: function () {

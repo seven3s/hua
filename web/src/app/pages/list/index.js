@@ -170,7 +170,7 @@ module.exports = Vue.extend({
         scroll: function() {
             var me = this;
             this.starTime = new Date().getTime();
-            document.onscroll = me.mouseScroll;
+            window.onscroll = document.onscroll = me.mouseScroll;
         },
 
         /**
@@ -194,10 +194,12 @@ module.exports = Vue.extend({
             var endPoemsTime = me.$data.endPoemsTimeObj.endPoemsTime;
             // 是list頁面
             var url = me.$route.path;
-            var reg = /\/list\//;
+            var reg = /\/list\/|\/\?/;
             var isList = reg.test(url) || (url === '/');
+            confirm(isList);
             if (
                 util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList) {
+                confirm(url);
                 me.$data.loadMore = 1;
                 me.loadListData(param, function(json) {
                     var data = json.data;

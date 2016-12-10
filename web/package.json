@@ -21,7 +21,6 @@
     "jquery": "^2.2.4",
     "lg-server": "^1.1.4",
     "lodash": "^4.13.1",
-    "masonry-layout": "^4.1.1",
     "mockjs": "^1.0.1-beta2",
     "moment": "^2.15.1",
     "qiniu-js": "^1.0.14-beta",
