@@ -297,7 +297,7 @@ webpackJsonp([1,5],Array(28).concat([
 	            var url = me.$route.path;
 	            var reg = /\/list\//;
 	            var isList = reg.test(url) || (url === '/');
-	            confirm(Math.abs(util.getScrollTop() + util.getClientHeight() - util.getScrollHeight()));
+	            confirm(loadMore);
 	            if (
 	                util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList) {
 	                confirm(url);
