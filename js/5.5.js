@@ -174,7 +174,7 @@ webpackJsonp([5],Array(32).concat([
 	        scroll: function() {
 	            var me = this;
 	            this.starTime = new Date().getTime();
-	            document.onscroll = me.mouseScroll;
+	            window.onscroll = document.onscroll = me.mouseScroll;
 	        },
 
 	        /**
@@ -14996,7 +14996,6 @@ webpackJsonp([5],Array(32).concat([
 	__webpack_require__(153);
 	__webpack_require__(155);
 	__webpack_require__(156);
-	// var Masonry = require('masonry-layout');
 	var restFullLoader = __webpack_require__(15);
 	module.exports = Vue.extend({
 	    ready: function () {
