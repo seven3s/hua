@@ -200,10 +200,8 @@ webpackJsonp([5],Array(32).concat([
 	            var url = me.$route.path;
 	            var reg = /\/list\/|\/\?/;
 	            var isList = reg.test(url) || (url === '/');
-	            confirm(isList);
 	            if (
 	                util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList) {
-	                confirm(url);
 	                me.$data.loadMore = 1;
 	                me.loadListData(param, function(json) {
 	                    var data = json.data;
