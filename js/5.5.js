@@ -199,6 +199,7 @@ webpackJsonp([5],Array(32).concat([
 	            // 是list頁面
 	            var url = me.$route.path;
 	            var reg = /\/list\//;
+	            alert(url);
 	            var isList = reg.test(url) || (url === '/');
 	            if (
 	                util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList) {
