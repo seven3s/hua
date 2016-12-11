@@ -295,7 +295,7 @@ webpackJsonp([1,5],Array(28).concat([
 	            var endPoemsTime = me.$data.endPoemsTimeObj.endPoemsTime;
 	            // 是list頁面
 	            var url = me.$route.path;
-	            var reg = /\/list\/|^\/\?/;
+	            var reg = /\/list\/|(^\/\?)/;
 	            var isList = reg.test(url) || (url === '/');
 	            if (
 	                util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList) {
