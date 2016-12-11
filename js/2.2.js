@@ -1,6 +1,25 @@
 webpackJsonp([2],{
 
-/***/ 33:
+/***/ 36:
+/***/ function(module, exports) {
+
+	/**
+	 * @File:      设置页面标题
+	 * @Author:    花夏(liubiao@itoxs.com)
+	 * @Version:   V0.0.1
+	 * @Date:      2016-09-17 17:42:27
+	 */
+	module.exports = {
+	    setTitle: function (s) {
+	        if (s) {
+	            document.title = s;
+	        }
+	    }
+	}
+
+/***/ },
+
+/***/ 165:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10,14 +29,14 @@ webpackJsonp([2],{
 	 * @Date:      2016-08-30 18:49:35
 	 */
 	var Vue = __webpack_require__(1);
-	__webpack_require__(34);
+	__webpack_require__(166);
 	var title = __webpack_require__(36);
 	var restFullLoader = __webpack_require__(15);
 	module.exports = Vue.extend({
 	    ready: function () {
 	        this.init();
 	    },
-	    template: __webpack_require__(37),
+	    template: __webpack_require__(168),
 	    data: function () {
 	        return {
 	            userName: '',
@@ -181,13 +200,13 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 34:
+/***/ 166:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(35);
+	var content = __webpack_require__(167);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -208,7 +227,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 35:
+/***/ 167:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -223,26 +242,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 36:
-/***/ function(module, exports) {
-
-	/**
-	 * @File:      设置页面标题
-	 * @Author:    花夏(liubiao@itoxs.com)
-	 * @Version:   V0.0.1
-	 * @Date:      2016-09-17 17:42:27
-	 */
-	module.exports = {
-	    setTitle: function (s) {
-	        if (s) {
-	            document.title = s;
-	        }
-	    }
-	}
-
-/***/ },
-
-/***/ 37:
+/***/ 168:
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"login\">\n    <div class=\"loginform ui form segment\">\n        <div id=\"owl-login\" class=\"{{passwording === 1 && postState === 0 ? 'password' : ''}}\">\n            <div class=\"hand\"></div>\n            <div class=\"hand hand-r\"></div>\n            <div class=\"arms\">\n                <div class=\"arm\"></div>\n                <div class=\"arm arm-r\"></div>\n            </div>\n        </div>\n        <div class=\"pad ui\">\n            <div class=\"field\">\n                <div class=\"ui left icon input\">\n                    <input type=\"text\" autofocus=\"autofocus\" tabindex=\"1\" placeholder=\"用户名\" name=\"user\" id=\"user\" v-model=\"userName\">\n                    <i class=\"user icon\"></i>\n                </div>\n            </div>\n            <div class=\"field\">\n                <div class=\"ui left icon input\">\n                    <input type=\"password\" tabindex=\"2\" placeholder=\"密码\" name=\"password\" id=\"password\" v-model=\"password\" @focus=\"passwordFocus\" @blur=\"passwordBlur\">\n                    <i class=\"lock icon\"></i>\n                </div>\n            </div>\n        </div>\n        <div class=\"ui buttons login-btn\">\n            <button class=\"ui green basic button submit loading\" tabindex=\"4\" v-if=\"postState === 1\" disabled>登录</button>\n            <button class=\"ui green basic button submit\" tabindex=\"4\" v-else>登录</button>\n        </div>\n        <a href=\"/hua\" class=\"goback\" title=\"返回首页\">返回首页</a>\n    </div>\n</div>\n";
