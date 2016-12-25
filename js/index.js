@@ -101,6 +101,7 @@
 	 * @Version:   V0.0.1
 	 * @Date:      2016-05-31 23:44:29
 	 */
+
 	var Vue = __webpack_require__(1);
 	var VueRouter = __webpack_require__(3);
 	window.$ = window.jQuery = __webpack_require__(4);
