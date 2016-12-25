@@ -482,7 +482,7 @@ webpackJsonp([3],{
 	         */
 	        isLogin: function () {
 	            var me = this;
-	            var host = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../web-config\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).host;
+	            var host = __webpack_require__(16).host;
 	            var url = host + '/api/isLogin';
 	            $.ajax({
 	                url: url,
