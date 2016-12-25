@@ -433,8 +433,8 @@ webpackJsonp([3],{
 	                        text: resData.message,
 	                        type: 'success'
 	                    }, function () {
-	                        me.backUpPoem(resData.data.id, function (resData) {
-	                            var url = '/p/' + resData.data.id;
+	                        me.backUpPoem(resData.data.id, function (id) {
+	                            var url = '/p/' + id;
 	                            me.$route.router.go(url);
 	                        });
 	                    });
@@ -469,10 +469,10 @@ webpackJsonp([3],{
 	            // });
 	            restFullLoader.requestPOST(url, data, function (res) {
 	                if (res.status === 1) {
-	                    cb && cb(resData);
+	                    cb && cb(id);
 	                }
 	            }, function (err) {
-	                cb && cb(resData);
+	                cb && cb(id);
 	            });
 	        },
 
