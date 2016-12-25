@@ -4,6 +4,7 @@
  * @Version:   V0.0.1
  * @Date:      2016-05-31 23:44:29
  */
+
 var Vue = require('vue');
 var VueRouter = require('vue-router');
 window.$ = window.jQuery = require('jquery');
