@@ -23599,7 +23599,7 @@
 	            var status = this.loginUrl();
 	            if (this.$data.login.status === 0 && status) {
 	                var url = '/hua/#!/login';
-	                this.$route.go(url);
+	                this.$route.router.go(url);
 	            }
 	        },
 
