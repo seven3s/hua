@@ -434,9 +434,8 @@ webpackJsonp([3],{
 	                        type: 'success'
 	                    }, function () {
 	                        me.backUpPoem(resData.data.id, function () {
-	                            var url = '/#!/p/' + resData.data.id;
-	                            url = webConfig.host + webConfig.root + url;
-	                            self.location.href = url;
+	                            var url = '/p/' + resData.data.id;
+	                            me.$route.router.go(url);
 	                        });
 	                    });
 	                }
