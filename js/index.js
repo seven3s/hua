@@ -23821,15 +23821,15 @@
 	        $.ajax(params).done(function (response) {
 	            var status = +response.status;
 	            // 状态为100 或者101，重定向到首页
-	            if (100 === status) {
-	                deferred.reject(response);
-	            } else if (101 === status) {
-	                deferred.reject(response);
-	            } else if (1 === status) {
-	                deferred.resolve(response);
-	            } else {
-	                deferred.reject(response);
-	            }
+	            // if (100 === status) {
+	            //     deferred.reject(response);
+	            // } else if (101 === status) {
+	            //     deferred.reject(response);
+	            // } else if (1 === status) {
+	            //     deferred.resolve(response);
+	            // } else {
+	            //     deferred.reject(response);
+	            // }
 	            success && success(response);
 	        }).fail(function (response) {
 	            deferred.reject(response);
