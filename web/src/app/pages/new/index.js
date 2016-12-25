@@ -330,9 +330,10 @@ module.exports = Vue.extend({
          */
         isLogin: function () {
             var me = this;
-            var url = '/api/isLogin';
+            var host = require('../web-config').host;
+            var url = host + '/api/isLogin';
             $.ajax({
-                url: '/api/isLogin',
+                url: url,
                 type: 'GET',
                 async: false
             })
