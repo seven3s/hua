@@ -432,7 +432,7 @@ webpackJsonp([3],{
 	                        title: '',
 	                        text: resData.message,
 	                        type: 'success'
-	                    }, function (resData) {
+	                    }, function () {
 	                        me.backUpPoem(resData.data.id, function (resData) {
 	                            var url = '/p/' + resData.data.id;
 	                            me.$route.router.go(url);
