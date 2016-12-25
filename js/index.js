@@ -23598,7 +23598,7 @@
 	        louterForeEach: function () {
 	            var status = this.loginUrl();
 	            if (this.$data.login.status === 0 && status) {
-	                var url = '/#!/login';
+	                var url = '/login';
 	                this.$route.router.go(url);
 	            }
 	        },
