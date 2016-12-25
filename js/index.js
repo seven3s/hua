@@ -23599,7 +23599,7 @@
 	            var status = this.loginUrl();
 	            if (this.$data.login.status === 0 && status) {
 	                var url = '/hua/#!/login';
-	                self.open(url);
+	                this.$route.go(url);
 	            }
 	        },
 
@@ -23825,7 +23825,7 @@
 	                deferred.reject(response);
 	            } else if (101 === status) {
 	                deferred.reject(response);
-	            } else if (0 === status) {
+	            } else if (1 === status) {
 	                deferred.resolve(response);
 	            } else {
 	                deferred.reject(response);
