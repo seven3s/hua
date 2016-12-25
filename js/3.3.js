@@ -483,33 +483,33 @@ webpackJsonp([3],{
 	        isLogin: function () {
 	            var me = this;
 	            var host = __webpack_require__(16).host;
-	            var url = host + '/api/isLogin';
-	            $.ajax({
-	                url: url,
-	                type: 'GET',
-	                async: false
-	            })
-	            .done(function(data) {
-	                if (data.status === 1) {
-	                    me.isLoginstate = 1;
-	                }else {
-	                    me.isLoginstate = 0;
-	                }
-	            })
-	            .fail(function(error) {
-	                me.isLoginstate = 0;
-	                console.log(error);
-	            });
-	            // restFullLoader.requestGET(url, function (res) {
-	            //     if (res.status === 1) {
+	            var url = '/api/isLogin';
+	            // $.ajax({
+	            //     url: url,
+	            //     type: 'GET',
+	            //     async: false
+	            // })
+	            // .done(function(data) {
+	            //     if (data.status === 1) {
 	            //         me.isLoginstate = 1;
 	            //     }else {
 	            //         me.isLoginstate = 0;
 	            //     }
-	            // }, function (err) {
+	            // })
+	            // .fail(function(error) {
 	            //     me.isLoginstate = 0;
 	            //     console.log(error);
 	            // });
+	            restFullLoader.requestGET(url, function (res) {
+	                if (res.status === 1) {
+	                    me.isLoginstate = 1;
+	                }else {
+	                    me.isLoginstate = 0;
+	                }
+	            }, function (err) {
+	                me.isLoginstate = 0;
+	                console.log(error);
+	            });
 	        },
 
 	        /**
