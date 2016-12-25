@@ -1,81 +1,5 @@
 webpackJsonp([3],{
 
-/***/ 35:
-/***/ function(module, exports) {
-
-	/**
-	 * @File:      type与id相互转换
-	 * @Author:    花夏(liubiao@itoxs.com)
-	 * @Version:   V0.0.1
-	 * @Date:      2016-09-12 14:56:53
-	 */
-	module.exports = {
-	    /**
-	     * getIdOfType 根据type判断typeid
-	     *
-	     * @param  {String} type 是个类型
-	     *
-	     * @return {Nunber} 返回诗歌类型ID
-	     */
-	    getIdOfType: function (type) {
-	        // 默认是诗
-	        var id = 1;
-	        switch (type) {
-	            case 'poem':
-	                id = 1;
-	                break;
-	            case 'speech':
-	                id = 2;
-	                break;
-	            case 'pennon':
-	                id = 3;
-	                break;
-	        }
-	        return id;
-	    },
-
-	    /**
-	     * getTypeOfId 根据Id返回type字段
-	     *
-	     * @return {String} 返回type
-	     */
-	    getTypeOfId: function (id) {
-	        // 默认是诗
-	        var type = 'poem';
-	        switch (id) {
-	            case 1:
-	                type = 'poem';
-	                break;
-	            case 2:
-	                type = 'speech';
-	                break;
-	            case 3:
-	                type = 'pennon';
-	                break;
-	        }
-	        return type;
-	    },
-
-	    getIdOfCn: function (id) {
-	        // 默认是诗
-	        var cn = '逸如诗';
-	        switch (id) {
-	            case 1:
-	                cn = '逸如诗';
-	                break;
-	            case 2:
-	                cn = '婉若词';
-	                break;
-	            case 3:
-	                cn = '兮及赋';
-	                break;
-	        }
-	        return cn;
-	    }
-	}
-
-/***/ },
-
 /***/ 36:
 /***/ function(module, exports) {
 
@@ -223,87 +147,437 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 164:
-/***/ function(module, exports) {
-
-	/**
-	 * swicthPoemType 根据code返回类型
-	 *
-	 * @return {String} 返回类型
-	 */
-	module.exports = function (i) {
-	    var type = '诗';
-	     switch (i) {
-	        case 1:
-	            type = '诗';
-	            break;
-	        case 2:
-	            type = '词';
-	            break;
-	        case 3:
-	            type = '赋';
-	            break;
-	    }
-	    return type;
-	}
-
-
-/***/ },
-
-/***/ 170:
+/***/ 169:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * @File:      诗歌详情页
+	 * @File:      新增页面
 	 * @Author:    花夏(liubiao01@itoxs.com)
 	 * @Version:   V0.0.1
-	 * @Date:      2016-09-08 18:14:59
+	 * @Date:      2016-06-05 19:35:07
 	 */
 	var Vue = __webpack_require__(1);
-	__webpack_require__(171);
-	var type_id =__webpack_require__(35);
+	__webpack_require__(170);
+	var numToCn = __webpack_require__(172);
+	var rule = __webpack_require__(173);
+	var defaultConfig = __webpack_require__(174);
 	var title = __webpack_require__(36);
-	__webpack_require__(173);
 	var restFullLoader = __webpack_require__(15);
+	var webConfig =  __webpack_require__(16);
 	module.exports = Vue.extend({
 	    ready: function () {
 	        this.init();
+	        this.date();
 	    },
 	    template: __webpack_require__(175),
 	    data: function () {
 	        return {
-	            load: 0,
-	            poem: {},
-	            likesState: false
+	            isLoginstate: 0, // 登陆状态
+	            poem_title: '', // 文题
+	            genres: defaultConfig.genresData,
+	            poem_time: '', // 创作时间
+	            initLineNum: 4, // 初始行数
+	            newLines: [],
+	            picobj: {
+	                state: 0,
+	                src: 'http://odflit039.bkt.clouddn.com/o_1asjud1su1nft13js1prps14hrl9image.png'
+	            },
+	            update: 0,
+	            postState: 0 // 点击提交状态
 	        };
 	    },
 	    events: {
-	        
+
 	    },
 	    components: {
-	        'v-loading': __webpack_require__(158)
+	        'v-select': __webpack_require__(176),
+	        'v-upload': __webpack_require__(180)
 	    },
 	    watch: {
-	        
+	        // newLines: {
+	        //     handler: function () {
+	        //         this.validation();
+	        //     },
+	        //     deep: true
+	        // }
+	        picobj: {
+	            handler: function (val) {
+	                // 获取上传组件传回的图片src
+	                this.$data.picobj.src = val.src;
+	            },
+	            deep: true
+	        }
 	    },
 	    methods: {
 	        init: function () {
 	            var me = this;
-	            var id = this.$route.params.id || '';
-	            if (id === '') {
+	            title.setTitle('忽来文思涌');
+	            this.isUpdate();
+	            // 刷新关闭提示
+	            this.fresh();
+	            $('[name = poem-form]').form({
+	                fields:    rule,
+	                inline:    true,
+	                istoday: false,
+	                on:        'submit',
+	                onSuccess: function () {
+	                    var validate = me.validation();
+	                    // 所有验证通过则提交数据并保存
+	                    if (validate) {
+	                        me.post();
+	                    }
+	                }
+	            });
+	        },
+
+	        /**
+	         * fresh 刷新提示
+	         *
+	         */
+	        fresh: function () {
+	            // 刷新提示
+	            document.body.onbeforeunload = function (e) {
+	                e = e || window.event;
+	                if (/webkit/.test(navigator.userAgent.toLowerCase())) {
+	                    return"离开页面将导致数据丢失！";
+	                }else {
+	                    e.returnValue ="离开页面将导致数据丢失！";
+	                }
+	            }
+	        },
+
+	        /**
+	         * isUpdate 是否是更新
+	         *
+	         */
+	        isUpdate: function () {
+	            // 编辑
+	            var path = this.$route.path;
+	            var update = path.split('/')[1];
+	            if (update === 'update') {
+	                this.$data.update = 1;
+	                var id = this.$route.params.id;
+	                this.getPoem(id);
+	            }else {
+	                this.$data.newLines = defaultConfig.newLines;
+	            }
+	        },
+
+	        /**
+	         * date 初始化日期组件
+	         *
+	         */
+	        date: function () {
+	            var me = this;
+	            laydate({
+	                elem:     '#poem_time',
+	                format:   'YYYY-MM-DD hh:mm:ss', // 分隔符可以任意定义，该例子表示只显示年月
+	                istime: true,
+	                festival: true, //显示节日
+	                choose:   function(datas){
+	                    //选择日期完毕的回调
+	                    me.poem_time = datas;
+	                }
+	            });
+	        },
+
+	        /**
+	         * newLine 新增一联
+	         *
+	         */
+	        newLine: function () {
+	            var initLineNum  = this.$data.initLineNum;
+	            var newLineNum   = initLineNum - 4;
+	            var cnNewLineNum = ++newLineNum + 4;
+	            if (cnNewLineNum >= 69) {
 	                swal({
 	                    title: '',
-	                    text: '诗歌不存在~~',
+	                    text: '不能再添加了哦~~',
+	                    type: 'error'
+	                });
+	                return;
+	            }
+	            this.$data.initLineNum = cnNewLineNum;
+	            var cn = numToCn.get(cnNewLineNum);
+	            var obj = {
+	                title: cn,
+	                value: ''
+	            }
+	            this.$data.newLines.push(obj);
+	        },
+
+	        /**
+	         * delLine 删除一联
+	         *
+	         */
+	        delLine: function () {
+	            var me = this;
+	            var cnNewLineNum = this.$data.initLineNum;
+	            var newLineNum   = cnNewLineNum - 4;
+	            if (newLineNum === 0) {
+	                swal({
+	                    title: '',
+	                    text: '不能再删除了哦~~',
+	                    type: 'warning'
+	                });
+	                return;
+	            }
+	            swal({
+	                title: "您确定要删除最后一行吗？",
+	                // text: "您确定要删除这条数据？", 
+	                type: "warning",
+	                showCancelButton: true,
+	                closeOnConfirm: false,
+	                confirmButtonText: "是的，我要删除",
+	                confirmButtonColor: "#ec6c62"
+	            }, function() {
+	                var len = me.$data.newLines.length;
+	                me.$data.newLines.splice(len - 1, len);
+	                me.$data.initLineNum = me.$data.newLines.length;
+	            });
+	        },
+
+	        /**
+	         * validation 自定义校验每一行
+	         *
+	         */
+	        validation: function () {
+	            var data = this.$data.newLines;
+	            var validateNum = 0;
+	            data.forEach(function (item, index) {
+	                if (!item.value && (item.value !== 0 || item.value !== '0')) {
+	                    var errEl = $('.ui.segment.field').eq(index).find('.prompt.label');
+	                    if (errEl.length <= 0) {
+	                        $('.ui.segment.field').eq(index).append('<div class="ui basic red pointing prompt label transition visible">再想想又是一好辞！</div>');
+	                    }
+	                    validateNum++;
+	                }else {
+	                    $('.ui.segment.field').eq(index).find('.prompt.label').remove();
+	                }
+	            });
+	            return validateNum <= 0;
+	        },
+
+	        /**
+	         * post 保存数据
+	         *
+	         */
+	        post: function () {
+	            var me = this;
+	            this.$data.postState = 1;
+	            var poem_title = this.$data.poem_title;
+	            var poem_time = this.$data.poem_time;
+	            var poem_type = this.$data.genres.checkedData;
+	            var poem_lines = [];
+	            var poem_imgSrc = '';
+	            var picobj = this.$data.picobj;
+	            if (picobj.state === 1) {
+	                poem_imgSrc = picobj.src;
+	            }
+	            this.$data.newLines.forEach(function (item) {
+	                poem_lines.push(item.value);
+	            });
+	            var data = {
+	                poem_title: poem_title,
+	                poem_time:  poem_time,
+	                poem_type:  poem_type,
+	                poem_lines: poem_lines,
+	                poem_imgSrc: poem_imgSrc
+	            };
+	            // 更新
+	            var _id = this.$route.params.id;
+	            if (_id) {
+	                data['_id'] = _id;
+	            }
+	            // 检查登陆状态
+	            this.isLogin();
+	            if (this.isLoginstate === 0) {
+	                this.$data.postState = 0;
+	                swal({
+	                    title: '',
+	                    text: '未登陆请登陆',
 	                    type: 'error'
 	                }, function () {
-	                    window.location.href = '/';
+	                    var url = '/#!/login';
+	                    self.open(url);
 	                });
+	                return;
 	            }
-	            var url = '/api/poem';
+	            var url = '/api/save/poem';
+	            // $.ajax({
+	            //     url: '/api/save/poem',
+	            //     type: 'POST',
+	            //     data: data,
+	            // })
+	            // .done(function(data) {
+	            //     swal({
+	            //         title: '',
+	            //         text: data.message,
+	            //         type: 'success'
+	            //     }, function () {
+	            //         me.backUpPoem(data.data.id, function () {
+	            //             var url = '/#!/p/' + data.data.id;
+	            //             self.location.href = url;
+	            //         });
+	            //     });
+	            // })
+	            // .fail(function() {
+	            //     me.$data.postState = 0;
+	            //     console.log("error");
+	            // });
+	            restFullLoader.requestPOST(url, data, function (res) {
+	                var resData = res;
+	                if (resData.status === 1) {
+	                    swal({
+	                        title: '',
+	                        text: data.message,
+	                        type: 'success'
+	                    }, function () {
+	                        me.backUpPoem(resData.data.id, function () {
+	                            var url = '/#!/p/' + resData.data.id;
+	                            url = webConfig.host + webConfig.root + url;
+	                            self.location.href = url;
+	                        });
+	                    });
+	                }
+	            }, function (err) {
+	                me.$data.postState = 0;
+	                console.log("error");
+	            });
+	        },
+
+	        /**
+	         * backUpPoem 备份诗歌
+	         *
+	         * @param  {string} id 诗歌id
+	         *
+	         */
+	        backUpPoem: function (id, cb) {
+	            var url = '/api/backup';
 	            var data = {
 	                id: id
 	            };
-	            restFullLoader.requestGET(url, data, function (json) {
+	            // $.ajax({
+	            //     url: '/api/backup',
+	            //     type: 'POST',
+	            //     data: data
+	            // })
+	            // .done(function(json) {
+	            //     cb && cb();
+	            // })
+	            // .fail(function() {
+	            //     cb && cb();
+	            // });
+	            restFullLoader.requestPOST('/api/poem', data, function (res) {
+	                if (res.status === 1) {
+	                    cb && cb();
+	                }
+	            }, function (err) {
+	                cb && cb();
+	            });
+	        },
+
+	        /**
+	         * isLogin 检查是否登陆
+	         *
+	         */
+	        isLogin: function () {
+	            var me = this;
+	            var host = __webpack_require__(16).host;
+	            var url = host + '/api/isLogin';
+	            $.ajax({
+	                url: url,
+	                type: 'GET',
+	                cache: false,
+	                xhrFields: {
+	                    withCredentials: true
+	                },
+	                async: false
+	            })
+	            .done(function(data) {
+	                if (data.status === 1) {
+	                    me.isLoginstate = 1;
+	                }else {
+	                    me.isLoginstate = 0;
+	                }
+	            })
+	            .fail(function(error) {
+	                me.isLoginstate = 0;
+	                console.log(error);
+	            });
+	            // restFullLoader.requestGET(url, function (res) {
+	            //     if (res.status === 1) {
+	            //         me.isLoginstate = 1;
+	            //     }else {
+	            //         me.isLoginstate = 0;
+	            //     }
+	            // }, function (err) {
+	            //     me.isLoginstate = 0;
+	            //     console.log(error);
+	            // });
+	        },
+
+	        /**
+	         * getPoem 根据id获取poemupdate
+	         *
+	         */
+	        getPoem: function (id) {
+	            var me = this;
+	            var url = '/api/poem';
+	            var data = {
+	                id: id,
+	                update: true
+	            };
+	            // $.ajax({
+	            //     url: '/api/poem',
+	            //     type: 'get',
+	            //     data: data
+	            // })
+	            // .done(function(json) {
+	            //     if (json.status === 0) {
+	            //         swal({
+	            //             title: '',
+	            //             text: json.message,
+	            //             type: 'warning',
+	            //             confirmButtonText: '跳转到首页'
+	            //         }, function () {
+	            //             var url = '/';
+	            //             router.go(url);
+	            //         });
+	            //         return;
+	            //     }
+	            //     var data = json.data;
+	            //     // 诗歌类型
+	            //     me.$data.genres.checkedData = data.poem_type;
+	            //     // 文题
+	            //     me.$data.poem_title = data.title;
+	            //     title.setTitle(data.title);
+	            //     // 创作时间
+	            //     me.$data.poem_time = data.poem_time;
+	            //     // 图集
+	            //     if (data.poem_imgSrc) {
+	            //         var picobj = {
+	            //             state: 1,
+	            //             src: data.poem_imgSrc
+	            //         };
+	            //         me.$data.picobj = picobj;
+	            //     }
+	            //     // 联句
+	            //     var poems = data.poem_lines;
+	            //     me.$data.initLineNum = poems.length;
+	            //     poems.forEach(function (item, index) {
+	            //         var cn = numToCn.get(index + 1);
+	            //         var obj = {
+	            //             title: cn,
+	            //             value: item
+	            //         }
+	            //         me.$data.newLines.push(obj);
+	            //     });
+	            // })
+	            // .fail(function(err) {
+	            //     console.log("error");
+	            // });
+	            restFullLoader.requestGET('/api/poem', data, function (json) {
 	                if (json.status === 0) {
 	                    swal({
 	                        title: '',
@@ -312,76 +586,51 @@ webpackJsonp([3],{
 	                        confirmButtonText: '跳转到首页'
 	                    }, function () {
 	                        var url = '/';
-	                        self.location.href = url;
+	                        me.$route.router.go('/');
 	                    });
 	                    return;
 	                }
 	                var data = json.data;
-	                var poem = {};
-	                poem.title = data.title;
+	                // 诗歌类型
+	                me.$data.genres.checkedData = data.poem_type;
+	                // 文题
+	                me.$data.poem_title = data.title;
 	                title.setTitle(data.title);
-	                poem.userName = data.userName;
-	                var swicthPoemType = __webpack_require__(164);
-	                poem.type = type_id.getTypeOfId(data.poem_type);
-	                poem.typeString = swicthPoemType(data.poem_type);
-	                poem.poem_time = data.poem_time;
-	                poem.imgSrc = data.poem_imgSrc;
-	                poem.lines = data.poem_lines;
-	                poem.likes = data.likes;
-	                poem.id = data.id;
-	                me.$data.poem = poem;
-	                me.$data.load = 1;
-	                // 图片预览
-	                setTimeout(function () {
-	                    baguetteBox.run('.baguette-img', {
-	                        animation: 'fadeIn',
-	                        noScrollbars: true,
-	                        captions: function(element) {
-	                            return element.getElementsByTagName('img')[0].alt;
-	                        }
-	                    });
+	                // 创作时间
+	                me.$data.poem_time = data.poem_time;
+	                // 图集
+	                if (data.poem_imgSrc) {
+	                    var picobj = {
+	                        state: 1,
+	                        src: data.poem_imgSrc
+	                    };
+	                    me.$data.picobj = picobj;
+	                }
+	                // 联句
+	                var poems = data.poem_lines;
+	                me.$data.initLineNum = poems.length;
+	                poems.forEach(function (item, index) {
+	                    var cn = numToCn.get(index + 1);
+	                    var obj = {
+	                        title: cn,
+	                        value: item
+	                    }
+	                    me.$data.newLines.push(obj);
 	                });
 	            });
-	        },
-
-	        likePoem: function (id, likes) {
-	            var me = this;
-	            if (!this.likesState) {
-	                if (this.poem.likes === undefined) {
-	                    this.poem['likes'] = 0;
-	                }
-	                this.poem.likes++;
-	                this.likesState = true;
-	                var num = 0;
-	                var url = '/api/likes';
-	                var data = {
-	                    _id: id,
-	                    likes: ++num
-	                }
-	                restFullLoader.requestPOST(url, data, function (res) {
-	                    
-	                }, function (err) {
-	                    me.likesState = false;
-	                });
-	            }else {
-	                var infoData = this.$root.$children[0].infoData;
-	                infoData.class = 'negative';
-	                infoData.info = '大才子,你已經點過贊拉!!!';
-	                infoData.state = true;
-	            }
 	        }
 	    }
 	});
 
 /***/ },
 
-/***/ 171:
+/***/ 170:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(172);
+	var content = __webpack_require__(171);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -402,7 +651,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 172:
+/***/ 171:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -410,20 +659,315 @@ webpackJsonp([3],{
 
 
 	// module
-	exports.push([module.id, "#main.w-90 {\n    width: 90%;\n}\n\n.poem-body {\n    \n}\n\n#app .poem-body > * {\n    padding-left: 30px;\n}\n\n.poem-body > .segment.ui {\n    font-size: 1.8rem;\n    font-family: STkaiti,Lato,\"Helvetica Neue\",Arial,Helvetica,sans-serif\n}\n\n#app .ui.label {\n    margin-bottom: 10px;\n}\n#poem-body .image {\n    text-align: center;\n}\n#main img.ui.image {\n    margin: 0 auto;\n}\n.ui.label {\n    z-index: 9;\n}\n.like.icon {\n    cursor: pointer;\n}\n#main .extra.content {\n    padding:14px 0 0 30px;\n    font-size: 1.3rem;\n}\n.ui.vertical.segment:last-child {\n    border-bottom: 1px solid rgba(34, 36, 38, 0.15);\n}\n.content .active.like.icon {\n    color: #ff2733;\n}\n@media screen and (max-width: 810px) {\n    #main {\n        width: 90%;\n    }\n    .poem-body > .segment.ui {\n        font-size: 1.2rem;\n    }\n}", ""]);
+	exports.push([module.id, "#main[name=poem-form] {\n    width: 80%;\n    margin: 0 auto;\n    padding: 0 1.5% 350px;\n}\n#main > .header {\n    padding: 0 18px;\n}\n.segment > div.input {\n    width: 90%;\n    float: right;\n    margin-top: -5px;\n}\n.segment > .button {\n    font-size: 12px;\n    font-weight: 400;\n}\n#submit {\n    float: right;\n    margin-right: 11px;\n}\n/*重置laydate样式*/\n#laydate_box * {\n    box-sizing: initial!important;\n}\n#laydate_YY {\n    margin-right: 0;\n}\n#laydate_MM {\n    float: right;\n}\n#app {\n    position: relative;\n    padding-top: 70px;\n    /*padding-bottom: 350px;*/\n    min-height:100%\n}\n/*重置laydate样式end*/\n.field > .prompt {\n    float: right;\n}\n.poem-title > .ui.label.prompt,\n.poem-genres > .ui.label.prompt {\n    margin-right: 45px;\n}\n.ui.input {\n    width: 64%;\n}\n#main .ui > .column > .label {\n    width: auto;\n}\n@media screen and (max-width: 810px) {\n    #main {\n        width: 80%;\n    }\n    #app .mobile > div {\n        display: block;\n        width: 100%;\n    }\n    .segment > div.input {\n        width: 71%;\n    }\n}\n.ui > .column > .label {\n    width: 5rem;\n}", ""]);
 
 	// exports
 
 
 /***/ },
 
+/***/ 172:
+/***/ function(module, exports) {
+
+	/**
+	 * @File:      数字转换为大写
+	 * @Author:    花夏(liubiao@itoxs.com)
+	 * @Version:   V0.0.1
+	 * @Date:      2016-08-31 19:11:34
+	 */
+	var object = {
+	    get: function (num) {
+	        // 转换为数字
+	        var num = num - 0;
+	        if (num > 1000000000000000000) {
+	            alert("您输入的数字太大，重新输入！");
+	            return;
+	        }
+	        num += '';
+	        num = num.split('').reverse();
+	        var len = num.length;
+	        var monval = "";
+	        var bitSignificance = '';
+	        var firstNum = '';
+	        for (var i = 0; i < len; i++) {
+	            bitSignificance = num[i] != 0 ? this.to_mon(i) : '';
+	            firstNum = num[i] != 0 ? this.to_upper(num[i]) : '';
+	            monval = monval + bitSignificance + firstNum;
+	        }
+	        monval = monval.split('').reverse().join('');
+	        return monval;
+	    },
+
+	    /**
+	     * to_upper 转换数字
+	     *
+	     * @param  {Number} a 数字
+	     *
+	     * @return {String}   返回转换后的数字
+	     */
+	    to_upper: function(a) {
+	        switch (a) {
+	            case '0':
+	                return '零';
+	                break;
+	            case '1':
+	                return '壹';
+	                break;
+	            case '2':
+	                return '贰';
+	                break;
+	            case '3':
+	                return '叁';
+	                break;
+	            case '4':
+	                return '肆';
+	                break;
+	            case '5':
+	                return '伍';
+	                break;
+	            case '6':
+	                return '陆';
+	                break;
+	            case '7':
+	                return '柒';
+	                break;
+	            case '8':
+	                return '捌';
+	                break;
+	            case '9':
+	                return '玖';
+	                break;
+	            default:
+	                return '';
+	        }
+	    },
+
+	    /**
+	     * to_mon 转换位数
+	     *
+	     * @param  {Number} a 位数
+	     *
+	     * @return {String} 返回转换后的位数
+	     */
+	    to_mon: function(a) {
+	        switch (a) {
+	            case 1:
+	                return '拾';
+	                break;
+	            case 2:
+	                return '佰';
+	                break;
+	            case 3:
+	                return '仟';
+	                break;
+	            default:
+	                return '';
+	                break;
+	        }
+	    }
+	};
+	module.exports = object;
+
+/***/ },
+
 /***/ 173:
+/***/ function(module, exports) {
+
+	/**
+	 * @File:      规则配置
+	 * @Author:    花夏(v_liubiao01@baidu.com)
+	 * @Version:   V0.0.1
+	 * @Date:      2016-09-01 16:42:52
+	 */
+	module.exports = {
+	    // 文题校验规则
+	    poem_title: {
+	        identifier: 'poem_title',
+	        rules: [
+	            {
+	                type:   'empty',
+	                prompt: '好题配好辞！'
+	            }
+	        ]
+	    },
+	    // 体裁校验规则
+	    poem_genres: {
+	        identifier: 'poem_genres',
+	        rules: [
+	            {
+	                type:   'empty',
+	                prompt: '请归下类目吧！'
+	            }
+	        ]
+	    },
+	    poem: {
+	        identifier: 'poem',
+	        rules: [
+	            {
+	                type:   'empty',
+	                prompt: '再想想又是一好辞'
+	            }
+	        ]
+	    }
+	};
+
+/***/ },
+
+/***/ 174:
+/***/ function(module, exports) {
+
+	/**
+	 * @File:      默认数据配置
+	 * @Author:    花夏(liubiao@itoxs.com)
+	 * @Version:   V0.0.1
+	 * @Date:      2016-09-16 20:59:43
+	 */
+	module.exports = {
+	    // 下拉框默认数据
+	    genresData: {
+	        inputName: 'poem_genres', // 选择的name字段
+	        defaultText: '请选择', // 默认请选择
+	        checkedData: -1, // 默认选中value值
+	        data: [
+	            {
+	                text: '请选择',
+	                value: -1
+	            },
+	            {
+	                text: '诗',
+	                value: 1
+	            },
+	            {
+	                text: '词',
+	                value: 2
+	            },
+	            {
+	                text: '赋',
+	                value: 3
+	            }
+	        ]
+	    },
+	    newLines: [
+	        {
+	            title: '壹',
+	            value: ''
+	        },
+	        {
+	            title: '贰',
+	            value: ''
+	        },
+	        {
+	            title: '叁',
+	            value: ''
+	        },
+	        {
+	            title: '肆',
+	            value: ''
+	        }
+	    ]
+	}
+
+/***/ },
+
+/***/ 175:
+/***/ function(module, exports) {
+
+	module.exports = "<div id=\"main\" name=\"poem-form\">\n    <v-loading v-if=\"load === 0\"></v-loading>\n    <template v-else>\n        <div class=\"ui three column grid mobile\">\n            <div class=\"column field poem-title\">\n                <span class=\"ui horizontal label\">文题</span>\n                <div class=\"ui input\">\n                    <input type=\"text\" placeholder=\"请输入文题\" name=\"poem_title\" v-model=\"poem_title\"/>\n                </div>\n            </div>\n            <div class=\"column field\">\n                <span class=\"ui horizontal label\">创作时间</span>\n                <div class=\"ui input\">\n                    <input type=\"text\" id=\"poem_time\" placeholder=\"输入创作时间\" v-model=\"poem_time\"/>\n                </div>\n            </div>\n            <div class=\"column field poem-genres\">\n                <span class=\"ui horizontal label\">体裁</span>\n                <v-select :selectobj.sync=\"genres\"></v-select>\n            </div>\n        </div>\n        <v-upload :picobj.sync=\"picobj\"></v-upload>\n        <div class=\"ui segments piled\">\n            <div class=\"ui segment field clearfix\" v-for=\"item in newLines\">\n                <span class=\"ui ribbon label\">第{{item.title}}联</span>\n                <div class=\"ui input\">\n                    <input type=\"text\" placeholder=\"请输入第{{item.title}}联\" v-model=\"item.value\">\n                </div>\n            </div>\n            <div class=\"ui segment\">\n                <button class=\"ui red button compact\" @click=\"delLine\">删一联</button>\n                <button class=\"ui green button compact\" @click=\"newLine\">增一联</button>\n                <button class=\"ui green button compact submit loading\" id=\"submit\" v-if=\"postState === 1\" disabled>\n                    <span v-if=\"update === 0\">发布</span>\n                    <span v-if=\"update === 1\">更新</span>\n                </button>\n                <button class=\"ui green button compact submit\" id=\"submit\" v-else>\n                    <span v-if=\"update === 0\">发布</span>\n                    <span v-if=\"update === 1\">更新</span>\n                </button>\n            </div>\n        </div>\n    </template>\n</div>\n";
+
+/***/ },
+
+/***/ 176:
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @File:      select组件
+	 * @Author:    花夏(liubiao@itoxs.com)
+	 * @Version:   V0.0.1
+	 * @Date:      2016-06-01 17:19:58
+	 */
+	__webpack_require__(177);
+	var Vue = __webpack_require__(1);
+	module.exports = Vue.extend({
+	    ready: function () {
+	        me = this;
+	        me.init();
+	    },
+	    template: __webpack_require__(179),
+	    data: function () {
+	        return {
+	            checkedData: -1
+	        };
+	    },
+	    watch: {
+	        // 监听当前选中项
+	        checkedData: {
+	            handler: function (val, oldVal) {
+	                this.selectobj.checkedData = val;
+	            }
+	        },
+	        selectobj: {
+	            handler: function (val, oldVal) {
+	                // 监听变化，如果是-1则做重置
+	                if (val.checkedData == -1) {
+	                    this.rest();
+	                }else {
+	                    this.checking(val.checkedData);
+	                }
+	            },
+	            deep: true
+	        }
+	    },
+	    props: {
+	        selectobj: {}
+	    },
+	    components: {
+	    },
+	    events: {},
+	    methods: {
+	        init: function () {
+	            $('.dropdown').dropdown({
+	                // 你可以使用任何过渡
+	                transition: 'slide down'
+	            });
+	        },
+
+	        /**
+	         * rest semantic-ui中没有重置默认选中文字，所以简单做一个
+	         *
+	         */
+	        rest: function () {
+	            var defaultText = this.selectobj.defaultText;
+	            $('.selection.dropdown > .text').text(defaultText).addClass('default');
+	        },
+
+	        /**
+	         * checking 修复semantic UI ajax获取数据无法显示选中的文字
+	         *
+	         * @return {type} description
+	         */
+	        checking: function (val) {
+	            var data = this.selectobj.data;
+	            var $el = $('.ui.dropdown > .text');
+	            var text = $el.text();
+	            data.forEach(function (item, index) {
+	                if (item.value == val) {
+	                    text = item.text;
+	                    $el.text(text).removeClass('default');
+	                }
+	            });
+	        }
+	    }
+	});
+
+/***/ },
+
+/***/ 177:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(174);
+	var content = __webpack_require__(178);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -432,8 +976,8 @@ webpackJsonp([3],{
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./baguetteBox.css", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./baguetteBox.css");
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./index.css", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./index.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -444,7 +988,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 174:
+/***/ 178:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -452,17 +996,313 @@ webpackJsonp([3],{
 
 
 	// module
-	exports.push([module.id, "/*!\n * baguetteBox.js\n * @author  feimosi\n * @version 0.7.0\n * @url https://github.com/feimosi/baguetteBox.js\n */\n\n#baguetteBox-overlay {\n\tdisplay: none;\n\topacity: 0;\n\tposition: fixed;\n\toverflow: hidden;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\tz-index: 1000000;\n\tbackground-color: #222;\n\tbackground-color: rgba(0, 0, 0, 0.8);\n\t-webkit-transition: opacity 0.5s ease;\n\t        transition: opacity 0.5s ease;\n}\n\n#baguetteBox-overlay.visible {\n\topacity: 1;\n}\n\n#baguetteBox-overlay .full-image {\n\tdisplay: inline-block;\n\tposition: relative;\n\twidth: 100%;\n\theight: 100%;\n\ttext-align: center;\n}\n\n#baguetteBox-overlay .full-image figure {\n\tdisplay: inline;\n\tmargin: 0;\n\theight: 100%;\n}\n\n#baguetteBox-overlay .full-image img {\n\tdisplay: inline-block;\n\twidth: auto;\n\theight: auto;\n\tmax-height: 100%;\n\tmax-width: 100%;\n\tvertical-align: middle;\n\t-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);\n\t   -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);\n\t        box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);\n}\n\n#baguetteBox-overlay .full-image figcaption {\n\tdisplay: block;\n\tposition: absolute;\n\tbottom: 0;\n\twidth: 100%;\n\ttext-align: center;\n\tline-height: 1.8;\n\tcolor: #ccc;\n\tbackground-color: #000;\n\tbackground-color: rgba(0, 0, 0, 0.6);\n\tfont-family: sans-serif;\n}\n\n#baguetteBox-overlay .full-image:before {\n\tcontent: \"\";\n\tdisplay: inline-block;\n\theight: 50%;\n\twidth: 1px;\n\tmargin-right: -1px;\n}\n\n#baguetteBox-slider {\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\theight: 100%;\n\twidth: 100%;\n\twhite-space: nowrap;\n\t-webkit-transition: left 0.4s ease, -webkit-transform 0.4s ease;\n\t        transition: left 0.4s ease, -moz-transform 0.4s ease;\n\t        transition: left 0.4s ease, transform 0.4s ease;\n}\n\n#baguetteBox-slider.bounce-from-right {\n\t-webkit-animation: bounceFromRight 0.4s ease-out;\n\t        animation: bounceFromRight 0.4s ease-out;\n}\n\n#baguetteBox-slider.bounce-from-left {\n\t-webkit-animation: bounceFromLeft 0.4s ease-out;\n\t        animation: bounceFromLeft 0.4s ease-out;\n}\n\n.baguetteBox-button#next-button,\n.baguetteBox-button#previous-button {\n\ttop: 50%;\n\ttop: calc(50% - 30px);\n\twidth: 44px;\n\theight: 60px;\n}\n\n.baguetteBox-button {\n\tposition: absolute;\n\tcursor: pointer;\n\toutline: none;\n\tpadding: 0;\n\tmargin: 0;\n\tborder: 0;\n\t-moz-border-radius: 15%;\n\t     border-radius: 15%;\n\tbackground-color: #323232;\n\tbackground-color: rgba(50, 50, 50, 0.5);\n\tcolor: #ddd;\n\tfont: 1.6em sans-serif;\n\t-webkit-transition: background-color 0.4s ease;\n\t        transition: background-color 0.4s ease;\n}\n\n.baguetteBox-button:hover {\n\tbackground-color: rgba(50, 50, 50, 0.9);\n}\n\n.baguetteBox-button#next-button {\n\tright: 2%;\n}\n\n.baguetteBox-button#previous-button {\n\tleft: 2%;\n}\n\n.baguetteBox-button#close-button {\n\ttop: 20px;\n\tright: 2%;\n\tright: calc(2% + 6px);\n\twidth: 30px;\n\theight: 30px;\n}\n\n/*\n    Preloader\n    Borrowed from http://tobiasahlin.com/spinkit/\n*/\n\n.spinner {\n\twidth: 40px;\n\theight: 40px;\n\tdisplay: inline-block;\n\tposition: absolute;\n\ttop: 50%;\n\tleft: 50%;\n\tmargin-top: -20px;\n\tmargin-left: -20px;\n}\n\n.double-bounce1,\n.double-bounce2 {\n\twidth: 100%;\n\theight: 100%;\n\t-moz-border-radius: 50%;\n\t     border-radius: 50%;\n\tbackground-color: #fff;\n\topacity: 0.6;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\t-webkit-animation: bounce 2s infinite ease-in-out;\n\t        animation: bounce 2s infinite ease-in-out;\n}\n\n.double-bounce2 {\n\t-webkit-animation-delay: -1s;\n\t        animation-delay: -1s;\n}\n\n@-webkit-keyframes bounceFromRight {\n\n0% {\n\tmargin-left: 0;\n}\n\n50% {\n\tmargin-left: -30px;\n}\n\n100% {\n\tmargin-left: 0;\n}\n\n}\n\n@keyframes bounceFromRight {\n\n0% {\n\tmargin-left: 0;\n}\n\n50% {\n\tmargin-left: -30px;\n}\n\n100% {\n\tmargin-left: 0;\n}\n\n}\n\n@-webkit-keyframes bounceFromLeft {\n\n0% {\n\tmargin-left: 0;\n}\n\n50% {\n\tmargin-left: 30px;\n}\n\n100% {\n\tmargin-left: 0;\n}\n\n}\n\n@keyframes bounceFromLeft {\n\n0% {\n\tmargin-left: 0;\n}\n\n50% {\n\tmargin-left: 30px;\n}\n\n100% {\n\tmargin-left: 0;\n}\n\n}\n\n@-webkit-keyframes bounce {\n\n0%,100% {\n\t-webkit-transform: scale(0);\n\t        transform: scale(0);\n}\n\n50% {\n\t-webkit-transform: scale(1);\n\t        transform: scale(1);\n}\n\n}\n\n@keyframes bounce {\n\n0%,100% {\n\t-webkit-transform: scale(0);\n\t   -moz-transform: scale(0);\n\t        transform: scale(0);\n}\n\n50% {\n\t-webkit-transform: scale(1);\n\t   -moz-transform: scale(1);\n\t        transform: scale(1);\n}\n\n}\n\n", ""]);
+	exports.push([module.id, ".ui.selection.dropdown {\n    min-width: 11.36rem;\n}\n@media screen and (-webkit-min-device-pixel-ratio:0) {\n    .ui.selection.dropdown {\n        min-width: 11.58rem;\n    }\n}", ""]);
 
 	// exports
 
 
 /***/ },
 
-/***/ 175:
+/***/ 179:
 /***/ function(module, exports) {
 
-	module.exports = "<div id=\"main\" name=\"poem-form\" class=\"mar-auto w-90\">\n    <v-loading v-if=\"load === 0\"></v-loading>\n    <div class=\"ui tall stacked segment green\" v-else>\n        <span class=\"ui teal ribbon label\">{{poem.title}}</span>\n        <div></div>\n        <a class=\"ui ribbon label\">{{poem.userName}}</a>\n        <div></div>\n        <span class=\"ui right ribbon label\">{{poem.poem_time}}</span>\n        <div></div>\n        <a class=\"ui right ribbon label\" v-link=\"{ path: '/list/' + poem.type }\">{{poem.typeString}}</a>\n        <div class=\"image baguette-img\" v-if=\"!!poem.imgSrc\">\n            <a href=\"javascript:;\" data-at-450=\"{{poem.imgSrc}}\" data-at-800=\"{{poem.imgSrc}}\" data-at-1366=\"{{poem.imgSrc}}\" data-at-1920=\"{{poem.imgSrc}}\" data-caption=\"{{poem.title}}\">\n                <img :src=\"poem.imgSrc\" class=\"ui wireframe image\" alt=\"{{poem.imgSrc}}\">\n            </a>\n        </div>\n        <div class=\"w-80 mar-auto poem-body\" id=\"poem-body\">\n            <p class=\"ui vertical segment\" v-for=\"item in poem.lines\">{{item}}</p>\n        </div>\n        <div class=\"extra content\">\n            <span>\n                <i class=\"heart like icon\" :class=\"{active:likesState}\" @click=\"likePoem(poem.id, poem.likes)\"></i>\n                <span>{{poem.likes || 0}}</span>\n            </span>\n        </div>\n    </div>\n</div>";
+	module.exports = "<div class=\"ui selection dropdown\">\n    <input name=\"{{selectobj.inputName}}\" type=\"hidden\" value=\"{{selectobj.checkedData}}\" v-model=\"checkedData\">\n    <i class=\"dropdown icon\"></i>\n    <div class=\"default text\">{{selectobj.defaultText}}</div>\n    <div class=\"menu\">\n        <div class=\"item\" data-value=\"{{item.value}}\" data-text=\"{{item.text}}\" v-for=\"item in selectobj.data\">\n            {{item.text}}\n        </div>\n    </div>\n</div>";
+
+/***/ },
+
+/***/ 180:
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @File:      上传组件
+	 * @Author:    花夏(liubiao01@itoxs.com)
+	 * @Version:   V0.0.1
+	 * @Date:      2016-09-13 15:52:19
+	 */
+	var Vue = __webpack_require__(1);
+	__webpack_require__(181);
+	var config = __webpack_require__(183);
+	module.exports = Vue.extend({
+	    ready: function () {
+	        this.init();
+	    },
+	    template: __webpack_require__(184),
+	    data: function () {
+	        var srcobj = JSON.stringify(config.srcobj);
+	        srcobj = JSON.parse(srcobj);
+	        return {
+	            srcobj: srcobj,
+	            loading: 0,
+	            imgDisabled: 0
+	        };
+	    },
+	    props: {
+	        picobj: {}
+	    },
+	    events: {
+	        
+	    },
+	    components: {
+	        'v-loading': __webpack_require__(158)
+	    },
+	    watch: {
+	        srcobj: {
+	            handler: function (val) {
+	                this.picobj = val;
+	            },
+	            deep: true
+	        },
+	        // 做数据回写
+	        picobj: {
+	            handler: function (val) {
+	                this.$data.srcobj = val;
+	                // this.$data.imgDisabled = val.state;
+	            },
+	            deep: true
+	        }
+	    },
+	    methods: {
+	        init: function () {
+	            var me = this;
+	            this.upload();
+	        },
+
+	        /**
+	         * upload 上传图片
+	         *
+	         */
+	        upload: function () {
+	            var me = this;
+	            var uploader = Qiniu.uploader({
+	                runtimes: 'html5,flash,html4', // 上传模式，依次退化
+	                browse_button: 'pickfiles', // 上传选择的点选按钮，必需
+	                // 在初始化时，uptoken，uptoken_url，uptoken_func三个参数中必须有一个被设置
+	                // 切如果提供了多个，其优先级为uptoken > uptoken_url > uptoken_func
+	                // 其中uptoken是直接提供上传凭证，uptoken_url是提供了获取上传凭证的地址，如果需要定制获取uptoken的过程则可以设置uptoken_func
+	                // uptoken : '<Your upload token>', // uptoken是上传凭证，由其他程序生成
+	                uptoken_url: 'http://hua.huar.love/qiniu/upToken',         // Ajax请求uptoken的Url，强烈建议设置（服务端提供）
+	                // uptoken_func: function(file){    // 在需要获取uptoken时，该方法会被调用
+	                //    // do something
+	                //    return uptoken;
+	                // },
+	                get_new_uptoken: true, // 设置上传文件的时候是否每次都重新获取新的uptoken
+	                // downtoken_url: '/downtoken',
+	                // Ajax请求downToken的Url，私有空间时使用，JS-SDK将向该地址POST文件的key和domain，服务端返回的JSON必须包含url字段，url值为该文件的下载地址
+	                // unique_names: true,              // 默认false，key为文件名。若开启该选项，JS-SDK会为每个文件自动生成key（文件名）
+	                // save_key: true,                  // 默认false。若在服务端生成uptoken的上传策略中指定了sava_key，则开启，SDK在前端将不对key进行任何处理
+	                domain: 'http://odflit039.bkt.clouddn.com/', // bucket域名，下载资源时用到，必需
+	                container: 'container', // 上传区域DOM ID，默认是browser_button的父元素
+	                max_file_size: '100mb', // 最大文件体积限制
+	                flash_swf_url: 'http://odflit039.bkt.clouddn.com/Moxie.swf', //引入flash，相对路径
+	                max_retries: 1, // 上传失败最大重试次数
+	                dragdrop: true, // 开启可拖曳上传
+	                drop_element: 'container', // 拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+	                chunk_size: '4mb', // 分块上传时，每块的体积
+	                auto_start: true, // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
+	                filters : {
+	                    max_file_size: '10mb',
+	                        mime_types: [{
+	                            title: "图片",
+	                            extensions: "jpeg,jpg,png,gif"
+	                        }]
+	                },
+	                //x_vars : {
+	                //    查看自定义变量
+	                //    'time' : function(up,file) {
+	                //        var time = (new Date()).getTime();
+	                // do something with 'time'
+	                //        return time;
+	                //    },
+	                //    'size' : function(up,file) {
+	                //        var size = file.size;
+	                // do something with 'size'
+	                //        return size;
+	                //    }
+	                //},
+	                init: {
+	                    'FilesAdded': function(up, files) {
+	                        plupload.each(files, function(file) {
+	                            // loading
+	                            me.$data.loading = 1;
+	                            // 文件添加进队列后，处理相关的事情
+	                        });
+	                    },
+	                    'BeforeUpload': function(up, file) {
+	                        // 每个文件上传前，处理相关的事情
+	                    },
+	                    'UploadProgress': function(up, file) {
+	                        // 每个文件上传时，处理相关的事情
+	                    },
+	                    'FileUploaded': function(up, file, info) {
+	                        // 每个文件上传成功后，处理相关的事情
+	                        // 其中info是文件上传成功后，服务端返回的json，形式如：
+	                        // {
+	                        //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+	                        //    "key": "gogopher.jpg"
+	                        //  }
+	                        // 查看简单反馈
+	                        var domain = up.getOption('domain');
+	                        var res = JSON.parse(info);
+	                        // 获取上传成功后的文件的Url
+	                        // -glistening 图片加水印
+	                        var sourceLink = domain + res.key + config.glistening;
+	                        me.$data.srcobj.state = 1;
+	                        me.$data.srcobj.src = sourceLink;
+	                        // loading
+	                        me.$data.loading = 0;
+	                        // me.$data.imgDisabled = 1;
+	                    },
+	                    'Error': function(up, err, errTip) {
+	                        //上传出错时，处理相关的事情
+	                        swal({
+	                            title: '',
+	                            text: '上传文件出错，请重新上传！',
+	                            type: 'error'
+	                        });
+	                        // loading
+	                        me.$data.loading = 0;
+	                        me.$data.imgDisabled = 0;
+	                    },
+	                    'UploadComplete': function() {
+	                        //队列文件处理完毕后，处理相关的事情
+	                        console.log('队列文件处理完毕');
+	                    },
+	                    'Key': function(up, file) {
+	                        // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+	                        // 该配置必须要在unique_names: false，save_key: false时才生效
+	                        var key = file.id + '__' + file.name;
+	                        // do something with key here
+	                        return key;
+	                    }
+	                }
+	            });
+	        },
+
+	        /**
+	         * remove 移除图片
+	         *
+	         */
+	        remove: function () {
+	            var qiniuSrc = this.$data.srcobj.src;
+	            if (qiniuSrc === config.srcobj.src) {
+	                swal({
+	                    title: '',
+	                    text: '没有可被移除的文件',
+	                    type: 'error'
+	                });
+	                return;
+	            }
+	            this.$data.imgDisabled = 0;
+	            var data = {
+	                src: qiniuSrc
+	            }
+	            $.ajax({
+	                url: '/qiniu/delete',
+	                type: 'POST',
+	                data: data,
+	            })
+	            .done(function(json) {
+	                if (json.status === -1) {
+	                    swal({
+	                        title: '',
+	                        text: json.message,
+	                        type: 'error'
+	                    });
+	                }
+	                console.log(json.message);
+	            })
+	            .fail(function(err) {
+	                console.log(err);
+	            });
+	            var srcobj = JSON.stringify(config.srcobj);
+	            srcobj = JSON.parse(srcobj);
+	            this.$data.srcobj = srcobj;
+	        },
+
+	        /**
+	         * showShade 显示遮罩层
+	         */
+	        showShade: function () {
+	            this.$data.imgDisabled = this.$data.srcobj.state;
+	        },
+
+	        /**
+	         * hideShade 隐藏遮罩层
+	         *
+	         */
+	        hideShade: function () {
+	            this.$data.imgDisabled = 0;
+	        }
+	    }
+	});
+
+/***/ },
+
+/***/ 181:
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(182);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./index.css", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./index.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+
+/***/ 182:
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#container {\n    width: 300px;\n    position: relative;\n    margin-top: 30px;\n}\n@media screen and (max-width: 810px) {\n   #container {\n        text-align: center;\n    }\n}\n#pickfiles {\n    border: none;\n    padding: 0;\n}\n.remove.icon {\n    position: absolute;\n    left: 0;\n    top: 9px;\n    z-index: 999;\n    font-size: 2rem;\n    cursor: pointer;\n    color: #fff;\n}\n.dimmer.ui {\n    position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 999;\n}\n.dimmer.ui > .loading {\n    left: 50%;\n    margin-left: -12px;\n    margin-top: -55px;\n    position: absolute;\n    top: 50%;\n}\n.img-disabled {\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    left: 0;\n    top: 0;\n    background: rgba(0, 0, 0, .3);\n    z-index: 998;\n    text-align: center;\n    color: #fff;\n}\n.img-disabled:after {\n    display:inline-block;\n    width:0;\n    height:100%;\n    vertical-align:middle;\n    content:\"\";\n}", ""]);
+
+	// exports
+
+
+/***/ },
+
+/***/ 183:
+/***/ function(module, exports) {
+
+	/**
+	 * @File:      默认配置
+	 * @Author:    花夏(liubiao@itoxs.com)
+	 * @Version:   V0.0.1
+	 * @Date:      2016-09-14 17:11:03
+	 */
+	module.exports = {
+	    glistening: '-scal',
+	    srcobj: {
+	        state: 0,
+	        src: 'http://odflit039.bkt.clouddn.com/o_1asjud1su1nft13js1prps14hrl9image.png'
+	    }
+	}
+
+/***/ },
+
+/***/ 184:
+/***/ function(module, exports) {
+
+	module.exports = "<div id=\"container\" @mouseenter=\"showShade\" @mouseleave=\"hideShade\">\n    <i class=\"remove icon\" v-if=\"imgDisabled === 1\" @click=\"remove\"></i>\n    <div class=\"img-disabled\" v-if=\"imgDisabled === 1\">请先移除图片再上传吧~</div>\n    <button id=\"pickfiles\">\n        <input type=\"hidden\" name=\"pic\" v-model=\"srcobj.src\" v-if=\"srcobj.state === 1\"/>\n        <img :src=\"srcobj.src\" class=\"ui medium image\">\n    </button>\n    <div class=\"ui active dimmer\" v-if=\"loading === 1\">\n        <v-loading class=\"loading\"></v-loading>\n    </div>\n</div>";
 
 /***/ }
 
