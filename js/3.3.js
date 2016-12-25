@@ -432,7 +432,7 @@ webpackJsonp([3],{
 	                        title: '',
 	                        text: resData.message,
 	                        type: 'success'
-	                    }, function () {
+	                    }, function (resData) {
 	                        me.backUpPoem(resData.data.id, function (resData) {
 	                            var url = '/p/' + resData.data.id;
 	                            me.$route.router.go(url);
@@ -469,10 +469,10 @@ webpackJsonp([3],{
 	            // });
 	            restFullLoader.requestPOST(url, data, function (res) {
 	                if (res.status === 1) {
-	                    cb && cb();
+	                    cb && cb(resData);
 	                }
 	            }, function (err) {
-	                cb && cb();
+	                cb && cb(resData);
 	            });
 	        },
 
