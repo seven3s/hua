@@ -430,7 +430,7 @@ webpackJsonp([3],{
 	                if (resData.status === 1) {
 	                    swal({
 	                        title: '',
-	                        text: data.message,
+	                        text: resData.message,
 	                        type: 'success'
 	                    }, function () {
 	                        me.backUpPoem(resData.data.id, function () {
