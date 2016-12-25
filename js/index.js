@@ -23831,9 +23831,11 @@
 	            //     deferred.reject(response);
 	            // }
 	            success && success(response);
+	            return response;
 	        }).fail(function (response) {
 	            deferred.reject(response);
 	            fail && fail(response);
+	            return response;
 	        });
 	        return deferred.promise();
 	    },
