@@ -274,16 +274,16 @@ module.exports = Vue.extend({
             //     console.log("error");
             // });
             restFullLoader.requestPOST(url, data, function (res) {
-                if (res.status === 1) {
+                var resData = res;
+                if (resData.status === 1) {
                     swal({
                         title: '',
-                        text: data.message,
+                        text: resData.message,
                         type: 'success'
                     }, function () {
-                        me.backUpPoem(data.data.id, function () {
-                            var url = '/#!/p/' + data.data.id;
-                            url = webConfig.host + webConfig.root + url;
-                            self.location.href = url;
+                        me.backUpPoem(resData.data.id, function (id) {
+                            var url = '/p/' + id;
+                            me.$route.router.go(url);
                         });
                     });
                 }
@@ -315,12 +315,12 @@ module.exports = Vue.extend({
             // .fail(function() {
             //     cb && cb();
             // });
-            restFullLoader.requestPOST('/api/poem', data, function (res) {
+            restFullLoader.requestPOST(url, data, function (res) {
                 if (res.status === 1) {
-                    cb && cb();
+                    cb && cb(id);
                 }
             }, function (err) {
-                cb && cb();
+                cb && cb(id);
             });
         },
 
@@ -330,11 +330,15 @@ module.exports = Vue.extend({
          */
         isLogin: function () {
             var me = this;
-            var host = require('../web-config').host;
+            var host = require('../../web-config').host;
             var url = host + '/api/isLogin';
             $.ajax({
                 url: url,
                 type: 'GET',
+                cache: false,
+                xhrFields: {
+                    withCredentials: true
+                },
                 async: false
             })
             .done(function(data) {

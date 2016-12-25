@@ -164,7 +164,9 @@ module.exports = Vue.extend({
                         text: res.message,
                         type: 'success'
                     }, function () {
-                        me.$route.router.go('/');
+                        var url = '/hua/#!/';
+                        self.location.href = url;
+                        // me.$route.router.go('/');
                     });
                 }
             }, function (err) {

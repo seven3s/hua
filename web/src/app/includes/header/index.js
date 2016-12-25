@@ -85,8 +85,8 @@ module.exports = Vue.extend({
         louterForeEach: function () {
             var status = this.loginUrl();
             if (this.$data.login.status === 0 && status) {
-                var url = '/#!/login';
-                self.open(url);
+                var url = '/login';
+                this.$route.router.go(url);
             }
         },
 
