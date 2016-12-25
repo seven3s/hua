@@ -189,7 +189,7 @@ webpackJsonp([2],{
 	                        type: 'success'
 	                    }, function () {
 	                        var url = 'www.huar.love/hua/#!/';
-	                        self.href = url;
+	                        self.location.href = url;
 	                        // me.$route.router.go('/');
 	                    });
 	                }
