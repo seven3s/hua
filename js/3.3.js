@@ -467,7 +467,7 @@ webpackJsonp([3],{
 	            // .fail(function() {
 	            //     cb && cb();
 	            // });
-	            restFullLoader.requestPOST('/api/poem', data, function (res) {
+	            restFullLoader.requestPOST(url, data, function (res) {
 	                if (res.status === 1) {
 	                    cb && cb();
 	                }
