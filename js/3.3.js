@@ -431,9 +431,9 @@ webpackJsonp([3],{
 	                        title: '',
 	                        text: data.message,
 	                        type: 'success'
-	                    }, function () {
-	                        me.backUpPoem(data.data.id, function () {
-	                            var url = '/#!/p/' + data.data.id;
+	                    }, function (res) {
+	                        me.backUpPoem(res.data.id, function () {
+	                            var url = '/#!/p/' + res.data.id;
 	                            url = webConfig.host + webConfig.root + url;
 	                            self.location.href = url;
 	                        });
