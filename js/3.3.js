@@ -487,6 +487,10 @@ webpackJsonp([3],{
 	            $.ajax({
 	                url: url,
 	                type: 'GET',
+	                cache: false,
+	                xhrFields: {
+	                    withCredentials: true
+	                },
 	                async: false
 	            })
 	            .done(function(data) {
