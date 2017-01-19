@@ -23,7 +23,7 @@
   },
   "deploy": {
     "type": "git",
-    "repo": "https://github.com/liubiao0810/hua.git",
+    "repo": "https://github.com/huarxia/hua.git",
     "branch": "gh-pages",
     "dir": "web/dist"
   }

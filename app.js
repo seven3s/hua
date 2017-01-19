@@ -1,14 +1,14 @@
 
-var express = require('express');
-var http = require('http');
-var path = require('path');
-var favicon = require('static-favicon');
-var logger = require('morgan');
+var express      = require('express');
+var http         = require('http');
+var path         = require('path');
+var favicon      = require('static-favicon');
+var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var bodyParser   = require('body-parser');
 var SessionStore = require("session-mongoose")(express);
-var routes = require('./routes/index');
-var app = express();
+var routes       = require('./routes/index');
+var app          = express();
 // view engine setup
 // app.set('views', path.join(__dirname, '/web/dist'));
 app.set('port', process.env.PORT || 2368);
@@ -36,7 +36,7 @@ var store = new SessionStore({
 });
 app.use(express.session({
     store: store,
-    resave: true, // don't save session if unmodified  
+    resave: true, // don't save session if unmodified
     saveUninitialized: false, // don't create session until something stored
     cookie: { domain:'.huar.love'},
     secret: 'secret',
