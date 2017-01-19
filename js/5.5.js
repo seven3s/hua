@@ -274,7 +274,7 @@ webpackJsonp([5],Array(32).concat([
 	         *
 	         * @param  {Object} a 对象a,可以是json，可以是数组
 	         * @param  {Object} b 对象b,可以是json，可以是数组
-	         * @param  {Object} override 
+	         * @param  {Object} override
 	         *
 	         * @return {Object}   返回合并后的对象
 	         */
@@ -292,6 +292,7 @@ webpackJsonp([5],Array(32).concat([
 	        }
 	    }
 	});
+
 
 /***/ },
 /* 33 */
