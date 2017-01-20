@@ -1,20 +1,14 @@
 #main.w-90 {
     width: 90%;
 }
-
-.poem-body {
-    
-}
-
-#app .poem-body > * {
+.poem-body {}
+#app .poem-body>* {
     padding-left: 30px;
 }
-
-.poem-body > .segment.ui {
+.poem-body>.segment.ui {
     font-size: 1.8rem;
-    font-family: STkaiti,Lato,"Helvetica Neue",Arial,Helvetica,sans-serif
+    font-family: STkaiti, Lato, "Helvetica Neue", Arial, Helvetica, sans-serif
 }
-
 #app .ui.label {
     margin-bottom: 10px;
 }
@@ -31,7 +25,7 @@
     cursor: pointer;
 }
 #main .extra.content {
-    padding:14px 0 0 30px;
+    padding: 14px 0 0 30px;
     font-size: 1.3rem;
 }
 .ui.vertical.segment:last-child {
@@ -44,7 +38,41 @@
     #main {
         width: 90%;
     }
-    .poem-body > .segment.ui {
+    .poem-body>.segment.ui {
         font-size: 1.2rem;
     }
+}
+/* 打賞 */
+.reward {
+    text-align: center;
+    border-top: 1px solid 1px solid rgba(34, 36, 38, 0.15);
+    padding-top: 12px;
+    margin-top: 18px;
+}
+.reward-button {
+    width: 70px;
+    height: 70px;
+    background: #e78133;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    line-height: 70px;
+    font: 400 35px/75px "microsofty";
+    color: #fff;
+    margin: 0 auto 12px;
+}
+.reward>div {
+    display: inline-block;
+    margin: 0 60px;
+}
+.reward>div>img {
+    border: 1px solid #ccc;
+    max-width: 100%;
+    width: 200px;
+}
+.reward>div>p {
+    display: block;
+    width: 100px;
+    margin: 6px auto;
+    font-size: 14px;
 }
