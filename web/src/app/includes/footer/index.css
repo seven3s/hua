@@ -77,6 +77,9 @@ footer {
     border-left: 1px solid #999;
 }
 @media screen and (max-width: 810px) {
+    #footer {
+        display: none;
+    }
     #footer .footavatar, #footer .visitor {
         width: 100%;
     }

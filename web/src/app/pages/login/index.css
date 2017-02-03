@@ -131,3 +131,8 @@
 #app {
     padding: 0;
 }
+@media screen and (max-width: 810px) {
+    #login {
+        padding-top: 235px;
+    }
+}
