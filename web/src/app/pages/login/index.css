@@ -132,4 +132,7 @@
     #login {
         padding-top: 235px;
     }
+    #login ~ footer#footer {
+        display: none;
+    }
 }
