@@ -303,6 +303,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                me.$data.loadMore = 1;
 	                me.loadListData(param, function(json) {
 	                    var data = json.data;
+	                    console.log(json.status == 0);
 	                    if (json.status == 1) {
 	                        // 记录最后一条的时间
 	                        me.$data.endTime = data[data.length - 1]['time'];
