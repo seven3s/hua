@@ -79,14 +79,12 @@ webpackJsonp([5],Array(32).concat([
 	            };
 	            me.loadListData(param, function(json) {
 	                var data = json.data;
-	                console.log(111);
-	                if (json.status == 1) {
+	                if (json.status === 1) {
 	                    // 记录最后一条的时间
 	                    me.$data.endTime = data[data.length - 1]['time'];
 	                    me.getPoemsData(json);
 	                    me.$data.loadMore = 0;
-	                }else if (json.status == 0) {
-	                    console.log('没有數據了');
+	                }else if (json.status === 0) {
 	                    // 记录最后一条的时间
 	                    me.$data.endPoemsTimeObj.endPoemsTime = me.$data.endTime;
 	                    me.$data.loadMore = 0;
@@ -207,7 +205,7 @@ webpackJsonp([5],Array(32).concat([
 	                me.$data.loadMore = 1;
 	                me.loadListData(param, function(json) {
 	                    var data = json.data;
-	                    if (json.status === 1) {
+	                    if (json.status == 1) {
 	                        // 记录最后一条的时间
 	                        me.$data.endTime = data[data.length - 1]['time'];
 	                        me.$data.endPoemsTimeObj.endPoemsTime = json.endPoemsTime;
@@ -215,7 +213,7 @@ webpackJsonp([5],Array(32).concat([
 	                            me.$data.endPoemsTimeObj.endPoemsTimeState = 1;
 	                        }
 	                        me.getPoemsData(json);
-	                    }else if (json.status === 0) {
+	                    }else if (json.status == 0) {
 	                        // 记录最后一条的时间
 	                        me.$data.endPoemsTimeObj.endPoemsTime = me.$data.endTime;
 	                        me.$data.loadMore = 0;
