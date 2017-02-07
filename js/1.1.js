@@ -176,12 +176,12 @@ webpackJsonp([1,5],Array(28).concat([
 	            };
 	            me.loadListData(param, function(json) {
 	                var data = json.data;
-	                if (json.status === 1) {
+	                if (json.status == 1) {
 	                    // 记录最后一条的时间
 	                    me.$data.endTime = data[data.length - 1]['time'];
 	                    me.getPoemsData(json);
 	                    me.$data.loadMore = 0;
-	                }else if (json.status === 0) {
+	                }else if (json.status == 0) {
 	                    // 记录最后一条的时间
 	                    me.$data.endPoemsTimeObj.endPoemsTime = me.$data.endTime;
 	                    me.$data.loadMore = 0;
