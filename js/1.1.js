@@ -302,6 +302,8 @@ webpackJsonp([1,5],Array(28).concat([
 	                me.$data.loadMore = 1;
 	                me.loadListData(param, function(json) {
 	                    var data = json.data;
+	                    console.log(1111);
+	                    console.log(json.status == 0);
 	                    if (json.status == 1) {
 	                        // 记录最后一条的时间
 	                        me.$data.endTime = data[data.length - 1]['time'];
@@ -311,6 +313,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                        }
 	                        me.getPoemsData(json);
 	                    }else if (json.status == 0) {
+	                        console.log(2);
 	                        // 记录最后一条的时间
 	                        me.$data.endPoemsTimeObj.endPoemsTime = me.$data.endTime;
 	                        me.$data.loadMore = 0;
