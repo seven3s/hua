@@ -200,6 +200,7 @@ webpackJsonp([5],Array(32).concat([
 	            var url = me.$route.path;
 	            var reg = /\/list\/|(^\/\?)/;
 	            var isList = reg.test(url) || (url === '/');
+	            console.log(util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList);
 	            if (
 	                util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList) {
 	                me.$data.loadMore = 1;
