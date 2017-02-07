@@ -157,9 +157,7 @@ module.exports = Vue.extend({
                 title.setTitle(cn);
             }
             restFullLoader.requestGET('/api/poem', data, function (json) {
-                if (json.status === 1) {
-                    fn && fn(json);
-                }
+                fn && fn(json);
             });
         },
 
@@ -201,7 +199,7 @@ module.exports = Vue.extend({
                 me.$data.loadMore = 1;
                 me.loadListData(param, function(json) {
                     var data = json.data;
-                    if (json.status === 1) {
+                    if (json.status == 1) {
                         // 记录最后一条的时间
                         me.$data.endTime = data[data.length - 1]['time'];
                         me.$data.endPoemsTimeObj.endPoemsTime = json.endPoemsTime;
@@ -209,7 +207,7 @@ module.exports = Vue.extend({
                             me.$data.endPoemsTimeObj.endPoemsTimeState = 1;
                         }
                         me.getPoemsData(json);
-                    }else if (json.status === 0) {
+                    }else if (json.status == 0) {
                         // 记录最后一条的时间
                         me.$data.endPoemsTimeObj.endPoemsTime = me.$data.endTime;
                         me.$data.loadMore = 0;
