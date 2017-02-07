@@ -258,9 +258,7 @@ webpackJsonp([1,5],Array(28).concat([
 	                title.setTitle(cn);
 	            }
 	            restFullLoader.requestGET('/api/poem', data, function (json) {
-	                if (json.status === 1) {
-	                    fn && fn(json);
-	                }
+	                fn && fn(json);
 	            });
 	        },
 
@@ -297,14 +295,11 @@ webpackJsonp([1,5],Array(28).concat([
 	            var url = me.$route.path;
 	            var reg = /\/list\/|(^\/\?)/;
 	            var isList = reg.test(url) || (url === '/');
-	            console.log(util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList);
 	            if (
 	                util.getScrollTop() + util.getClientHeight() === util.getScrollHeight() && loadMore === 0 && endTime > endPoemsTime && isList) {
 	                me.$data.loadMore = 1;
-	                console.log(1);
 	                me.loadListData(param, function(json) {
 	                    var data = json.data;
-	                    console.log(json);
 	                    if (json.status == 1) {
 	                        // 记录最后一条的时间
 	                        me.$data.endTime = data[data.length - 1]['time'];
