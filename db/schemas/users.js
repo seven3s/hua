@@ -1,6 +1,6 @@
 /**
  * @File:      users  db 模型
- * @Author:    花夏(v_liubiao01@baidu.com)
+ * @Author:    花夏(liubiao01@itoxs.com)
  * @Version:   V0.0.1
  * @Date:      2016-09-05 15:51:46
  */

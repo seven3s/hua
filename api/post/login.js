@@ -1,6 +1,6 @@
 /**
  * @File:      登录接口
- * @Author:    花夏(v_liubiao01@baidu.com)
+ * @Author:    花夏(liubiao01@itoxs.com)
  * @Version:   V0.0.1
  * @Date:      2016-08-31 11:22:13
  */
